@@ -1,0 +1,774 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="MoonBack 本地可交互 App 原型，左侧操作、右侧说明，离线可用。">
+<title>MoonBack · 可交互 App 原型</title>
+<link rel="icon" href="assets/home_pet_lucky.jpg"><link rel="stylesheet" href="style.css?v=34">
+<script>
+/* Repair legacy demo data before the app script loads, so a cached older app.js can still render Discover / Profile. */
+(function(){
+  try{
+    var K='moonback-interactive-offline-v1',raw=localStorage.getItem(K);
+    if(!raw)return;
+    var s=JSON.parse(raw);
+    if(!s||typeof s!=='object'||!Array.isArray(s.posts))return;
+    var ok=function(p){return p&&typeof p==='object';};
+    var valid=s.posts.filter(ok);
+    if(valid.length===s.posts.length)return;
+    if(valid.length){s.posts=valid;}else{delete s.posts;}
+    localStorage.setItem(K,JSON.stringify(s));
+  }catch(e){}
+})();
+</script>
+<script defer src="app.js?v=34"></script>
+</head>
+<body>
+<header class="topbar">
+  <div class="topline">
+    <div class="brand"><img src="assets/home_logo.png" alt="MoonBack"><div><p class="eyebrow">PRODUCT WALKTHROUGH</p><strong>App 交互原型与功能说明</strong></div></div>
+    <div class="top-actions"><span class="version">本地演示 · 无需联网</span><button class="tool" data-action="help"><span>使用与编辑说明</span> ?</button><button class="tool" data-action="reset"><span>重置演示</span> ↻</button></div>
+  </div>
+  <nav class="tabs" id="top-tabs" aria-label="主要功能页面"></nav>
+</header>
+<main class="workspace">
+  <div class="intro"><div><p class="eyebrow">EXPLORE THE EXPERIENCE</p><h1>每一次点击，都能看见产品如何运作。</h1><p>在左侧体验 App，右侧查看对应说明。顶部导航与 App 内菜单同步切换。</p></div><label><span class="eyebrow">页面快速定位</span><br><select class="overview-select" id="page-picker" aria-label="页面快速定位"></select></label></div>
+  <div class="columns">
+    <section class="preview" aria-label="可交互 App 演示">
+      <div class="preview-meta"><span>APP PREVIEW / 可点击体验</span><span id="preview-state">● 示例数据</span></div>
+      <div class="phone"><div class="screen" lang="en">
+        <div class="statusbar"><span>9:41</span><span class="island" aria-hidden="true"></span><span class="status-icons" aria-hidden="true">▮▮▮　⌁　▰</span></div>
+        <div class="app-header" id="app-header"></div>
+        <div class="app-content" id="app-content" tabindex="-1"></div>
+        <nav class="bottom-nav" id="bottom-nav" aria-label="App 底部菜单"></nav>
+        <div class="home-indicator" aria-hidden="true"></div>
+        <div id="app-toast" class="toast" role="status" hidden></div>
+        <div id="modal-layer" class="modal-layer" hidden></div>
+      </div></div>
+      <div class="scenario-tools"><button class="tool" data-go="login">体验登录流程</button><button class="tool" data-action="empty-scenario">空数据场景</button><button class="tool" data-action="expired-scenario">登录过期场景</button><button class="tool" data-action="demo-login">一键体验演示账号</button></div>
+      <div class="demo-banner"><strong>离线交互原型 · 演示说明</strong><span>手机内的宠物、设备、健康数据与社区内容均为示例；不创建真实账号、不连接硬件、不产生费用。演示验证码 123456，右上角「重置演示」可恢复初始数据。</span></div>
+    </section>
+    <aside class="docs" aria-label="当前页面功能说明">
+      <div class="doc-breadcrumb"><span>功能说明</span><span>／</span><span id="doc-module"></span><span class="pill">可编辑 HTML</span></div>
+      <div id="page-docs">
+<!-- =====================================================================
+【右侧功能说明编辑区】
+1. 用 VS Code、记事本等文本编辑器打开本 index.html 文件（建议使用 UTF-8）。
+2. 搜索对应中文页面名称，例如“首页 · 宠物状态总览”。
+3. 修改该 section 内的 h2、p、li 文字，保存后在浏览器刷新。
+4. 可以增加段落、列表，不要删除或修改 section 的 id、data-page、data-group 属性。
+5. 每个 section 对应一个 App 页面，子页面同样有独立说明。
+6. 以下文字直接显示在右侧，不需要修改 app.js，不需要安装环境或重新构建。
+===================================================================== -->
+
+<!-- ===== 首页 · 宠物状态总览：修改以下文字即可 ===== -->
+<section class="doc-page" id="doc-home" data-page="home" data-group="home" hidden>
+<h2>首页 · 宠物状态总览</h2>
+<p class="lead">从宠物出发，了解今天的状态。</p>
+<h3>页面功能</h3><p>品牌 Logo、消息与添加设备入口；宠物切换条（Lucky 金毛贵宾 / Milo 黑色拉布拉多 / Coco 腊肠犬，头像均为与各自状态动图同款形象的卡通正面头像）；状态卡（标题、状态胶囊、Activity / Sleep 小卡、右侧宠物状态图：Lucky / Milo / Coco 均使用本次生成的透明 GIF 动图，分别为睡觉 / 散步 / 玩球，自带呼吸与动作；随当前宠物切换）、AI 洞察条）；Quick Access 四个彩色圆形入口（图标取自 Font Awesome v5 实体集：dog / video / microphone / heartbeat，SVG 内联以保证离线可用）；Focus on Lucky 提示卡；关联设备列表。</p>
+<h3>可以怎样操作</h3>
+<ul>
+<li>点击右上角「+」或设备区底部的「+ Add Device」，弹出同一个添加设备弹框（Smart Dog Harness / Smart Dog House，均 Model 001）。</li>
+<li>选择 Smart Dog Harness 并确认，进入参数弹框：参数取自 <code>MQTT_Protocol.pdf</code>（MQTT 3.1.1、Broker、Client ID、Topic、上报字段、事件与可配置上报间隔）；先选 Linked pet 关联宠物（下拉列出系统内已添加的宠物，默认当前选中宠物），再填写 IMEI 与上报间隔，加入后设备即归属该宠物。</li>
+<li>点击 Smart Dog House 会提示「该设备生产中」，暂不提供后续弹框。</li>
+<li>切换 Lucky、Milo、Coco 或 All Pets；点击状态卡进入健康详情，点击洞察条进入 AI 管家。</li>
+<li>设备区随当前宠物过滤：Lucky 2 台（Harness + Dog House）、Milo 1 台（Harness）、Coco 无设备（显示 No devices yet），All Pets 汇总 3 台。</li>
+</ul>
+<div class="callout"><h3>演示范围</h3><p>新增设备仅写入当前浏览器演示数据；参数为协议文档摘要，不连接真实 Broker。</p><p class="from-phone">【手机框迁出】设备在线 / 离线状态为示例，可在设备详情切换；首页状态卡与数值不代表真实检测。</p></div>
+</section>
+
+<!-- ===== 健康 · 数据与趋势：修改以下文字即可 ===== -->
+<section class="doc-page" id="doc-health" data-page="health" data-group="health" hidden>
+<h2>健康 · 数据与趋势</h2>
+<p class="lead">看见状态，也看懂变化。</p>
+<h3>页面功能</h3><p>按当前宠物展示活动、生命体征、睡眠和消化等健康示例数据，支持进入指标详情和专业报告。</p>
+<h3>可以怎样操作</h3>
+<ul>
+<li>选择宠物，切换 Today、7 Days 或指定日期，数据和趋势同步变化。</li>
+<li>点击指标卡查看详情；点击报告入口查看当前宠物的专业报告。</li>
+<li>点击健康检测观看检测进度，结果回到当前宠物；通过记录和兽医入口进入后续流程。</li>
+</ul>
+<div class="callout"><h3>演示范围</h3><p>图表由网页组件绘制，可响应切换；数据为演示数据，不代表真实检测或医学判断。</p><p class="from-phone">【手机框迁出】健康指标与趋势为示例数据，不代表真实检测或医学判断。</p></div>
+</section>
+
+<!-- ===== AI 管家 · 宠物专属对话：修改以下文字即可 ===== -->
+<section class="doc-page" id="doc-ai" data-page="ai" data-group="ai" hidden>
+<h2>AI 管家 · 宠物专属对话</h2>
+<p class="lead">让每一次提问，都围绕当前宠物。</p>
+<h3>页面功能</h3><p>以对话形式演示健康解释、状态查询和养宠建议，当前宠物决定对话上下文。</p>
+<h3>可以怎样操作</h3>
+<ul>
+<li>在顶部切换宠物，分别保留各只宠物的对话记录。</li>
+<li>输入问题并发送，或点击建议问题，查看基于示例数据生成的预设回复。</li>
+<li>点击健康数据、专业报告或在线兽医，继续体验关联流程。</li>
+</ul>
+<div class="callout"><h3>演示范围</h3><p>回复来自本地规则和示例模板，没有连接真实 AI 模型；不会发送网络请求。</p><p class="from-phone">【手机框迁出】AI 管家回复来自本地预设规则与模板，没有连接真实 AI 模型，也不会发送网络请求。</p></div>
+</section>
+
+<!-- ===== 发现 · 宠物社区：修改以下文字即可 ===== -->
+<section class="doc-page" id="doc-discover" data-page="discover" data-group="discover" hidden>
+<h2>发现 · 宠物社区</h2>
+<p class="lead">分享日常，遇见更多毛孩子。</p>
+<h3>页面功能</h3><p>按评审截图改为搜索栏 + 话题筛选 + 双列瀑布流卡片；卡片统一为图片轮播、标题、两行简述与发布人信息，保留社区浏览、互动、发布和作者主页。</p>
+<h3>可以怎样操作</h3>
+<ul>
+<li>顶部搜索栏按标题、副文本、作者与话题实时筛选卡片。</li>
+<li>切换 For You / Following / Health / Training / Nutrition / Care；最右侧圆形按钮打开 Stories 作者列表。</li>
+<li>卡片顶部图片有多张时每 3 秒自动轮播并显示指示点；图片下方依次是标题、两行简述、发布人头像与名称及点赞次数。</li>
+<li>点击卡片进入帖子详情，支持点赞、收藏、评论、多图切换及话题聚合。</li>
+<li>右上角加号发布图文，新内容进入信息流与个人主页；底部悬浮胶囊导航切换五个主模块。</li>
+</ul>
+<div class="callout"><h3>演示范围</h3><p>点赞、评论、关注和图文文字保存在当前浏览器；上传图片仅在当前打开会话保留，不会发布到真实社区。</p></div>
+</section>
+
+<!-- ===== 我的 · 个人主页：修改以下文字即可 ===== -->
+<section class="doc-page" id="doc-profile" data-page="profile" data-group="profile" hidden>
+<h2>我的 · 个人主页</h2>
+<p class="lead">个人资料、宠物与内容，一处管理。</p>
+<h3>页面功能</h3><p>沿用当前 Demo 的个人资料、社交统计、宠物入口与内容宫格布局。</p>
+<h3>可以怎样操作</h3>
+<ul>
+<li>点击个人资料编辑昵称、所在地和简介，保存后同步展示。</li>
+<li>点击 Posts、Followers、Friends 查看对应列表；切换 Moments、Liked 查看内容。</li>
+<li>点击 My pets 管理宠物，点击右上角进入会员或设置中心。</li>
+</ul>
+<div class="callout"><h3>演示范围</h3><p>示例账号默认 Kevin；社交数据反映当前演示中的内容和互动，不代表真实账号。</p><p class="from-phone">【手机框迁出】会员标识为演示状态，不产生真实订阅或扣款。</p></div>
+</section>
+
+<!-- ===== 实时看护 · Remote care：修改以下文字即可 ===== -->
+<section class="doc-page" id="doc-monitor" data-page="monitor" data-group="monitor" hidden>
+<h2>实时看护 · Remote care</h2>
+<p class="lead">用可操作界面，演示远程陪伴。</p>
+<h3>页面功能</h3><p>历史页面：展示画面区、看护控制及 AI Wellness Snapshot（本期无对应设备）。</p>
+<h3>可以怎样操作</h3>
+<ul>
+<li>查看示例画面和看护指标；本期无实时看护设备时显示空状态。</li>
+<li>点击 Listen、Talk 和 Play Sound，体验按钮状态与控制反馈。</li>
+<li>切换检测框显示，查看模拟识别事件；进入宠物语言翻译或返回设备选择。</li>
+</ul>
+<div class="callout"><h3>演示范围</h3><p>本期设备仅智能背带与智能狗窝，不含摄像头；本页按历史内容保留，无对应设备时显示空状态。画面使用项目自带照片，不调用摄像头、麦克风或真实视频服务。</p><p class="from-phone">【手机框迁出】实时看护画面与检测事件均为模拟，不调用摄像头、麦克风或真实视频服务；画面为模拟画面。</p></div>
+</section>
+
+<!-- ===== 登录 · 账号入口：修改以下文字即可 ===== -->
+<section class="doc-page" id="doc-login" data-page="login" data-group="login" hidden>
+<h2>登录 · 账号入口</h2>
+<p class="lead">品牌入口：Get Started 与四种登录方式。</p>
+<h3>页面功能</h3><p>MoonBack Logo 与 Get Started 大标题；Continue with Apple ID / Continue with Google / Continue with Email 三个浅灰胶囊按钮（图标与文字紧挨、Apple 图标为黑色）；按钮下方为「——— or ———」分隔线（品牌蓝）与 Use phone number instead 入口；圆形协议勾选。</p>
+<h3>可以怎样操作</h3>
+<ul>
+<li>初始页只有三个按钮与 or 分隔线下方的 Use phone number instead；点击 Continue with Email 或 Use phone number instead 才展开输入框与验证码，可用 Back 返回按钮页。</li>
+<li>未勾选 Terms of Service 与 Privacy Policy 时，第三方登录、Get code、Sign in 全部被拦截并提示。</li>
+<li>邮箱验证码：输入邮箱 → Get code（60 秒倒计时，演示码 123456）→ Sign in 进入 Home；验证码页可切换到 +1 手机号。</li>
+<li>点击 Terms of Service / Privacy Policy 查看对应协议页，返回后继续登录。</li>
+</ul>
+<div class="callout"><h3>演示范围</h3><p>本地模拟登录，不创建真实账号、不发送短信或邮件；第三方登录仅演示成功态。美国市场口径：+1 区号、英文文案；第三方统一为 Apple ID 与 Google 账号登录。</p><p class="from-phone">【手机框迁出】登录页为离线演示：不创建真实账号、不发送验证码；演示码固定 123456；未勾选隐私政策与个人协议时全部登录动作被拦截。</p></div>
+</section>
+
+<!-- ===== 隐私政策 · Privacy Policy：修改以下文字即可 ===== -->
+<section class="doc-page" id="doc-privacy" data-page="privacy" data-group="login" hidden>
+<h2>隐私政策 · Privacy Policy</h2>
+<p class="lead">登录页 Privacy Policy 链接的目标页。</p>
+<h3>页面功能</h3><p>App 内英文协议页，按美国市场口径列出数据收集、使用与用户权利。</p>
+<h3>可以怎样操作</h3><ul><li>阅读要点后点击返回，回到登录页继续。</li></ul>
+<div class="callout"><h3>演示范围</h3><p>原型占位文案，不是正式法律文件；CCPA/CPPA 条款待法务确认。</p><p class="from-phone">【手机框迁出】协议正文为原型占位文案，不是正式法律文件；美国隐私口径（CCPA/CPPA）待法务确认。</p></div>
+</section>
+
+<!-- ===== 个人协议 · Terms of Service：修改以下文字即可 ===== -->
+<section class="doc-page" id="doc-terms" data-page="terms" data-group="login" hidden>
+<h2>个人协议 · Terms of Service</h2>
+<p class="lead">登录页 Terms of Service 链接的目标页。</p>
+<h3>页面功能</h3><p>App 内英文协议页，说明账号、设备使用边界与健康数据免责。</p>
+<h3>可以怎样操作</h3><ul><li>阅读要点后点击返回，回到登录页继续。</li></ul>
+<div class="callout"><h3>演示范围</h3><p>原型占位文案，不是正式法律文件；最终措辞待法务确认。</p><p class="from-phone">【手机框迁出】协议正文为原型占位文案，不是正式法律文件；最终措辞待法务确认。</p></div>
+</section>
+
+<!-- ===== 注册账号：修改以下文字即可 ===== -->
+<section class="doc-page" id="doc-register" data-page="register" data-group="login" hidden>
+<h2>注册账号</h2>
+<p class="lead">演示账号创建流程。</p>
+<h3>页面功能</h3><p>提供手机号／邮箱、密码、确认密码和协议选择。</p>
+<h3>可以怎样操作</h3>
+<ul>
+<li>选择注册方式，填写账号和密码，确认两次密码一致。</li>
+<li>提交后完成模拟注册并进入首页；返回可回到登录。</li>
+</ul>
+<div class="callout"><h3>演示范围</h3><p>不会发送验证码或创建线上账号，表单不保存密码。</p><p class="from-phone">【手机框迁出】注册为本地模拟，不创建线上账号、不保存密码；演示验证码固定 123456。</p></div>
+</section>
+
+<!-- ===== 找回密码：修改以下文字即可 ===== -->
+<section class="doc-page" id="doc-forgot" data-page="forgot" data-group="login" hidden>
+<h2>找回密码</h2>
+<p class="lead">查看找回入口与提交反馈。</p>
+<h3>页面功能</h3><p>演示账号输入、验证码填写及新密码校验。</p>
+<h3>可以怎样操作</h3>
+<ul>
+<li>填写手机号或邮箱，点击获取演示验证码。</li>
+<li>输入显示的演示验证码和新密码，完成后返回登录。</li>
+</ul>
+<div class="callout"><h3>演示范围</h3><p>验证码仅用于本地演示，不发送短信或邮件，不修改任何真实密码。</p><p class="from-phone">【手机框迁出】找回密码为本地模拟，不修改真实密码；演示验证码固定 123456。</p></div>
+</section>
+
+<!-- ===== 我的宠物 · 宠物列表：修改以下文字即可 ===== -->
+<section class="doc-page" id="doc-pets" data-page="pets" data-group="home" hidden>
+<h2>我的宠物 · 宠物列表</h2>
+<p class="lead">管理每一位家庭成员。</p>
+<h3>页面功能</h3><p>显示当前演示账号的宠物，连接宠物详情、建档和关联设备。</p>
+<h3>可以怎样操作</h3>
+<ul>
+<li>点击宠物卡查看详情；点击添加宠物填写资料。</li>
+<li>新增、编辑或删除后，首页和健康页的宠物选择同步更新。</li>
+</ul>
+<div class="callout"><h3>演示范围</h3><p>宠物资料保存在当前浏览器；删除前需要确认，并解除演示设备关联。</p></div>
+</section>
+
+<!-- ===== 宠物建档 · 新增与编辑：修改以下文字即可 ===== -->
+<section class="doc-page" id="doc-pet-edit" data-page="pet-edit" data-group="home" hidden>
+<h2>宠物建档 · 新增与编辑</h2>
+<p class="lead">按评审截图重建的 Add Pet 表单。</p>
+<h3>页面功能</h3><p>Device ID（含扫码入口与「还没有设备？去添加」）；两列字段：宠物名称 / 类型（本期仅 Dog）、品种 / 年龄、性别 / 体重、身高 / 情感经历、主人 / 联系方式；Pet photos 八宫格：正面、左侧、右侧、背部、顶部、底部、左斜侧、右斜侧；底部 Save。</p>
+<h3>可以怎样操作</h3>
+<ul>
+<li>点击扫码图标自动填入示例 Device ID；点击「No device yet? Add one」打开添加设备弹框。</li>
+<li>点击任一虚线照片框选用本地图片预览；新建时必须凑齐 8 张不同角度照片才能保存。</li>
+<li>保存后进入宠物详情；编辑已有宠物时不重复要求上传照片。</li>
+</ul>
+<div class="callout"><h3>演示范围</h3><p>照片仅保存在当前浏览器会话，使用 blob URL 预览，不上传服务器；App 内文案按项目约定使用英文，参考截图为中文界面。</p></div>
+</section>
+
+<!-- ===== 宠物详情：修改以下文字即可 ===== -->
+<section class="doc-page" id="doc-pet-detail" data-page="pet-detail" data-group="home" hidden>
+<h2>宠物详情</h2>
+<p class="lead">围绕一只宠物查看资料和设备。</p>
+<h3>页面功能</h3><p>聚合宠物基础信息、健康记录、关联设备与编辑入口。关联设备按该宠物过滤：Lucky 2 台、Milo 1 台、Coco 无设备（显示 No devices linked yet.）。</p>
+<h3>可以怎样操作</h3>
+<ul>
+<li>编辑资料、进入健康页、查看健康记录。</li>
+<li>点击关联设备查看详情；删除宠物前确认，删除后回到宠物列表。</li>
+</ul>
+<div class="callout"><h3>演示范围</h3><p>切换到该宠物详情时会设置当前宠物，后续健康和 AI 页面沿用该上下文。</p></div>
+</section>
+
+<!-- ===== 健康记录：修改以下文字即可 ===== -->
+<section class="doc-page" id="doc-records" data-page="records" data-group="health" hidden>
+<h2>健康记录</h2>
+<p class="lead">让每条记录都有对应宠物。</p>
+<h3>页面功能</h3><p>按当前宠物展示疫苗及健康记录。</p>
+<h3>可以怎样操作</h3>
+<ul>
+<li>添加记录，填写名称、日期、下次日期与备注。</li>
+<li>编辑或删除已有记录，列表立即更新。</li>
+</ul>
+<div class="callout"><h3>演示范围</h3><p>记录仅在本地保存，不会同步到医疗或设备系统。</p></div>
+</section>
+
+<!-- ===== 新增／编辑健康记录：修改以下文字即可 ===== -->
+<section class="doc-page" id="doc-record-edit" data-page="record-edit" data-group="health" hidden>
+<h2>新增／编辑健康记录</h2>
+<p class="lead">记录一次接种或健康事件。</p>
+<h3>页面功能</h3><p>演示健康记录表单和保存流程。</p>
+<h3>可以怎样操作</h3>
+<ul>
+<li>填写记录名称、发生日期、可选的下次日期与备注。</li>
+<li>校验日期顺序，保存后返回当前宠物的健康记录列表。</li>
+</ul>
+<div class="callout"><h3>演示范围</h3><p>所填信息仅属于当前选中宠物。</p></div>
+</section>
+
+<!-- ===== 我的设备：修改以下文字即可 ===== -->
+<section class="doc-page" id="doc-devices" data-page="devices" data-group="home" hidden>
+<h2>我的设备</h2>
+<p class="lead">查看已绑定的演示设备。</p>
+<h3>页面功能</h3><p>展示设备名称、类型、连接状态、电量和关联宠物。示例共 3 台：Lucky 2 台（Harness + Dog House）、Milo 1 台（Harness）、Coco 无设备；列表汇总全部设备，不按宠物分栏。</p>
+<h3>可以怎样操作</h3>
+<ul>
+<li>切换 All Devices / Harness / Dog House 筛选。</li>
+<li>点击设备查看详情，点击添加设备模拟绑定。</li>
+</ul>
+<div class="callout"><h3>演示范围</h3><p>设备来自本地演示数据，不扫描蓝牙或局域网。</p></div>
+</section>
+
+<!-- ===== 添加设备：修改以下文字即可 ===== -->
+<section class="doc-page" id="doc-device-add" data-page="device-add" data-group="home" hidden>
+<h2>添加设备</h2>
+<p class="lead">从选择类型到完成绑定。</p>
+<h3>页面功能</h3><p>通过简化表单演示设备添加与宠物关联。Home 的添加入口（右上角「+」与设备区「+ Add Device」）统一走弹框流程，本页是完整表单入口，从设备列表底部按钮、宠物详情「关联设备」等进入。</p>
+<h3>可以怎样操作</h3>
+<ul>
+<li>设备类型仅 Smart Dog Harness 与 Smart Dog House（均 Model 001）。</li>
+<li>填写设备名称和演示编号，选择关联宠物并提交。</li>
+</ul>
+<div class="callout"><h3>演示范围</h3><p>绑定成功后设备列表与首页立即同步；不连接真实硬件。</p><p class="from-phone">【手机框迁出】设备绑定为本地模拟，不扫描或连接真实设备。</p></div>
+</section>
+
+<!-- ===== 设备详情：修改以下文字即可 ===== -->
+<section class="doc-page" id="doc-device-detail" data-page="device-detail" data-group="home" hidden>
+<h2>设备详情</h2>
+<p class="lead">从设备入口，继续体验相关能力。</p>
+<h3>页面功能</h3><p>展示单台设备的状态与关联关系。</p>
+<h3>可以怎样操作</h3>
+<ul>
+<li>切换模拟在线／离线，修改关联宠物。</li>
+<li>智能背带可进入电子围栏与历史轨迹；两款设备均可查看健康数据与固件升级。</li>
+<li>查看固件升级，或确认后解除绑定。</li>
+</ul>
+<div class="callout"><h3>演示范围</h3><p>状态切换只影响本地演示；解绑不会影响真实设备。</p><p class="from-phone">【手机框迁出】设备在线状态、电量与升级均为本地模拟，不向硬件发送指令。</p></div>
+</section>
+
+<!-- ===== 宠物语言翻译：修改以下文字即可 ===== -->
+<section class="doc-page" id="doc-translation" data-page="translation" data-group="monitor" hidden>
+<h2>宠物语言翻译</h2>
+<p class="lead">暖橙 + 品牌蓝双色的录音翻译页：2 个方向选项、完整状态链路与历史联动。</p>
+<h3>页面功能</h3><p>Translation Mode 下只有 2 个选项：Dog → Human 与 Cat → Human，每个选项用「宠物图标 → 人图标」表示方向（宠物暖橙、人品牌蓝），选项右侧的圆形切换按钮点一下即原地翻转成 Human → Dog / Human → Cat，两个选项各自记住自己的方向。中央大号录音按钮带呼吸光晕与极简爪印装饰，录音中显示动态音频波形；结果以气泡卡片展示并支持模拟播放；页面角落有低透明度爪印剪影。</p>
+<h3>可以怎样操作</h3>
+<ul>
+<li>首次进入弹出麦克风权限引导；点主按钮开始录音，再点结束依次进入 Analyzing audio... / Generating interpretation...，生成译文后自动存入历史。</li>
+<li>每条历史支持 Play（重放）、View Pet Health Report（跳转健康报告）、删除；空态为插画卡片 + Start Recording 引导。</li>
+<li>点选项即选中该宠物，点切换按钮只翻转该选项的方向（两个图标左右互换、箭头随之换向，切换按钮转 180° 并变蓝底）；录音进行中切换会被提示先结束录音。切换有平滑过渡，录音按钮按压缩放反馈。</li>
+<li>图标：切换 / 狗 / 人类 / 猫 四个图标取自 Font Awesome v5 实体库（repeat / dog / cat / user-alt），SVG 路径已内联进 app.js，不引 CDN、不依赖外部字体；空态插画的宠物剪影会随所选宠物切换。配色：暖橙主色承担宠物与操作，Logo 蓝（#2165b0）承担「人」侧图标、播放键、View Pet Health Report 等跨模块入口，页面另有右上冷色 / 左下暖色的低透明度冲洗，两者混合不抢主体。</li>
+</ul>
+<div class="callout"><h3>状态演示（仅原型）</h3><p>以下按钮用于演示异常状态，不影响真实流程。</p><div class="doc-demo-row"><button data-action="trans-demo" data-value="nosound">无声音</button><button data-action="trans-demo" data-value="error">权限失败</button><button data-action="trans-demo" data-value="idle">恢复空闲</button></div></div>
+<div class="callout"><h3>演示范围</h3><p>不申请真实麦克风、不采集声音，译文为预设示例；页面底部常驻免责说明（仅供娱乐，不替代专业行为学分析或兽医诊断）。</p><p class="from-phone">【手机框迁出】语言翻译为本地模拟，不访问麦克风、不采集声音，也不生成真实语音；异常状态需通过右侧「状态演示」手动触发。</p></div>
+</section>
+
+<!-- ===== 电子围栏：修改以下文字即可 ===== -->
+<section class="doc-page" id="doc-fence" data-page="fence" data-group="home" hidden>
+<h2>电子围栏</h2>
+<p class="lead">用示意地图体验安全范围设置。</p>
+<h3>页面功能</h3><p>为当前宠物选择胸背设备，设置围栏名称、范围和启用状态。</p>
+<h3>可以怎样操作</h3>
+<ul>
+<li>拖动半径滑块，地图范围同步变化，保存设置。</li>
+<li>点击地图移动围栏中心；进入历史轨迹和电子签到。</li>
+</ul>
+<div class="callout"><h3>演示范围</h3><p>地图和定位均为本地示意，不包含真实位置，不连接地图服务。</p><p class="from-phone">【手机框迁出】电子围栏为本地演示，不产生真实定位告警。</p></div>
+</section>
+
+<!-- ===== 历史轨迹：修改以下文字即可 ===== -->
+<section class="doc-page" id="doc-trajectory" data-page="trajectory" data-group="home" hidden>
+<h2>历史轨迹</h2>
+<p class="lead">回看示例活动路线。</p>
+<h3>页面功能</h3><p>按宠物和日期展示轨迹示意、里程与活动时间。</p>
+<h3>可以怎样操作</h3>
+<ul>
+<li>选择日期切换示例轨迹，点击播放观看位置点沿路线移动。</li>
+</ul>
+<div class="callout"><h3>演示范围</h3><p>路线为离线 SVG 示意，不能用于真实定位。</p><p class="from-phone">【手机框迁出】轨迹为示例数据。</p></div>
+</section>
+
+<!-- ===== 电子签到：修改以下文字即可 ===== -->
+<section class="doc-page" id="doc-checkin" data-page="checkin" data-group="home" hidden>
+<h2>电子签到</h2>
+<p class="lead">为一次到访留下记录。</p>
+<h3>页面功能</h3><p>展示签到位置输入和历史签到记录。</p>
+<h3>可以怎样操作</h3>
+<ul>
+<li>填写地点，点击签到，查看新增时间记录。</li>
+</ul>
+<div class="callout"><h3>演示范围</h3><p>不调用定位权限，地点由用户输入，记录保存在本地。</p><p class="from-phone">【手机框迁出】签到记录仅保存在本地。</p></div>
+</section>
+
+<!-- ===== 健康指标详情：修改以下文字即可 ===== -->
+<section class="doc-page" id="doc-metric" data-page="metric" data-group="health" hidden>
+<h2>健康指标详情</h2>
+<p class="lead">从摘要进入具体趋势。</p>
+<h3>页面功能</h3><p>展示所选指标的当前值、参考范围和趋势。</p>
+<h3>可以怎样操作</h3>
+<ul>
+<li>从健康卡片进入；切换时间范围，查看对应趋势。</li>
+<li>点击交给 AI 解释，带入当前指标和宠物上下文。</li>
+</ul>
+<div class="callout"><h3>演示范围</h3><p>图表和参考数据均为演示，不作为诊疗依据。</p><p class="from-phone">【手机框迁出】指标图表与数值为示例，实际健康判断需结合有效数据与专业意见。</p></div>
+</section>
+
+<!-- ===== 专业健康报告：修改以下文字即可 ===== -->
+<section class="doc-page" id="doc-report" data-page="report" data-group="health" hidden>
+<h2>专业健康报告</h2>
+<p class="lead">汇总当前宠物的演示健康数据。</p>
+<h3>页面功能</h3><p>展示当前宠物资料、健康摘要、趋势和项目中的报告版式参考。</p>
+<h3>可以怎样操作</h3>
+<ul>
+<li>查看当前宠物摘要，展开版式参考图。</li>
+<li>下载本地 HTML 摘要，或发送给演示兽医进入咨询流程。</li>
+</ul>
+<div class="callout"><h3>演示范围</h3><p>下载的是可离线打开的 HTML 演示摘要，不是正式医疗报告或 PDF。</p><p class="from-phone">【手机框迁出】报告数值仅用于原型展示、不是医疗报告；「原 App 报告版式参考」图片与说明已迁至本说明区。</p></div>
+</section>
+
+<!-- ===== 在线兽医：修改以下文字即可 ===== -->
+<section class="doc-page" id="doc-vets" data-page="vets" data-group="health" hidden>
+<h2>在线兽医</h2>
+<p class="lead">选择一位演示兽医。</p>
+<h3>页面功能</h3><p>展示兽医头像、专业方向和咨询入口。</p>
+<h3>可以怎样操作</h3>
+<ul>
+<li>选择兽医进入资料确认，选择是否授权当前宠物的演示报告。</li>
+<li>进入咨询会话，或查看历史咨询记录。</li>
+</ul>
+<div class="callout"><h3>演示范围</h3><p>没有真实医生在线，不产生费用。</p><p class="from-phone">【手机框迁出】在线兽医与咨询为演示流程，没有真实医生在线，不产生费用。</p></div>
+</section>
+
+<!-- ===== 兽医详情 · 咨询确认：修改以下文字即可 ===== -->
+<section class="doc-page" id="doc-vet-detail" data-page="vet-detail" data-group="health" hidden>
+<h2>兽医详情 · 咨询确认</h2>
+<p class="lead">在开始前确认宠物与报告授权。</p>
+<h3>页面功能</h3><p>展示所选兽医信息，固定本次咨询关联的宠物。</p>
+<h3>可以怎样操作</h3>
+<ul>
+<li>选择咨询宠物，勾选是否分享报告，再开始演示咨询。</li>
+</ul>
+<div class="callout"><h3>演示范围</h3><p>授权只影响本地会话展示，不向第三方发送数据。</p><p class="from-phone">【手机框迁出】兽医资料与咨询入口为演示数据，不产生真实问诊。</p></div>
+</section>
+
+<!-- ===== 兽医咨询会话：修改以下文字即可 ===== -->
+<section class="doc-page" id="doc-consult" data-page="consult" data-group="health" hidden>
+<h2>兽医咨询会话</h2>
+<p class="lead">演示问诊沟通与结束记录。</p>
+<h3>页面功能</h3><p>围绕本次固定宠物进行演示聊天，展示报告授权状态。</p>
+<h3>可以怎样操作</h3>
+<ul>
+<li>输入并发送消息，查看预设回复。</li>
+<li>结束咨询后保留记录，可从咨询历史重新查看。</li>
+</ul>
+<div class="callout"><h3>演示范围</h3><p>会话由本地规则模拟，不是真实在线医疗服务。</p><p class="from-phone">【手机框迁出】咨询会话使用预设回复，不是真实在线诊疗；报告授权状态仅在本地演示中生效。</p></div>
+</section>
+
+<!-- ===== 咨询历史：修改以下文字即可 ===== -->
+<section class="doc-page" id="doc-consult-history" data-page="consult-history" data-group="health" hidden>
+<h2>咨询历史</h2>
+<p class="lead">回看已经完成的演示咨询。</p>
+<h3>页面功能</h3><p>按时间列出关联宠物、兽医及会话状态。</p>
+<h3>可以怎样操作</h3>
+<ul>
+<li>点击历史记录查看对应聊天；开始新咨询可返回兽医列表。</li>
+</ul>
+<div class="callout"><h3>演示范围</h3><p>仅包含在此浏览器内创建的演示记录。</p><p class="from-phone">【手机框迁出】咨询记录保存在当前浏览器，不产生真实问诊。</p></div>
+</section>
+
+<!-- ===== 帖子详情：修改以下文字即可 ===== -->
+<section class="doc-page" id="doc-post" data-page="post" data-group="discover" hidden>
+<h2>帖子详情</h2>
+<p class="lead">阅读、互动与评论。</p>
+<h3>页面功能</h3><p>展示作者、完整图文、话题和评论列表。</p>
+<h3>可以怎样操作</h3>
+<ul>
+<li>切换多张图片，点赞、收藏、关注作者。</li>
+<li>输入评论并发布，查看评论数同步变化；点击话题查看聚合内容。</li>
+<li>分享时显示本地演示定位链接。</li>
+</ul>
+<div class="callout"><h3>演示范围</h3><p>评论和互动只修改本地状态；本地文件链接需要对方拥有同一份文件夹才能打开。</p></div>
+</section>
+
+<!-- ===== 作者主页：修改以下文字即可 ===== -->
+<section class="doc-page" id="doc-author" data-page="author" data-group="discover" hidden>
+<h2>作者主页</h2>
+<p class="lead">了解社区中的另一位养宠人。</p>
+<h3>页面功能</h3><p>展示作者资料、宠物简介、内容宫格和关注状态。</p>
+<h3>可以怎样操作</h3>
+<ul>
+<li>关注／取消关注，查看作者帖子，进入私信会话。</li>
+</ul>
+<div class="callout"><h3>演示范围</h3><p>关注结果同步影响发现页的 Following 流。</p></div>
+</section>
+
+<!-- ===== 发布图文：修改以下文字即可 ===== -->
+<section class="doc-page" id="doc-publish" data-page="publish" data-group="discover" hidden>
+<h2>发布图文</h2>
+<p class="lead">把一段日常加入演示社区。</p>
+<h3>页面功能</h3><p>深色发布态：支持最多 9 张本地图片、500 字以内正文、话题标签与图片预览。</p>
+<h3>可以怎样操作</h3>
+<ul>
+<li>点击正方形「+」按钮选择多张图片（最多 9 张），预览后可逐张删除。</li>
+<li>输入正文，右上角「Publish」发布；正文限 500 字，计数器随输入更新。</li>
+<li>添加话题标签（逗号分隔），发布后返回信息流，并同步显示在我的主页。</li>
+</ul>
+<div class="callout"><h3>演示范围</h3><p>没有图片时使用内置宠物图；上传图片仅当前会话显示，重新打开后使用内置替代图。</p><p class="from-phone">【手机框迁出】图文内容仅发布到本地演示，不会上传到网络。</p></div>
+</section>
+
+<!-- ===== 宠物故事：修改以下文字即可 ===== -->
+<section class="doc-page" id="doc-story" data-page="story" data-group="discover" hidden>
+<h2>宠物故事</h2>
+<p class="lead">以单张故事卡展示宠物瞬间。</p>
+<h3>页面功能</h3><p>展示作者故事图片及前后切换。</p>
+<h3>可以怎样操作</h3>
+<ul>
+<li>点击上一条／下一条切换故事，点击作者进入主页。</li>
+</ul>
+<div class="callout"><h3>演示范围</h3><p>使用现有社区图片模拟故事，不包含真实视频播放。</p></div>
+</section>
+
+<!-- ===== 话题聚合：修改以下文字即可 ===== -->
+<section class="doc-page" id="doc-topic" data-page="topic" data-group="discover" hidden>
+<h2>话题聚合</h2>
+<p class="lead">沿着一个话题继续浏览。</p>
+<h3>页面功能</h3><p>筛选带有所选话题的帖子。</p>
+<h3>可以怎样操作</h3>
+<ul>
+<li>点击帖子进入详情，或通过发布入口添加带话题的内容。</li>
+</ul>
+<div class="callout"><h3>演示范围</h3><p>话题和内容都来自本地演示社区。</p><p class="from-phone">【手机框迁出】话题内容来自本地示例数据。</p></div>
+</section>
+
+<!-- ===== 消息中心：修改以下文字即可 ===== -->
+<section class="doc-page" id="doc-messages" data-page="messages" data-group="discover" hidden>
+<h2>消息中心</h2>
+<p class="lead">将服务消息和私信放在一处。</p>
+<h3>页面功能</h3><p>展示设备提醒、社区消息、私信和好友申请。</p>
+<h3>可以怎样操作</h3>
+<ul>
+<li>点击设备提醒标记已读并进入相关设备；点击私信进入聊天。</li>
+<li>通过好友申请入口接受申请，或搜索添加演示好友。</li>
+</ul>
+<div class="callout"><h3>演示范围</h3><p>消息状态只在本地变化，不发送通知。</p></div>
+</section>
+
+<!-- ===== 私信会话：修改以下文字即可 ===== -->
+<section class="doc-page" id="doc-chat" data-page="chat" data-group="discover" hidden>
+<h2>私信会话</h2>
+<p class="lead">演示消息发送与回复。</p>
+<h3>页面功能</h3><p>展示与所选社区用户的本地聊天。</p>
+<h3>可以怎样操作</h3>
+<ul>
+<li>输入消息发送，查看演示回复，切换会话后保留各自内容。</li>
+</ul>
+<div class="callout"><h3>演示范围</h3><p>不会向真实用户发送消息。</p><p class="from-phone">【手机框迁出】私信会话为本地演示数据。</p></div>
+</section>
+
+<!-- ===== 好友与关注：修改以下文字即可 ===== -->
+<section class="doc-page" id="doc-friends" data-page="friends" data-group="discover" hidden>
+<h2>好友与关注</h2>
+<p class="lead">查看社交关系列表。</p>
+<h3>页面功能</h3><p>展示当前演示好友、关注或粉丝列表。</p>
+<h3>可以怎样操作</h3>
+<ul>
+<li>进入作者主页、发送私信，或添加好友。</li>
+</ul>
+<div class="callout"><h3>演示范围</h3><p>列表由本地种子数据与演示操作组成。</p></div>
+</section>
+
+<!-- ===== 添加好友：修改以下文字即可 ===== -->
+<section class="doc-page" id="doc-friend-add" data-page="friend-add" data-group="discover" hidden>
+<h2>添加好友</h2>
+<p class="lead">搜索一个演示社区用户。</p>
+<h3>页面功能</h3><p>通过昵称搜索本地社区用户，发送模拟申请。</p>
+<h3>可以怎样操作</h3>
+<ul>
+<li>输入名字或账号，查看匹配结果，点击申请后显示已申请。</li>
+</ul>
+<div class="callout"><h3>演示范围</h3><p>不执行真实用户搜索，不发送外部申请。</p></div>
+</section>
+
+<!-- ===== 好友申请：修改以下文字即可 ===== -->
+<section class="doc-page" id="doc-friend-requests" data-page="friend-requests" data-group="discover" hidden>
+<h2>好友申请</h2>
+<p class="lead">处理一条示例申请。</p>
+<h3>页面功能</h3><p>展示本地好友申请与处理状态。</p>
+<h3>可以怎样操作</h3>
+<ul>
+<li>接受申请后加入好友列表，或忽略申请。</li>
+</ul>
+<div class="callout"><h3>演示范围</h3><p>仅更新本地演示关系。</p></div>
+</section>
+
+<!-- ===== 商城专区：修改以下文字即可 ===== -->
+<section class="doc-page" id="doc-mall" data-page="mall" data-group="discover" hidden>
+<h2>商城专区</h2>
+<p class="lead">查看商品与加入演示购物车。</p>
+<h3>页面功能</h3><p>以商品卡片展示食品、用品等内容。</p>
+<h3>可以怎样操作</h3>
+<ul>
+<li>选择商品查看详情；点击加入演示购物车，查看数量反馈。</li>
+</ul>
+<div class="callout"><h3>演示范围</h3><p>没有真实订单、支付或物流。</p><p class="from-phone">【手机框迁出】购物车与商品为示例，不产生真实订单。</p></div>
+</section>
+
+<!-- ===== 商品详情：修改以下文字即可 ===== -->
+<section class="doc-page" id="doc-product" data-page="product" data-group="discover" hidden>
+<h2>商品详情</h2>
+<p class="lead">体验从浏览到加入购物车。</p>
+<h3>页面功能</h3><p>展示单个商品介绍、价格和数量选择。</p>
+<h3>可以怎样操作</h3>
+<ul>
+<li>调整数量，加入演示购物车；返回商城查看总件数。</li>
+</ul>
+<div class="callout"><h3>演示范围</h3><p>价格为示例，不产生购买行为。</p><p class="from-phone">【手机框迁出】商品与价格为示例，没有真实支付或物流。</p></div>
+</section>
+
+<!-- ===== 设置中心：修改以下文字即可 ===== -->
+<section class="doc-page" id="doc-settings" data-page="settings" data-group="profile" hidden>
+<h2>设置中心</h2>
+<p class="lead">管理资料、设备和演示偏好。</p>
+<h3>页面功能</h3><p>聚合账号、设备、宠物、语言、升级、咨询记录和帮助。</p>
+<h3>可以怎样操作</h3>
+<ul>
+<li>进入个人资料、宠物、设备、修改密码及固件升级。</li>
+<li>切换演示通知和语言偏好，查看说明反馈；退出后进入模拟登录。</li>
+</ul>
+<div class="callout"><h3>演示范围</h3><p>偏好保存在本地；语言选择记录偏好并提示，不改变原型已有的中英混合界面。</p><p class="from-phone">【手机框迁出】通知与语言偏好仅记录在当前浏览器；固件升级不会向设备发送指令。</p></div>
+</section>
+
+<!-- ===== 编辑个人资料：修改以下文字即可 ===== -->
+<section class="doc-page" id="doc-personal" data-page="personal" data-group="profile" hidden>
+<h2>编辑个人资料</h2>
+<p class="lead">修改演示主页上的文字。</p>
+<h3>页面功能</h3><p>提供昵称、所在地和个人简介编辑。</p>
+<h3>可以怎样操作</h3>
+<ul>
+<li>填写并保存，返回主页后立即显示新内容。</li>
+</ul>
+<div class="callout"><h3>演示范围</h3><p>只修改当前浏览器的演示资料。</p></div>
+</section>
+
+<!-- ===== 修改密码：修改以下文字即可 ===== -->
+<section class="doc-page" id="doc-password" data-page="password" data-group="profile" hidden>
+<h2>修改密码</h2>
+<p class="lead">展示校验和提交反馈。</p>
+<h3>页面功能</h3><p>演示原密码、新密码与确认密码表单。</p>
+<h3>可以怎样操作</h3>
+<ul>
+<li>填写至少 6 位的新密码，确认两次一致后提交。</li>
+</ul>
+<div class="callout"><h3>演示范围</h3><p>不连接账号系统，不读取或保存真实密码。</p><p class="from-phone">【手机框迁出】密码表单为本地演示，不修改真实账号密码。</p></div>
+</section>
+
+<!-- ===== 固件升级：修改以下文字即可 ===== -->
+<section class="doc-page" id="doc-firmware" data-page="firmware" data-group="profile" hidden>
+<h2>固件升级</h2>
+<p class="lead">观看一次模拟升级过程。</p>
+<h3>页面功能</h3><p>选择演示设备，展示版本与进度。</p>
+<h3>可以怎样操作</h3>
+<ul>
+<li>点击检查更新，再开始升级；离线设备需先恢复模拟在线。</li>
+</ul>
+<div class="callout"><h3>演示范围</h3><p>进度由本地计时器驱动，不发送硬件指令。</p><p class="from-phone">【手机框迁出】固件升级为本地模拟，不会向设备发送指令；离开页面会中止未完成的进度。</p></div>
+</section>
+
+<!-- ===== 意见反馈：修改以下文字即可 ===== -->
+<section class="doc-page" id="doc-feedback" data-page="feedback" data-group="profile" hidden>
+<h2>意见反馈</h2>
+<p class="lead">展示问题填写与提交结果。</p>
+<h3>页面功能</h3><p>提供反馈类型、详细内容和可选联系方式。</p>
+<h3>可以怎样操作</h3>
+<ul>
+<li>填写问题描述后提交，查看本地保存反馈。</li>
+</ul>
+<div class="callout"><h3>演示范围</h3><p>不会发送邮件或工单；联系方式仅保存在当前浏览器。</p></div>
+</section>
+
+<!-- ===== 联系我们：修改以下文字即可 ===== -->
+<section class="doc-page" id="doc-contact" data-page="contact" data-group="profile" hidden>
+<h2>联系我们</h2>
+<p class="lead">展示支持入口及本地反馈流程。</p>
+<h3>页面功能</h3><p>提供说明文字和反馈入口。</p>
+<h3>可以怎样操作</h3>
+<ul>
+<li>点击意见反馈填写问题；查看帮助与关于页面。</li>
+</ul>
+<div class="callout"><h3>演示范围</h3><p>这是演示支持页面，不会拨号或发送邮件。</p><p class="from-phone">【手机框迁出】支持页面为原型内容，不包含真实客服联系方式，不会拨号或发送邮件。</p></div>
+</section>
+
+<!-- ===== 关于 MoonBack：修改以下文字即可 ===== -->
+<section class="doc-page" id="doc-about" data-page="about" data-group="profile" hidden>
+<h2>关于 MoonBack</h2>
+<p class="lead">了解原型与使用范围。</p>
+<h3>页面功能</h3><p>介绍 MoonBack 宠物健康平台和当前本地交互演示。</p>
+<h3>可以怎样操作</h3>
+<ul>
+<li>查看版本、演示说明和协议页面。</li>
+</ul>
+<div class="callout"><h3>演示范围</h3><p>这里的交互原型用于评审和沟通，不代表产品已经上线。</p><p class="from-phone">【手机框迁出】关于页的技术实现说明（HTML/CSS/JS、右侧说明编辑方式、Android Demo 来源）已迁至本说明区。</p></div>
+</section>
+
+<!-- ===== 用户协议与隐私说明：修改以下文字即可 ===== -->
+<section class="doc-page" id="doc-agreement" data-page="agreement" data-group="login" hidden>
+<h2>用户协议与隐私说明</h2>
+<p class="lead">说明本地原型如何处理数据。</p>
+<h3>页面功能</h3><p>此处是演示说明，供体验账号流程时查看。</p>
+<h3>可以怎样操作</h3>
+<ul>
+<li>阅读本地存储、重置和模拟范围说明，然后返回。</li>
+</ul>
+<div class="callout"><h3>演示范围</h3><p>不是正式法律协议；不采集真实凭据，不连接外部服务。</p><p class="from-phone">【手机框迁出】原「本地演示说明」全文（数据保存在 localStorage、重置演示方式、图片与网络说明、请勿填写真实凭据）已迁至本说明区与手机框下方演示提示。</p></div>
+</section>
+
+<!-- ===== 会员中心：修改以下文字即可 ===== -->
+<section class="doc-page" id="doc-membership" data-page="membership" data-group="profile" hidden>
+<h2>会员中心</h2>
+<p class="lead">演示权益与方案选择。</p>
+<h3>页面功能</h3><p>展示会员方案、权益和选择状态。</p>
+<h3>可以怎样操作</h3>
+<ul>
+<li>切换月度／年度方案，点击体验权益更新演示会员标识。</li>
+</ul>
+<div class="callout"><h3>演示范围</h3><p>无真实付费订阅，不产生扣款。</p><p class="from-phone">【手机框迁出】会员方案与权益为示例，没有真实订阅或扣款。</p></div>
+</section>
+
+<!-- ===== 喂养计划：修改以下文字即可 ===== -->
+<section class="doc-page" id="doc-feeding" data-page="feeding" data-group="home" hidden>
+<h2>喂养计划</h2>
+<p class="lead">为宠物安排演示喂养时间。</p>
+<h3>页面功能</h3><p>按当前宠物展示喂养计划、时间、份量和启用状态。</p>
+<h3>可以怎样操作</h3>
+<ul>
+<li>添加、编辑或删除计划，切换启用状态。</li>
+<li>进入我的食品，管理或选择食品。</li>
+</ul>
+<div class="callout"><h3>演示范围</h3><p>不会向设备下发指令；计划保存在本地。</p></div>
+</section>
+
+<!-- ===== 新增／编辑喂养计划：修改以下文字即可 ===== -->
+<section class="doc-page" id="doc-feeding-edit" data-page="feeding-edit" data-group="home" hidden>
+<h2>新增／编辑喂养计划</h2>
+<p class="lead">安排一次定时喂养。</p>
+<h3>页面功能</h3><p>填写计划名称、时间、份量与食品。</p>
+<h3>可以怎样操作</h3>
+<ul>
+<li>填写时间和大于零的份量，选择食品后保存。</li>
+</ul>
+<div class="callout"><h3>演示范围</h3><p>仅创建本地示例计划。</p></div>
+</section>
+
+<!-- ===== 我的食品：修改以下文字即可 ===== -->
+<section class="doc-page" id="doc-foods" data-page="foods" data-group="home" hidden>
+<h2>我的食品</h2>
+<p class="lead">管理常用宠物食品。</p>
+<h3>页面功能</h3><p>展示已有食品与添加入口。</p>
+<h3>可以怎样操作</h3>
+<ul>
+<li>查看食品详情，选择预设食品或添加自定义食品，删除前确认。</li>
+</ul>
+<div class="callout"><h3>演示范围</h3><p>仅用于演示喂养计划选择，不关联商城订单。</p></div>
+</section>
+
+<!-- ===== 选择食品：修改以下文字即可 ===== -->
+<section class="doc-page" id="doc-food-select" data-page="food-select" data-group="home" hidden>
+<h2>选择食品</h2>
+<p class="lead">从预设食品中加入收藏。</p>
+<h3>页面功能</h3><p>提供几种本地预设宠物食品。</p>
+<h3>可以怎样操作</h3>
+<ul>
+<li>点击添加后加入我的食品；已添加的食品显示对应状态。</li>
+</ul>
+<div class="callout"><h3>演示范围</h3><p>不购买商品，也不获取外部商品数据。</p></div>
+</section>
+
+<!-- ===== 添加食品：修改以下文字即可 ===== -->
+<section class="doc-page" id="doc-food-add" data-page="food-add" data-group="home" hidden>
+<h2>添加食品</h2>
+<p class="lead">填写一条自定义食品资料。</p>
+<h3>页面功能</h3><p>提供食品名称、品牌及适用宠物类型。</p>
+<h3>可以怎样操作</h3>
+<ul>
+<li>填写名称与品牌后保存，随后可在喂养计划中选择。</li>
+</ul>
+<div class="callout"><h3>演示范围</h3><p>数据仅在本地保存。</p></div>
+</section>
+
+<!-- =================== 右侧功能说明编辑区结束 =================== -->
+      </div>
+      <hr class="doc-divider">
+      <div class="edit-note"><strong>这段说明，你也可以改。</strong><br>用文本编辑器打开 <code>index.html</code>，搜索上方页面标题，修改对应段落后保存并刷新。顶部 Tab 和 App 菜单的联动不受文字修改影响。<br><a href="使用说明.html" target="_blank" rel="noopener">查看完整使用与编辑指南 ↗</a></div>
+    </aside>
+  </div>
+</main>
+<footer class="global-footer">MOONBACK　/　INTERACTIVE PROTOTYPE　/　OFFLINE EDITION</footer>
+<noscript><p style="padding:30px">请使用允许 JavaScript 的浏览器打开本文件，才能体验左侧 App 交互。</p></noscript>
+</body></html>
