@@ -1,0 +1,562 @@
+[
+  [
+    "index.html",
+    "r', encoding='utf-8"
+  ],
+  [
+    "<!-- ===== Vaccination Records：修改以下文字即可 ===== -->",
+    "<!-- ===== Vaccination Records: Edit text below ===== -->"
+  ],
+  [
+    "<h2>Vaccination Records 疫苗记录</h2>",
+    "<h2>Vaccination Records</h2>"
+  ],
+  [
+    "<p class=\"lead\">下一次接种时间与接种历史一目了然。</p>",
+    "<p class=\"lead\">Next vaccination time and history at a glance.</p>"
+  ],
+  [
+    "<p>顶部显示下一次接种的疫苗、到期日期与倒计时；下方按日期倒序列出该宠物的接种记录。</p>",
+    "<p>Top shows next vaccine, expiry date and countdown; below lists vaccination records in reverse date order.</p>"
+  ],
+  [
+    "<li>Add vaccination record 新增接种记录（名称、接种日期、下次到期、剂量、诊所、备注）。</li>",
+    "<li>Add vaccination record (name, vaccination date, next expiry, dose, clinic, remarks).</li>"
+  ],
+  [
+    "<li>删除记录后下一次接种时间会重新计算。</li>",
+    "<li>After delete record, next vaccination time recalculates.</li>"
+  ],
+  [
+    "<div class=\"callout\"><h3>Demo scope</h3><p>记录仅本地保存；无到期日期时显示 Not scheduled。</p></div>",
+    "<div class=\"callout\"><h3>Demo scope</h3><p>Records saved locally only; shows Not scheduled when no expiry date.</p></div>"
+  ],
+  [
+    "<!-- ===== Add Vaccination Record：修改以下文字即可 ===== -->",
+    "<!-- ===== Add Vaccination Record: Edit text below ===== -->"
+  ],
+  [
+    "<h2>新增接种记录</h2>",
+    "<h2>Add Vaccination Record</h2>"
+  ],
+  [
+    "<p class=\"lead\">记录一次疫苗接种。</p>",
+    "<p class=\"lead\">Record a vaccination.</p>"
+  ],
+  [
+    "<p>演示接种记录表单与保存流程。</p>",
+    "<p>Demo vaccination record form and save flow.</p>"
+  ],
+  [
+    "<li>填写疫苗名称与接种日期（必填），下次到期日期、剂量、诊所与备注选填。</li>",
+    "<li>Fill vaccine name and vaccination date (required), next expiry date, dose, clinic and remarks optional.</li>"
+  ],
+  [
+    "<li>校验日期顺序，保存后返回当前宠物的接种记录列表。</li>",
+    "<li>Validate date order, after save returns to current pet\\'s vaccination record list.</li>"
+  ],
+  [
+    "<!-- ===== 我的设备：修改以下文字即可 ===== -->",
+    "<!-- ===== My devices: Edit text below ===== -->"
+  ],
+  [
+    "<h2>我的设备</h2>",
+    "<h2>My devices</h2>"
+  ],
+  [
+    "<p class=\"lead\">查看已绑定的演示设备。</p>",
+    "<p class=\"lead\">View bound demo devices.</p>"
+  ],
+  [
+    "<p>展示设备名称、类型、连接状态、电量和关联宠物。示例共 3 台：Lucky 2 台（Harness + Dog House）、Milo 1 台（Harness）、Coco 无设备；列表汇总全部设备，不按宠物分栏。</p>",
+    "<p>Shows device name, type, connection status, battery and linked pet. Total 3 units: Lucky 2 (Harness + Dog House), Milo 1 (Harness), Coco none; list summarizes all devices, not by pet column.</p>"
+  ],
+  [
+    "<li>切换 All Devices / Harness / Dog House 筛选。</li>",
+    "<li>Switch All Devices / Harness / Dog House filter.</li>"
+  ],
+  [
+    "<li>点击设备查看详情，点击添加设备模拟绑定。</li>",
+    "<li>Tap device to view details, tap Add device to simulate binding.</li>"
+  ],
+  [
+    "<div class=\"callout\"><h3>Demo scope</h3><p>设备来自本地演示数据，不扫描蓝牙或局域网。</p></div>",
+    "<div class=\"callout\"><h3>Demo scope</h3><p>Devices from local demo data, no Bluetooth or LAN scan.</p></div>"
+  ],
+  [
+    "<!-- ===== 添加设备：修改以下文字即可 ===== -->",
+    "<!-- ===== Add device: Edit text below ===== -->"
+  ],
+  [
+    "<h2>添加设备</h2>",
+    "<h2>Add device</h2>"
+  ],
+  [
+    "<p class=\"lead\">从选择类型到完成绑定。</p>",
+    "<p class=\"lead\">From type selection to binding completion.</p>"
+  ],
+  [
+    "<p>通过简化表单演示设备添加与宠物关联。Home 的添加入口（右上角「+」与设备区「+ Add Device」）统一走弹框流程，本页是完整表单入口，从设备列表底部按钮、宠物详情「关联设备」等进入。</p>",
+    "<p>Demo device add and pet link via simplified form. Home add entry (top-right + and device area + Add Device) unified to dialog flow; this page is full form entry, entered from device list bottom button, pet details \"Link device\", etc.</p>"
+  ],
+  [
+    "<li>设备类型仅 Smart Dog Harness 与 Smart Dog House（均 Model 001）。</li>",
+    "<li>Device type only Smart Dog Harness and Smart Dog House (both Model 001).</li>"
+  ],
+  [
+    "<li>填写设备名称和演示编号，选择关联宠物并提交。</li>",
+    "<li>Fill device name and demo number, select linked pet and submit.</li>"
+  ],
+  [
+    "<div class=\"callout\"><h3>Demo scope</h3><p>绑定成功后设备列表与首页立即同步；不连接真实硬件。</p><p class=\"from-phone\">【手机框迁出】设备绑定为本地模拟，不扫描或连接真实设备。</p></div>",
+    "<div class=\"callout\"><h3>Demo scope</h3><p>After binding success, device list and Home sync immediately; no real hardware connection.</p><p class=\"from-phone\">[Moved out of phone frame] Device binding is local simulation, no scan or connect to real device.</p></div>"
+  ],
+  [
+    "<!-- ===== 设备详情：修改以下文字即可 ===== -->",
+    "<!-- ===== Device details: Edit text below ===== -->"
+  ],
+  [
+    "<h2>设备详情</h2>",
+    "<h2>Device details</h2>"
+  ],
+  [
+    "<p class=\"lead\">从设备入口，继续体验相关能力。</p>",
+    "<p class=\"lead\">From device entry, continue related capabilities.</p>"
+  ],
+  [
+    "<p>展示单台设备的状态与关联关系。</p>",
+    "<p>Shows single device status and associations.</p>"
+  ],
+  [
+    "<li>切换模拟在线／离线，修改关联宠物。</li>",
+    "<li>Switch simulated online/offline, modify linked pet.</li>"
+  ],
+  [
+    "<li>智能背带可进入电子围栏与历史轨迹；两款设备均可查看健康数据与固件升级。</li>",
+    "<li>Smart Dog Harness can enter electronic fence and history trajectory; both devices can view health data and firmware upgrade.</li>"
+  ],
+  [
+    "<li>查看固件升级，或确认后解除绑定。</li>",
+    "<li>View firmware upgrade, or confirm to unbind.</li>"
+  ],
+  [
+    "<div class=\"callout\"><h3>Demo scope</h3><p>状态切换只影响本地演示；解绑不会影响真实设备。</p><p class=\"from-phone\">【手机框迁出】设备在线状态、电量与升级均为本地模拟，不向硬件发送指令。</p></div>",
+    "<div class=\"callout\"><h3>Demo scope</h3><p>Status switch affects local demo only; unbind does not affect real device.</p><p class=\"from-phone\">[Moved out of phone frame] Device online status, battery and upgrade are all local simulation, no commands sent to hardware.</p></div>"
+  ],
+  [
+    "<!-- ===== 新用户绑定设备 · 首次设置：修改以下文字即可 ===== -->",
+    "<!-- ===== New-user device binding · First-time setup: Edit text below ===== -->"
+  ],
+  [
+    "<h2>新用户绑定设备 · 首次设置</h2>",
+    "<h2>New-user device binding · First-time setup</h2>"
+  ],
+  [
+    "<p class=\"lead\">扫描产品绑定码 → 绑定账号 → 建宠物档案 → 关联产品与宠物 → 进入 Home。</p>",
+    "<p class=\"lead\">Scan product binding code → Bind account → Build pet profile → Associate product and pet → Enter Home.</p>"
+  ],
+  [
+    "<p>新用户首次开箱流程，仅支持扫码绑定（智能设备 / 基因检测试剂盒），不提供“选择已有设备”或“稍后绑定”选项，必须完成产品绑定与宠物关联后才能进入 Home。</p>",
+    "<p>New user first-time unboxing flow, supports scan binding only (smart device / genetic test kit), no \"choose existing device\" or \"bind later\" options; must complete product binding and pet association before entering Home.</p>"
+  ],
+  [
+    "<li>步骤 1：点 Scan QR code，模拟扫描产品绑定码（Smart Dog Harness / Smart Dog House / 基因检测试剂盒），屏幕出示产品序列号。</li>",
+    "<li>Step 1: Tap Scan QR code, simulate scanning product binding code (Smart Dog Harness / Smart Dog House / genetic test kit), screen shows product serial number.</li>"
+  ],
+  [
+    "<li>步骤 2：点 Bind to account，将产品绑定至当前账号，产品出现在 My Devices 中。</li>",
+    "<li>Step 2: Tap Bind to account, bind product to current account, product appears in My Devices.</li>"
+  ],
+  [
+    "<li>步骤 3：创建宠物档案（姓名、品种、性别、体重），并上传 8 角度宠物照片，用于生成数字生命体；8 张照片齐全后才能进入下一步。</li>",
+    "<li>Step 3: Create pet profile (name, breed, sex, weight), and upload 8 angle pet photos for digital life generation; must have all 8 photos to proceed to next step.</li>"
+  ],
+  [
+    "<li>步骤 4：将已绑定的产品与新建宠物关联，点 Link & finish 完成首次设置，系统进入 Home。</li>",
+    "<li>Step 4: Associate bound product with new pet, tap Link & finish to complete first-time setup, system enters Home.</li>"
+  ],
+  [
+    "<div class=\"callout\"><h3>与 Add Pet 的区别</h3><p>Add Pet 面向已有宠物用户：可扫码新设备，也可从已有设备列表中选择，或选 I'll link a device later 跳过；新用户绑定设备只能扫码，且必须绑定账号、创建宠物并关联产品，不可跳过。</p></div>",
+    "<div class=\"callout\"><h3>Difference from Add Pet</h3><p>Add Pet is for existing pet users: can scan new device, or choose from existing device list, or choose I\\'ll link a device later to skip; new-user device binding can only scan, must bind account, create pet and associate product, cannot skip.</p></div>"
+  ],
+  [
+    "<div class=\"callout\"><h3>Demo scope</h3><p>扫码、绑定与照片上传均为本地模拟，不连接真实硬件；照片仅在当前会话保留，重置演示后清空。</p><p class=\"from-phone\">【手机框迁出】绑定设备为本地演示数据，不扫描或连接真实设备。</p></div>",
+    "<div class=\"callout\"><h3>Demo scope</h3><p>Scan, binding and photo upload are all local simulation, no real hardware connection; photos kept only in current session, cleared after demo reset.</p><p class=\"from-phone\">[Moved out of phone frame] Device binding is local demo data, no scan or connect to real device.</p></div>"
+  ],
+  [
+    "<!-- ===== 宠物语言翻译：修改以下文字即可 ===== -->",
+    "<!-- ===== Pet language translation: Edit text below ===== -->"
+  ],
+  [
+    "<h2>宠物语言翻译</h2>",
+    "<h2>Pet language translation</h2>"
+  ],
+  [
+    "<p class=\"lead\">暖橙 + 品牌蓝双色的录音翻译页：2 个方向选项、完整状态链路与历史联动。</p>",
+    "<p class=\"lead\">Warm orange + brand blue two-color recording translation page: 2 direction options, complete status chain and history linkage.</p>"
+  ],
+  [
+    "<p>Translation Mode 下只有 2 个选项：Dog → Human 与 Cat → Human，每个选项用「宠物图标 → 人图标」表示方向（宠物暖橙、人品牌蓝），选项右侧的圆形切换按钮点一下即原地翻转成 Human → Dog / Human → Cat，两个选项各自记住自己的方向。中央大号录音按钮带呼吸光晕与极简爪印装饰，录音中显示动态音频波形；结果以气泡卡片展示并支持模拟播放；页面角落有低透明度爪印剪影。</p>",
+    "<p>Translation Mode has only 2 options: Dog → Human and Cat → Human, each option uses \"Pet icon → Human icon\" to indicate direction (pet warm orange, human brand blue); the circular switch button on the right of each option taps to flip in place to Human → Dog / Human → Cat, each option remembers its own direction. Central large recording button with breathing glow and minimalist paw decoration; during recording shows dynamic audio waveform; result shown in bubble card with simulated playback support; page corner has low-opacity paw silhouette.</p>"
+  ],
+  [
+    "<li>首次进入弹出麦克风权限引导；点主按钮开始录音，再点结束依次进入 Analyzing audio... / Generating interpretation...，生成译文后自动存入历史。</li>",
+    "<li>First entry pops up microphone permission guide; tap main button to start recording, tap end to enter Analyzing audio... / Generating interpretation... in sequence, after translation generated auto-saved to history.</li>"
+  ],
+  [
+    "<li>每条历史支持 Play（重放）、View Pet Health Report（跳转健康报告）、删除；空态为插画卡片 + Start Recording 引导。</li>",
+    "<li>Each history supports Play (replay), View Pet Health Report (jump to health report), Delete; empty state is illustration card + Start Recording guide.</li>"
+  ],
+  [
+    "<li>点选项即选中该宠物，点切换按钮只翻转该选项的方向（两个图标左右互换、箭头随之换向，切换按钮转 180° 并变蓝底）；录音进行中切换会被提示先结束录音。切换有平滑过渡，录音按钮按压缩放反馈。</li>",
+    "<li>Tap option to select that pet, tap switch button to flip only that option\\'s direction (two icons swap left-right, arrow changes direction accordingly, switch button rotates 180° and turns blue background); switching during recording prompts to end recording first. Switch has smooth transition, recording button press compression feedback.</li>"
+  ],
+  [
+    "<li>图标：切换 / 狗 / 人类 / 猫 四个图标取自 Font Awesome v5 实体库（repeat / dog / cat / user-alt），SVG 路径已内联进 app.js，不引 CDN、不依赖外部字体；空态插画的宠物剪影会随所选宠物切换。配色：暖橙主色承担宠物与操作，Logo 蓝（#2165b0）承担「人」侧图标、播放键、View Pet Health Report 等跨模块入口，页面另有右上冷色 / 左下暖色的低透明度冲洗，两者混合不抢主体。</li>",
+    "<li>Icons: Switch / Dog / Human / Cat four icons from Font Awesome v5 solid library (repeat / dog / cat / user-alt), SVG paths inlined into app.js, no CDN, no external font dependency; empty state illustration pet silhouette switches with selected pet. Color scheme: warm orange main color for pet and operation, Logo blue (#2165b0) for \"human\" side icons, play button, View Pet Health Report and other cross-module entries; page also has top-right cool color / bottom-left warm color low-opacity wash, both mixed without stealing the main subject.</li>"
+  ],
+  [
+    "<div class=\"callout\"><h3>状态演示（仅原型）</h3><p>以下按钮用于演示异常状态，不影响真实流程。</p><div class=\"doc-demo-row\"><button data-action=\"trans-demo\" data-value=\"nosound\">无声音</button><button data-action=\"trans-demo\" data-value=\"error\">权限失败</button><button data-action=\"trans-demo\" data-value=\"idle\">恢复空闲</button></div></div>",
+    "<div class=\"callout\"><h3>Status demo (prototype only)</h3><p>Buttons below for demo of exception status, do not affect real flow.</p><div class=\"doc-demo-row\"><button data-action=\"trans-demo\" data-value=\"nosound\">No sound</button><button data-action=\"trans-demo\" data-value=\"error\">Permission failed</button><button data-action=\"trans-demo\" data-value=\"idle\">Restore idle</button></div></div>"
+  ],
+  [
+    "<div class=\"callout\"><h3>Demo scope</h3><p>不申请真实麦克风、不采集声音，译文为预设示例；页面底部常驻免责说明（仅供娱乐，不替代专业行为学分析或兽医诊断）。</p><p class=\"from-phone\">【手机框迁出】语言翻译为本地模拟，不访问麦克风、不采集声音，也不生成真实语音；异常状态需通过右侧「状态演示」手动触发。</p></div>",
+    "<div class=\"callout\"><h3>Demo scope</h3><p>No real microphone application, no sound collection, translation is preset sample; page bottom has permanent disclaimer (for entertainment only, does not replace professional behavior analysis or vet diagnosis).</p><p class=\"from-phone\">[Moved out of phone frame] Language translation is local simulation, no microphone access, no sound collection, no real voice generation; exception status needs to be triggered manually via \"Status demo\" on the right.</p></div>"
+  ],
+  [
+    "<!-- ===== 电子围栏：修改以下文字即可 ===== -->",
+    "<!-- ===== Electronic fence: Edit text below ===== -->"
+  ],
+  [
+    "<h2>电子围栏</h2>",
+    "<h2>Electronic fence</h2>"
+  ],
+  [
+    "<p class=\"lead\">用示意地图体验安全范围设置。</p>",
+    "<p class=\"lead\">Experience safety range setting with schematic map.</p>"
+  ],
+  [
+    "<p>为当前宠物选择胸背设备，设置围栏名称、范围和启用状态。</p>",
+    "<p>Select chest harness device for current pet, set fence name, range and enabled status.</p>"
+  ],
+  [
+    "<li>拖动半径滑块，地图范围同步变化，保存设置。</li>",
+    "<li>Drag radius slider, map range changes in sync, save settings.</li>"
+  ],
+  [
+    "<li>点击地图移动围栏中心；进入历史轨迹和电子签到。</li>",
+    "<li>Tap map to move fence center; enter history trajectory and electronic check-in.</li>"
+  ],
+  [
+    "<div class=\"callout\"><h3>Demo scope</h3><p>地图和定位均为本地示意，不包含真实位置，不连接地图服务。</p><p class=\"from-phone\">【手机框迁出】电子围栏为本地演示，不产生真实定位告警。</p></div>",
+    "<div class=\"callout\"><h3>Demo scope</h3><p>Map and location are both local schematic, no real location, no map service connection.</p><p class=\"from-phone\">[Moved out of phone frame] Electronic fence is local demo, no real location alarm generated.</p></div>"
+  ],
+  [
+    "<!-- ===== 历史轨迹：修改以下文字即可 ===== -->",
+    "<!-- ===== History trajectory: Edit text below ===== -->"
+  ],
+  [
+    "<h2>历史轨迹</h2>",
+    "<h2>History trajectory</h2>"
+  ],
+  [
+    "<p class=\"lead\">回看示例活动路线。</p>",
+    "<p class=\"lead\">Review sample activity route.</p>"
+  ],
+  [
+    "<p>按宠物和日期展示轨迹示意、里程与活动时间。</p>",
+    "<p>Shows trajectory schematic, mileage and activity time by pet and date.</p>"
+  ],
+  [
+    "<li>选择日期切换示例轨迹，点击播放观看位置点沿路线移动。</li>",
+    "<li>Select date to switch sample trajectory, tap playback to watch location point move along route.</li>"
+  ],
+  [
+    "<div class=\"callout\"><h3>Demo scope</h3><p>路线为离线 SVG 示意，不能用于真实定位。</p><p class=\"from-phone\">【手机框迁出】轨迹为示例数据。</p></div>",
+    "<div class=\"callout\"><h3>Demo scope</h3><p>Route is offline SVG schematic, cannot be used for real positioning.</p><p class=\"from-phone\">[Moved out of phone frame] Trajectory is sample data.</p></div>"
+  ],
+  [
+    "<!-- ===== 电子签到：修改以下文字即可 ===== -->",
+    "<!-- ===== Electronic check-in: Edit text below ===== -->"
+  ],
+  [
+    "<h2>电子签到</h2>",
+    "<h2>Electronic check-in</h2>"
+  ],
+  [
+    "<p class=\"lead\">为一次到访留下记录。</p>",
+    "<p class=\"lead\">Leave a record for a visit.</p>"
+  ],
+  [
+    "<p>展示签到位置输入和历史签到记录。</p>",
+    "<p>Shows check-in location input and history check-in records.</p>"
+  ],
+  [
+    "<li>填写地点，点击签到，查看新增时间记录。</li>",
+    "<li>Fill location, tap check-in, view new time record.</li>"
+  ],
+  [
+    "<div class=\"callout\"><h3>Demo scope</h3><p>不调用定位权限，地点由用户输入，记录保存在本地。</p><p class=\"from-phone\">【手机框迁出】签到记录仅保存在本地。</p></div>",
+    "<div class=\"callout\"><h3>Demo scope</h3><p>No location permission called, location entered by user, records saved locally.</p><p class=\"from-phone\">[Moved out of phone frame] Check-in records saved locally only.</p></div>"
+  ],
+  [
+    "<!-- ===== 健康指标详情：修改以下文字即可 ===== -->",
+    "<!-- ===== Health metric details: Edit text below ===== -->"
+  ],
+  [
+    "<h2>健康指标详情</h2>",
+    "<h2>Health metric details</h2>"
+  ],
+  [
+    "<p class=\"lead\">从摘要进入具体趋势。</p>",
+    "<p class=\"lead\">Enter specific trend from summary.</p>"
+  ],
+  [
+    "<p>展示所选指标的当前值、参考范围和趋势。</p>",
+    "<p>Shows current value, reference range and trend of selected metric.</p>"
+  ],
+  [
+    "<li>从健康卡片进入；切换时间范围，查看对应趋势。</li>",
+    "<li>Enter from health card; switch time range to view corresponding trend.</li>"
+  ],
+  [
+    "<li>点击交给 AI 解释，带入当前指标和宠物上下文。</li>",
+    "<li>Tap to let AI explain, bringing in current metric and pet context.</li>"
+  ],
+  [
+    "<div class=\"callout\"><h3>Demo scope</h3><p>图表和参考数据均为演示，不作为诊疗依据。</p><p class=\"from-phone\">【手机框迁出】指标图表与数值为示例，实际健康判断需结合有效数据与专业意见。</p></div>",
+    "<div class=\"callout\"><h3>Demo scope</h3><p>Charts and reference data are both demo, not used for diagnosis basis.</p><p class=\"from-phone\">[Moved out of phone frame] Metric charts and values are sample, actual health judgment needs to combine valid data and professional opinion.</p></div>"
+  ],
+  [
+    "<!-- ===== 专业健康报告：修改以下文字即可 ===== -->",
+    "<!-- ===== Professional health report: Edit text below ===== -->"
+  ],
+  [
+    "<h2>专业健康报告</h2>",
+    "<h2>Professional health report</h2>"
+  ],
+  [
+    "<p class=\"lead\">汇总当前宠物的演示健康数据。</p>",
+    "<p class=\"lead\">Summarize current pet\\'s demo health data.</p>"
+  ],
+  [
+    "<p>展示当前宠物资料、健康摘要、趋势和项目中的报告版式参考。</p>",
+    "<p>Shows current pet info, health summary, trends and report layout reference in project.</p>"
+  ],
+  [
+    "<li>查看当前宠物摘要，展开版式参考图。</li>",
+    "<li>View current pet summary, expand layout reference image.</li>"
+  ],
+  [
+    "<li>下载本地 HTML 摘要，或发送给演示兽医进入咨询流程。</li>",
+    "<li>Download local HTML summary, or send to demo vet to enter consultation flow.</li>"
+  ],
+  [
+    "<div class=\"callout\"><h3>Demo scope</h3><p>下载的是可离线打开的 HTML 演示摘要，不是正式医疗报告或 PDF。</p><p class=\"from-phone\">【手机框迁出】报告数值仅用于原型展示、不是医疗报告；「原 App 报告版式参考」图片与说明已迁至本说明区。</p></div>",
+    "<div class=\"callout\"><h3>Demo scope</h3><p>Downloaded is offline-openable HTML demo summary, not formal medical report or PDF.</p><p class=\"from-phone\">[Moved out of phone frame] Report values for prototype display only, not medical report; \"Original App report layout reference\" image and description moved to this description area.</p></div>"
+  ],
+  [
+    "<!-- ===== 在线兽医：修改以下文字即可 ===== -->",
+    "<!-- ===== Online vet: Edit text below ===== -->"
+  ],
+  [
+    "<h2>在线兽医</h2>",
+    "<h2>Online vet</h2>"
+  ],
+  [
+    "<p class=\"lead\">选择一位演示兽医。</p>",
+    "<p class=\"lead\">Select a demo vet.</p>"
+  ],
+  [
+    "<p>展示兽医头像、专业方向和咨询入口。</p>",
+    "<p>Shows vet avatar, specialty and consultation entry.</p>"
+  ],
+  [
+    "<li>选择兽医进入资料确认，选择是否授权当前宠物的演示报告。</li>",
+    "<li>Select vet to enter info confirmation, choose whether to authorize current pet\\'s demo report.</li>"
+  ],
+  [
+    "<li>进入咨询会话，或查看历史咨询记录。</li>",
+    "<li>Enter consultation session, or view history consultation records.</li>"
+  ],
+  [
+    "<div class=\"callout\"><h3>Demo scope</h3><p>没有真实医生在线，不产生费用。</p><p class=\"from-phone\">【手机框迁出】在线兽医与咨询为演示流程，没有真实医生在线，不产生费用。</p></div>",
+    "<div class=\"callout\"><h3>Demo scope</h3><p>No real doctor online, no fees incurred.</p><p class=\"from-phone\">[Moved out of phone frame] Online vet and consultation are demo flow, no real doctor online, no fees incurred.</p></div>"
+  ],
+  [
+    "<!-- ===== 兽医详情 · 咨询确认：修改以下文字即可 ===== -->",
+    "<!-- ===== Vet details · Consultation confirm: Edit text below ===== -->"
+  ],
+  [
+    "<h2>兽医详情 · 咨询确认</h2>",
+    "<h2>Vet details · Consultation confirm</h2>"
+  ],
+  [
+    "<p class=\"lead\">在开始前确认宠物与报告授权。</p>",
+    "<p class=\"lead\">Confirm pet and report authorization before starting.</p>"
+  ],
+  [
+    "<p>展示所选兽医信息，固定本次咨询关联的宠物。</p>",
+    "<p>Shows selected vet info, fixes pet linked to this consultation.</p>"
+  ],
+  [
+    "<li>选择咨询宠物，勾选是否分享报告，再开始演示咨询。</li>",
+    "<li>Select consultation pet, check whether to share report, then start demo consultation.</li>"
+  ],
+  [
+    "<div class=\"callout\"><h3>Demo scope</h3><p>授权只影响本地会话展示，不向第三方发送数据。</p><p class=\"from-phone\">【手机框迁出】兽医资料与咨询入口为演示数据，不产生真实问诊。</p></div>",
+    "<div class=\"callout\"><h3>Demo scope</h3><p>Authorization affects local session display only, no data sent to third parties.</p><p class=\"from-phone\">[Moved out of phone frame] Vet info and consultation entry are demo data, no real diagnosis.</p></div>"
+  ],
+  [
+    "<!-- ===== 兽医咨询会话：修改以下文字即可 ===== -->",
+    "<!-- ===== Vet consultation session: Edit text below ===== -->"
+  ],
+  [
+    "<h2>兽医咨询会话</h2>",
+    "<h2>Vet consultation session</h2>"
+  ],
+  [
+    "<p class=\"lead\">演示问诊沟通与结束记录。</p>",
+    "<p class=\"lead\">Demo diagnosis communication and end record.</p>"
+  ],
+  [
+    "<p>围绕本次固定宠物进行演示聊天，展示报告授权状态。</p>",
+    "<p>Demo chat around fixed pet of this consultation, shows report authorization status.</p>"
+  ],
+  [
+    "<li>输入并发送消息，查看预设回复。</li>",
+    "<li>Type and send message, view preset replies.</li>"
+  ],
+  [
+    "<li>结束咨询后保留记录，可从咨询历史重新查看。</li>",
+    "<li>After end consultation, record kept, can re-view from consultation history.</li>"
+  ],
+  [
+    "<div class=\"callout\"><h3>Demo scope</h3><p>会话由本地规则模拟，不是真实在线医疗服务。</p><p class=\"from-phone\">【手机框迁出】咨询会话使用预设回复，不是真实在线诊疗；报告授权状态仅在本地演示中生效。</p></div>",
+    "<div class=\"callout\"><h3>Demo scope</h3><p>Session simulated by local rules, not real online medical service.</p><p class=\"from-phone\">[Moved out of phone frame] Consultation session uses preset replies, not real online diagnosis; report authorization status effective in local demo only.</p></div>"
+  ],
+  [
+    "<!-- ===== 咨询历史：修改以下文字即可 ===== -->",
+    "<!-- ===== Consultation history: Edit text below ===== -->"
+  ],
+  [
+    "<h2>咨询历史</h2>",
+    "<h2>Consultation history</h2>"
+  ],
+  [
+    "<p class=\"lead\">回看已经完成的演示咨询。</p>",
+    "<p class=\"lead\">Review completed demo consultations.</p>"
+  ],
+  [
+    "<p>按时间列出关联宠物、兽医及会话状态。</p>",
+    "<p>Lists linked pet, vet and session status by time.</p>"
+  ],
+  [
+    "<li>点击历史记录查看对应聊天；开始新咨询可返回兽医列表。</li>",
+    "<li>Tap history record to view corresponding chat; start new consultation can return to vet list.</li>"
+  ],
+  [
+    "<div class=\"callout\"><h3>Demo scope</h3><p>仅包含在此浏览器内创建的演示记录。</p><p class=\"from-phone\">【手机框迁出】咨询记录保存在当前浏览器，不产生真实问诊。</p></div>",
+    "<div class=\"callout\"><h3>Demo scope</h3><p>Includes only demo records created in this browser.</p><p class=\"from-phone\">[Moved out of phone frame] Consultation records saved in current browser, no real diagnosis.</p></div>"
+  ],
+  [
+    "<!-- ===== 帖子详情：修改以下文字即可 ===== -->",
+    "<!-- ===== Post details: Edit text below ===== -->"
+  ],
+  [
+    "<h2>帖子详情</h2>",
+    "<h2>Post details</h2>"
+  ],
+  [
+    "<p class=\"lead\">阅读、互动与评论。</p>",
+    "<p class=\"lead\">Read, interact and comment.</p>"
+  ],
+  [
+    "<p>展示作者、完整图文、话题和评论列表。</p>",
+    "<p>Shows author, full image-text, topics and comment list.</p>"
+  ],
+  [
+    "<li>切换多张图片，点赞、收藏、关注作者。</li>",
+    "<li>Switch multiple images, like, favorite, follow author.</li>"
+  ],
+  [
+    "<li>输入评论并发布，查看评论数同步变化；点击话题查看聚合内容。</li>",
+    "<li>Type comment and publish, view comment count sync change; tap topic to view aggregation content.</li>"
+  ],
+  [
+    "<li>分享时显示本地演示定位链接。</li>",
+    "<li>Share shows local demo location link.</li>"
+  ],
+  [
+    "<div class=\"callout\"><h3>Demo scope</h3><p>评论和互动只修改本地状态；本地文件链接需要对方拥有同一份文件夹才能打开。</p></div>",
+    "<div class=\"callout\"><h3>Demo scope</h3><p>Comment and interaction modify local state only; local file link requires other party to have same folder to open.</p></div>"
+  ],
+  [
+    "<!-- ===== 作者主页：修改以下文字即可 ===== -->",
+    "<!-- ===== Author homepage: Edit text below ===== -->"
+  ],
+  [
+    "<h2>作者主页</h2>",
+    "<h2>Author homepage</h2>"
+  ],
+  [
+    "<p class=\"lead\">了解社区中的另一位养宠人。</p>",
+    "<p class=\"lead\">Learn about another pet owner in the community.</p>"
+  ],
+  [
+    "<p>展示作者资料、宠物简介、内容宫格和关注状态。</p>",
+    "<p>Shows author info, pet intro, content grid and follow status.</p>"
+  ],
+  [
+    "<li>关注／取消关注，查看作者帖子，进入私信会话。</li>",
+    "<li>Follow / unfollow, view author posts, enter private message session.</li>"
+  ],
+  [
+    "<div class=\"callout\"><h3>Demo scope</h3><p>关注结果同步影响发现页的 Following 流。</p></div>",
+    "<div class=\"callout\"><h3>Demo scope</h3><p>Follow result sync affects Discover page Following flow.</p></div>"
+  ],
+  [
+    "<!-- ===== 发布图文：修改以下文字即可 ===== -->",
+    "<!-- ===== Publish image-text: Edit text below ===== -->"
+  ],
+  [
+    "<h2>发布图文</h2>",
+    "<h2>Publish image-text</h2>"
+  ],
+  [
+    "<p class=\"lead\">把一段日常加入演示社区。</p>",
+    "<p class=\"lead\">Add a piece of daily life to demo community.</p>"
+  ],
+  [
+    "<p>深色发布态：支持最多 9 张本地图片、500 字以内正文、话题标签与图片预览。</p>",
+    "<p>Dark publish mode: supports up to 9 local images, 500-char body text, topic tags and image preview.</p>"
+  ],
+  [
+    "<li>点击正方形「+」按钮选择多张图片（最多 9 张），预览后可逐张删除。</li>",
+    "<li>Tap square \"+\" button to select multiple images (up to 9), can delete one by one after preview.</li>"
+  ],
+  [
+    "<li>输入正文，右上角「Publish」发布；正文限 500 字，计数器随输入更新。</li>",
+    "<li>Type body text, top-right \"Publish\" to publish; body limited to 500 chars, counter updates with input.</li>"
+  ],
+  [
+    "<li>添加话题标签（逗号分隔），发布后返回信息流，并同步显示在我的主页。</li>",
+    "<li>Add topic tags (comma-separated), after publish return to feed and sync to my homepage.</li>"
+  ],
+  [
+    "<div class=\"callout\"><h3>Demo scope</h3><p>没有图片时使用内置宠物图；上传图片仅当前会话显示，重新打开后使用内置替代图。</p><p class=\"from-phone\">【手机框迁出】图文内容仅发布到本地演示，不会上传到网络。</p></div>",
+    "<div class=\"callout\"><h3>Demo scope</h3><p>When no image, uses built-in pet image; uploaded images shown only in current session, after re-open uses built-in alternative image.</p><p class=\"from-phone\">[Moved out of phone frame] Image-text content published to local demo only, not uploaded to network.</p></div>"
+  ],
+  [
+    "<!-- ===== 宠物故事：修改以下文字即可 ===== -->",
+    "<!-- ===== Pet story: Edit text below ===== -->"
+  ],
+  [
+    "<h2>宠物故事</h2>",
+    "<h2>Pet story</h2>"
+  ],
+  [
+    "<p class=\"lead\">以单张故事卡展示宠物瞬间。</p>",
+    "<p class=\"lead\">Show pet moments with single story card.</p>"
+  ]
+]

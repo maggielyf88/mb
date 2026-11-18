@@ -1,0 +1,918 @@
+/* MoonBack offline interaction logic. All in-app UI strings are English; the notes on the right are edited in index.html. */
+(() => {
+'use strict';
+const $ = s => document.querySelector(s);
+const esc = v => String(v == null ? '' : v).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const paths = {
+ star:'M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z',
+ home:'M3 10 12 3l9 7v10h-6v-7H9v7H3z',health:'M3 12h4l3-7 4 14 3-7h4',ai:'M5 9 4 3l6 3h4l6-3-1 6a8 8 0 1 1-14 0M8 12h1m6 0h1m-6 4q2 2 4 0',discover:'M20 12a8 8 0 1 1-8-8m0 4a4 4 0 1 0 4 4m-4 0 9-9m-5 0h5v5',profile:'M8 7a4 4 0 1 0 8 0 4 4 0 1 0-8 0M4 21v-3a8 6 0 0 1 16 0v3',back:'m14 5-7 7 7 7',arrow:'m9 5 7 7-7 7',plus:'M12 4v16M4 12h16',bell:'M5 17h14l-2-4V9a5 5 0 0 0-10 0v4l-2 4m5 3h4',camera:'M3 7h12v13H3zM15 11l6-4v13l-6-4M6 4h6',mic:'M9 6a3 3 0 0 1 6 0v6a3 3 0 0 1-6 0V6m-3 5v1a6 6 0 0 0 12 0v-1m-6 7v4m-3 0h6',paw:'M9 12q3-4 6 0l3 5q0 4-6 2-6 2-6-2zM5 7a1.5 2 0 1 0 0 .1M10 4a1.5 2 0 1 0 0 .1M15 4a1.5 2 0 1 0 0 .1M20 7a1.5 2 0 1 0 0 .1',settings:'m9 3-1 3-3 1-2 3 2 2-1 3 2 3 3-1 3 3 3-3 3 1 2-3-1-3 2-2-2-3-3-1-1-3zM9 12a3 3 0 1 0 6 0 3 3 0 1 0-6 0',heart:'M12 21 3 12C-3 3 9 0 12 7c3-7 15-4 9 5z',comment:'M21 11a9 8 0 0 1-13 7l-6 3 2-6a9 8 0 1 1 17-4',bookmark:'M6 3h12v18l-6-4-6 4z',send:'M3 3l18 8-8 3-3 8-7-19m0 0 10 11',moon:'M19 15A8 8 0 0 1 9 5a8 8 0 1 0 10 10',chart:'M4 20V10h4v10m2 0V6h4v14m2 0V2h4v18M2 20h20',device:'M7 3h10v18H7zM10 17h4',fence:'m12 3 8 6-3 11H7L4 9zM12 3v4M4 9l4 2m9 0 3-2',food:'M5 8h14l-2 12H7zM3 8h18M9 4h6',check:'m5 12 4 4L20 5',logout:'M9 4H4v16h5m4-13 5 5-5 5m-5-5h13',crown:'m3 6 5 5 4-7 4 7 5-5-3 14H6z',volume:'M3 9h5l5-5v16l-5-5H3zM16 8q4 4 0 8m3-11q7 7 0 14',play:'m8 4 12 8-12 8z',trash:'M4 6h16M9 6V3h6v3M6 6l1 15h10l1-15M10 10v7m4-7v7',edit:'m4 16 12-12 4 4L8 20l-5 1zM14 6l4 4',pin:'M12 22S4 14 4 9a8 8 0 1 1 16 0c0 5-8 13-8 13M9 9a3 3 0 1 0 6 0 3 3 0 1 0-6 0',lock:'M5 10h14v11H5zM8 10V6a4 4 0 0 1 8 0v4',search:'M10 3a7 7 0 1 0 0 14 7 7 0 1 0 0-14m5 12 6 6',share:'M12 16V2m-5 5 5-5 5 5M5 11H3v10h18V11h-2',refresh:'M20 7a9 9 0 1 0 1 9M20 2v6h-6',info:'M12 3a9 9 0 1 0 0 18 9 9 0 1 0 0-18m0 7v7m0-11v1',mail:'M3 5h18v14H3zM3 5l9 7 9-7',clock:'M12 3a9 9 0 1 0 0 18 9 9 0 1 0 0-18m0 4v6l4 2',close:'m5 5 14 14M19 5 5 19',alert:'M12 2 1 21h22zM12 8v6M12 16v1',dna:'M4 3c0 6 16 6 16 12S4 21 4 21M20 3C20 9 4 9 4 15s16 6 16 6M7 6h10M7 12h10M7 18h10',syringe:'M18 2l4 4M19.5 3.5l-1 1M17 5L5 17l-2 4 4-2 12-12M13 5l4 4M10 8l4 4M7 11l4 4M3 21l2-2',truck:'M3 6h11v10H3zM14 9h4l3 3v4h-7zM7 20a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM18 20a2 2 0 1 0 0-4 2 2 0 0 0 0 4z',vial:'M9 3h6M10 3v7l-5 9a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-5-9V3M8 15h8',calcheck:'M4 6h16v15H4zM4 10h16M8 3v5M16 3v5m-6 9 2 2 4-4'
+};
+const icon = n => `<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="${paths[n] || paths.info}"/></svg>`;
+const FACES={
+ dog:{vb:'0 0 576 512',d:'M298.06,224,448,277.55V496a16,16,0,0,1-16,16H368a16,16,0,0,1-16-16V384H192V496a16,16,0,0,1-16,16H112a16,16,0,0,1-16-16V282.09C58.84,268.84,32,233.66,32,192a32,32,0,0,1,64,0,32.06,32.06,0,0,0,32,32ZM544,112v32a64,64,0,0,1-64,64H448v35.58L320,197.87V48c0-14.25,17.22-21.39,27.31-11.31L374.59,64h53.63c10.91,0,23.75,7.92,28.62,17.69L464,96h64A16,16,0,0,1,544,112Zm-112,0a16,16,0,1,0-16,16A16,16,0,0,0,432,112Z'},
+ cat:{vb:'0 0 512 512',d:'M290.59 192c-20.18 0-106.82 1.98-162.59 85.95V192c0-52.94-43.06-96-96-96-17.67 0-32 14.33-32 32s14.33 32 32 32c17.64 0 32 14.36 32 32v256c0 35.3 28.7 64 64 64h176c8.84 0 16-7.16 16-16v-16c0-17.67-14.33-32-32-32h-32l128-96v144c0 8.84 7.16 16 16 16h32c8.84 0 16-7.16 16-16V289.86c-10.29 2.67-20.89 4.54-32 4.54-61.81 0-113.52-44.05-125.41-102.4zM448 96h-64l-64-64v134.4c0 53.02 42.98 96 96 96s96-42.98 96-96V32l-64 64zm-72 80c-8.84 0-16-7.16-16-16s7.16-16 16-16 16 7.16 16 16-7.16 16-16 16zm80 0c-8.84 0-16-7.16-16-16s7.16-16 16-16 16 7.16 16 16-7.16 16-16 16z'},
+ user:{vb:'0 0 512 512',d:'M256 288c79.5 0 144-64.5 144-144S335.5 0 256 0 112 64.5 112 144s64.5 144 144 144zm128 32h-55.1c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16H128C57.3 320 0 377.3 0 448v16c0 26.5 21.5 48 48 48h416c26.5 0 48-21.5 48-48v-16c0-70.7-57.3-128-128-128z'},
+ repeat:{vb:'0 0 512 512',d:'M0 224c0 17.7 14.3 32 32 32s32-14.3 32-32c0-53 43-96 96-96h160v32c0 12.9 7.8 24.6 19.8 29.6s25.7 2.2 34.9-6.9l64-64c12.5-12.5 12.5-32.8 0-45.3l-64-64c-9.2-9.2-22.9-11.9-34.9-6.9S320 19.1 320 32v32H160C71.6 64 0 135.6 0 224m512 64c0-17.7-14.3-32-32-32s-32 14.3-32 32c0 53-43 96-96 96H192v-32c0-12.9-7.8-24.6-19.8-29.6s-25.7-2.2-34.9 6.9l-64 64c-12.5 12.5-12.5 32.8 0 45.3l64 64c9.2 9.2 22.9 11.9 34.9 6.9s19.8-16.6 19.8-29.6v-32h160c88.4 0 160-71.6 160-160z'}
+};
+const face = (kind,cls='') => {const f=FACES[kind]||FACES.user;return `<svg class="face${cls?' '+cls:''}" viewBox="${f.vb}" aria-hidden="true"><path d="${f.d}"/></svg>`;};
+const swapIcon = () => `<svg class="swap-ico" viewBox="${FACES.repeat.vb}" aria-hidden="true"><path d="${FACES.repeat.d}"/></svg>`;
+const dirArrow = k => `<svg class="ttc-arr" viewBox="0 0 24 24" aria-hidden="true"><path d="${k==='b'?'M19.5 12H5.5m0 0 4.2-4.2M5.5 12l4.2 4.2':'M4.5 12h14m0 0-4.2-4.2M18.5 12l-4.2 4.2'}"/></svg>`;
+const BLANK_IMG='data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==';
+const img = (src,cls='',alt='') => {const s=src==null?'':String(src),u=s?(s.startsWith('blob:')?s:'assets/'+s):BLANK_IMG;return `<img src="${esc(u)}" class="${esc(cls)}" alt="${esc(alt)}">`;};
+const navButton = (route,label,cls='text-btn') => `<button class="${cls}" data-go="${esc(route)}">${label}</button>`;
+const action = (name,label,cls='secondary',attrs='') => `<button class="${cls}" data-action="${name}" ${attrs}>${label}</button>`;
+const ib = (name,label,extra='') => `<button class="icon-btn" aria-label="${esc(label)}" ${extra}>${icon(name)}</button>`;
+const field = (label,name,value='',type='text',extra='') => `<label class="field">${label}<input name="${name}" type="${type}" value="${esc(value)}" ${extra}></label>`;
+const selectField = (label,name,options,value,extra='') => `<label class="field">${label}<select name="${name}" ${extra}>${options.map(([v,t])=>`<option value="${esc(v)}" ${String(v)===String(value)?'selected':''}>${esc(t)}</option>`).join('')}</select></label>`;
+const form = (name,body,submit='Save',extra='') => `<form data-form="${name}" ${extra}>${body}<p class="form-error" role="alert"></p><button class="primary" type="submit">${submit}</button></form>`;
+const empty = (title,text,route,label='Add') => `<div class="empty">${icon('paw')}<strong>${esc(title)}</strong>${esc(text)}${route?navButton(route,label,'primary'):''}</div>`;
+const row = (label,route,ico='arrow',sub='') => `<button class="list-row" data-go="${esc(route)}">${icon(ico)}<span class="grow">${label}</span>${sub?`<small>${sub}</small>`:''}${icon('arrow')}</button>`;
+const uid = () => 'id'+Date.now().toString(36)+(++sequence).toString(36);
+let sequence=0;
+const authors = [
+ {id:'sophie',name:'sophie.andduke',location:'San Francisco',avatar:'ins_a1.png',bio:'Little paws, big adventures. 🐾',photo:'ins_p1.jpg'},
+ {id:'oliver',name:'oliver.the.cat',location:'Los Angeles',avatar:'ins_a2.png',bio:'Slow afternoons & a curious cat.',photo:'ins_p2.jpg'},
+ {id:'luna',name:'luna.daily',location:'Seattle',avatar:'ins_a3.png',bio:'Collecting happy moments with Luna.',photo:'ins_p3.jpg'},
+ {id:'max',name:'max.and.me',location:'Portland',avatar:'ins_a4.png',bio:'Every day is a good day for a walk.',photo:'ins_p4.jpg'},
+ {id:'coco',name:'coco.adventures',location:'San Diego',avatar:'ins_a5.png',bio:'Life is better together.',photo:'ins_p5.jpg'}
+];
+const discoverChips=[['for-you','For You'],['following','Following'],['Health','Health'],['Training','Training'],['Nutrition','Nutrition'],['Care','Care']];
+const discoverSub=['He always ends up on my pillow when I am up late...','A new favorite spot by the window, every single afternoon.','Weekend adventures with this little explorer.','Our daily walk went a little longer than usual today.','Happiness comes with four little paws.','A little sunshine with Lucky after breakfast.','Milo and his favorite window again.','Coco is ready for a new adventure.'];
+const discoverTopicList=['Health','Training','Nutrition','Care','Health','Training','Nutrition','Care'];
+const discoverTopicOf=(p,i)=>(Array.isArray(p.topics)&&p.topics[0])||discoverTopicList[i%discoverTopicList.length];
+function discoverSearchBar(){return `<label class="ds-search">${icon('search')}<input type="search" data-input="discover-search" placeholder="Search pet care, tips and stories..." aria-label="Search community posts"></label>`;}
+function discoverChipRow(){const on=view.discoverTopic||view.feed;const items=discoverChips.map(([v,l])=>`<button class="ds-chip${on===v?' active':''}" data-action="feed" data-value="${v}" aria-pressed="${on===v}">${l}</button>`);items.splice(4,0,`<button class="ds-chip ds-chip-round" data-action="discover-stories" aria-label="Stories">${icon('paw')}</button>`);return `<div class="ds-chips">${items.join('')}</div>`;}
+function discoverCard(p,orig,topic,slot){
+ const a=author(p.author),photos=postPhotos(p),sub=p.subtitle||discoverSub[orig%discoverSub.length];
+ const likes=(Number(p.likes)||0).toLocaleString();
+ const h=['ds-h-tall','ds-h-mid','ds-h-short','ds-h-mid'][slot%4];
+ const toUrl=u=>{const s=u==null?'':String(u);return s?(s.startsWith('blob:')?s:'assets/'+s):BLANK_IMG;};
+ const urls=photos.length?photos.map(toUrl):[BLANK_IMG];
+ const dots=urls.length>1?`<div class="ds-dots">${urls.map((_,i)=>`<span class="ds-dot${i===0?' on':''}"></span>`).join('')}</div>`:'';
+ const media=`<div class="ds-media ${h}" data-slides="${esc(JSON.stringify(urls))}" data-slide="0">${img(photos[0]||'','ds-img','Community photo')}${dots}</div>`;
+ const copy=`<div class="ds-copy"><strong class="ds-title">${esc(p.body||'')}</strong><p class="ds-sub">${esc(sub)}</p><div class="ds-meta">${img(a.avatar,'ds-avatar',a.name)}<span class="ds-author">${esc(a.name)}</span><span class="ds-likes">${icon('paw')}${likes}</span></div></div>`;
+ const search=((p.body||'')+' '+sub+' '+a.name+' '+(p.tags||[]).join(' ')).toLowerCase();
+ return `<div class="ds-card" data-go="post?id=${esc(p.id)}" data-search="${esc(search)}" data-topic="${esc(topic)}" role="button" tabindex="0">${media}${copy}</div>`;
+}
+const types = {harness:['Smart Dog Harness','home_dev_harness.jpg'],house:['Smart Dog House','home_dev_bed.jpg']};
+const devImg=t=>types[t]?.[1]||'home_dev_harness.jpg';
+const seed = () => ({version:1,selected:'lucky',profile:{name:'Kevin',location:'San Francisco, CA',bio:'A pet lover who enjoys sharing the daily moments with my furry friends.'},pets:[
+ {id:'lucky',name:'Lucky',type:'Dog',breed:'Golden Retriever',sex:'Male',birth:'2023-06-03',weight:28,photo:'home_pet_lucky.jpg',scene:'real_lucky_rest.jpg',status:'Resting now'},
+ {id:'milo',name:'Milo',type:'Dog',breed:'Labrador Retriever',sex:'Male',birth:'2024-03-10',weight:28,photo:'home_pet_milo.jpg',scene:'real_milo_play.jpg',status:'Walking now',abnormal:true,anomalies:[{label:'Persistent High Heart Rate',value:'125 bpm',note:'Sustained above normal canine range'}]},
+ {id:'coco',name:'Coco',type:'Dog',breed:'Dachshund',sex:'Female',birth:'2022-09-12',weight:9,photo:'home_pet_coco.jpg',scene:'real_coco_sleep.jpg',status:'Playing now'}
+ ],devices:[
+ {id:'harness',name:'Smart Dog Harness',type:'harness',pet:'lucky',online:true,battery:90,serial:'001'},
+ {id:'house',name:'Smart Dog House',type:'house',pet:'lucky',online:true,battery:86,serial:'001'},
+ {id:'harness2',name:'Smart Dog Harness',type:'harness',pet:'milo',online:true,battery:74,serial:'001'}
+ ],
+ posts:authors.map((a,i)=>({id:'post'+i,author:a.id,body:['A quiet afternoon with my best friend. Every little moment matters. 🐾','Milo found a new favorite spot by the window. ☀️','Weekend adventures with this little explorer.','Our daily walk, a little longer today. 🌿','Happiness comes with four little paws.'][i],photos:[a.photo,'ins_p'+(i+2)+'.jpg'],tags:['PetLife',i%2?'CatLife':'DailyWalk'],likes:124+i*17,liked:false,saved:false,comments:[{name:'Kevin',text:'So lovely! 🐾'}],time:'Today'})).concat([0,1,2].map((i)=>({id:'my-post'+i,author:'me',body:['A little sunshine with Lucky. 🐾','Milo and his favorite window.','Coco is ready for a new adventure.'][i],photos:[['ins_p6.jpg','ins_p7.jpg','real_coco_sleep.jpg'][i]],tags:['PetLife'],likes:12+i*8,liked:false,saved:false,comments:[],time:'Yesterday'}))),following:['sophie','luna'],friends:['sophie'],requests:[{author:'oliver',status:'pending'}],sentRequests:[],messagesRead:false,
+ conversations:{},chats:{},consultations:[],records:[{id:'rec1',pet:'lucky',name:'Rabies vaccine',date:'2026-06-03',next:'2027-06-03',note:'Annual vaccination (sample)'}],geneticTests:[{id:'gt1',pet:'lucky',kitId:'MB-DNA-240618',petInfo:{name:'Lucky',type:'Dog',breed:'Golden Retriever',sex:'Male',birth:'2023-06-03',weight:28},status:'ready',carrier:'FedEx',tracking:'9400 1102 3344 5566',submittedAt:'2026-10-12',shippingAt:'2026-10-14',testingAt:'2026-10-15',reportAt:'2026-10-29'},{id:'gt2',pet:'lucky',kitId:'MB-DNA-251102',petInfo:{name:'Lucky',type:'Dog',breed:'Golden Retriever',sex:'Male',birth:'2023-06-03',weight:28},status:'submitted',carrier:'',tracking:'',submittedAt:'2026-11-14',shippingAt:'',testingAt:'',reportAt:''},{id:'gt3',pet:'milo',kitId:'MB-DNA-251020',petInfo:{name:'Milo',type:'Dog',breed:'Labrador Retriever',sex:'Male',birth:'2024-03-10',weight:28},status:'testing',carrier:'UPS',tracking:'9400 1102 8899 0011',submittedAt:'2026-11-02',shippingAt:'2026-11-04',testingAt:'2026-11-06',reportAt:''}],vaccinations:[{id:'vac1',pet:'lucky',name:'Rabies',date:'2026-06-03',next:'2027-06-03',dose:'1 mL',vet:'Sunset Animal Clinic',note:'Annual vaccination'},{id:'vac2',pet:'lucky',name:'DHPP (Distemper, Hepatitis, Parvovirus, Parainfluenza)',date:'2026-04-18',next:'2027-04-18',dose:'1 mL',vet:'Sunset Animal Clinic',note:'Annual booster'},{id:'vac3',pet:'lucky',name:'Bordetella (Kennel Cough)',date:'2026-08-21',next:'2026-12-21',dose:'1 mL',vet:'Sunset Animal Clinic',note:'Every 6-12 months'},{id:'vac4',pet:'milo',name:'Rabies',date:'2026-02-11',next:'2027-02-11',dose:'1 mL',vet:'Bay Pet Care',note:'Annual vaccination'}],
+ foods:[{id:'food1',name:'Daily Balance',brand:'MoonBack',type:'Dog'},{id:'food2',name:'Indoor Cat',brand:'Nature Care',type:'Cat'}],feeding:[{id:'feed1',pet:'lucky',name:'Breakfast',time:'08:00',grams:90,food:'food1',enabled:true},{id:'feed2',pet:'milo',name:'Dinner',time:'18:30',grams:45,food:'food2',enabled:true}],fences:{},checkins:[],translations:[],feedback:[],member:false,cart:0,notifications:true,language:'Follow demo',firmware:{},healthChecks:{},emptyMode:false
+});
+const STORE='moonback-interactive-offline-v1';
+let storageAvailable=true,state;
+try { const raw=JSON.parse(localStorage.getItem(STORE)||'null'); state=raw&&raw.version===1&&Array.isArray(raw.pets)&&Array.isArray(raw.devices)&&Array.isArray(raw.posts)?Object.assign(seed(),raw):seed(); state.devices=(state.devices||[]).filter(d=>d.type==='harness'||d.type==='house'); if(!state.devices.length||state.devAssign!==2){state.devices=seed().devices;state.devAssign=2;(state.pets||[]).forEach(p=>{const c=seed().pets.find(x=>x.id===p.id);if(c&&(p.breed==='British Shorthair'||p.breed==='Bichon Frise'))Object.assign(p,{type:c.type,breed:c.breed,weight:c.weight,status:c.status,scene:c.scene,anomalies:c.anomalies});});} } catch(e){state=seed();storageAvailable=false;}normalizeState(state);try{localStorage.setItem(STORE,JSON.stringify(state));}catch(e){}
+function save(){try{localStorage.setItem(STORE,JSON.stringify(state));}catch(e){storageAvailable=false;$('#preview-state').textContent='● Session mode · refresh may reset';}}
+function normalizeState(s){
+ const base=seed(),rawPosts=Array.isArray(s.posts)?s.posts:null;
+ const fallbackPhotos=['ins_p1.jpg','ins_p2.jpg','ins_p3.jpg','ins_p4.jpg','ins_p5.jpg','ins_p6.jpg','ins_p7.jpg','real_coco_sleep.jpg'];
+ const valid=(rawPosts||[]).filter(p=>p&&typeof p==='object');
+ s.posts=valid.map((p,i)=>{const ph=(Array.isArray(p.photos)?p.photos:[]).filter(u=>u&&typeof u==='string');return Object.assign({},p,{
+  id:p.id||('post'+i),author:p.author||'me',body:p.body||'',
+  photos:ph.length?ph:[fallbackPhotos[i%fallbackPhotos.length]],tags:Array.isArray(p.tags)?p.tags:[],
+  likes:Number(p.likes)||0,liked:!!p.liked,saved:!!p.saved,
+  comments:Array.isArray(p.comments)?p.comments:[],time:p.time||'Today'
+ });});
+ if(!s.posts.length)s.posts=base.posts;
+ ['following','friends','requests','sentRequests','pets','devices','records','geneticTests','vaccinations','feeding','feedback','consultations','translations','checkins'].forEach(k=>{if(!Array.isArray(s[k]))s[k]=base[k]||[];});
+ if(!s.profile||typeof s.profile!=='object')s.profile=base.profile;
+ ['conversations','chats','fences','firmware','healthChecks'].forEach(k=>{if(!s[k]||typeof s[k]!=='object'||Array.isArray(s[k]))s[k]=base[k]||{};});
+ (s.geneticTests||[]).forEach(g=>{if(g.carrier===undefined)g.carrier='';if(g.shippingAt===undefined)g.shippingAt=(g.status==='testing'||g.status==='ready')?(g.testingAt||g.submittedAt||''):(g.status==='shipping'?(g.submittedAt||''):'');});
+ return s;
+}
+
+const uploadedPhotos={}; let pendingPhotos=[],uploadGeneration=0,uploadReading=false,publishDraft={body:'',tags:''};
+let current={page:'home',params:new URLSearchParams()},previousHash='',toastTimer,operationTimer,modalCallback,modalFocus;
+let view={topicPanelOpen:false,discoverTopic:'',lgStep:'buttons',lgMode:'email',lgAgreed:false,lgCooldownUntil:0,devPick:'harness',feed:'for-you',profileTab:'posts',deviceFilter:'all',range:'today',date:'2026-10-29',loginMode:'phone',translationDirection:'pet-human',translationType:'Dog',recording:false,translationResult:'',listen:false,talk:false,overlay:false,camera:'cam',firmwareStage:'ready',firmwareProgress:0,healthProgress:0,postImage:0,storyIndex:0,friendSearch:'',fenceRadius:150,gtStep:'scan',gtKit:'',gtVet:'',gtPet:'',gtExpanded:{}};
+let discoverSlidesTimer=null;
+function startDiscoverSlides(){
+ clearInterval(discoverSlidesTimer);discoverSlidesTimer=null;
+ if(current.page!=='discover')return;
+ const media=[...document.querySelectorAll('#app-content .ds-media[data-slides]')].filter(m=>{try{return JSON.parse(m.dataset.slides).length>1;}catch(e){return false;}});
+ if(!media.length)return;
+ discoverSlidesTimer=setInterval(()=>{
+  media.forEach(m=>{
+   if(m.closest('.ds-card')?.hidden)return;
+   let urls;try{urls=JSON.parse(m.dataset.slides);}catch(e){return;}
+   const i=(Number(m.dataset.slide||0)+1)%urls.length;
+   m.dataset.slide=i;
+   const im=m.querySelector('.ds-img');
+   if(im){im.src=urls[i];im.classList.remove('ds-fade');void im.offsetWidth;im.classList.add('ds-fade');}
+   m.querySelectorAll('.ds-dot').forEach((d,k)=>d.classList.toggle('on',k===i));
+  });
+ },3000);
+}
+const docs=[...document.querySelectorAll('.doc-page')];
+const docMap=Object.fromEntries(docs.map(e=>[e.dataset.page,e]));
+const modules=[['login','Account','lock'],['home','Home','home'],['monitor','Live care','camera'],['health','Health','health'],['ai','AI Butler','ai'],['discover','Discover','discover'],['profile','Profile','profile']];
+const moduleName=g=>(modules.find(x=>x[0]===g)||['','Home'])[1];
+const titles={home:'',health:'Health Analysis',ai:'AI Butler',discover:'Discover',profile:'User profile',monitor:'Remote care',login:'',register:'Create account',forgot:'Reset password',pets:'My pets','pet-edit':'Add Pet','pet-detail':'Pet profile',devices:'All Devices','device-add':'Add device','device-detail':'Device details',translation:'Pet Language Translator',fence:'Geofence',trajectory:'Location history',checkin:'Check-in',metric:'Health details',report:'Professional report',records:'Health records','record-edit':'Health record',vets:'Online vets','vet-detail':'Vet profile',consult:'Consultation','consult-history':'Consultations',post:'Post',author:'User profile',publish:'Create a post',story:'Stories',topic:'Topic',messages:'Messages',chat:'Chat',friends:'Connections','friend-add':'Add friend','friend-requests':'Friend requests',mall:'Pet shop',product:'Product',settings:'Settings',personal:'Edit profile',password:'Change password',firmware:'Firmware update',feedback:'Feedback',contact:'Contact us',about:'About MoonBack',agreement:'Terms & privacy',membership:'MoonBack Plus',feeding:'Feeding plan','feeding-edit':'Feeding plan',foods:'My foods','food-add':'Add food','food-select':'Select food',genetic:'Genetic Test','genetic-new':'New Genetic Test','genetic-report':'Genetic Test Report',vaccines:'Vaccination Records','vaccine-add':'Add vaccination record','device-bind':'Bind a device'};
+Object.assign(titles,{privacy:'Privacy Policy',terms:'Terms of Service'});
+const pet=()=>state.pets.find(p=>p.id===state.selected)||state.pets[0]||null;
+const petName=id=>(state.pets.find(p=>p.id===id)||{}).name||'Unlinked';
+const author=id=>id==='me'?{id:'me',name:state.profile.name,location:state.profile.location,avatar:'profile_avatar.jpg',bio:state.profile.bio}:authors.find(a=>a.id===id)||authors[0];
+const param=(name,def='')=>current.params.get(name)||def;
+const query=(page,params={})=>page+(Object.keys(params).length?'?'+new URLSearchParams(params).toString():'');
+function go(route){closeModal();if(!route)return;if(location.hash.slice(1)===route){readRoute();return;}try{history.pushState({mb:true},'','#'+route);}catch(e){try{location.hash=route;}catch(e2){}}readRoute();}
+function back(){if(history.state&&history.state.mb){history.back();}else go(docMap[current.page].dataset.group);}
+function selectPet(id){if(id==='all'||state.pets.some(p=>p.id===id)){state.selected=id;save();}}
+function needPet(){return pet()?null:empty('No pets yet','Add a pet first, then try this feature.','pet-edit','Add pet');}
+function relatedDevices(){return state.devices.filter(d=>state.selected==='all'||!d.pet||d.pet===pet()?.id);}
+function metrics(){const n=pet()?.id==='milo'?1:pet()?.id==='coco'?2:0,week=view.range==='week',dateFactor=view.range==='date'?(Number(view.date.replace(/-/g,''))%7):0;return {steps:[5462,3210,4820][n]+(week?980:dateFactor*97),sleep:[8.5,12.2,9.1][n]+(week?.4:dateFactor/10),heart:[98,125,105][n]+(week?-4:dateFactor),temp:[38.5,38.3,38.6][n],breath:[22,25,24][n],hrv:[42,38,45][n],bowel:[2,1,2][n],activity:[2.5,1.8,2.2][n]};}
+const metricInfo={steps:['Daily steps','steps',6000],sleep:['Sleep','h',8.5],heart:['Heart Rate','bpm',98],temp:['Body temperature','°C',38.5],breath:['Breathing Channel','breaths/min',22],hrv:['HRV','ms',42],bowel:['Toileting','times',2],activity:['Active time','h',2.5]};
+function petOptions(includeNone=false){return (includeNone?[['','Link later / Shared device']]:[]).concat(state.pets.map(p=>[p.id,p.name]));}
+function petStrip(all=true){return `<div class="pets">${state.pets.map(p=>`<button class="pet-chip ${state.selected===p.id?'active':''}" data-action="pet" data-id="${esc(p.id)}" aria-label="Switch pet ${esc(p.name)}">${`<span class="pet-avatar">${img(p.photo,'',p.name)}${p.abnormal?'<span class="pet-warn" title="Abnormal data risk" aria-label="Abnormal data risk">!</span>':''}</span>`}<span>${esc(p.name)}</span></button>`).join('')}${all?`<button class="pet-chip ${state.selected==='all'?'active':''}" data-action="pet" data-id="all"><span class="pet-symbol">${icon('paw')}</span><span>All Pets</span></button>`:''}<button class="pet-chip" data-go="pet-edit"><span class="pet-symbol">${icon('plus')}</span><span>Add Pet</span></button></div>`;}
+function petSelect(label='Current pet',value=pet()?.id,change='select-pet'){return selectField(label,'pet',petOptions(),value,`data-change="${change}"`);}
+function deviceCard(d){return `<button class="device-card" data-go="${query('device-detail',{id:d.id})}">${img(devImg(d.type),'',d.name)}<span class="info"><b>${esc(d.name)}</b><span class="badge ${d.online?'':'offline'}">${d.online?'● Connected':'● Offline'}</span><small> · ${d.battery}%</small><br><small>${esc(d.pet?petName(d.pet):'Shared device')}</small></span>${icon('arrow')}</button>`;}
+function heading(title,link='',text='See All'){return `<div class="section-heading"><h3>${title}</h3>${link?navButton(link,text):''}</div>`;}
+function segments(items,active,act){return `<div class="segments">${items.map(([value,label])=>`<button class="${value===active?'active':''}" data-action="${act}" data-value="${value}" aria-pressed="${value===active}">${label}</button>`).join('')}</div>`;}
+function chart(metric='steps',large=false){const m=metrics(),v=m[metric]||m.steps;const series=Array.from({length:12},(_,i)=>25+((i*23+Math.round(v)*3+(view.range==='week'?17:0))%65));const points=series.map((n,i)=>`${10+i*28},${110-n}`).join(' ');return `<svg class="chart" viewBox="0 0 330 120" role="img" aria-label="${esc(metric)} ${esc(view.range)} trend"><path d="M10 25H320M10 65H320M10 105H320" stroke="#e5e9ec" stroke-width="1" fill="none"/>${metric==='steps'||metric==='bowel'?series.map((n,i)=>`<rect x="${11+i*27}" y="${110-n}" width="14" height="${n}" rx="3" fill="${i===7?'#2165b0':'#9cc4db'}"/>`).join(''):`<polygon points="10,110 ${points} 318,110" fill="#2165b00c"/><polyline points="${points}" fill="none" stroke="#397eab" stroke-width="2.3" stroke-linejoin="round"/>`}</svg><div class="chart-labels"><span>${view.range==='week'?'Mon':'00:00'}</span><span>${view.range==='week'?'Wed':'08:00'}</span><span>${view.range==='week'?'Fri':'16:00'}</span><span>${view.range==='week'?'Sun':'24:00'}</span></div>`;}
+function rangeSelect(){return `${segments([['today','Today'],['week','7 Days'],['date','Date']],view.range,'range')}${view.range==='date'?`<label class="field">Date<input type="date" value="${esc(view.date)}" data-change="health-date"></label>`:''}`;}
+function anomalyBanner(p){if(!(p.anomalies&&p.anomalies.length))return '';const a=p.anomalies[0];let h=`<div class="anomaly-banner">${icon('alert')}<div class="grow"><b>${esc(a.label)}</b>`;if(a.note)h+=`<small>${esc(a.note)}</small>`;h+=`</div>`;if(a.value)h+=`<span class="anomaly-val">${esc(a.value)}</span>`;h+=`</div>`;return h;}
+
+/* ===== Add-device dialog (2026-11-15) ===== */
+function devPickHtml(){return `<div class="dev-pick">
+  <button class="dev-opt selected" data-action="pick-device" data-value="harness"><span class="dev-ic" style="background:#2165b0">${icon('paw')}</span><span class="dev-name">Smart Dog Harness<small>Model 001</small></span><span class="dev-check">✓</span></button>
+  <button class="dev-opt" data-action="pick-device" data-value="house"><span class="dev-ic" style="background:#c4b5e0">${icon('home')}</span><span class="dev-name">Smart Dog House<small>Model 001</small></span><span class="dev-check"></span></button>
+</div>`;}
+function harnessSpecHtml(){
+ const row=(k,v)=>`<div class="dev-spec-row"><span>${k}</span><span>${v}</span></div>`;
+ const cur=pet()?.id||state.pets[0]?.id||'';
+ const petSel=`<label class="field dev-field">Linked pet<select id="dev-pet">${state.pets.map(p=>`<option value="${esc(p.id)}" ${p.id===cur?'selected':''}>${esc(p.name)} · ${esc(p.type)}</option>`).join('')||'<option value="">No pets yet</option>'}</select></label>`;
+ return `<div class="dev-spec">
+  <div class="dev-spec-group"><h4>Device</h4>${row('Model','Smart Dog Harness · 001')}${row('Platform','STM32L4A6 · 4G Cat.1 + eSIM')}${row('Device ID','15-digit IMEI')}</div>
+  <div class="dev-spec-group"><h4>MQTT connection</h4>${row('Protocol','MQTT 3.1.1')}${row('Broker','mqtt.your-server.com:1883 (TLS 8883)')}${row('Client ID','pet_{IMEI}')}${row('Auth','Username = IMEI · Password = token')}${row('Keep Alive','60 s · Clean Session true')}${row('Payload','UTF-8 JSON · ts in Unix seconds')}</div>
+  <div class="dev-spec-group"><h4>Topics</h4>${row('Up · data','pet/{devId}/up/data · QoS 0 · 30 s')}${row('Up · event','pet/{devId}/up/event · QoS 1')}${row('Up · voice / ack','pet/{devId}/up/voice · /up/ack')}${row('Down','pet/{devId}/down/cmd · /down/voice')}</div>
+  <div class="dev-spec-group"><h4>Telemetry</h4>${row('GPS','lat / lon / alt / spd / hdg / hdop / sat')}${row('IMU','pitch / roll / yaw / temp')}${row('Health','steps / spo2')}${row('Battery','pct / vol / charging')}${row('Network','csq / rssi / operator')}</div>
+  <div class="dev-spec-group"><h4>Events & config</h4>${row('Events','low_battery · geofence in/out · sos · online/offline · error')}${row('Config','set_interval 10-3600 s · set_fence')}${row('Voice','ADPCM 8 kHz · up to 30 s · HTTP upload')}</div>
+ </div>
+  ${petSel}
+  <label class="field dev-field">Device ID (IMEI)<input id="dev-imei" value="868681071353013" maxlength="15" pattern="[0-9]{15}" inputmode="numeric"></label>
+  <label class="field dev-field">Report interval (10-3600 s)<input id="dev-interval" type="number" value="30" min="10" max="3600"></label>`;
+}
+function tidyDeviceModal(){
+ const x=$('#modal-layer .row.between .icon-btn');if(x)x.remove();
+ const h=$('#modal-title');if(h)h.classList.add('dev-modal-title');
+ const cancel=$('#modal-layer .secondary[data-action="close-modal"]');if(cancel)cancel.textContent='Cancel';
+ if(document.activeElement&&document.activeElement.blur)document.activeElement.blur();
+}
+function showHarnessSpec(){
+ modal('Smart Dog Harness','','Add device',()=>{
+  const idEl=document.querySelector('#dev-imei'),ivEl=document.querySelector('#dev-interval'),petEl=document.querySelector('#dev-pet');
+  const id=String(idEl?.value||'868681071353013').trim();
+  const interval=Number(ivEl?.value||30);
+  const linked=petEl?String(petEl.value||''):(pet()?.id||'');
+  state.devices.push({id:uid(),name:'Smart Dog Harness',type:'harness',serial:id,pet:linked,online:true,battery:100});
+  save();toast('Smart Dog Harness added · report interval '+interval+'s');render(true);
+ },harnessSpecHtml());tidyDeviceModal();
+}
+const FA_QUICK={"dog": {"vb": "0 0 576 512", "d": "M298.06,224,448,277.55V496a16,16,0,0,1-16,16H368a16,16,0,0,1-16-16V384H192V496a16,16,0,0,1-16,16H112a16,16,0,0,1-16-16V282.09C58.84,268.84,32,233.66,32,192a32,32,0,0,1,64,0,32.06,32.06,0,0,0,32,32ZM544,112v32a64,64,0,0,1-64,64H448v35.58L320,197.87V48c0-14.25,17.22-21.39,27.31-11.31L374.59,64h53.63c10.91,0,23.75,7.92,28.62,17.69L464,96h64A16,16,0,0,1,544,112Zm-112,0a16,16,0,1,0-16,16A16,16,0,0,0,432,112Z"}, "video": {"vb": "0 0 576 512", "d": "M336.2 64H47.8C21.4 64 0 85.4 0 111.8v288.4C0 426.6 21.4 448 47.8 448h288.4c26.4 0 47.8-21.4 47.8-47.8V111.8c0-26.4-21.4-47.8-47.8-47.8zm189.4 37.7L416 177.3v157.4l109.6 75.5c21.2 14.6 50.4-.3 50.4-25.8V127.5c0-25.4-29.1-40.4-50.4-25.8z"}, "microphone": {"vb": "0 0 352 512", "d": "M176 352c53.02 0 96-42.98 96-96V96c0-53.02-42.98-96-96-96S80 42.98 80 96v160c0 53.02 42.98 96 96 96zm160-160h-16c-8.84 0-16 7.16-16 16v48c0 74.8-64.49 134.82-140.79 127.38C96.71 376.89 48 317.11 48 250.3V208c0-8.84-7.16-16-16-16H16c-8.84 0-16 7.16-16 16v40.16c0 89.64 63.97 169.55 152 181.69V464H96c-8.84 0-16 7.16-16 16v16c0 8.84 7.16 16 16 16h160c8.84 0 16-7.16 16-16v-16c0-8.84-7.16-16-16-16h-56v-33.77C285.71 418.47 352 344.9 352 256v-48c0-8.84-7.16-16-16-16z"}, "heartbeat": {"vb": "0 0 512 512", "d": "M320.2 243.8l-49.7 99.4c-6 12.1-23.4 11.7-28.9-.6l-56.9-126.3-30 71.7H60.6l182.5 186.5c7.1 7.3 18.6 7.3 25.7 0L451.4 288H342.3l-22.1-44.2zM473.7 73.9l-2.4-2.5c-51.5-52.6-135.8-52.6-187.4 0L256 100l-27.9-28.5c-51.5-52.7-135.9-52.7-187.4 0l-2.4 2.4C-10.4 123.7-12.5 203 31 256h102.4l35.9-86.2c5.4-12.9 23.6-13.2 29.4-.4l58.2 129.3 49-97.9c5.9-11.8 22.7-11.8 28.6 0l27.6 55.2H481c43.5-53 41.4-132.3-7.3-182.1z"},"device": {"vb": "0 0 24 24", "d": "M7 3h10v18H7zM10 17h4"},"dna": {"vb": "0 0 24 24", "d": "M4 3c0 6 16 6 16 12S4 21 4 21M20 3C20 9 4 9 4 15s16 6 16 6M7 6h10M7 12h10M7 18h10"}};
+const faIcon=k=>`<svg class="quick-fa" viewBox="${FA_QUICK[k].vb}" aria-hidden="true"><path d="${FA_QUICK[k].d}"/></svg>`;
+function home(){const p=pet(),m=metrics();const sleepText=Math.floor(m.sleep)+'h'+String(Math.round((m.sleep%1)*60)).padStart(2,'0')+'min';const sceneMap={'real_lucky_rest.jpg':'home_status_lucky.gif','real_lucky_rest.png':'home_status_lucky.gif','real_milo_play.jpg':'home_status_milo.gif','real_coco_sleep.jpg':'home_status_coco.gif'};const scene=p?(sceneMap[p.scene]||p.scene):'home_status_lucky.gif';return `${petStrip()}${!p?empty('Welcome to MoonBack','Add a pet and a device to start using MoonBack.','pet-edit','Add your first pet'):state.selected==='all'?`<div class="card soft"><h3 class="serif">All your little companions</h3><p class="muted">${state.pets.length} pets · ${state.devices.filter(d=>d.online).length} devices online</p></div>${state.pets.map(p=>`<button class="device-card" data-action="pet" data-id="${esc(p.id)}">${img(p.photo,'',p.name)}<span class="info"><b>${esc(p.name)}</b><small>${esc(p.status)} · View today’s status</small></span>${icon('arrow')}</button>`).join('')}`:`${anomalyBanner(p)}<div class="hero hero-v2"><div class="hero-left"><h3>${esc(p.name)} is<br>doing well today!</h3><span class="badge">${icon('moon')}${esc(p.status)}</span><div class="hero-metrics">${navButton('metric?kind=activity',`Activity<b>Normal</b>`,'')}${navButton('metric?kind=sleep',`Sleep<b>${sleepText}</b>`,'')}</div></div><div class="hero-pet-photo">${img(scene,'',p.name)}</div>${navButton('ai?prompt=sleep',`${icon('chart')} Sleep was slightly longer than usual. ${icon('arrow')}`,'insight')}</div>`}
+${heading('Quick Access').replace('class="section-heading"','class="section-heading home-section"')}<div class="quick-grid">${[['pets','My Pet','dog'],['translation','Voice Translation','microphone'],['devices','Device','device'],['genetic','Genetic Test','dna']].map(([r,t,i])=>navButton(r,`<span class="quick-bubble">${faIcon(i)}</span><span>${t}</span>`,'quick')).join('')}</div>
+${heading('Focus on '+esc(p?p.name:'Lucky')).replace('class="section-heading"','class="section-heading home-section"')}<button class="focus-card" data-go="ai?prompt=sleep"><span class="focus-dot">!</span><span>Sleep was slightly longer than usual.</span>${icon('arrow')}</button>
+${heading(state.selected==='all'?'All Devices':(p?esc(p.name)+'’s Devices':'My Devices'),'devices','All Devices').replace('class="section-heading"','class="section-heading home-section"')}${relatedDevices().map(deviceCard).join('')||empty('No devices yet','Add a device to start tracking.')}${action('add-device-menu',icon('plus')+' Add Device','secondary')}`;}
+function health(){if(needPet())return needPet();const p=pet(),m=metrics();return `<div class="health-pet">${img(p.photo,'',p.name)}<div class="grow"><select aria-label="Current pet on Health" data-change="select-pet">${petOptions().map(([v,t])=>`<option value="${esc(v)}" ${v===p.id?'selected':''}>${esc(t)}</option>`).join('')}</select><small class="muted">${esc(p.breed)} · ${esc(p.weight)} kg</small></div>${ib('clock','Health records','data-go="records"')}</div>${navButton('report','View Professional Health Report','primary')}${rangeSelect()}<div class="row between"><h3 class="serif">${view.range==='week'?'This week’s overview':'Today’s situation'}</h3><span class="muted">${view.range==='date'?esc(view.date):'Today'}</span></div><div class="metric-grid">${['steps','activity','heart','sleep'].map(k=>{const w=k==='heart'&&p.abnormal;return navButton('metric?kind='+k,`<span class="label">${metricInfo[k][0]}</span><b>${typeof m[k]==='number'&&!Number.isInteger(m[k])?m[k].toFixed(1):m[k].toLocaleString()} <small>${metricInfo[k][1]}</small></b><span class="badge${w?' warn':''}">${w?'High':'Normal'}</span>`,'metric'+(w?' warn':''));}).join('')}</div>${heading('Vital signs')}<div class="card">${['temp','breath','hrv'].map(k=>`<button class="list-row" data-go="metric?kind=${k}"><span class="grow">${metricInfo[k][0]}</span><b>${m[k]} <small>${metricInfo[k][1]}</small></b>${icon('arrow')}</button>`).join('')}</div><div class="card"><div class="row between"><h4>Daily steps</h4>${navButton('metric?kind=steps','View details')}</div>${chart('steps')}</div><div class="card"><div class="row between"><h4>Sleep</h4><span class="badge">Good</span></div>${chart('sleep')}</div>${navButton('metric?kind=bowel','Toileting · Digestion','secondary')}${action('health-check',icon('health')+' Start health check','primary')}${view.healthProgress?`<div class="progress"><span style="width:${view.healthProgress}%"></span></div><p class="muted">${view.healthProgress===100?'Check complete · all metrics updated':'Checking… '+view.healthProgress+'%'}</p>`:''}${state.healthChecks[p.id]?`<p class="muted">Last check: ${esc(state.healthChecks[p.id])}</p>`:''}${navButton('records','Health & vaccine records','secondary')}${navButton('vets','Consult a vet','secondary')}`;}
+function ai(){if(needPet())return needPet();const p=pet(),msgs=state.conversations[p.id]||[];return `<div class="chat-pet">${img(p.photo,'avatar',p.name)}<span>Current pet</span><select aria-label="Current pet for AI" data-change="select-pet">${petOptions().map(([v,t])=>`<option value="${esc(v)}" ${v===p.id?'selected':''}>${esc(t)}</option>`).join('')}</select>${icon('paw')}</div><div class="chat-messages"><div class="bubble">Hi, I’m the AI butler for ${esc(p.name)}. ${param('prompt')==='sleep'?'Sleep was a little longer than recent days — let’s look at the trend together.':'Ask me about today’s activity, sleep or health.'}</div>${msgs.map(m=>`<div class="bubble ${m.role==='user'?'user':''}">${esc(m.text)}</div>`).join('')}</div><div class="suggestions">${['How is today going?','Why the longer sleep?','Any care suggestions?'].map(t=>action('ai-suggest',esc(t),'',`data-text="${esc(t)}"`)).join('')}</div>${form('ai',`<div class="chat-compose"><input name="message" maxlength="500" placeholder="Ask about ${esc(p.name)}…" aria-label="AI message" required><button type="submit" aria-label="Send AI message">${icon('send')}</button></div>`,'').replace('<button class="primary" type="submit"></button>','')}<div class="row between">${navButton('health','View health data')}${navButton('report','Full report')}${navButton('vets','Online vets')}</div>`;}
+function postPhotos(p){const v=uploadedPhotos[p.id]||p.photos;return Array.isArray(v)?v:[];}
+function postCard(p,detail=false){const a=author(p.author),photos=postPhotos(p),idx=detail?view.postImage%(photos.length||1):0;return `<article class="feed-post"><div class="post-head">${navButton(query('author',{id:a.id}),img(a.avatar,'avatar',a.name),'')}<button class="grow" data-go="${query('author',{id:a.id})}"><strong>${esc(a.name)}</strong><small>${esc(a.location)} · ${esc(p.time||'')}</small></button>${p.author!=='me'?action('follow',state.following.includes(a.id)?'Following':'Follow','text-btn',`data-id="${a.id}"`):''}</div><button class="post-photo" ${detail?'data-action="post-next"':`data-go="post?id=${esc(p.id)}"`} aria-label="${detail?'Next photo':'Open post'}">${img(photos[idx],'post-photo','Pet post photo')}</button>${detail&&photos.length>1?`<div class="row between muted" style="padding:8px 16px">${action('post-prev','← Previous','text-btn')}<span>${idx+1} / ${photos.length}</span>${action('post-next','Next →','text-btn')}</div>`:''}<div class="post-actions">${action('like',icon('paw'),'icon-btn '+(p.liked?'liked':''),`data-id="${p.id}" aria-label="${p.liked?'Unlike':'Like'}" aria-pressed="${p.liked}"`)}${action('bookmark',icon('star'),'icon-btn '+(p.saved?'saved':''),`data-id="${p.id}" aria-label="${p.saved?'Remove from favorites':'Add to favorites'}" aria-pressed="${p.saved}"`)}${action('share',icon('send'),'icon-btn',`data-id="${p.id}" aria-label="Share post"`)}${detail?'':'<span class="grow"></span>'+navButton('post?id='+p.id,icon('comment'),'icon-btn')}</div><div class="post-copy"><b>${((Number(p.likes)||0)+(p.liked?1:0)).toLocaleString()} likes</b><p><strong>${esc(a.name)}</strong> ${esc(p.body||'')}</p>${(p.tags||[]).map(t=>navButton('topic?tag='+encodeURIComponent(t),'#'+esc(t))).join(' ')}${!detail?`<p>${navButton('post?id='+p.id,'View all '+(p.comments||[]).length+' comments')}</p>`:''}</div></article>`;}
+function discover(){const all=(state.posts||[]).filter(p=>p&&typeof p==='object');const decorated=all.map((p,i)=>({p,i,topic:discoverTopicOf(p,i)}));let list=decorated.filter(x=>view.feed!=='following'||(state.following||[]).includes(x.p.author));if(view.discoverTopic)list=list.filter(x=>x.topic===view.discoverTopic);const left=[],right=[];list.forEach((x,k)=>{(k%2?right:left).push(discoverCard(x.p,x.i,x.topic,k));});const grid=list.length?`<div class="ds-grid"><div class="ds-col">${left.join('')}</div><div class="ds-col">${right.join('')}</div></div>`:empty('No posts yet','Try another topic or share your first post.','publish','Create a post');return `${discoverSearchBar()}${discoverChipRow()}${grid}<div class="ds-no-result" hidden>No matching posts. Try another search.</div>${navButton('mall','Pet shop','secondary')}`;}
+function post(){const p=state.posts.find(p=>p.id===param('id'));if(!p)return empty('Post not found','It may have been deleted.','discover','Back to Discover');return `${postCard(p,true)}<h4>Comments · ${p.comments.length}</h4>${p.comments.map(c=>`<div class="card"><strong class="small-title">${esc(c.name)}</strong><p class="muted">${esc(c.text)}</p></div>`).join('')}<form class="cmt-form" data-form="comment"><div class="cmt-box">${icon('edit')}<input class="cmt-input" name="comment" type="text" maxlength="500" placeholder="Write a comment" aria-label="Write a comment" required><button class="cmt-send" type="submit" hidden>Post</button></div><p class="form-error" role="alert"></p></form>`;}
+function authorPage(){const a=author(param('id'));if(a.id==='me')return profile();return `<div class="row" style="margin:12px 0 18px">${img(a.avatar,'avatar lg',a.name)}<div><h3 class="serif" style="margin:0">${esc(a.name)}</h3><p class="muted">${esc(a.location)}</p></div></div><p class="muted">${esc(a.bio)}</p><div class="stat-row"><div><b>${state.posts.filter(p=>p.author===a.id).length}</b><small>Posts</small></div><div><b>${124+(state.following.includes(a.id)?1:0)}</b><small>Followers</small></div><div><b>56</b><small>Following</small></div></div>${action('follow',state.following.includes(a.id)?'Following · Unfollow':'Follow','primary',`data-id="${a.id}"`)}${navButton('chat?id='+a.id,'Message','secondary')}<div class="card soft"><b>My pets</b><p class="muted">A little companion, a big part of life. 🐾</p></div>${postGrid(state.posts.filter(p=>p.author===a.id))}`;}
+function postGrid(posts){return posts.length?`<div class="post-grid">${posts.map(p=>navButton('post?id='+p.id,img(postPhotos(p)[0]||'','','Open post'),'')).join('')}</div>`:empty('Nothing here yet','Share a post or like something you love.','discover','Explore community');}
+function profile(){const p=state.profile||{},posts=(state.posts||[]).filter(x=>x&&(view.profileTab==='liked'?x.liked:x.author==='me'));return `<button class="list-row" data-go="personal">${img('profile_avatar.jpg','avatar lg',p.name)}<span class="grow"><strong style="font:600 25px Fraunces,serif">${esc(p.name)}</strong><span class="muted" style="display:block">${icon('pin')}${esc(p.location)}</span></span>${icon('arrow')}</button><h4>About me</h4><p class="muted">${esc(p.bio)}</p><div class="stat-row">${navButton('friends?kind=posts',`<small>Posts</small><b>${(state.posts||[]).filter(p=>p&&p.author==='me').length}</b>`,'')}${navButton('friends?kind=followers',`<small>Followers</small><b>46</b>`,'')}${navButton('friends?kind=friends',`<small>Friends</small><b>${(state.friends||[]).length}</b>`,'')}</div><button class="device-card" data-go="pets"><span class="grow"><b>My pets</b><small>${(state.pets||[]).length} companions</small></span>${(state.pets||[]).slice(0,3).map(p=>img(p.photo,'avatar',p.name)).join('')}${icon('arrow')}</button><button class="device-card" data-go="genetic?all=1"><span class="grow"><b>Genetic Test</b><small>${(state.geneticTests||[]).length} records</small></span>${icon('dna')}${icon('arrow')}</button>${segments([['posts','Moments'],['liked','Liked']],view.profileTab,'profile-tab')}${postGrid(posts)}${navButton('publish','Share a moment','secondary')}${state.member?'':''}`;}
+function pets(){return `${state.pets.map(p=>`<button class="device-card" data-go="pet-detail?id=${esc(p.id)}">${img(p.photo,'',p.name)}<span class="info"><b>${esc(p.name)}</b>${p.abnormal?'<span class="badge warn">High HR</span>':''}<small>${esc(p.type)} · ${esc(p.breed)}<br>${esc(p.weight)} kg</small></span>${icon('arrow')}</button>`).join('')||empty('No pets yet','Add a pet to start tracking.')}${navButton('pet-edit',icon('plus')+' Add Pet','primary')}`;}
+const PET_ANGLES=[['front','Front'],['left','Left side'],['right','Right side'],['back','Back'],['top','Top'],['bottom','Bottom'],['leftDiag','Left diagonal'],['rightDiag','Right diagonal']];
+const petPhotoSlots={};
+/* ===== Add Pet wizard (2026-11-17) : 3 tabs = device / profile / photos ===== */
+const BREED_PICKS=[
+ ['Golden Retriever','home_pet_lucky.jpg','大型'],['Labrador Retriever','home_pet_milo.jpg','大型'],
+ ['Dachshund','home_pet_coco.jpg','小型'],['Mixed Breed','lucky_b0.jpg','中型']
+];
+const PET_WIZ_STEPS=[['1','Connect device'],['2','Pet profile'],['3','Photos']];
+function wiz(){if(!view.petWiz)view.petWiz={step:1,editId:'',mode:'scan',deviceId:'',reassign:false,draft:{},newId:'',done:false,error:'',sizeFilter:''};return view.petWiz;}
+function newWiz(id){view.petWiz={step:1,editId:id||'',mode:'scan',deviceId:'',reassign:false,draft:{},newId:'',done:false,error:'',sizeFilter:''};}
+function syncPetDraft(){const w=wiz(),root=$('#app-content');if(!root)return;['name','type','breed','age','sex','weight','height','emotional','owner','contact','nextVax'].forEach(k=>{const el=root.querySelector(`[name="${k}"]`);if(el)w.draft[k]=el.value;});}
+function wizError(msg){const w=wiz();w.error=msg||'';const el=$('#pet-wiz-error');if(el){el.textContent=w.error;el.hidden=!w.error;}}
+function petStepTabs(){const w=wiz();return `<div class="pw-steps">${PET_WIZ_STEPS.map(([n,t],i)=>`<button type="button" class="pw-step${w.step===i+1?' on':''}${w.step>i+1?' done':''}" data-action="pet-step" data-value="${i+1}" aria-current="${w.step===i+1}"><span class="pw-num">${w.step>i+1?'✓':n}</span><span>${t}</span></button>`).join('')}</div>`;}
+function petWizDevice(){
+ const w=wiz();
+ const devOpts=state.devices.map(d=>`<option value="${esc(d.id)}" ${w.deviceId===d.id?'selected':''}>${esc(d.name)} · ${esc(d.serial||'')} · ${esc(d.pet?petName(d.pet):'Unassigned')}</option>`).join('');
+ const selectedDev=state.devices.find(d=>d.id===w.deviceId);
+ const devType=selectedDev?selectedDev.type:(w.scanType||'harness');
+ const devImgHtml=(w.deviceId||w.scanType)?`<div class="bind-device-img">${img(devImg(devType),'',esc((types[devType]||types.harness)[0]))}</div>`:'';
+ const scan=`<button type="button" class="pw-mode${w.mode==='scan'?' on':''}" data-action="pet-wiz-mode" data-value="scan"><span class="pw-mode-ic">${icon('camera')}</span><span class="pw-mode-tx"><b>Scan a device or genetic test box</b><small>Scan the QR code on the device or box</small></span><span class="pw-radio"></span></button>`
+  +(w.mode==='scan'?`<div class="pw-scan-box">${devImgHtml}<div class="pw-scan-id">${w.deviceId?esc(w.deviceId):'No device or box scanned yet'}</div>${action('pet-wiz-scan','Scan QR code','secondary')}</div>`:'');
+ const existing=`<button type="button" class="pw-mode${w.mode==='existing'?' on':''}" data-action="pet-wiz-mode" data-value="existing"><span class="pw-mode-ic">${icon('device')}</span><span class="pw-mode-tx"><b>Use an existing device</b><small>Pick one already added to your account</small></span><span class="pw-radio"></span></button>`
+  +(w.mode==='existing'?`<label class="field pw-select"><select data-change="pet-wiz-device"><option value="">Choose a device…</option>${devOpts}</select></label>${w.deviceId?`<p class="pw-note">${icon('check')} ${w.reassign?'Owner will be changed to this pet on save.':'Device will be linked to this pet on save.'}</p>`:''}`:'');
+ const skip=`<button type="button" class="pw-mode${w.mode==='skip'?' on':''}" data-action="pet-wiz-mode" data-value="skip"><span class="pw-mode-ic">${icon('clock')}</span><span class="pw-mode-tx"><b>I'll link a device later</b><small>You can add a device from the pet profile</small></span><span class="pw-radio"></span></button>`;
+ return `<div class="pw-pane"><p class="pw-intro">Link a Smart Dog Harness now, or skip and do it later.</p>${scan}${existing}${skip}</div>`;
+}
+function petWizInfo(){
+ const w=wiz(),d=w.draft,p=state.pets.find(x=>x.id===w.editId)||{};
+ const val=k=>esc(d[k]!=null&&d[k]!==''?d[k]:(p[k]!=null?p[k]:''));
+ const inp=(n,ph,type='text',extra='')=>`<input name="${n}" type="${type}" value="${val(n)}" placeholder="${esc(ph)}" ${extra}>`;
+ const cell=(label,body)=>`<div class="pe-cell"><span class="pe-label">${label}</span><div class="pe-input">${body}</div></div>`;
+ const unit=u=>`<span class="pe-unit">${u}</span>`;
+ const sizeBtn=`<div class="pw-size-filter"><span class="pe-label">Filter by size</span>${['小型','中型','大型'].map(sz=>`<button type="button" class="pw-size-btn${w.sizeFilter===sz?' on':''}" data-action="pet-wiz-size" data-value="${esc(sz)}">${esc(sz)}</button>`).join('')}</div>`;
+ const breed=`<div class="pw-breed"><span class="pe-label">Dog breed · pick a photo</span><div class="pw-breed-row">${BREED_PICKS.filter(([, ,sz])=>!w.sizeFilter||sz===w.sizeFilter).map(([n,src])=>`<button type="button" class="pw-breed-card${d.breed===n?' on':''}" data-action="pet-wiz-breed" data-value="${esc(n)}">${img(src,'',n)}<span>${esc(n)}</span></button>`).join('')}</div></div>`;
+ const grid=`<div class="pe-grid">
+  ${cell('Pet name',inp('name','Enter pet name','text','maxlength="30"'))}
+  ${cell('Type',`<select name="type"><option value="Dog" selected>Dog</option></select>`)}
+  ${cell('Breed',inp('breed','Enter breed','text','maxlength="50"'))}
+  ${cell('Age',inp('age','Enter age','number','min="0" max="30" step="1"')+unit('yrs'))}
+  ${cell('Sex',`<select name="sex"><option value="Male" ${(d.sex||p.sex||'Male')!=='Female'?'selected':''}>Male</option><option value="Female" ${(d.sex||p.sex)==='Female'?'selected':''}>Female</option></select>`)}
+  ${cell('Weight',inp('weight','Enter weight','number','min="0.1" max="150" step="0.1"')+unit('kg'))}
+  ${cell('Height',inp('height','Enter height','number','min="1" max="200" step="0.1"')+unit('cm'))}
+  ${cell('Emotional history',inp('emotional','e.g. Neutered','text','maxlength="60"'))}
+  ${cell('Owner',inp('owner','Enter owner name','text','maxlength="40"'))}
+  ${cell('Contact',inp('contact','Mobile number','tel','maxlength="20"'))}
+  ${cell('Next vaccination',inp('nextVax','','date'))}
+ </div>`;
+ return `<div class="pw-pane">${sizeBtn}${breed}${grid}</div>`;
+}
+function petWizPhotos(){
+ const cam=`<svg class="pe-cam-ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="7" width="10" height="10" rx="2"/></svg>`;
+ return `<div class="pw-pane"><div class="pe-photos"><h3>Pet photos</h3><p>Upload at least 8 photos from different angles</p>
+  <div class="pe-photo-grid">${PET_ANGLES.map((a,i)=>`<div class="pe-slot-wrap"><label class="pe-slot"><input type="file" accept="image/*" data-change="pet-photo" data-index="${i}" hidden>${petPhotoSlots[i]?`<img class="pe-slot-img" src="${petPhotoSlots[i]}" alt="${a[1]}">`:cam}</label><span class="pe-slot-label">${a[1]}</span></div>`).join('')}</div>
+ </div></div>`;
+}
+function petWizDone(){
+ const w=wiz(),p=state.pets.find(x=>x.id===w.newId||x.id===w.editId);
+ return `<div class="pw-done"><div class="pw-done-ic">${icon('check')}</div><h2 class="serif">All set!</h2><p class="muted">${esc(p?p.name:'Your pet')} is ready to explore MoonBack with you.</p>${action('pet-wiz-home','Go to Home','primary')}</div>`;
+}
+function petEdit(){
+ const w=wiz();
+ if(w.done)return petWizDone();
+ const body=w.step===1?petWizDevice():w.step===2?petWizInfo():petWizPhotos();
+ const back=w.step>1?action('pet-wiz-back','Back','secondary'):'';
+ const next=action('pet-wiz-next',w.step===3?'Save & Finish':(w.step===1?'Next: Pet profile':'Next: Photos'),'primary');
+ return `${petStepTabs()}${body}<p class="form-error" id="pet-wiz-error" role="alert" ${w.error?'':'hidden'}>${esc(w.error||'')}</p><div class="pw-actions">${back}${next}</div>`;
+}
+/* ===== Bind device: first-time setup for a new user (scan → pet profile → photos → home) ===== */
+const BIND_STEPS=[['1','Scan product'],['2','Pet profile'],['3','Photos']];
+function bindWiz(){if(!view.bindWiz)view.bindWiz={step:1,scanId:'',bound:false,deviceId:'',petId:'',draft:{},error:'',done:false};return view.bindWiz;}
+function newBind(){view.bindWiz={step:1,scanId:'',bound:false,deviceId:'',petId:'',draft:{},error:'',done:false};}
+function syncBindDraft(){const w=bindWiz(),root=$('#app-content');if(!root)return;['name','breed','sex','weight','age','height','emotional','owner','contact','nextVax'].forEach(k=>{const el=root.querySelector(`[name="${k}"]`);if(el)w.draft[k]=el.value;});}
+function bindError(msg){const w=bindWiz();w.error=msg||'';const el=$('#pet-wiz-error');if(el){el.textContent=w.error;el.hidden=!w.error;}}
+function bindStepTabs(){const w=bindWiz();return `<div class="pw-steps">${BIND_STEPS.map(([n,t],i)=>`<button type="button" class="pw-step${w.step===i+1?' on':''}${w.step>i+1?' done':''}" data-action="bind-step" data-value="${i+1}" aria-current="${w.step===i+1}"><span class="pw-num">${w.step>i+1?'✓':n}</span><span>${t}</span></button>`).join('')}</div>`;}
+function bindPaneScan(){
+ const w=bindWiz();
+ const devImgHtml=w.scanId?`<div class="bind-device-img">${img(devImg(w.bindType||'harness'),'',esc((types[w.bindType||'harness']||types.harness)[0]))}</div>`:'';
+ return `<div class="pw-pane"><p class="pw-intro">Scan the QR code on the product box to bind it to your MoonBack account. Smart Dog Harness, Smart Dog House and Genetic Test kits are all supported.</p>
+  <button type="button" class="pw-mode on" data-action="bind-mode" data-value="scan"><span class="pw-mode-ic">${icon('camera')}</span><span class="pw-mode-tx"><b>Scan a device or genetic test box</b><small>Scan the QR code on the device or box</small></span><span class="pw-radio"></span></button>
+  <div class="pw-scan-box"><div class="pw-scan-id">${w.scanId?'Scanned · '+esc(w.scanId):'No product scanned yet'}</div>${action('bind-scan','Scan QR code','secondary')}${devImgHtml}</div>
+  <p class="muted" style="margin:0 0 14px">Only a fresh scan is accepted here — pick the scanned product to bind it to your account.</p></div>`;
+}
+function bindPaneBind(){
+ const w=bindWiz();
+ const devImgHtml=`<div class="bind-device-img">${img(devImg(w.bindType||'harness'),'',esc((types[w.bindType||'harness']||types.harness)[0]))}</div>`;
+ return `<div class="pw-pane"><p class="pw-intro">Bind the scanned product to your MoonBack account. It will show up in My Devices once confirmed.</p>
+  <div class="pw-scan-box">${devImgHtml}<div class="pw-scan-id">${w.scanId?esc(w.scanId):'—'}</div><p class="muted" style="margin:6px 0 0">Product: ${esc((types[w.bindType||'harness']||types.harness)[0])} · Model 001</p></div>
+  <div class="pw-actions" style="justify-content:flex-start">${action('bind-bind','Bind to account','primary')}</div></div>`;
+}
+function bindPanePet(){
+ const w=bindWiz(),d=w.draft;
+ const val=k=>esc(d[k]!=null&&d[k]!==''?d[k]:'');
+ const inp=(n,ph,type,extra='')=>`<input name="${n}" type="${type}" value="${val(n)}" placeholder="${esc(ph)}" ${extra}>`;
+ const cell=(label,body)=>`<div class="pe-cell"><span class="pe-label">${label}</span><div class="pe-input">${body}</div></div>`;
+ const unit=u=>`<span class="pe-unit">${u}</span>`;
+ const sizeBtn=`<div class="pw-size-filter"><span class="pe-label">Filter by size</span>${['小型','中型','大型'].map(sz=>`<button type="button" class="pw-size-btn${w.sizeFilter===sz?' on':''}" data-action="bind-size" data-value="${esc(sz)}">${esc(sz)}</button>`).join('')}</div>`;
+ const breed=`<div class="pw-breed"><span class="pe-label">Dog breed · pick a photo</span><div class="pw-breed-row">${BREED_PICKS.filter(([, ,sz])=>!w.sizeFilter||sz===w.sizeFilter).map(([n,src])=>`<button type="button" class="pw-breed-card${d.breed===n?' on':''}" data-action="bind-breed" data-value="${esc(n)}">${img(src,'',n)}<span>${esc(n)}</span></button>`).join('')}</div></div>`;
+ const grid=`<div class="pe-grid">
+  ${cell('Pet name',inp('name','Enter pet name','text','maxlength="30"'))}
+  ${cell('Type',`<select name="type"><option value="Dog" selected>Dog</option></select>`)}
+  ${cell('Breed',inp('breed','Enter breed','text','maxlength="50"'))}
+  ${cell('Age',inp('age','Enter age','number','min="0" max="30" step="1"')+unit('yrs'))}
+  ${cell('Sex',`<select name="sex"><option value="Male" ${(d.sex||'Male')!=='Female'?'selected':''}>Male</option><option value="Female" ${(d.sex||'')==='Female'?'selected':''}>Female</option></select>`)}
+  ${cell('Weight',inp('weight','Enter weight','number','min="0.1" max="150" step="0.1"')+unit('kg'))}
+  ${cell('Height',inp('height','Enter height','number','min="1" max="200" step="0.1"')+unit('cm'))}
+  ${cell('Emotional history',inp('emotional','e.g. Neutered','text','maxlength="60"'))}
+  ${cell('Owner',inp('owner','Enter owner name','text','maxlength="40"'))}
+  ${cell('Contact',inp('contact','Mobile number','tel','maxlength="20"'))}
+  ${cell('Next vaccination',inp('nextVax','','date'))}
+ </div>`;
+ return `<div class="pw-pane">${sizeBtn}${breed}${grid}</div>`;
+}
+function bindPanePhotos(){
+ const cam=`<svg class="pe-cam-ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="7" width="10" height="10" rx="2"/></svg>`;
+ return `<div class="pw-pane"><div class="pe-photos"><h3>Pet photos</h3><p>Upload 8 photos from different angles — they are used to generate your pet's digital twin</p>
+  <div class="pe-photo-grid">${PET_ANGLES.map((a,i)=>`<div class="pe-slot-wrap"><label class="pe-slot"><input type="file" accept="image/*" data-change="bind-photo" data-index="${i}" hidden>${petPhotoSlots[i]?`<img class="pe-slot-img" src="${petPhotoSlots[i]}" alt="${a[1]}">`:cam}</label><span class="pe-slot-label">${a[1]}</span></div>`).join('')}</div>
+  <p class="muted" style="margin:8px 0 0">${Object.keys(petPhotoSlots).length}/8 uploaded</p></div></div>`;
+}
+function bindPaneDone(){
+ const w=bindWiz(),p=state.pets.find(x=>x.id===w.petId);
+ return `<div class="pw-done"><div class="pw-done-ic">${icon('check')}</div><h2 class="serif">All set!</h2><p class="muted">${esc(p?p.name:'Your pet')} is ready to explore MoonBack with you. A digital twin is being generated from the uploaded photos.</p>${action('bind-home','Go to Home','primary')}</div>`;
+}
+function deviceBind(){
+ const w=bindWiz();
+ if(w.done)return bindPaneDone();
+ const body=w.step===1?bindPaneScan():w.step===2?bindPanePet():bindPanePhotos();
+ const back=w.step>1?action('bind-back','Back','secondary'):'';
+ const next=w.step<3?action('bind-next',w.step===1?'Next: Pet profile':'Next: Photos','primary'):action('bind-next','Finish setup','primary');
+ return `${bindStepTabs()}${body}<p class="form-error" id="pet-wiz-error" role="alert" ${w.error?'':'hidden'}>${esc(w.error||'')}</p><div class="pw-actions">${back}${next}</div>`;
+}
+function petDetail(){const p=state.pets.find(p=>p.id===param('id'))||pet();if(!p)return needPet();return `<div class="center">${img(p.photo,'avatar lg',p.name)}<h2 class="serif">${esc(p.name)}</h2><p class="muted">${esc(p.type)} · ${esc(p.breed)} · ${esc(p.sex)}</p></div>${p.abnormal?anomalyBanner(p):''}<div class="card"><div class="list-row"><span class="grow">Date of birth</span>${esc(p.birth)}</div><div class="list-row"><span class="grow">Weight</span>${p.weight} kg</div></div>${navButton('pet-edit?id='+p.id,'Edit pet profile','secondary')}${row('Health analysis','health','health')}${row('Health & vaccine records','records','clock')}${row('Genetic Test','genetic','dna')}${row('Vaccination records','vaccines','syringe')}${row('Feeding plan','feeding','food')}${heading('Linked devices','device-add','Add device')}${state.devices.filter(d=>d.pet===p.id||(!d.pet&&d.type==='camera')).map(deviceCard).join('')||'<p class="muted">No devices linked yet.</p>'}${action('delete-pet',icon('trash')+' Delete pet','danger',`data-id="${p.id}"`)}`;}
+function devices(){const ds=state.devices.filter(d=>view.deviceFilter==='all'||d.type===view.deviceFilter);return `${segments([['all','All Devices'],['harness','Harness'],['house','Dog House']],view.deviceFilter,'device-filter')}${ds.map(deviceCard).join('')||empty('No devices yet','Add a device to try the pairing flow.')}${navButton('device-add',icon('plus')+' Add device','primary')}`;}
+function deviceAdd(){return `${form('device',selectField('Device type','type',Object.entries(types).map(([k,v])=>[k,v[0]]),'harness')+field('Device name','name','','text','required maxlength="40" placeholder="e.g. Smart Dog Harness"')+field('Device serial','serial','MB-'+String(Date.now()).slice(-6),'text','required maxlength="50"')+selectField('Linked pet','pet',petOptions(true),pet()?.id||''),'Finish pairing')}`;}
+function deviceDetail(){const d=state.devices.find(d=>d.id===param('id'));if(!d)return empty('Device not found','It may have been unpaired.','devices','Back to devices');return `<div class="center">${img(devImg(d.type),'avatar lg',d.name)}<h3 class="serif">${esc(d.name)}</h3><span class="badge ${d.online?'':'offline'}">${d.online?'● Online':'● Offline'}</span></div><div class="card"><div class="list-row"><span class="grow">Device serial</span><small>${esc(d.serial)}</small></div><div class="list-row"><span class="grow">Battery</span>${d.battery}%</div><label class="list-row"><span class="grow">Online status</span><input class="toggle" type="checkbox" data-change="device-online" data-id="${d.id}" ${d.online?'checked':''} aria-label="Device online status"></label></div>${selectField('Linked pet','pet',petOptions(true),d.pet,`data-change="device-pet" data-id="${d.id}"`)}${d.type==='harness'?row('Geofence','fence','fence')+row('Location history','trajectory','pin'):''}${row('View health data','health','health')}${row('Firmware update','firmware?id='+d.id,'refresh')}${action('unbind-device','Unpair','danger',`data-id="${d.id}"`)}`;}
+function monitor(){const cams=state.devices.filter(d=>d.type==='camera'),d=cams.find(d=>d.id===param('camera',view.camera))||cams[0];if(!d)return empty('No devices available','This release has no live camera support.','devices','Back to devices');view.camera=d.id;return `<div class="row between" style="margin-bottom:12px"><b class="small-title">Live footage</b><select aria-label="Select device" data-change="camera" style="max-width:150px;border:0;background:none;color:var(--blue);font-size:11px">${cams.map(x=>`<option value="${x.id}" ${x.id===d.id?'selected':''}>${esc(x.name)}</option>`).join('')}</select></div><div class="live ${d.online?'':'offline'} ${view.overlay?'overlay':''}">${img('remote_live_room.jpg','','Live footage')}<span class="live-label">● Live</span><span class="live-bottom">${esc(d.name)} · 640P · ${d.battery}%</span></div><div class="live-controls">${action('listen',icon('volume')+'Listen',''+(view.listen?'active':''),`aria-pressed="${view.listen}"`)}${action('talk',icon('mic')+'Talk',view.talk?'active':'',`aria-pressed="${view.talk}"`)}${action('sound',icon('play')+'Play Sound','')}</div>${petStrip(false)}${heading('AI Wellness Snapshot')}<div class="metric-grid">${[['Toileting','Normal'],['Body Condition','Normal'],['Mood','Relaxed'],['Coat','Healthy']].map(([k,v])=>`<div class="metric"><span class="label">${k}</span><b style="font-size:17px">${d.online&&pet()?v:'--'}</b><span class="muted">${esc(pet()?.name||'No pet selected')}</span></div>`).join('')}</div>${row('Pet Language Converter','translation','mic')}<label class="list-row"><span class="grow">Show detection box</span><input class="toggle" type="checkbox" data-change="overlay" ${view.overlay?'checked':''} aria-label="Show detection box"></label><div class="card"><h4>Detection events</h4><p class="muted">${d.online?'09:41 · Milo detected · Living Room<br>09:38 · Resting · Lucky':'Device offline · no detection events'}</p></div>${navButton('devices','Return to Select Camera','secondary')}${navButton('device-detail?id='+d.id,'Camera device details','secondary')}`;}
+function transArt(kind){const f=FACES[kind==='Cat'?'cat':'dog'];return `<svg class="trans-art" viewBox="0 0 180 104" aria-hidden="true"><rect x="0" y="4" width="180" height="96" rx="20" fill="#FBF3EC"/><svg x="30" y="37" width="44" height="44" viewBox="${f.vb}"><path d="${f.d}" fill="#E7A97F"/></svg><g stroke="#E08A4C" stroke-width="2.4" fill="none" stroke-linecap="round" opacity=".85"><path d="M82 52a9 9 0 0 1 0 16"/><path d="M90 47a15 15 0 0 1 0 26"/><path d="M98 42a21 21 0 0 1 0 36"/></g><g><rect x="122" y="36" width="17" height="27" rx="8.5" fill="#D9762F"/><path d="M116 53a14.5 14.5 0 0 0 29 0" stroke="#D9762F" stroke-width="2.8" fill="none" stroke-linecap="round"/><path d="M130 68v9M121 77h18" stroke="#D9762F" stroke-width="2.8" stroke-linecap="round"/></g></svg>`;}
+function showTransPerm(){view.translationPerm=true;modal('Microphone Access','MoonBack listens only while you record, to capture your pet’s sound for this playful interpretation. This demo never uploads or stores any audio.','Allow Microphone',()=>{view.recording=true;view.translationStage='recording';view.translationResult='';render(true);});const pel=document.querySelector('#modal-layer .modal');if(pel)pel.classList.add('warm');}
+function translation(){
+ const st=view.translationStage||'idle';
+ const busy=st==='analyzing'||st==='generating';
+ const tdir=t=>((view.transDir&&view.transDir[t])||'pet-human');
+ const cur=view.translationType==='Cat'?'Cat':'Dog';
+ const dirLabel=t=>tdir(t)==='pet-human'?`${t} → Human`:`Human → ${t}`;
+ const dirTxt=dirLabel(cur);
+ const petFace={Dog:'dog',Cat:'cat'};
+ const choiceSeq=t=>tdir(t)==='pet-human'
+  ? `<span class="ttc-ico pet">${face(petFace[t])}</span>${dirArrow('f')}<span class="ttc-ico human">${face('user')}</span>`
+  : `<span class="ttc-ico human">${face('user')}</span>${dirArrow('f')}<span class="ttc-ico pet">${face(petFace[t])}</span>`;
+ const choiceRow=t=>`<div class="ttc${t===cur?' on':''}${view.swapPulse===t?' morph':''}" data-type="${t}"><button class="ttc-main" data-action="translation-type" data-value="${t}" aria-pressed="${t===cur}">${choiceSeq(t)}<span class="ttc-txt">${dirLabel(t)}</span></button><button class="ttc-swap${tdir(t)==='human-pet'?' flip':''}" data-action="trans-flip" data-value="${t}" aria-label="${tdir(t)==='pet-human'?'Switch to Human → '+t:'Switch to '+t+' → Human'}">${swapIcon()}</button></div>`;
+ const hint=st==='recording'?'Recording...':st==='analyzing'?'Analyzing audio...':st==='generating'?'Generating interpretation...':st==='nosound'?'No sound detected, please try again':st==='error'?'Translation failed, check microphone permission':'Tap to Start Recording';
+ const bars=[38,62,86,54,96,70,44,82,58].map((h,k)=>`<i style="--d:${(k*0.1).toFixed(2)}s;--h:${h}%"></i>`).join('');
+ if(!view.translationPermAsked){view.translationPermAsked=true;setTimeout(()=>{if(current.page==='translation'&&!view.recording&&!view.translationPerm)showTransPerm();},700);}
+ return `<div class="trans">
+  <span class="trans-wash" aria-hidden="true"></span>
+  <span class="trans-orn trans-orn-a" aria-hidden="true">${icon('paw')}</span>
+  <span class="trans-orn trans-orn-b" aria-hidden="true">${icon('paw')}</span>
+  <p class="trans-sub">Record your pet’s vocalization and generate playful AI interpretation</p>
+  <div class="trans-group"><span class="trans-label">Translation Mode</span>${choiceRow('Dog')}${choiceRow('Cat')}</div>
+  <div class="trans-stage">
+   <button class="trans-mic${st==='recording'?' rec':''}${busy?' busy':''}" data-action="record" aria-label="${st==='recording'?'Stop recording':'Start recording'}"><span class="trans-halo"></span>${icon('mic')}<span class="trans-mic-paw">${icon('paw')}</span></button>
+   <div class="trans-wave${st==='recording'?' on':''}" aria-hidden="true">${bars}</div>
+   <p class="trans-hint${st==='nosound'||st==='error'?' err':''}">${hint}</p>
+  </div>
+  ${st==='done'&&view.translationResult?`<div class="trans-result"><div class="trans-result-top"><span class="trans-tag">${face(petFace[cur])}${esc(dirTxt)}</span><button class="trans-play" data-action="translation-play" aria-label="Play audio">${icon('play')}</button></div><p class="trans-result-text">${esc(view.translationResult)}</p></div>`:''}
+  <div class="trans-hist-head"><h3>Translation history</h3>${state.translations.length?`<button class="trans-clear" data-action="translation-clear">Clear</button>`:''}</div>
+  ${state.translations.length?state.translations.map((t,k)=>`<div class="trans-item"><div class="trans-item-top"><span class="trans-tag">${face(t.type==='Cat'?'cat':'dog')}${esc(t.direction)}</span><div class="trans-item-meta"><small>${esc(t.time)}</small><button class="danger" data-action="translation-delete" data-value="${k}" aria-label="Delete translation">${icon('trash')}</button></div></div><p class="trans-item-text">${esc(t.text)}</p><div class="trans-item-actions"><button data-action="translation-play">${icon('play')}Play</button><button class="link" data-action="translation-report">View Pet Health Report</button></div></div>`).join(''):`<div class="trans-empty">${transArt(cur)}<h4>No translation history yet</h4><p>Record your pet’s bark or meow to create your first translation</p><button class="trans-cta" data-action="record">Start Recording</button></div>`}
+  <p class="trans-disclaimer">This function is for entertainment only. AI interpretation cannot replace scientific animal behavior analysis or veterinary diagnosis.</p>
+ </div>`;
+}
+function fence(){if(needPet())return needPet();const d=state.devices.find(d=>d.type==='harness'&&d.pet===pet().id);if(!d)return empty('Location device required','Add a Smart Dog Harness to this pet, then set a geofence.','device-add','Add device');const f=state.fences[pet().id]||{name:'Home zone',radius:150,enabled:true,x:50,y:50};return `<div class="card soft"><b>${esc(pet().name)} · ${esc(d.name)}</b><p class="muted">Offline demo map · tap the map to move the center</p></div><div class="map" id="fence-map" role="button" tabindex="0" aria-label="Geofence demo map, tap to set the center, arrow keys also work"><span class="river"></span><span class="zone" id="fence-zone" style="width:${f.radius/2+70}px;height:${f.radius/2+70}px;left:${f.x}%;top:${f.y}%"></span><span class="pin" id="fence-pin" style="left:${f.x}%;top:${f.y}%"></span></div>${form('fence',field('Geofence name','name',f.name,'text','required maxlength="30"')+`<label class="field">Radius: <span id="radius-label">${f.radius}</span> m<input name="radius" type="range" min="50" max="500" step="10" value="${f.radius}" data-input="radius"></label><label class="checkbox"><input type="checkbox" name="enabled" ${f.enabled?'checked':''}>Enable geofence</label>`,'Save geofence')}${row('Location history','trajectory','pin')}${row('Check-in','checkin','check')}`;}
+function trajectory(){if(needPet())return needPet();const k=Number(view.date.replace(/-/g,''))%3;return `<p class="muted">${esc(pet().name)} · Activity trail (demo)</p><label class="field">Date<input type="date" value="${esc(view.date)}" data-change="trajectory-date"></label><div class="map"><span class="river"></span><svg viewBox="0 0 340 250" width="100%" height="100%" role="img" aria-label="Trail"><path id="trail-path" d="${['M40 180Q100 20 170 110T290 70','M40 110Q110 200 160 90T290 170','M50 180Q180 220 240 110T90 60'][k]}" stroke="#377cb2" stroke-width="3" stroke-dasharray="5 4" fill="none"/><circle id="trail-point" cx="40" cy="${k===1?110:180}" r="7" fill="#2165b0" stroke="white" stroke-width="3"/></svg></div><div class="stat-row"><div><b>${(2.4+k*.6).toFixed(1)} km</b><small>Distance</small></div><div><b>${35+k*12} min</b><small>Active time</small></div></div>${action('trail-play',icon('play')+' Play trail','primary')}${navButton('fence','Set geofence','secondary')}`;}
+function checkin(){if(needPet())return needPet();return `${form('checkin',field('Check-in place (manual)','place','','text','required maxlength="60" placeholder="e.g. MoonBack Park"'),'Check in')}${heading('Check-in history')}${state.checkins.filter(c=>c.pet===pet().id).map(c=>`<div class="card"><b>${esc(c.place)}</b><p class="muted">${esc(c.time)}</p></div>`).join('')||empty('No check-ins yet','Enter a place to check in.')}`;}
+function metric(){if(needPet())return needPet();const k=metricInfo[param('kind')]?param('kind'):'steps',m=metrics(),info=metricInfo[k];return `<div class="row">${img(pet().photo,'avatar',pet().name)}<div><b>${esc(pet().name)}</b><p class="muted">${info[0]}</p></div></div>${k==='heart'&&pet().abnormal?anomalyBanner(pet()):''}${rangeSelect()}<div class="card"><span class="muted">${view.range==='week'?'7-day average':'Current value'}</span><h2 style="font-size:40px;font-weight:500;margin:15px 0">${m[k]} <small style="font-size:14px">${info[1]}</small></h2><span class="badge${k==='heart'&&pet().abnormal?' warn':''}">${k==='heart'&&pet().abnormal?'High · Anomaly detected':'Normal'}</span>${chart(k,true)}</div><div class="card"><h4>About this metric</h4><p class="muted">${info[0]} shows ${esc(pet().name)}’s daily state and changes.</p></div>${navButton('ai?metric='+k,'Explain with AI','primary')}${navButton('report','View full report','secondary')}`;}
+function report(){if(needPet())return needPet();const p=pet(),m=metrics();return `${p.abnormal?anomalyBanner(p):''}<div class="card soft"><p class="eyebrow">MOONBACK HEALTH REPORT</p><h2 class="serif">${esc(p.name)}’s wellness</h2><p class="muted">${esc(p.breed)} · ${p.weight} kg · ${esc(view.range==='date'?view.date:'2026-10-29')}</p><span class="badge">Health Report</span></div><div class="card"><h4>Health summary</h4>${p.abnormal?`<p class="muted">${esc(p.name)}’s data shows <b style="color:#b23b3b">Persistent High Heart Rate</b>: sustained above the normal canine range.</p>`:`<p class="muted">${esc(p.name)}’s metrics are steady, with normal activity and sleep trends.</p>`}${Object.entries(metricInfo).slice(0,6).map(([k,v])=>`<div class="list-row"><span class="grow">${v[0]}</span><b>${m[k]} ${v[1]}</b>${k==='heart'&&p.abnormal?'<span class="badge warn">High</span>':''}</div>`).join('')}</div><div class="card"><h4>Daily steps trend</h4>${chart('steps')}</div>${action('download-report','Download this pet’s HTML summary','secondary')}${navButton('vets','Send this report to a vet','primary')}`;}
+function records(){if(needPet())return needPet();return `<p class="muted">${esc(pet().name)}’s health / vaccine records</p>${state.records.filter(r=>r.pet===pet().id).map(r=>`<div class="card"><div class="row between"><b>${esc(r.name)}</b>${navButton('record-edit?id='+r.id,'Edit')}</div><p class="muted">Recorded: ${esc(r.date)}<br>Next date: ${esc(r.next||'Not set')}<br>${esc(r.note)}</p>${action('delete-record','Delete record','text-btn',`data-id="${r.id}"`)}</div>`).join('')||empty('No records yet','Add your first health or vaccine record.')}${navButton('record-edit',icon('plus')+' Add record','primary')}`;}
+function recordEdit(){if(needPet())return needPet();const r=state.records.find(r=>r.id===param('id'))||{};return form('record',`<p class="muted">Current pet: ${esc(pet().name)}</p>`+field('Record name','name',r.name||'','text','required maxlength="60"')+field('Date','date',r.date||today(),'date','required')+field('Next date (optional)','next',r.next||'','date')+`<label class="field">Notes<textarea name="note" maxlength="500">${esc(r.note||'')}</textarea></label>`,'Save record');}
+
+/* ===== Genetic Test & Vaccination (2026-11-17) ===== */
+const gtStatus={submitted:{label:'Sample submitted',cls:'gt-sub'},shipping:{label:'In transit',cls:'gt-ship'},testing:{label:'Testing in progress',cls:'gt-test'},ready:{label:'Report ready',cls:'gt-ready'}};
+function gtReportFor(g){
+ const key=(g.petInfo&&g.petInfo.breed)||'';
+ return {breed:key||'Mixed breed',composition:[['Golden Retriever',86],['Labrador Retriever',9],['Other',5]],
+  risks:[['Hip dysplasia','Low risk','ok'],['Exercise-induced collapse','Carrier','warn'],['Progressive retinal atrophy','Clear','ok']],
+  traits:[['Coat type','Double coat'],['Expected adult weight','25-32 kg'],['Energy level','High']],
+  generated:g.reportAt||today()};
+}
+function genetic(){
+ if(needPet())return needPet();
+ const p=pet(),showAll=!!param('all'),all=state.geneticTests.slice().sort((a,b)=>String(b.submittedAt).localeCompare(String(a.submittedAt)));
+ const list=showAll?all:all.filter(g=>g.pet===p.id);
+ const card=g=>{const st=gtStatus[g.status]||gtStatus.submitted,info=g.petInfo||p;
+  const trackBtn=action('gt-track',icon('truck')+(g.tracking?' Edit tracking number':' Enter tracking number'),'secondary',`data-id="${g.id}"`);
+  const steps=[['Submitted',g.submittedAt],['Shipping',g.shippingAt],['Testing',g.testingAt],['Report',g.reportAt]].map(([lbl,d])=>`<div class="gt-step${d?' done':''}"><span class="gt-dot"></span><small>${lbl}${d?'<br>'+esc(d):''}</small></div>`).join('');
+  let act='', viewDetails='';
+  const isReady=g.status==='ready';
+  const defaultExpanded = !isReady;
+  const expanded = (view.gtExpanded||{})[g.id] !== undefined ? (view.gtExpanded||{})[g.id] : defaultExpanded;
+  const arrow = expanded?'▲':'▼';
+  viewDetails=`<span class="gt-viewdetails" data-action="gt-toggle-track" data-id="${g.id}"><span class="gt-arr">${arrow}</span><span class="gt-track-label">View details</span></span>`;
+  if(isReady){
+    act=`<div class="gt-ready-row">${navButton('genetic-report?id='+g.id,icon('dna')+' View Report','primary')}${g.reportAt?'<span class="gt-report-date">'+esc(g.reportAt)+'</span>':''}</div>`;
+  } else if(g.status==='submitted'||g.status==='shipping'){
+    act=(g.tracking?'<span class="gt-shipinfo">'+icon('truck')+' '+esc(g.carrier||'Carrier')+' · '+esc(g.tracking)+'</span>':trackBtn);
+  }
+  return `<div class="card gt-card">
+   <div class="row between"><b>${icon('dna')} ${esc(g.kitId)}</b><span class="badge ${st.cls}">${st.label}</span></div>
+   <p class="muted gt-info-line">${esc(info.name)} · ${esc(info.breed)} · ${esc(info.sex)}<br>Submitted ${esc(g.submittedAt||'—')}${viewDetails}</p>
+   <div class="gt-track${expanded?'':' collapsed'}" data-gt-track="${g.id}">${steps}</div>
+   <div class="gt-actions">${act}</div>
+  </div>`;};
+ return `<p class="muted">${showAll?'All DNA test kits and reports':'DNA test kits and reports for '+esc(p.name)}.</p>`
+  +(list.length?list.map(card).join(''):empty('No genetic tests yet','Add a kit to track your pet’s DNA test and report.'))
+  +navButton('genetic-new',icon('plus')+' Add Genetic Test','primary')
+  +`<p class="muted gt-note">Status flow: Sample submitted → Shipping (enter tracking number) → Testing in progress (read-only) → Report ready. Sample data only.</p>`;
+}
+function geneticNew(){
+ if(needPet())return needPet();
+ const step=view.gtStep||'scan';
+ const stepBar=`<div class="gt-newsteps"><span class="${step==='scan'?'on':''}">1 · Scan kit</span><span class="${step==='info'?'on':''}">2 · Pet info</span></div>`;
+ if(step==='scan')return `${stepBar}<div class="gt-scan">${icon('dna')}<h3 class="serif">Scan the kit QR code</h3><p class="muted">Point the camera at the QR code on the Genetic Test kit box to link it to your pet.</p><div class="gt-scanbox"><span class="gt-corner tl"></span><span class="gt-corner tr"></span><span class="gt-corner bl"></span><span class="gt-corner br"></span><span class="gt-scanline"></span>${icon('dna')}</div>${action('gt-scan',icon('camera')+' Scan QR code','primary')}${navButton('genetic','Cancel','text-btn')}</div>`;
+ const kit=view.gtKit||'MB-DNA-'+String(Date.now()).slice(-6);
+ const pets=state.pets||[];
+ const selId=view.gtPet||pets[0]?.id||'';
+ const sel=pets.find(x=>x.id===selId)||{};
+ return `${stepBar}<div class="card soft"><b>${icon('dna')} Kit ${esc(kit)}</b><p class="muted">Confirm the pet details below. This information will be sent with the sample.</p></div>`
+  +form('gt-info',
+    `<p class="muted">Pet information · editable before submission</p>`
+    +selectField('Pet','pet',pets.map(x=>[x.id,x.name]),selId,`data-change="gt-pet"`)
+    +field('Type','type',sel.type||'Dog','text','required maxlength="40"')
+    +field('Breed','breed',sel.breed||'','text','required maxlength="60"')
+    +field('Sex','sex',sel.sex||'Male','text','required maxlength="20"')
+    +field('Date of birth','birth',sel.birth||'','date')
+    +field('Weight (kg)','weight',sel.weight||'','number','min="1" max="120" step="0.1"')
+    ,'Confirm & create record')
+  +action('gt-back',icon('back')+' Back to scan','text-btn');
+}
+function geneticReport(){
+ if(needPet())return needPet();
+ const g=state.geneticTests.find(x=>x.id===param('id'));
+ if(!g)return empty('Report not found','It may have been removed.','genetic','Back to Genetic Test');
+ const r=gtReportFor(g),info=g.petInfo||pet();
+ return `<div class="card gt-rhead"><p class="eyebrow">MOONBACK · GENETIC TEST REPORT</p><h2 class="serif">${esc(info.name)}’s DNA report</h2><p class="muted">Kit ${esc(g.kitId)} · ${esc(r.breed)}<br>Generated ${esc(r.generated)}</p><span class="badge gt-ready">✓ Report ready</span></div>`
+  +`<div class="card"><h4>Breed composition</h4>${r.composition.map(([n,v])=>`<div class="gt-bar-row"><span>${esc(n)}</span><b>${v}%</b><div class="gt-bar"><span style="width:${v}%"></span></div></div>`).join('')}</div>`
+  +`<div class="card"><h4>Genetic health risks</h4>${r.risks.map(([n,v,c])=>`<div class="list-row"><span class="grow">${esc(n)}</span><span class="badge ${c==='ok'?'':'warn'}">${esc(v)}</span></div>`).join('')}</div>`
+  +`<div class="card"><h4>Traits</h4>${r.traits.map(([k,v])=>`<div class="list-row"><span class="grow">${esc(k)}</span><b>${esc(v)}</b></div>`).join('')}</div>`
+  +`<p class="muted gt-note">This sample report is for demonstration only. It is not a veterinary diagnosis. Consult a qualified veterinarian before making health decisions.</p>`
+  +navButton('genetic','Back to Genetic Test','secondary');
+}
+function nextVaccination(){
+ const list=state.vaccinations.filter(v=>v.pet===pet().id&&v.next);
+ if(!list.length)return null;
+ return list.slice().sort((a,b)=>String(a.next).localeCompare(String(b.next)))[0];
+}
+function daysUntil(date){
+ const d=new Date(date+'T00:00:00'),now=new Date();now.setHours(0,0,0,0);
+ return Math.round((d-now)/86400000);
+}
+function vaccines(){
+ if(needPet())return needPet();
+ const p=pet(),list=state.vaccinations.filter(v=>v.pet===p.id).slice().sort((a,b)=>String(b.date).localeCompare(String(a.date)));
+ const next=nextVaccination();
+ const nextCard=next?`<div class="card soft vac-next">${icon('calcheck')}<div class="grow"><small>Next vaccination</small><b>${esc(next.name)}</b><span class="muted">Due ${esc(next.next)} · ${daysUntil(next.next)>0?'in '+daysUntil(next.next)+' days':daysUntil(next.next)===0?'today':'overdue'}</span></div></div>`:`<div class="card soft vac-next">${icon('calcheck')}<div class="grow"><small>Next vaccination</small><b>Not scheduled</b><span class="muted">Add a record with a next due date.</span></div></div>`;
+ const card=v=>`<div class="card vac-card"><div class="row between"><b>${icon('syringe')} ${esc(v.name)}</b>${action('vac-delete',icon('trash'),'danger gt-del',`data-id="${v.id}" aria-label="Delete vaccination"`)}</div><p class="muted">Administered ${esc(v.date)}<br>${v.next?'Next due '+esc(v.next)+'<br>':''}${v.dose?'Dose '+esc(v.dose)+' · ':''}${esc(v.vet||'')}${v.note?'<br>'+esc(v.note):''}</p></div>`;
+ return nextCard
+  +heading('Vaccination history')
+  +(list.length?list.map(card).join(''):empty('No vaccination records yet','Add your pet’s first vaccination record.'))
+  +navButton('vaccine-add',icon('plus')+' Add vaccination record','primary');
+}
+function vaccineAdd(){
+ if(needPet())return needPet();
+ return `<p class="muted">Current pet: ${esc(pet().name)}</p>`
+  +form('vaccine',
+    field('Vaccine name','name','','text','required maxlength="80" placeholder="e.g. Rabies"')
+   +field('Date administered','date',today(),'date','required')
+   +field('Next due date (optional)','next',(()=>{const d=new Date();return d.getFullYear()+1+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');})(),'date')
+    +field('Dose (optional)','dose','','text','maxlength="30" placeholder="e.g. 1 mL"')
+    +field('Vet / clinic (optional)','vet','','text','maxlength="80"')
+    +`<label class="field">Notes<textarea name="note" maxlength="500"></textarea></label>`
+    ,'Save vaccination record');
+}
+
+const vetsData=[{id:'vet1',name:'Dr. Emma Wilson',specialty:'General care · Internal medicine / daily health',photo:'vet_1.png'},{id:'vet2',name:'Dr. James Chen',specialty:'Nutrition & behavior',photo:'vet_2.png'},{id:'vet3',name:'Dr. Olivia Martin',specialty:'Preventive care',photo:'vet_3.png'}];
+function vets(){return `${vetsData.map(v=>`<div class="card"><div class="row">${img(v.photo,'avatar lg',v.name)}<div class="grow"><b>${v.name}</b><p class="muted">${v.specialty}</p><span class="badge">✓ Verified</span></div></div>${navButton('vet-detail?id='+v.id,'View details & consult','secondary')}</div>`).join('')}${navButton('consult-history','View consultations','secondary')}`;}
+function vetDetail(){if(needPet())return needPet();const v=vetsData.find(x=>x.id===param('id'))||vetsData[0];return `<div class="center">${img(v.photo,'avatar lg',v.name)}<h3>${v.name}</h3><p class="muted">${v.specialty}</p><p class="muted">Focused on everyday wellbeing and long-term health. This is a preset vet profile and consultation flow.</p></div>${form('consult-start',petSelect('Pet for this consultation',pet().id,'consult-pet')+'<label class="checkbox"><input type="checkbox" name="share">Share this pet’s report</label>','Start consultation')}`;}
+function consult(){const c=state.consultations.find(c=>c.id===param('id'));if(!c)return empty('Pick a vet first','Start a consultation from the online vet list.','vets','Pick a vet');const v=vetsData.find(v=>v.id===c.vet)||vetsData[0];return `<div class="chat-pet">${img(v.photo,'avatar',v.name)}<span>${v.name}<br><small>${esc(c.petName)} · ${c.ended?'Ended':'In progress'}</small></span></div><div class="chat-messages">${c.messages.map(m=>`<div class="bubble ${m.role==='user'?'user':''}">${esc(m.text)}</div>`).join('')}</div>${c.ended?'':messageForm('consult','Write your question…')+action('end-consult','End this consultation','secondary')}${navButton('consult-history','View consultation history','text-btn')}`;}
+function consultHistory(){return state.consultations.length?state.consultations.slice().reverse().map(c=>`<button class="device-card" data-go="consult?id=${c.id}">${img((vetsData.find(v=>v.id===c.vet)||vetsData[0]).photo,'','Vet avatar')}<span class="info"><b>${esc(c.petName)} · ${(vetsData.find(v=>v.id===c.vet)||vetsData[0]).name}</b><small>${esc(c.time)}<br>${c.ended?'Ended':'In progress'}</small></span>${icon('arrow')}</button>`).join('')+navButton('vets','Start a new consultation','primary'):empty('No consultations yet','Pick a vet to try the consultation flow.','vets','Pick a vet');}
+function messageForm(name,placeholder){return form(name,`<div class="chat-compose"><input name="message" maxlength="500" placeholder="${placeholder}" aria-label="Message" required><button type="submit" aria-label="Send message">${icon('send')}</button></div>`,'').replace('<button class="primary" type="submit"></button>','');}
+function publish(){const topics=[['PetLife','1.2M views'],['DailyWalk','845K views'],['CatLife','3.4M views'],['Health','2.1M views'],['Funny','986K views'],['Cute','4.7M views']];if(!publishDraft.tags&&param('tag'))publishDraft.tags=param('tag');const sel=Array.from(new Set(String(publishDraft.tags||'').split(/[,\s]+/).filter(Boolean)));const chips=sel.map(x=>`<span class="topic-chip">#${esc(x)}<button class="topic-chip-del" data-action="remove-topic" data-value="${esc(x)}" type="button" aria-label="Remove ${esc(x)}">${icon('close')}</button></span>`).join('');const items=topics.filter(([x])=>!sel.includes(x)).map(([x,v])=>`<button class="topic-item" data-action="set-topic" data-value="${esc(x)}" type="button"><span><span class="topic-hash">#</span>${esc(x)}</span><small>${esc(v)}</small></button>`).join('');return `<form data-form="publish" class="publish-form"><p class="form-error" role="alert"></p><div class="publish-body"><div class="photo-section"><button class="photo-plus" data-action="pick-photo" type="button">${icon('plus')}<span>Add photos</span></button><input type="file" accept="image/*" multiple data-change="upload" style="display:none"><div class="photo-grid">${pendingPhotos.map((u,i)=>`<div class="photo-wrap">${img(u,'','Photo to publish')}<button class="photo-del" data-action="remove-photo" data-index="${i}" type="button">${icon('close')}</button></div>`).join('')}</div><small class="photo-cap">Up to 9 photos · JPEG/PNG/WebP</small></div><label class="field">What’s new with your little friend?<textarea name="body" required maxlength="500" placeholder="Share a moment with your pet…">${esc(publishDraft.body)}</textarea><span class="char-count"><span id="pub-count">${publishDraft.body.length}</span>/500</span></label><div class="topic-section"><div class="topic-input-wrap" data-action="topic-focus"><div class="topic-chips">${chips}</div><input class="topic-input" type="text" data-input="topic-input" placeholder="${sel.length?'#tag':'#Tag'}" aria-label="Add a topic"></div><div class="topic-panel"><div class="topic-list"${view.topicPanelOpen?'':' hidden'}>${items||'<p class="topic-none">All topics selected</p>'}</div></div></div></div><div class="publish-footer"><button class="publish-submit" type="submit">Publish</button></div></form>`;}
+function story(){const idx=Number(param('index',String(view.storyIndex)))%authors.length,a=authors[idx];view.storyIndex=idx;return `<div class="story">${img(a.photo,'','Pet story')}<span class="story-name">${esc(a.name)} · Today</span></div><div class="row between" style="margin:16px 0">${navButton('story?index='+((idx+authors.length-1)%authors.length),'← Previous')}${navButton('author?id='+a.id,'View author')}${navButton('story?index='+((idx+1)%authors.length),'Next →')}</div>`;}
+function topic(){const tag=param('tag','PetLife'),posts=state.posts.filter(p=>p.tags.includes(tag));return `<h2 class="serif">#${esc(tag)}</h2><p class="muted">${posts.length} posts</p>${posts.map(p=>postCard(p)).join('')||empty('Nothing here yet','Share a post with this topic.')}${navButton('publish?tag='+encodeURIComponent(tag),'Post to this topic','primary')}`;}
+function messages(){return `<div class="card">${action('read-notification',`<span class="grow"><b>Device alert · ${state.messagesRead?'Read':'Unread'}</b><small class="muted" style="display:block">Living Room Cam status update · 09:41</small></span>${icon('arrow')}`,'list-row')}${row('Friend requests','friend-requests','profile',String(state.requests.filter(r=>r.status==='pending').length))}${row('Add friend','friend-add','plus')}</div><h4>Messages</h4>${authors.slice(0,3).map(a=>`<button class="list-row" data-go="chat?id=${a.id}">${img(a.avatar,'avatar',a.name)}<span class="grow"><b>${esc(a.name)}</b><small style="display:block">${esc((state.chats[a.id]||[]).slice(-1)[0]?.text||'Hi! How is your pet doing?')}</small></span>${icon('arrow')}</button>`).join('')}`;}
+function chat(){const a=author(param('id',authors[0].id)),msgs=state.chats[a.id]||[{role:'assistant',text:'Hi! How is your pet doing? 🐾'}];return `<div class="chat-pet">${img(a.avatar,'avatar',a.name)}<span>${esc(a.name)}<br><small>Chat</small></span></div><div class="chat-messages">${msgs.map(m=>`<div class="bubble ${m.role==='user'?'user':''}">${esc(m.text)}</div>`).join('')}</div>${messageForm('chat','Send a message…')}`;}
+function friends(){const kind=param('kind','friends');if(kind==='posts')return `<h3>My posts</h3>${postGrid(state.posts.filter(p=>p.author==='me'))}${navButton('publish','New post','primary')}`;const ids=kind==='followers'?authors.slice(0,3).map(a=>a.id):kind==='following'?state.following:state.friends;return `${segments([['friends','Friends'],['followers','Followers'],['following','Following']],kind,'friends-kind')}${ids.map(id=>{const a=author(id);return `<button class="list-row" data-go="author?id=${a.id}">${img(a.avatar,'avatar',a.name)}<span class="grow"><b>${esc(a.name)}</b><small style="display:block">${esc(a.location)}</small></span>${icon('arrow')}</button>`;}).join('')||empty('No users yet','Follow creators or add friends in Discover.')}${navButton('friend-add','Add friend','primary')}`;}
+function friendAdd(){const matches=authors.filter(a=>!view.friendSearch||a.name.toLowerCase().includes(view.friendSearch.toLowerCase()));return `${form('friend-search',field('Search name','keyword',view.friendSearch,'text','maxlength="50" placeholder="e.g. sophie"'),'Search')}${matches.map(a=>`<div class="list-row">${img(a.avatar,'avatar',a.name)}<div class="grow"><b>${esc(a.name)}</b><p class="muted">${esc(a.location)}</p></div>${action('friend-request',state.friends.includes(a.id)?'Friends':state.sentRequests.includes(a.id)?'Requested':'Request','text-btn',`data-id="${a.id}"`)}</div>`).join('')||empty('No matching users','Try sophie, oliver, luna, max or coco.')}`;}
+function friendRequests(){return state.requests.map(r=>{const a=author(r.author);return `<div class="card"><div class="row">${img(a.avatar,'avatar',a.name)}<div class="grow"><b>${esc(a.name)}</b><p class="muted">Wants to be your friend</p></div></div>${r.status==='pending'?`<div class="row">${action('accept-friend','Accept','primary',`data-id="${a.id}"`)}${action('ignore-friend','Ignore','secondary',`data-id="${a.id}"`)}</div>`:`<p class="badge">${r.status==='accepted'?'Accepted':'Ignored'}</p>`}</div>`;}).join('')||empty('No requests','Friend requests you receive appear here.');}
+const products=[{id:'p1',name:'Daily Balance · Dog food',price:129,image:'home_dev_feeder.jpg',desc:'A balanced formula for everyday feeding.'},{id:'p2',name:'Smart Water Fountain',price:299,image:'home_dev_fountain.jpg',desc:'Smart watering demo — care for every day’s hydration.'},{id:'p3',name:'Comfort Smart Bed',price:599,image:'home_dev_bed.jpg',desc:'A cosy resting spot made for your companion.'}];
+function mall(){return `<div class="card soft"><h2 class="serif">Little things,<br>happier pets.</h2></div>${products.map(p=>`<button class="device-card" data-go="product?id=${p.id}">${img(p.image,'',p.name)}<span class="info"><b>${esc(p.name)}</b><small>$ ${p.price}</small></span>${icon('arrow')}</button>`).join('')}`;}
+function product(){const p=products.find(p=>p.id===param('id'))||products[0];return `<div class="center">${img(p.image,'report',p.name)}<h3>${p.name}</h3><p class="muted">${p.desc}</p><h2>$ ${p.price}</h2></div>${form('cart',field('Quantity','quantity',1,'number','required min="1" max="99" step="1"'),'Add to cart')}`;}
+function settings(){return `<div class="setting-group">${row('Profile','personal','profile')}${row('My pets','pets','paw')}${row('My devices','devices','device')}${row('Change password','password','lock')}</div><div class="setting-group"><label class="list-row">${icon('bell')}<span class="grow">Notifications</span><input type="checkbox" class="toggle" data-change="notifications" ${state.notifications?'checked':''} aria-label="Notifications"></label>${selectField('Language','language',[['Follow system','Follow system'],['Chinese','Chinese'],['English','English']],state.language,'data-change="language"')}${row('Firmware update','firmware','refresh')}${row('Online vet consultations','consult-history','comment')}</div><div class="setting-group">${row('Contact us','contact','mail')}${row('Feedback','feedback','edit')}${row('About MoonBack','about','info')}${row('Terms & Privacy','agreement','lock')}</div>${action('logout','Sign out','danger')}${action('switch-account','Switch account','secondary')}`;}
+function personal(){return `<div class="center" style="padding:15px">${img('profile_avatar.jpg','avatar lg',state.profile.name)}</div>${form('personal',field('Display name','name',state.profile.name,'text','required maxlength="30"')+field('Location','location',state.profile.location,'text','maxlength="80"')+`<label class="field">Bio<textarea name="bio" maxlength="300">${esc(state.profile.bio)}</textarea></label>`,'Save profile')}`;}
+
+/* ===== Sign-in v2 (2026-11-15): English, US market, agreement gate ===== */
+const LG_GOOGLE = `<svg class="lg-ico" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M21.6 12.2c0-.7-.1-1.4-.2-2H12v3.9h5.4a4.6 4.6 0 0 1-2 3v2.5h3.2c1.9-1.7 3-4.3 3-7.4z"/><path fill="#34A853" d="M12 22c2.7 0 5-.9 6.6-2.4l-3.2-2.5c-.9.6-2 1-3.4 1-2.6 0-4.8-1.7-5.6-4.1H3.1v2.6A10 10 0 0 0 12 22z"/><path fill="#FBBC05" d="M6.4 14c-.2-.6-.3-1.3-.3-2s.1-1.4.3-2V7.4H3.1a10 10 0 0 0 0 9.2L6.4 14z"/><path fill="#EA4335" d="M12 6c1.5 0 2.8.5 3.8 1.5l2.8-2.8A10 10 0 0 0 3.1 7.4L6.4 10c.8-2.4 3-4 5.6-4z"/></svg>`;
+const LG_APPLE = `<svg class="lg-ico lg-ico-apple" viewBox="0 0 24 24" fill="#000000" aria-hidden="true"><path d="M16.365 1.43c0 1.14-.493 2.27-1.177 3.08-.744.9-1.99 1.57-2.987 1.48-.12-1.04.454-2.14 1.113-2.88.733-.84 2.02-1.48 3.05-1.68zM20.5 17.1c-.55 1.26-.82 1.82-1.53 2.93-.99 1.56-2.39 3.5-4.12 3.52-1.54.01-1.94-1-4.03-.99-2.09.01-2.53 1.01-4.07.99-1.73-.02-3.05-1.77-4.04-3.33C.13 16.6-.24 11.5 1.5 8.72c1.15-1.86 2.97-2.95 4.68-2.95 1.74 0 2.83 1 4.27 1 1.39 0 2.24-1 4.28-1 1.53 0 3.15.83 4.3 2.27-3.78 2.07-3.16 7.46.47 9.06z"/></svg>`;
+const LG_MAIL = `<svg class="lg-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>`;
+let lgTimer;
+function lgStartTick(){
+  clearInterval(lgTimer);
+  const tick=()=>{
+    const b=$('#lg-send'),left=Math.max(0,Math.ceil((view.lgCooldownUntil-Date.now())/1000));
+    if(!b||left<=0){clearInterval(lgTimer);if(b){b.disabled=false;b.textContent='Get code';}return;}
+    b.disabled=true;b.textContent=left+'s';
+  };
+  tick();
+  lgTimer=setInterval(tick,250);
+}
+function lgGate(){
+  const cb=$('#lg-agree'),box=$('#lg-agree-box');
+  if(cb&&cb.checked){view.lgAgreed=true;if(box)box.classList.remove('lg-warn');return true;}
+  if(box){box.classList.add('lg-warn');setTimeout(()=>box.classList.remove('lg-warn'),1600);}
+  toast('Please agree to the Privacy Policy and Terms of Service first.');
+  return false;
+}
+function loginV2(){
+ const phone=view.lgMode==='phone';
+ const code=view.lgStep==='code';
+ const left=Math.max(0,Math.ceil((view.lgCooldownUntil-Date.now())/1000));
+ const phoneIcon=`<svg class="lg-phone-ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg>`;
+ const agree=`<div class="lg-agree" id="lg-agree-box"><input type="checkbox" id="lg-agree" data-change="lg-agree" ${view.lgAgreed?'checked':''} aria-label="Agree to Terms of Service and Privacy Policy"><span data-action="lg-agree-toggle">By continuing, you agree to our <button type="button" class="lg-link" data-go="terms">Terms of Service</button> and <button type="button" class="lg-link" data-go="privacy">Privacy Policy</button></span></div>`;
+ const buttons=`<div class="lg-social">
+   <button class="lg-sbtn lg-apple" data-action="lg-oauth" data-value="Apple ID">${LG_APPLE}<span>Continue with Apple ID</span></button>
+   <button class="lg-sbtn lg-google" data-action="lg-oauth" data-value="Google">${LG_GOOGLE}<span>Continue with Google</span></button>
+   <button class="lg-sbtn lg-email" data-action="lg-step" data-value="email">${LG_MAIL}<span>Continue with Email</span></button>
+  </div>
+  <div class="lg-or"><i></i><span>or</span><i></i></div>
+  <div class="lg-alt lg-alt-top"><button type="button" class="text-btn lg-switch" data-action="lg-step" data-value="phone">${phoneIcon}Use phone number instead</button></div>`;
+ const form=`<div class="lg-code-head"><button type="button" class="lg-back" data-action="lg-step" data-value="buttons">← Back</button><span class="lg-step-title">${phone?'Phone verification code':'Email verification code'}</span></div>
+  <form data-form="lg-login" class="lg-form">
+   <label class="lg-field">${phone?'Mobile number':'Email address'}<span class="lg-input-wrap ${phone?'has-prefix':''}">${phone?'<span class="lg-prefix">+1</span>':''}<input name="account" type="${phone?'tel':'email'}" inputmode="${phone?'tel':'email'}" autocomplete="off" placeholder="${phone?'(555) 000-0000':'you@example.com'}" required maxlength="80"></span></label>
+   <div class="lg-code-row"><label class="lg-field lg-grow">Verification code<input name="code" type="text" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" autocomplete="off" placeholder="6-digit code" required></label><button type="button" id="lg-send" class="lg-send" data-action="lg-send" ${left?'disabled':''}>${left?left+'s':'Get code'}</button></div>
+   <p class="form-error" role="alert"></p>
+   <button class="primary lg-submit" type="submit">Sign in</button>
+  </form>
+  <div class="lg-alt"><button type="button" class="text-btn lg-switch" data-action="lg-step" data-value="${phone?'email':'phone'}">${phoneIcon}${phone?'Use email instead':'Use phone number instead'}</button></div>`;
+ return `<div class="lg">
+  <div class="lg-hero">${img('home_logo.png','lg-logo','MoonBack')}<h1 class="lg-title">Get Started</h1></div>
+  ${code?form:buttons}
+  ${agree}
+ </div>`;
+}
+function privacy(){return `<div class="lg-doc"><h2>Privacy Policy</h2><p class="muted">Last updated November 2026 - prototype copy for review</p><div class="card"><h4>What we collect</h4><p class="muted">Account details (email or mobile number), pet profiles, and data reported by Smart Dog House and Smart Dog Harness (Model 001).</p></div><div class="card"><h4>How we use it</h4><p class="muted">To deliver health insights, device status and account features. We do not sell personal information.</p></div><div class="card"><h4>Your choices</h4><p class="muted">You may access, correct or delete your data, and opt out of certain processing. US state privacy rights (CCPA/CPPA) apply where relevant.</p></div></div>`;}
+function terms(){return `<div class="lg-doc"><h2>Terms of Service</h2><p class="muted">Last updated November 2026 - prototype copy for review</p><div class="card"><h4>Using MoonBack</h4><p class="muted">MoonBack is the companion app for Smart Dog House and Smart Dog Harness. You are responsible for the accuracy of the information you provide.</p></div><div class="card"><h4>Not medical advice</h4><p class="muted">Health insights are informational only and do not replace professional veterinary diagnosis or treatment.</p></div><div class="card"><h4>Account and devices</h4><p class="muted">Keep your credentials secure. Device availability may vary by region and connectivity.</p></div></div>`;}
+function auth(mode='login'){const email=view.loginMode==='email',isLogin=mode==='login',isRegister=mode==='register';return `<div class="center"><div class="auth-logo">IB09</div><h2 class="auth-title">IB09 Pet</h2><p class="muted">Care beyond the everyday.</p></div><div class="auth-form">${segments([['phone','Phone'],['email','Email']],view.loginMode,'login-mode')}${form(mode,field(email?'Email address':'Phone number','account','',email?'email':'tel',`required maxlength="80" autocomplete="off" placeholder="${email?'demo@example.com':'+1 415 555 0132'}"`)+(mode==='forgot'?`<div class="row">${field('Verification code','code','','text','required maxlength="6"')}<button type="button" class="text-btn" data-action="verification-code">Get code</button></div>`:'')+field(isLogin?'Password':'New password (min 6 characters)','password','','password','required minlength="6" maxlength="64" autocomplete="off"')+(isRegister?field('Confirm password','confirm','','password','required minlength="6" maxlength="64" autocomplete="off"'):'')+(mode!=='forgot'?`<label class="checkbox"><input type="checkbox" name="agree" required><span>I have read and agree to the ${navButton('agreement','Terms & Privacy')}</span></label>`:''),isLogin?'Sign in':isRegister?'Create account':'Reset password')}${isLogin?`<div class="row between" style="margin:16px 0">${navButton('forgot','Forgot password?')}${navButton('register','Sign up')}</div>`:navButton('login','Back to sign in','secondary')}</div>`;}
+function password(){return `${form('password',field('Current password (min 6 characters)','old','','password','required minlength="6" autocomplete="off"')+field('New password','password','','password','required minlength="6" maxlength="64" autocomplete="off"')+field('Confirm new password','confirm','','password','required minlength="6" maxlength="64" autocomplete="off"'),'Save changes')}`;}
+function firmware(){const d=state.devices.find(d=>d.id===param('id'))||state.devices[0];if(!d)return empty('No devices yet','Add a device to see the update flow.','device-add','Add device');return `${selectField('Select device','device',state.devices.map(d=>[d.id,d.name]),d.id,'data-change="firmware-device"')}<div class="center" style="padding:30px 0">${img(devImg(d.type),'avatar lg',d.name)}<h3>${esc(d.name)}</h3><p class="muted">Current version ${state.firmware[d.id]||'1.2.0'} · ${d.online?'Online':'Offline'}</p></div><div class="card"><h4>${view.firmwareStage==='done'?'Update complete':view.firmwareStage==='ready'?'Check for updates':'New version found:  1.3.0'}</h4><p class="muted">Improves connectivity and device stability</p>${view.firmwareStage==='updating'?`<div class="progress"><span style="width:${view.firmwareProgress}%"></span></div><p class="muted">Updating… ${view.firmwareProgress}%</p>`:action(view.firmwareStage==='ready'?'firmware-check':'firmware-start',view.firmwareStage==='done'?'Update again':view.firmwareStage==='ready'?'Check for updates':'Start update','primary',`data-id="${d.id}"`)}</div>`;}
+function feedback(){return `${form('feedback',selectField('Feedback type','type',[['Feature idea','Feature idea'],['UI issue','UI issue'],['Other','Other']],'Feature idea')+`<label class="field">Details<textarea name="body" required minlength="5" maxlength="1000" placeholder="At least 5 characters"></textarea></label>`+field('Contact (optional)','contact','','text','maxlength="80"'),'Submit locally')}${state.feedback.length?heading('Saved feedback')+state.feedback.slice().reverse().map(f=>`<div class="card"><b>${esc(f.type)}</b><p class="muted">${esc(f.body)}</p><small class="muted">${esc(f.time)}</small></div>`).join(''):''}`;}
+function contact(){return `<div class="card soft"><h2 class="serif">We’re here<br>for little companions.</h2><p class="muted">Questions or ideas? Tell us.</p></div>${row('Write feedback','feedback','edit')}${row('About MoonBack','about','info')}`;}
+function about(){return `<div class="center" style="padding:30px 0">${img('home_logo.png','','MoonBack')}<h2 class="serif">Care beyond<br>the everyday.</h2><p class="muted">MoonBack · Version 1.0</p></div><div class="card"><p class="muted">Health, device care, AI companionship and community — get to know your companion a little better every day.</p></div>${row('Legal','agreement','lock')}${action('help','Usage & editing guide','secondary')}`;}
+function agreement(){return `<div class="lg-doc"><h2>Legal</h2><p class="muted">MoonBack · Version 1.0</p><div class="setting-group">${row('Privacy Policy','privacy','lock')}${row('Terms of Service','terms','lock')}</div></div>`;}
+function membership(){return `<div class="card soft center">${icon('crown')}<h2 class="serif">A little more care.</h2><p class="muted">MoonBack Plus</p></div><div class="card"><h4>Membership benefits</h4><p class="muted">Health trends, in-depth reports and dedicated service entries. Pick the plan that fits you.</p></div>${form('membership',selectField('Choose plan','plan',[['monthly','Monthly · $29 / mo'],['yearly','Yearly · $199 / yr']],'monthly'),'Try membership')}${state.member?'':''}`;}
+function feeding(){if(needPet())return needPet();return `<p class="muted">${esc(pet().name)}’s feeding plan</p>${state.feeding.filter(f=>f.pet===pet().id).map(f=>`<div class="card"><div class="row"><div class="grow"><b>${esc(f.name)}</b><p class="muted">${esc(f.time)} · ${f.grams} g · ${esc(state.foods.find(x=>x.id===f.food)?.name||'No food selected')}</p></div><input class="toggle" type="checkbox" data-change="feeding-enabled" data-id="${f.id}" ${f.enabled?'checked':''} aria-label="${esc(f.name)} Enabled"></div><div class="row between">${navButton('feeding-edit?id='+f.id,'Edit')}${action('delete-feeding','Delete','text-btn',`data-id="${f.id}"`)}</div></div>`).join('')||empty('No feeding plans yet','Plan the first meal for this pet.')}${navButton('feeding-edit','Add feeding plan','primary')}${navButton('foods','Manage my foods','secondary')}`;}
+function feedingEdit(){if(needPet())return needPet();const f=state.feeding.find(f=>f.id===param('id'))||{};return form('feeding',field('Plan name','name',f.name||'Breakfast','text','required maxlength="40"')+field('Feeding time','time',f.time||'08:00','time','required')+field('Portion (g)','grams',f.grams||60,'number','required min="1" max="2000" step="1"')+selectField('Food','food',[['','Choose later'],...state.foods.map(f=>[f.id,f.name])],f.food||''),'Save plan')+navButton('foods','Add or pick food','secondary');}
+function foods(){return `${state.foods.map(f=>`<div class="card"><div class="row">${icon('food')}<div class="grow"><b>${esc(f.name)}</b><p class="muted">${esc(f.brand)} · ${esc(f.type)}</p></div>${action('food-detail',icon('info'),'icon-btn',`data-id="${f.id}" aria-label="Food details"`)}</div>${action('delete-food','Delete food','text-btn',`data-id="${f.id}"`)}</div>`).join('')||empty('No foods yet','Add food first, then pick it in a feeding plan.')}${navButton('food-select','Pick a preset food','primary')}${navButton('food-add','Add custom food','secondary')}${navButton('feeding','Back to feeding plan','secondary')}`;}
+const presetFoods=[['Daily Balance','MoonBack','Dog'],['Indoor Cat','Nature Care','Cat'],['Sensitive Care','Pet Wellness','Dog']];
+function foodSelect(){return presetFoods.map(([n,b,t],i)=>`<div class="card"><h4>${n}</h4><p class="muted">${b} · ${t}</p>${action('add-preset-food',state.foods.some(f=>f.name===n)?'Already in my foods':'Add to my foods','secondary',`data-index="${i}"`)}</div>`).join('')+navButton('foods','View my foods','primary');}
+function foodAdd(){return form('food',field('Food name','name','','text','required maxlength="60"')+field('Brand','brand','','text','required maxlength="40"')+selectField('Type','type',[['Dog','Dog'],['Cat','Cat']],'Dog'),'Save food');}
+const renderers={home,health,ai,discover,profile,monitor,login:loginV2,register:()=>auth('register'),forgot:()=>auth('forgot'),pets,'pet-edit':petEdit,'pet-detail':petDetail,devices,'device-add':deviceAdd,'device-detail':deviceDetail,translation,fence,trajectory,checkin,metric,report,records,'record-edit':recordEdit,vets,'vet-detail':vetDetail,consult,'consult-history':consultHistory,post,author:authorPage,publish,story,topic,messages,chat,friends,'friend-add':friendAdd,'friend-requests':friendRequests,mall,product,settings,personal,password,firmware,feedback,contact,about,agreement,membership,feeding,'feeding-edit':feedingEdit,foods,'food-select':foodSelect,'food-add':foodAdd,privacy,terms,genetic,'genetic-new':geneticNew,'genetic-report':geneticReport,vaccines,'vaccine-add':vaccineAdd,'device-bind':deviceBind};
+function render(keepScroll=false){
+ const pos=$('#app-content').scrollTop,doc=docMap[current.page],group=doc.dataset.group;
+ $('#top-tabs').innerHTML=modules.map(([r,t,i])=>`<button class="tab ${r===group?'active':''}" role="tab" aria-selected="${r===group}" data-go="${r}">${icon(i)}${t}</button>`).join('');
+ $('#bottom-nav').innerHTML=modules.filter(m=>!['login','monitor'].includes(m[0])).map(([r,t,i])=>`<button data-go="${r}" class="${r===group?'active':''}" aria-label="App navigation ${t}" aria-current="${r===group?'page':'false'}">${icon(i)}<span>${({home:'Home',health:'Health',ai:'AI Butler',discover:'Discover',profile:'Profile'})[r]}</span></button>`).join('');
+ const noNav=group==='login'||['post','publish','device-bind'].includes(current.page);
+ $('#bottom-nav').hidden=noNav;
+ $('#bottom-nav').style.display=noNav?'none':'flex';
+ const main=['home','health','ai','discover','profile','login'].includes(current.page);
+ let header=main?'':ib('back','Back','data-action="back"');
+ header+=current.page==='home'?`${img('home_logo.png','app-logo','MoonBack')}<span class="spacer"></span>${`<button class="icon-btn${state.messagesRead?'':' has-unread'}" aria-label="Messages" data-go="messages">${icon('bell')}<span class="notif-dot"></span></button>`}${ib('plus','Add device','data-action="add-device-menu"')}`:(current.page==='login'?'':`<h2>${esc(current.page==='pet-edit'&&param('id')?'Edit Pet':(titles[current.page]||doc.querySelector('h2').textContent))}</h2>`);
+ if(current.page==='health')header+=ib('clock','Health records','data-go="records"');
+ if(current.page==='ai')header+=ib('trash','Clear this pet’s chat','data-action="clear-ai"');
+ if(current.page==='discover')header+=ib('plus','New post','data-go="publish"')+ib('comment','Messages','data-go="messages"');
+ if(current.page==='profile')header+=ib('crown','Membership','data-go="membership"')+ib('settings','Settings','data-go="settings"');
+ $('#app-header').innerHTML=header;
+ $('#app-content').classList.toggle('ds-page',current.page==='discover');
+ $('#app-content').classList.toggle('has-composer',current.page==='post');
+ $('#app-content').classList.toggle('has-publish',current.page==='publish');
+ $('.screen').classList.toggle('ds-screen',current.page==='discover');
+ if(current.page==='discover'){const m=$('#app-header [data-go="messages"]');if(m){m.classList.add('has-unread');m.insertAdjacentHTML('beforeend','<span class="notif-dot"></span>');}}
+ $('#app-header').classList.toggle('pe-head',current.page==='pet-edit');
+ try{$('#app-content').innerHTML=renderers[current.page]();}catch(err){console.error('[MoonBack] Unable to render '+current.page,err);$('#app-content').innerHTML='<div class="empty">'+icon('paw')+'<strong>Something went wrong</strong>This page could not be displayed.'+navButton('home','Back to Home','primary')+'</div>';}
+  if(current.page==='login'&&view.lgCooldownUntil>Date.now())lgStartTick();
+ $('#app-content').scrollTop=keepScroll?pos:0;
+ docs.forEach(d=>d.hidden=d!==doc);
+ $('#doc-module').textContent=moduleName(group);
+ $('#page-picker').value=current.page;
+ $('#preview-state').textContent=!storageAvailable?'● Session mode · refresh may reset':state.emptyMode?'● Empty demo':'● Sample data';
+ document.title='MoonBack · '+doc.querySelector('h2').textContent;
+ startDiscoverSlides();
+}
+function readRoute(){
+ clearInterval(operationTimer);clearInterval(discoverSlidesTimer);view.recording=false;if(view.firmwareStage==='updating'){view.firmwareStage='available';view.firmwareProgress=0;}if(view.healthProgress<100)view.healthProgress=0;
+ closeModal();const raw=location.hash.slice(1)||'home',[page,q]=raw.split('?');
+ if(!docMap[page]||!renderers[page]){go('home');return;}
+ const old=current.page;
+ current={page,params:new URLSearchParams(q||'')};
+ if(old!==page)view.postImage=0;
+ if(page==='login'&&old!==page)view.lgStep='buttons';
+ if(page==='genetic-new'&&old!==page){view.gtStep='scan';view.gtKit='';view.gtPet=param('id')||'';}
+ if(page==='pet-edit'&&old!==page){newWiz(param('id')||'');}
+if(page==='device-bind'&&old!==page){newBind();}
+ if(page==='pet-detail'){const p=state.pets.find(p=>p.id===param('id'));if(p)selectPet(p.id);}
+ if(page==='device-detail'){const d=state.devices.find(d=>d.id===param('id'));if(d?.pet)selectPet(d.pet);}
+ previousHash=raw;
+ render();
+}
+function toast(t){clearTimeout(toastTimer);const el=$('#app-toast');el.textContent=t;el.hidden=false;toastTimer=setTimeout(()=>el.hidden=true,3400);}
+function modal(title,text,confirmText,callback,html=''){modalFocus=document.activeElement;modalCallback=callback;$('#modal-layer').innerHTML=`<div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title"><div class="row between"><h3 id="modal-title">${esc(title)}</h3>${ib('close','Close dialog','data-action="close-modal"')}</div>${text?`<p>${esc(text)}</p>`:""}${html}<div class="row">${action('close-modal',confirmText?'Cancel':'Got it','secondary')}${confirmText?action('confirm-modal',esc(confirmText),'primary'):''}</div></div>`;$('#modal-layer').hidden=false;$('#modal-layer button').focus();}
+function closeModal(){if($('#modal-layer').hidden)return;$('#modal-layer').hidden=true;modalCallback=null;if(modalFocus?.isConnected)modalFocus.focus();}
+function confirm(title,text,callback){modal(title,text,'Confirm',callback);}
+function today(){const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;}
+function now(){return new Date().toLocaleString('zh-CN',{hour12:false});}
+function refresh(message='',keepScroll=true){save();render(keepScroll);if(message)toast(message);}
+function sendAi(text){if(!pet())return;const p=pet(),m=metrics(),ms=state.conversations[p.id]||(state.conversations[p.id]=[]);let reply;
+ if(/sleep/i.test(text))reply=`${p.name} slept ${m.sleep.toFixed(1)} hours. Give it a few days, then read it together with activity and mood. Open Health to see the trend.`;
+ else if(/care|advice/i.test(text))reply=`For ${p.name}, keep a steady routine, plenty of water and gentle activity. If discomfort persists, consult a vet.`;
+ else if(/heart/i.test(text))reply=`${p.name} ’s heart rate is ${m.heart} bpm, breathing rate ${m.breath} breaths/min. See Health for metric trends.`;
+ else reply=`Today, ${p.name} walked ${m.steps.toLocaleString()} steps, was active for ${m.activity} hours and slept ${m.sleep.toFixed(1)} hours. Everything looks steady — ask me about sleep, heart rate or care tips.`;
+ ms.push({role:'user',text},{role:'assistant',text:reply});refresh();$('#app-content').scrollTop=$('#app-content').scrollHeight;
+}
+function deleteBy(collection,id,msg){confirm('Delete?',msg,()=>{state[collection]=state[collection].filter(x=>x.id!==id);refresh('Deleted');});}
+document.addEventListener('click',e=>{
+ if(view.topicPanelOpen&&!e.target.closest('.topic-section')){view.topicPanelOpen=false;const l=document.querySelector('#app-content .topic-list');if(l)l.hidden=true;}
+ const link=e.target.closest('[data-go]');if(link){e.preventDefault();go(link.dataset.go);return;}
+ const b=e.target.closest('[data-action]');if(!b)return;
+ const a=b.dataset.action,id=b.dataset.id,v=b.dataset.value;
+ switch(a){
+ case 'back':back();break;
+ case 'discover-stories':modal('Stories','Pick a creator to view their story.',null,null,`<div class="setting-group">${authors.map((a,i)=>row(a.name.split('.')[0],'story?index='+i,'paw')).join('')}</div>`);break;
+ case 'close-modal':closeModal();break;
+ case 'confirm-modal':{const cb=modalCallback;closeModal();if(cb)cb();break;}
+ case 'help':modal('Usage & editing guide','The phone on the left is clickable and scrollable; the top tabs stay in sync with the phone menu.\n\nTo edit the notes on the right: open index.html in a text editor, search for the page title and edit the matching section, then save and refresh. Do not change data-page, data-group or id.',null,null,'<a href="Guide.html" target="_blank" rel="noopener">Open the full guide ↗</a>');break;
+ case 'reset':confirm('Reset the demo?','This clears demo edits, chats and uploads in this browser and restores Lucky, Milo, Coco and the sample devices. Notes edited in the HTML file are not affected.',()=>{state=seed();Object.values(uploadedPhotos).flat().forEach(u=>URL.revokeObjectURL(u));Object.keys(uploadedPhotos).forEach(k=>delete uploadedPhotos[k]);pendingPhotos.forEach(u=>URL.revokeObjectURL(u));pendingPhotos=[];uploadGeneration++;uploadReading=false;publishDraft={body:'',tags:''};Object.keys(petPhotoSlots).forEach(k=>{URL.revokeObjectURL(petPhotoSlots[k]);delete petPhotoSlots[k];});view.firmwareStage='ready';view.healthProgress=0;clearInterval(operationTimer);save();if(current.page==='home')render();else go('home');toast('Sample data restored');});break;
+ case 'empty-scenario':confirm('Try the empty demo state?','This clears the demo pets and devices to show the onboarding state. Use Reset demo in the top right to restore.',()=>{state=seed();state.pets=[];state.devices=[];state.records=[];state.feeding=[];state.selected='';state.emptyMode=true;save();if(current.page==='home')render();else go('home');toast('Switched to the empty demo state');});break;
+ case 'expired-scenario':go('login');setTimeout(()=>toast('Session expired, please sign in again (demo)'),100);break;
+ case 'pet':selectPet(id);refresh();break;
+ case 'pet-scan':{const el=$('#pe-device-id');if(el){el.value='868681071353013';toast('Device ID scanned');}break;}
+ case 'pet-step':{syncPetDraft();const w=wiz();if(w.done)break;const n=Number(v);if(n>=1&&n<=3){w.error='';w.step=n;render();}break;}
+ case 'pet-wiz-mode':{const w=wiz();w.mode=v;if(v!=='existing'){w.deviceId='';w.reassign=false;}w.error='';render(true);break;}
+ case 'pet-wiz-scan':{const w=wiz();w.deviceId='868681071353013';w.scanType='harness';w.error='';render(true);toast('Device ID scanned');break;}
+ case 'pet-wiz-breed':{syncPetDraft();const w=wiz();w.draft.breed=v;w.error='';render(true);break;}
+ case 'pet-wiz-size':{const w=wiz();w.sizeFilter=v;w.error='';render(true);break;}
+ case 'pet-wiz-back':{syncPetDraft();const w=wiz();w.error='';w.step=Math.max(1,w.step-1);render();break;}
+case 'pet-wiz-home':{view.petWiz=null;go('home');toast('Pet added - welcome to MoonBack!');break;}
+case 'bind-step':{syncBindDraft();const w=bindWiz();if(w.done)break;const n=Number(v);if(n>=1&&n<=3){w.error='';w.step=n;render();}break;}
+case 'bind-mode':{const w=bindWiz();w.error='';render(true);break;}
+case 'bind-scan':{const w=bindWiz();w.scanId='868681071353013';w.bindType='harness';w.error='';render(true);toast('Product scanned');break;}
+case 'bind-bind':{const w=bindWiz();if(!w.scanId){bindError('Scan a product first.');render(true);break;}state.devices.push({id:uid(),name:'Smart Dog Harness',type:'harness',serial:w.scanId,pet:'',online:true,battery:100});w.bound=true;w.deviceId=state.devices[state.devices.length-1].id;w.error='';w.step=3;save();render();break;}
+case 'bind-breed':{syncBindDraft();const w=bindWiz();w.draft.breed=v;w.error='';render(true);break;}
+case 'bind-size':{syncBindDraft();const w=bindWiz();w.sizeFilter=v;w.error='';render(true);break;}
+case 'bind-back':{syncBindDraft();const w=bindWiz();w.error='';w.step=Math.max(1,w.step-1);render();break;}
+case 'bind-next':{
+ syncBindDraft();const w=bindWiz(),d=w.draft;
+ if(w.step===1){if(!w.scanId){bindError('Scan a product first.');render(true);break;}w.error='';w.step=2;render();break;}
+ if(w.step===2){if(!String(d.name||'').trim()){bindError('Enter a pet name.');render(true);break;}if(!Number.isFinite(Number(d.weight))||Number(d.weight)<=0){bindError('Enter a valid weight.');render(true);break;}w.error='';w.step=3;render();break;}
+ if(w.step===3){if(Object.keys(petPhotoSlots).length<8){bindError('Please upload all 8 pet photos.');render(true);break;}const p={id:uid(),photo:'home_pet_coco.jpg',scene:'real_coco_sleep.jpg',status:'Resting now',type:'Dog',breed:String(d.breed||'Mixed breed'),sex:String(d.sex||'Male'),weight:Number(d.weight)||0,name:String(d.name||'').trim(),age:d.age||'',height:d.height||'',emotional:d.emotional||'',owner:d.owner||'',contact:d.contact||'',nextVax:d.nextVax||''};state.pets.push(p);const dev=state.devices.find(x=>x.id===w.deviceId);if(dev)dev.pet=p.id;state.selected=p.id;save();w.petId=p.id;w.done=true;w.error='';render();break;}
+ break;
+}
+case 'bind-home':{view.bindWiz=null;go('home');toast('Setup complete — welcome to MoonBack!');break;}
+case 'pet-wiz-next':{
+  syncPetDraft();const w=wiz(),d=w.draft;
+  if(w.step===1){
+   if(w.mode==='scan'&&!w.deviceId){wizError('Scan a device first, or choose to link one later.');render(true);break;}
+   if(w.mode==='existing'&&!w.deviceId){wizError('Choose a device, or choose to link one later.');render(true);break;}
+   w.error='';w.step=2;render();break;
+  }
+  if(w.step===2){
+   if(!String(d.name||'').trim()){wizError('Enter a pet name.');render(true);break;}
+   if(!Number.isFinite(Number(d.weight))||Number(d.weight)<=0){wizError('Enter a valid weight.');render(true);break;}
+   w.error='';w.step=3;render();break;
+  }
+  if(w.step===3){
+   if(!w.editId&&Object.keys(petPhotoSlots).length<8){wizError('Please upload all 8 pet photos.');render(true);break;}
+   let p=state.pets.find(x=>x.id===w.editId);
+   if(!p){p={id:uid(),photo:'home_pet_coco.jpg',scene:'real_coco_sleep.jpg',status:'Resting now'};state.pets.push(p);}
+   Object.assign(p,{name:String(d.name||'').trim(),type:'Dog',breed:d.breed||'Mixed breed',sex:d.sex||'Male',weight:Number(d.weight),age:d.age||'',height:d.height||'',emotional:d.emotional||'',owner:d.owner||'',contact:d.contact||'',nextVax:d.nextVax||'',deviceId:w.mode==='scan'?w.deviceId:''});
+   if(w.mode==='existing'&&w.deviceId){
+    const dev=state.devices.find(x=>x.id===w.deviceId);
+    if(dev){dev.pet=p.id;if(w.reassign)toast('Device owner changed to '+p.name);}
+   }else if(w.mode==='scan'&&w.deviceId){
+    const dev=state.devices.find(x=>x.serial===w.deviceId);
+    if(dev){dev.pet=p.id;toast('Device linked to '+p.name);}
+    else{state.devices.push({id:uid(),name:'Smart Dog Harness',type:'harness',serial:w.deviceId,pet:p.id,online:true,battery:100});toast('Device paired and linked to '+p.name);}
+   }
+   Object.keys(petPhotoSlots).forEach(k=>{URL.revokeObjectURL(petPhotoSlots[k]);delete petPhotoSlots[k];});
+   state.selected=p.id;save();w.newId=p.id;w.done=true;w.error='';render();break;
+  }
+ }
+ case 'add-device-menu':{view.devPick='harness';modal('Add a device','','Confirm',()=>{if(view.devPick==='house'){toast('This device is still in production');return;}showHarnessSpec();},devPickHtml());tidyDeviceModal();break;}
+ case 'pick-device':{if(v==='house'){toast('This device is still in production');break;}view.devPick=v;document.querySelectorAll('.dev-opt').forEach(b=>{const on=b.dataset.value===v;b.classList.toggle('selected',on);const c=b.querySelector('.dev-check');if(c)c.textContent=on?'✓':'';});break;}
+ case 'quick':modal('Quick Access','Pick a feature to continue.',null,null,`<div class="setting-group">${row('My pets','pets','paw')}${row('Remote care','monitor','camera')}${row('Voice translation','translation','mic')}${row('Health','health','health')}${row('Geofence','fence','fence')}${row('Feeding plan','feeding','food')}</div>`);break;
+ case 'range':view.range=v;render(true);break;
+case 'topic-focus':{if(view.topicPanelOpen)break;view.topicPanelOpen=true;render(true);const i=document.querySelector('.topic-input');if(i)i.focus();break;}
+case 'clear-topics':view.topicPanelOpen=false;render(true);break;
+case 'remove-topic':publishDraft.tags=String(publishDraft.tags||'').split(/[,\s]+/).filter(x=>x&&x!==v).join(' ');render(true);break;
+case 'pick-photo':{const inp=b.closest('form').querySelector('input[type=file]');if(inp){inp.value='';inp.click();}break;}
+case 'remove-photo':{const i=Number(b.dataset.index);pendingPhotos.splice(i,1);render(true);break;}
+case 'pick-topic':{const f=b.closest('form');const list=f.querySelector('.topic-list');if(list)list.style.display=list.style.display==='block'?'none':'block';break;}
+case 'set-topic':{const cur=String(publishDraft.tags||'').split(/[,\s]+/).filter(Boolean);if(!cur.includes(v))cur.push(v);publishDraft.tags=cur.join(' ');render(true);break;}
+ case 'feed':if(v==='for-you'||v==='following'){view.feed=v;view.discoverTopic='';}else{view.feed='for-you';view.discoverTopic=v;}render();break;
+ case 'profile-tab':view.profileTab=v;render(true);break;
+ case 'device-filter':view.deviceFilter=v;render();break;
+ case 'friends-kind':go('friends?kind='+v);break;
+ case 'login-mode':view.loginMode=v;render();break;
+ case 'demo-login':go('device-bind');toast('Signed in with the demo account');break;
+ case 'lg-step':{if(v==='buttons')view.lgStep='buttons';else{view.lgStep='code';view.lgMode=v;}render();break;}
+ case 'lg-agree-toggle':{const cb=$('#lg-agree');if(cb){cb.checked=!cb.checked;view.lgAgreed=cb.checked;const box=$('#lg-agree-box');if(box&&cb.checked)box.classList.remove('lg-warn');}break;}
+ case 'lg-oauth':{if(!lgGate())break;go('device-bind');toast('Signed in with '+v+' (demo)');break;}
+ case 'lg-send':{if(!lgGate())break;const f=$('#app-content').querySelector('[data-form="lg-login"]');if(!f)break;const acct=String(f.elements.account.value||'').trim();const ok=view.lgMode==='phone'?/^[\d\s()\-]{10,20}$/.test(acct):/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(acct);f.querySelector('.form-error').textContent=ok?'':(view.lgMode==='phone'?'Enter a valid US mobile number.':'Enter a valid email address.');if(!ok)break;view.lgCooldownUntil=Date.now()+60000;lgStartTick();toast('Demo code sent - 123456');break;}
+ case 'verification-code':modal('Verification code','The code is 123456. No SMS or email is sent.');break;
+ case 'logout':confirm('Sign out?','You will go to the sign-in page; pets and demo content stay in this browser.',()=>{go('login');toast('Signed out');});break;
+ case 'switch-account':go('login');toast('Use the demo sign-in flow to switch accounts');break;
+ case 'like':{const p=state.posts.find(p=>p.id===id);if(p){p.liked=!p.liked;refresh();}break;}
+ case 'bookmark':{const p=state.posts.find(p=>p.id===id);if(p){p.saved=!p.saved;refresh(p.saved?'Saved to the local demo':'Bookmark removed');}break;}
+ case 'follow':state.following=state.following.includes(id)?state.following.filter(x=>x!==id):state.following.concat(id);refresh(state.following.includes(id)?'Followed · feed synced':'Unfollowed');break;
+ case 'post-next':view.postImage++;render(true);break;
+ case 'post-prev':{const p=state.posts.find(p=>p.id===param('id'));if(p)view.postImage=(view.postImage+postPhotos(p).length-1)%postPhotos(p).length;render(true);break;}
+ case 'share':modal('Share this demo post','Send the whole folder when sharing locally; this link only works on a computer that has the same prototype.',null,null,`<input aria-label="Local demo page URL" readonly style="width:100%;padding:10px;font-size:10px" value="${esc(location.href.split('#')[0]+'#post?id='+id)}">`);break;
+ case 'ai-suggest':sendAi(b.dataset.text);break;
+ case 'clear-ai':if(pet())confirm('Clear this pet’s chat?','Clears the local demo conversation for this pet only.',()=>{state.conversations[pet().id]=[];refresh('Conversation cleared');});break;
+ case 'delete-pet':confirm('Delete this pet?','This removes the demo pet, its health records and feeding plan, and unlinks demo devices. Use Reset demo to restore the samples.',()=>{state.pets=state.pets.filter(p=>p.id!==id);state.devices.forEach(d=>{if(d.pet===id)d.pet='';});state.records=state.records.filter(r=>r.pet!==id);state.geneticTests=(state.geneticTests||[]).filter(g=>g.pet!==id);state.vaccinations=(state.vaccinations||[]).filter(v=>v.pet!==id);state.feeding=state.feeding.filter(f=>f.pet!==id);delete state.conversations[id];delete state.fences[id];delete state.healthChecks[id];state.selected=state.pets[0]?.id||'';save();go('pets');toast('Pet deleted');});break;
+ case 'unbind-device':confirm('Unpair?','Removes the demo device from this browser only; real hardware is not affected.',()=>{state.devices=state.devices.filter(d=>d.id!==id);save();go('devices');toast('Device unpaired');});break;
+ case 'listen':case 'talk':case 'sound':{const d=state.devices.find(d=>d.id===view.camera);if(!d?.online){toast('Device is offline — restore the demo online state in device details');break;}if(a!=='sound'){view[a]=!view[a];render(true);}toast(a==='sound'?'Simulated playing a sound to the pet':`${a==='listen'?'Listen':'Talk'}${view[a]?'on':'off'} (button state only, no audio captured)`);break;}
+ case 'translation-type':if(view.recording){toast('Stop the current demo recording first');break;}if(v!=='Dog'&&v!=='Cat')break;view.translationType=v;view.translationDirection=(view.transDir||{})[v]||'pet-human';view.translationStage='idle';view.translationResult='';render(true);break;
+ case 'trans-flip':{if(view.recording){toast('Stop the current demo recording first');break;}const t=String(v);if(t!=='Dog'&&t!=='Cat')break;view.transDir=view.transDir||{};const nd=(view.transDir[t]||'pet-human')==='pet-human'?'human-pet':'pet-human';view.transDir[t]=nd;view.swapPulse=t;if(view.translationType===t)view.translationDirection=nd;view.translationStage='idle';view.translationResult='';render(true);setTimeout(()=>{view.swapPulse=null;},420);break;}
+ case 'record':{
+  if(!$('#modal-layer').hidden)break;
+  if(view.translationStage==='analyzing'||view.translationStage==='generating')break;
+  if(view.recording){
+   view.recording=false;view.translationStage='analyzing';render(true);
+   clearTimeout(operationTimer);
+   operationTimer=setTimeout(()=>{
+    view.translationStage='generating';render(true);
+    operationTimer=setTimeout(()=>{
+     const cat=view.translationType==='Cat',dir=view.translationDirection==='pet-human';
+     view.translationStage='done';
+     view.translationResult=dir?(cat?'I would like a warm quiet spot to curl up, and I want to stay close to you.':'I want to go for a walk! Let’s play together today.'):'Your tone came through gentle and reassuring, so your pet reads it as calm, safe and playful.';
+     state.translations.unshift({type:view.translationType,direction:dir?`${view.translationType} → Human`:`Human → ${view.translationType}`,text:view.translationResult,time:now()});
+     refresh('Translation ready');
+    },1150);
+   },950);
+   break;
+  }
+  if(!view.translationPerm){showTransPerm();break;}
+  view.recording=true;view.translationStage='recording';view.translationResult='';render(true);
+  break;
+ }
+ case 'translation-delete':{const i=Number(v);if(Number.isInteger(i)&&state.translations[i]){state.translations.splice(i,1);refresh('Translation deleted');}break;}
+ case 'translation-report':go('report');break;
+ case 'trans-demo':{view.translationStage=v==='nosound'?'nosound':v==='error'?'error':'idle';view.recording=false;view.translationResult='';go('translation');render(true);break;}
+ case 'translation-play':modal('Playback','Simulated pet voice plays here. This demo does not generate or play real audio.');break;
+ case 'translation-clear':confirm('Clear translation history?','This removes the demo translations stored in this browser.',()=>{state.translations=[];refresh('History cleared');});break;
+ case 'health-check':{if(!pet())break;clearInterval(operationTimer);const id=pet().id;view.healthProgress=10;render(true);operationTimer=setInterval(()=>{view.healthProgress=Math.min(100,view.healthProgress+15);if(view.healthProgress===100){clearInterval(operationTimer);state.healthChecks[id]=now();save();}render(true);if(view.healthProgress===100)toast('Demo health check complete · using sample data');},400);break;}
+ case 'trail-play':{clearInterval(operationTimer);const path=$('#trail-path'),point=$('#trail-point'),len=path.getTotalLength();let progress=0;operationTimer=setInterval(()=>{progress+=.02;const p=path.getPointAtLength(Math.min(1,progress)*len);point.setAttribute('cx',p.x);point.setAttribute('cy',p.y);if(progress>=1){clearInterval(operationTimer);toast('Demo trail playback finished');}},50);break;}
+ case 'download-report':downloadReport();break;
+ case 'delete-record':deleteBy('records',id,'Delete this local health record.');break;
+ case 'end-consult':confirm('End this demo consultation?','The conversation is saved; you cannot send more messages afterwards.',()=>{const c=state.consultations.find(c=>c.id===param('id'));if(c){c.ended=true;refresh('Consultation ended, record saved');}});break;
+ case 'read-notification':state.messagesRead=true;save();{const d=state.devices.find(d=>d.type==='camera');go(d?'device-detail?id='+d.id:'devices');}break;
+ case 'friend-request':if(state.friends.includes(id)){toast('Already a demo friend');break;}if(state.sentRequests.includes(id)){toast('Demo request sent, please do not resubmit');break;}state.sentRequests.push(id);refresh('Local demo request sent');break;
+ case 'accept-friend':case 'ignore-friend':{const r=state.requests.find(r=>r.author===id);if(r){r.status=a==='accept-friend'?'accepted':'ignored';if(a==='accept-friend'&&!state.friends.includes(id))state.friends.push(id);refresh(a==='accept-friend'?'Added as a demo friend':'Request ignored');}break;}
+ case 'firmware-check':{const d=state.devices.find(d=>d.id===id);if(!d?.online){toast('Device is offline — restore the demo online state first');break;}view.firmwareStage='available';render(true);toast('New version found:  1.3.0');break;}
+ case 'firmware-start':{const d=state.devices.find(d=>d.id===id);if(!d?.online){toast('Device is offline — restore the demo online state first');break;}view.firmwareStage='updating';view.firmwareProgress=0;clearInterval(operationTimer);operationTimer=setInterval(()=>{view.firmwareProgress+=10;if(view.firmwareProgress>=100){clearInterval(operationTimer);view.firmwareStage='done';state.firmware[id]='1.3.0';save();}render(true);if(view.firmwareStage==='done')toast('Firmware update complete');},300);render(true);break;}
+ case 'delete-feeding':deleteBy('feeding',id,'Delete this local feeding plan.');break;
+ case 'food-detail':{const f=state.foods.find(f=>f.id===id);if(f)modal(f.name,`Brand: ${f.brand}\nType: ${f.type}\nFoods can be picked in a feeding plan; no real product or order is involved.`);break;}
+ case 'delete-food':confirm('Delete this food?','Feeding plans stay; the food selection is cleared.',()=>{state.foods=state.foods.filter(f=>f.id!==id);state.feeding.forEach(f=>{if(f.food===id)f.food='';});refresh('Food deleted');});break;
+ case 'add-preset-food':{const [name,brand,type]=presetFoods[Number(b.dataset.index)];if(state.foods.some(f=>f.name===name)){toast('Already in my foods');break;}state.foods.push({id:uid(),name,brand,type});refresh('Added to my foods');break;}
+ /* Genetic Test & Vaccination */
+ case 'gt-scan':view.gtKit='MB-DNA-'+String(Date.now()).slice(-6);view.gtStep='info';render(true);break;
+ case 'gt-back':view.gtStep='scan';render(true);break;
+ case 'gt-track':{const g=state.geneticTests.find(x=>x.id===id);if(!g)break;
+   modal('Tracking number','','Save',()=>{
+    const car=document.querySelector('#gt-carrier'),inp=document.querySelector('#gt-track-input');
+    const carrier=String(car?.value||'').trim(),val=String(inp?.value||'').trim();
+    if(!val){toast('Enter a tracking number');return;}
+    g.carrier=carrier;g.tracking=val;save();render(true);toast('Tracking details saved');
+   },`<label class="field dev-field">Shipping company<input id="gt-carrier" value="${esc(g.carrier||'')}" maxlength="60" placeholder="e.g. FedEx, UPS, USPS"></label><label class="field dev-field">Tracking number<input id="gt-track-input" value="${esc(g.tracking||'')}" maxlength="60" placeholder="e.g. 9400 1102 3344 5566"></label>`);
+   const pel=document.querySelector('#modal-layer .modal');if(pel)pel.classList.add('gt-track-modal');
+   break;}
+ case 'gt-advance':{const g=state.geneticTests.find(x=>x.id===id);if(!g)break;
+   if(g.status==='submitted'){g.status='shipping';g.shippingAt=today();save();render(true);toast('Sample is in transit · add the tracking number');}
+   else if(g.status==='shipping'){g.status='testing';g.testingAt=today();save();render(true);toast('Sample is now being tested · status read-only');}
+   else if(g.status==='testing'){g.status='ready';g.reportAt=today();save();render(true);toast('Genetic test report is ready');}
+   break;}
+ case 'gt-toggle-track':{view.gtExpanded=view.gtExpanded||{};const cur=(view.gtExpanded[id]!==false);view.gtExpanded[id]=!cur;render(true);break;}
+ case 'vac-delete':deleteBy('vaccinations',id,'Delete this local vaccination record.');break;
+ }
+});
+document.addEventListener('change',async e=>{
+ const el=e.target,a=el.dataset.change;if(!a)return;
+ switch(a){
+ case 'pet-photo':{const i=Number(el.dataset.index),file=el.files&&el.files[0];if(!file)break;if(!/^image\//.test(file.type)){toast('Please choose an image file');break;}if(petPhotoSlots[i])URL.revokeObjectURL(petPhotoSlots[i]);petPhotoSlots[i]=URL.createObjectURL(file);const label=el.closest('.pe-slot');if(label){const c=label.querySelector('.pe-cam-ic');if(c)c.remove();let im=label.querySelector('.pe-slot-img');if(!im){im=document.createElement('img');im.className='pe-slot-img';label.appendChild(im);}im.src=petPhotoSlots[i];}toast('Photo '+PET_ANGLES[i][1]+' added');break;}
+ case 'bind-photo':{const i=Number(el.dataset.index),file=el.files&&el.files[0];if(!file)break;if(!/^image\//.test(file.type)){toast('Please choose an image file');break;}if(petPhotoSlots[i])URL.revokeObjectURL(petPhotoSlots[i]);petPhotoSlots[i]=URL.createObjectURL(file);const label=el.closest('.pe-slot');if(label){const c=label.querySelector('.pe-cam-ic');if(c)c.remove();let im=label.querySelector('.pe-slot-img');if(!im){im=document.createElement('img');im.className='pe-slot-img';label.appendChild(im);}im.src=petPhotoSlots[i];}toast('Photo '+PET_ANGLES[i][1]+' added');break;}
+ case 'select-pet':selectPet(el.value);refresh();break;
+ case 'gt-pet':view.gtPet=el.value||'';render(true);break;
+ case 'consult-pet':break;
+case 'pet-wiz-device':{
+ const w=wiz();w.deviceId=el.value||'';w.reassign=false;render(true);
+ const dev=state.devices.find(x=>x.id===w.deviceId);
+ w.scanType=dev?dev.type:'harness';
+ if(dev&&dev.pet&&dev.pet!==w.editId){
+  confirm('Change device owner?',dev.name+' is already linked to '+petName(dev.pet)+'. Change the owner to this pet?',()=>{const ww=wiz();ww.reassign=true;render(true);toast('Owner will be changed on save');});
+ }
+ break;
+}
+ case 'health-date':view.date=el.value||today();render(true);break;
+ case 'trajectory-date':view.date=el.value||today();render(true);break;
+ case 'device-online':{const d=state.devices.find(d=>d.id===el.dataset.id);if(d)d.online=el.checked;refresh(el.checked?'Device set to Online (demo)':'Device set to Offline (demo)');break;}
+ case 'device-pet':{const d=state.devices.find(d=>d.id===el.dataset.id);if(d)d.pet=el.value;refresh('Linked pet updated');break;}
+ case 'camera':view.camera=el.value;view.listen=false;view.talk=false;go('monitor?camera='+el.value);break;
+ case 'overlay':view.overlay=el.checked;render(true);break;
+  case 'lg-agree':view.lgAgreed=el.checked;if(el.checked){const box=$('#lg-agree-box');if(box)box.classList.remove('lg-warn');}break;
+ case 'notifications':state.notifications=el.checked;save();toast('Notification preference saved');break;
+ case 'language':state.language=el.value;save();toast('Language preference saved');break;
+ case 'firmware-device':view.firmwareStage='ready';view.firmwareProgress=0;go('firmware?id='+el.value);break;
+ case 'feeding-enabled':{const f=state.feeding.find(f=>f.id===el.dataset.id);if(f)f.enabled=el.checked;save();toast(el.checked?'Plan enabled (demo)':'Plan disabled (demo)');break;}
+ case 'upload':{
+  const f=el.closest('form');publishDraft={body:f.elements.body.value,tags:(publishDraft.tags||'')}; const files=[...el.files].slice(0,9),generation=++uploadGeneration;
+  if(files.some(f=>!/^image\/(png|jpeg|webp|gif)$/.test(f.type)||f.size>8*1024*1024)){toast('Choose PNG, JPG, WebP or GIF, up to 8 MB each');el.value='';break;}
+  const urls=files.map(file=>URL.createObjectURL(file));uploadReading=true;const submit=f.querySelector('[type=submit]');if(submit)submit.disabled=true;
+  try {await Promise.all(urls.map(src=>new Promise((resolve,reject)=>{const i=new Image();i.onload=resolve;i.onerror=reject;i.src=src;})));if(generation!==uploadGeneration){urls.forEach(u=>URL.revokeObjectURL(u));break;}pendingPhotos.forEach(u=>URL.revokeObjectURL(u));pendingPhotos=urls;const preview=$('#upload-preview');if(preview)preview.innerHTML=pendingPhotos.map(u=>img(u,'','Photo to publish')).join('');toast('Photos loaded for this session only');}catch(err){urls.forEach(u=>URL.revokeObjectURL(u));toast('Cannot read the image, please try another file');}finally{if(generation===uploadGeneration)uploadReading=false;if(submit)submit.disabled=false;}break;
+ }
+ }
+});
+document.addEventListener('input',e=>{const el=e.target;if(el.dataset.input==='radius'){const n=Number(el.value);$('#radius-label').textContent=n;$('#fence-zone').style.width=(n/2+70)+'px';$('#fence-zone').style.height=(n/2+70)+'px';}if(el.closest('[data-form="publish"]')){const f=el.closest('form');publishDraft={body:f.elements.body.value,tags:(publishDraft.tags||'')};const c=$('#pub-count');if(c)c.textContent=f.elements.body.value.length;}});
+document.addEventListener('click',e=>{const map=e.target.closest('#fence-map');if(!map)return;const r=map.getBoundingClientRect(),x=Math.max(15,Math.min(85,(e.clientX-r.left)/r.width*100)),y=Math.max(20,Math.min(80,(e.clientY-r.top)/r.height*100));map.dataset.x=x;map.dataset.y=y;$('#fence-zone').style.left=x+'%';$('#fence-zone').style.top=y+'%';$('#fence-pin').style.left=x+'%';$('#fence-pin').style.top=y+'%';});
+document.addEventListener('keydown',e=>{
+ if(!$('#modal-layer').hidden){if(e.key==='Escape'){closeModal();e.preventDefault();}if(e.key==='Tab'){const els=[...$('#modal-layer').querySelectorAll('button,a,input')];const first=els[0],last=els[els.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}}return;}
+ if(e.target.id==='fence-map'&&['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.key)){e.preventDefault();const map=e.target,f=state.fences[pet().id]||{x:50,y:50};let x=Number(map.dataset.x||f.x),y=Number(map.dataset.y||f.y);x+=e.key==='ArrowLeft'?-5:e.key==='ArrowRight'?5:0;y+=e.key==='ArrowUp'?-5:e.key==='ArrowDown'?5:0;x=Math.max(15,Math.min(85,x));y=Math.max(20,Math.min(80,y));map.dataset.x=x;map.dataset.y=y;['#fence-zone','#fence-pin'].forEach(s=>{$(s).style.left=x+'%';$(s).style.top=y+'%';});}
+});
+document.addEventListener('submit',e=>{
+ const f=e.target.closest('[data-form]');if(!f)return;e.preventDefault();const d=new FormData(f),s=k=>String(d.get(k)||'').trim(),error=t=>{f.querySelector('.form-error').textContent=t;},kind=f.dataset.form;
+ if(!f.reportValidity())return;
+ switch(kind){
+ case 'lg-login':{
+   if(!lgGate())break;
+   const acct=s('account'),code=s('code');
+   const ok=view.lgMode==='phone'?/^[\d\s()\-]{10,20}$/.test(acct):/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(acct);
+   if(!ok){error(view.lgMode==='phone'?'Enter a valid US mobile number.':'Enter a valid email address.');return;}
+   if(!/^\d{6}$/.test(code)){error('Enter the 6-digit verification code.');return;}
+   if(code!=='123456'){error('Demo verification code is 123456.');return;}
+  f.reset();go('device-bind');toast('Signed in (demo)');break;
+ }
+ case 'login':case 'register':case 'forgot':{
+  if(view.loginMode==='phone'&&!/^\+?[\d\s-]{6,20}$/.test(s('account'))){error('Enter a valid phone number, e.g. +1 415 555 0132.');return;}
+  if(view.loginMode==='email'&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s('account'))){error('Enter a valid email address.');return;}
+  if(s('password').length<6){error('Password must be at least 6 characters.');return;}
+  if(kind==='register'&&s('password')!==s('confirm')){error('The passwords do not match.');return;}
+  if(kind==='forgot'&&s('code')!=='123456'){error('The verification code is 123456.');return;}
+  f.reset();go(kind==='forgot'?'login':'device-bind');toast(kind==='forgot'?'Demo reset complete; no real password changed':kind==='register'?'Demo sign-up complete':'Signed in with the demo account');break;
+ }
+ case 'pet':{
+  if(!s('name')){error('Enter a pet name.');return;}
+  if(!Number.isFinite(Number(s('weight')))||Number(s('weight'))<=0){error('Enter a valid weight.');return;}
+  if(!param('id')&&Object.keys(petPhotoSlots).length<8){error('Please upload all 8 pet photos.');return;}
+  let p=state.pets.find(p=>p.id===param('id'));
+  if(!p){p={id:uid(),photo:'home_pet_coco.jpg',scene:'real_coco_sleep.jpg',status:'Resting now'};state.pets.push(p);}
+  Object.assign(p,{name:s('name'),type:s('type')||'Dog',breed:s('breed')||'Mixed breed',sex:s('sex'),weight:Number(s('weight')),age:s('age'),height:s('height'),emotional:s('emotional'),owner:s('owner'),contact:s('contact'),deviceId:s('deviceId'),photoCount:Object.keys(petPhotoSlots).length||8});
+  Object.keys(petPhotoSlots).forEach(k=>{URL.revokeObjectURL(petPhotoSlots[k]);delete petPhotoSlots[k];});
+  state.selected=p.id;save();go('pet-detail?id='+p.id);toast('Pet profile saved');break;
+ }
+ case 'device':{
+  if(!s('name')||!s('serial')){error('Please fill in the device name and serial.');return;}if(state.devices.some(x=>x.serial===s('serial'))){error('That demo serial already exists, please use another.');return;}
+  const item={id:uid(),name:s('name'),type:s('type'),serial:s('serial'),pet:s('pet'),online:true,battery:100};state.devices.push(item);save();go('device-detail?id='+item.id);toast('Demo device paired');break;
+ }
+ case 'fence':{const p=pet(),map=$('#fence-map'),old=state.fences[p.id]||{x:50,y:50};if(!s('name')){error('Please name the geofence.');return;}state.fences[p.id]={name:s('name'),radius:Number(s('radius')),enabled:d.has('enabled'),x:Number(map.dataset.x||old.x),y:Number(map.dataset.y||old.y)};refresh('Geofence saved (demo)');break;}
+ case 'checkin':if(!s('place')){error('Please enter a check-in place.');return;}state.checkins.unshift({pet:pet().id,place:s('place'),time:now()});refresh('Checked in (demo)');break;
+ case 'ai':if(s('message'))sendAi(s('message'));else error('Please enter a message.');break;
+ case 'comment':{const p=state.posts.find(p=>p.id===param('id'));if(p&&s('comment')){p.comments.push({name:state.profile.name,text:s('comment')});refresh('Comment added to the local demo');}else error('Please enter a comment.');break;}
+ case 'record':{
+  if(!s('name')){error('Please name the record.');return;}if(s('next')&&s('next')<s('date')){error('The next date cannot be earlier than the record date.');return;}
+  let r=state.records.find(r=>r.id===param('id'));if(!r){r={id:uid(),pet:pet().id};state.records.push(r);}Object.assign(r,{name:s('name'),date:s('date'),next:s('next'),note:s('note')});save();go('records');toast('Health record saved');break;
+ }
+ case 'consult-start':{
+  const p=state.pets.find(p=>p.id===s('pet'));if(!p){error('Please pick a pet first.');return;}const c={id:uid(),vet:param('id',vetsData[0].id),pet:p.id,petName:p.name,share:d.has('share'),time:now(),ended:false,messages:[{role:'assistant',text:`Hi, this is the consultation for ${p.name}. Tell us what you’d like to know.`}]};state.consultations.push(c);save();go('consult?id='+c.id);break;
+ }
+ case 'consult':{const c=state.consultations.find(c=>c.id===param('id'));if(c&&!c.ended&&s('message')){c.messages.push({role:'user',text:s('message')},{role:'assistant',text:`Noted your note on ${c.petName}. A professional vet should review the full picture before advising.${c.share?'Report sharing is enabled for this session.':'Report sharing is off for this session.'}`});refresh();$('#app-content').scrollTop=$('#app-content').scrollHeight;}else error('Please enter a message.');break;}
+ case 'chat':{const a=author(param('id'));if(!s('message')){error('Please enter a message.');return;}const msgs=state.chats[a.id]||(state.chats[a.id]=[{role:'assistant',text:'Hi! How is your pet doing? 🐾'}]);msgs.push({role:'user',text:s('message')},{role:'assistant',text:'Thanks for sharing! Wishing you and your little companion a lovely day. 🐾'});refresh();$('#app-content').scrollTop=$('#app-content').scrollHeight;break;}
+ case 'publish':{
+  if(uploadReading){error('Photos are still loading, please publish shortly.');return;}
+  if(!s('body')){error('Please write something for your post.');return;}const p={id:uid(),author:'me',body:s('body'),tags:[...new Set((publishDraft.tags||'').split(/[,\s]+/).map(t=>t.replace(/^#/,'')).filter(Boolean))].slice(0,8),photos:pendingPhotos.slice(0,9),likes:0,liked:false,saved:false,comments:[],time:'Just now'};
+  if(pendingPhotos.length){uploadedPhotos[p.id]=pendingPhotos;pendingPhotos=[];}state.posts.unshift(p);publishDraft={body:'',tags:''};view.feed='for-you';save();go('discover');toast('Posted to the local demo · your profile is updated');break;
+ }
+ case 'friend-search':view.friendSearch=s('keyword');render();break;
+ case 'cart':state.cart+=Number(s('quantity'));refresh('Added to cart · '+state.cart+' items');break;
+ case 'personal':if(!s('name')){error('Display name cannot be empty.');return;}state.profile={name:s('name'),location:s('location'),bio:s('bio')};save();go('profile');toast('Profile updated');break;
+ case 'password':if(s('password')!==s('confirm')){error('The new passwords do not match.');return;}if(s('password')===s('old')){error('The new password must differ from the current one.');return;}f.reset();modal('Demo change complete','The form is cleared; no real account or password was changed.');break;
+ case 'feedback':if(s('body').length<5){error('Please write at least 5 characters.');return;}state.feedback.push({type:s('type'),body:s('body'),contact:s('contact'),time:now()});refresh('Feedback saved locally; no ticket is sent');break;
+ case 'membership':state.member=true;refresh('Demo membership enabled; nothing is charged');break;
+ case 'feeding':{
+  if(!s('name')){error('Please name the plan.');return;}let f=state.feeding.find(f=>f.id===param('id'));if(!f){f={id:uid(),pet:pet().id,enabled:true};state.feeding.push(f);}Object.assign(f,{name:s('name'),time:s('time'),grams:Number(s('grams')),food:s('food')});save();go('feeding');toast('Feeding plan saved; no hardware command is sent');break;
+ }
+ case 'food':if(!s('name')||!s('brand')){error('Please fill in the food name and brand.');return;}state.foods.push({id:uid(),name:s('name'),brand:s('brand'),type:s('type')});save();go('foods');toast('Food saved');break;
+ case 'gt-info':{
+   if(!s('pet')){error('Pick a pet.');return;}
+   const p0=state.pets.find(x=>x.id===s('pet'))||pet();const kit=view.gtKit||'MB-DNA-'+String(Date.now()).slice(-6);
+   const rec={id:uid(),pet:s('pet'),kitId:kit,petInfo:{name:p0.name,type:s('type')||'Dog',breed:s('breed')||'Mixed breed',sex:s('sex'),birth:s('birth'),weight:Number(s('weight'))||p0.weight},status:'submitted',carrier:'',tracking:'',submittedAt:today(),shippingAt:'',testingAt:'',reportAt:''};
+   state.geneticTests.unshift(rec);view.gtStep='scan';view.gtKit='';view.gtPet='';save();go('genetic');toast('Genetic test created · status: Sample submitted');break;
+ }
+ case 'vaccine':{
+   if(!s('name')){error('Enter the vaccine name.');return;}
+   if(s('next')&&s('next')<s('date')){error('The next due date cannot be earlier than the administered date.');return;}
+   state.vaccinations.unshift({id:uid(),pet:pet().id,name:s('name'),date:s('date'),next:s('next'),dose:s('dose'),vet:s('vet'),note:s('note')});
+   save();go('vaccines');toast('Vaccination record saved');break;
+ }
+ }
+});
+function downloadReport(){const p=pet(),m=metrics();if(!p)return;const content=`<!doctype html><html lang="en"><meta charset="utf-8"><title>${esc(p.name)} · Health summary</title><style>body{font:16px/1.8 sans-serif;max-width:760px;margin:50px auto;padding:24px;color:#273b52}table{width:100%;border-collapse:collapse}td{padding:12px;border-bottom:1px solid #ddd}small{color:#7a8793}</style><h1>MoonBack · ${esc(p.name)} · health summary</h1><p>${esc(p.breed)} · ${p.weight} kg</p><p>Exported: ${esc(now())}</p><table>${Object.entries(metricInfo).map(([k,v])=>`<tr><td>${v[0]}</td><td>${m[k]} ${v[1]}</td></tr>`).join('')}</table><p><small>This HTML summary is exported from a local prototype. All metrics are samples, not a medical report.</small></p></html>`;const blob=new Blob([content],{type:'text/html;charset=utf-8'}),u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download='MoonBack-'+p.name.replace(/[^\p{L}\p{N}_-]/gu,'_')+'-health-summary.html';a.click();setTimeout(()=>URL.revokeObjectURL(u),10000);toast('Exported this pet’s HTML summary');}
+$('#page-picker').innerHTML=modules.map(([g,t])=>`<optgroup label="${t}">${docs.filter(d=>d.dataset.group===g).map(d=>`<option value="${d.dataset.page}">${esc(d.querySelector('h2').textContent)}</option>`).join('')}</optgroup>`).join('');
+$('#page-picker').addEventListener('change',e=>{const page=e.target.value,defaults={'pet-detail':pet()?.id,'device-detail':state.devices[0]?.id,post:state.posts[0]?.id,author:authors[0].id,consult:state.consultations.slice(-1)[0]?.id};go(defaults[page]?query(page,{id:defaults[page]}):page);});
+document.addEventListener('input',e=>{const el=e.target;if(el.name!=='comment')return;const f=el.closest('form'),b=f&&f.querySelector('.cmt-send');if(b)b.hidden=!String(el.value||'').trim();});
+document.addEventListener('input',e=>{const el=e.target;if(el.dataset.input!=='topic-input')return;const q=String(el.value||'').trim().replace(/^#/,'').toLowerCase();document.querySelectorAll('#app-content .topic-item').forEach(it=>{it.hidden=!!q&&!String(it.dataset.value).toLowerCase().includes(q);});});
+document.addEventListener('keydown',e=>{if(e.key!=='Enter')return;const el=e.target;if(el.dataset.input!=='topic-input')return;e.preventDefault();const v=String(el.value||'').trim().replace(/^#/,'');if(!v)return;const cur=String(publishDraft.tags||'').split(/[,\s]+/).filter(Boolean);if(!cur.includes(v))cur.push(v);publishDraft.tags=cur.join(' ');render(true);});
+window.addEventListener('hashchange',readRoute);
+document.addEventListener('input',e=>{const el=e.target;if(el.dataset.input!=='discover-search')return;const q=String(el.value||'').trim().toLowerCase();let shown=0;document.querySelectorAll('#app-content .ds-card').forEach(c=>{const hit=!q||String(c.dataset.search||'').includes(q);c.hidden=!hit;if(hit)shown++;});const note=$('#app-content .ds-no-result');if(note)note.hidden=q===''||shown>0;});
+if(!location.hash){try{history.replaceState(null,'','#home');}catch(e){location.hash='home';}}readRoute();
+})();

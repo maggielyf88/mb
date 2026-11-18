@@ -1,0 +1,562 @@
+[
+  [
+    "<p>展示作者故事图片及前后切换。</p>",
+    "<p>Shows author story images and previous/next switch.</p>"
+  ],
+  [
+    "<li>点击上一条／下一条切换故事，点击作者进入主页。</li>",
+    "<li>Tap previous / next to switch story, tap author to enter homepage.</li>"
+  ],
+  [
+    "<div class=\"callout\"><h3>Demo scope</h3><p>使用现有社区图片模拟故事，不包含真实视频播放。</p></div>",
+    "<div class=\"callout\"><h3>Demo scope</h3><p>Uses existing community images to simulate story, no real video playback.</p></div>"
+  ],
+  [
+    "<!-- ===== 话题聚合：修改以下文字即可 ===== -->",
+    "<!-- ===== Topic aggregation: Edit text below ===== -->"
+  ],
+  [
+    "<h2>话题聚合</h2>",
+    "<h2>Topic aggregation</h2>"
+  ],
+  [
+    "<p class=\"lead\">沿着一个话题继续浏览。</p>",
+    "<p class=\"lead\">Continue browsing along a topic.</p>"
+  ],
+  [
+    "<p>筛选带有所选话题的帖子。</p>",
+    "<p>Filters posts with selected topic.</p>"
+  ],
+  [
+    "<li>点击帖子进入详情，或通过发布入口添加带话题的内容。</li>",
+    "<li>Tap post to enter details, or add topic content via publish entry.</li>"
+  ],
+  [
+    "<div class=\"callout\"><h3>Demo scope</h3><p>话题和内容都来自本地演示社区。</p><p class=\"from-phone\">【手机框迁出】话题内容来自本地示例数据。</p></div>",
+    "<div class=\"callout\"><h3>Demo scope</h3><p>Topics and content both from local demo community.</p><p class=\"from-phone\">[Moved out of phone frame] Topic content from local sample data.</p></div>"
+  ],
+  [
+    "<!-- ===== 消息中心：修改以下文字即可 ===== -->",
+    "<!-- ===== Message center: Edit text below ===== -->"
+  ],
+  [
+    "<h2>消息中心</h2>",
+    "<h2>Message center</h2>"
+  ],
+  [
+    "<p class=\"lead\">将服务消息和私信放在一处。</p>",
+    "<p class=\"lead\">Put service messages and private messages in one place.</p>"
+  ],
+  [
+    "<p>展示设备提醒、社区消息、私信和好友申请。</p>",
+    "<p>Shows device reminders, community messages, private messages and friend requests.</p>"
+  ],
+  [
+    "<li>点击设备提醒标记已读并进入相关设备；点击私信进入聊天。</li>",
+    "<li>Tap device reminder to mark read and enter related device; tap private message to enter chat.</li>"
+  ],
+  [
+    "<li>通过好友申请入口接受申请，或搜索添加演示好友。</li>",
+    "<li>Accept request via friend request entry, or search to add demo friend.</li>"
+  ],
+  [
+    "<div class=\"callout\"><h3>Demo scope</h3><p>消息状态只在本地变化，不发送通知。</p></div>",
+    "<div class=\"callout\"><h3>Demo scope</h3><p>Message status changes locally only, no notifications sent.</p></div>"
+  ],
+  [
+    "<!-- ===== 私信会话：修改以下文字即可 ===== -->",
+    "<!-- ===== Private message session: Edit text below ===== -->"
+  ],
+  [
+    "<h2>私信会话</h2>",
+    "<h2>Private message session</h2>"
+  ],
+  [
+    "<p class=\"lead\">演示消息发送与回复。</p>",
+    "<p class=\"lead\">Demo message send and reply.</p>"
+  ],
+  [
+    "<p>展示与所选社区用户的本地聊天。</p>",
+    "<p>Shows local chat with selected community user.</p>"
+  ],
+  [
+    "<li>输入消息发送，查看演示回复，切换会话后保留各自内容。</li>",
+    "<li>Type message to send, view demo reply, content kept after session switch.</li>"
+  ],
+  [
+    "<div class=\"callout\"><h3>Demo scope</h3><p>不会向真实用户发送消息。</p><p class=\"from-phone\">【手机框迁出】私信会话为本地演示数据。</p></div>",
+    "<div class=\"callout\"><h3>Demo scope</h3><p>No messages sent to real users.</p><p class=\"from-phone\">[Moved out of phone frame] Private message session is local demo data.</p></div>"
+  ],
+  [
+    "<!-- ===== 好友与关注：修改以下文字即可 ===== -->",
+    "<!-- ===== Friends & following: Edit text below ===== -->"
+  ],
+  [
+    "<h2>好友与关注</h2>",
+    "<h2>Friends & following</h2>"
+  ],
+  [
+    "<p class=\"lead\">查看社交关系列表。</p>",
+    "<p class=\"lead\">View social relationship list.</p>"
+  ],
+  [
+    "<p>展示当前演示好友、关注或粉丝列表。</p>",
+    "<p>Shows current demo friends, following or followers list.</p>"
+  ],
+  [
+    "<li>进入作者主页、发送私信，或添加好友。</li>",
+    "<li>Enter author homepage, send private message, or add friend.</li>"
+  ],
+  [
+    "<div class=\"callout\"><h3>Demo scope</h3><p>列表由本地种子数据与演示操作组成。</p></div>",
+    "<div class=\"callout\"><h3>Demo scope</h3><p>List composed of local seed data and demo operations.</p></div>"
+  ],
+  [
+    "<!-- ===== 添加好友：修改以下文字即可 ===== -->",
+    "<!-- ===== Add friend: Edit text below ===== -->"
+  ],
+  [
+    "<h2>添加好友</h2>",
+    "<h2>Add friend</h2>"
+  ],
+  [
+    "<p class=\"lead\">搜索一个演示社区用户。</p>",
+    "<p class=\"lead\">Search a demo community user.</p>"
+  ],
+  [
+    "<p>通过昵称搜索本地社区用户，发送模拟申请。</p>",
+    "<p>Search local community users by nickname, send simulated application.</p>"
+  ],
+  [
+    "<li>输入名字或账号，查看匹配结果，点击申请后显示已申请。</li>",
+    "<li>Type name or account, view match results, after tap apply shows applied.</li>"
+  ],
+  [
+    "<div class=\"callout\"><h3>Demo scope</h3><p>不执行真实用户搜索，不发送外部申请。</p></div>",
+    "<div class=\"callout\"><h3>Demo scope</h3><p>No real user search executed, no external application sent.</p></div>"
+  ],
+  [
+    "<!-- ===== 好友申请：修改以下文字即可 ===== -->",
+    "<!-- ===== Friend requests: Edit text below ===== -->"
+  ],
+  [
+    "<h2>好友申请</h2>",
+    "<h2>Friend requests</h2>"
+  ],
+  [
+    "<p class=\"lead\">处理一条示例申请。</p>",
+    "<p class=\"lead\">Handle a sample request.</p>"
+  ],
+  [
+    "<p>展示本地好友申请与处理状态。</p>",
+    "<p>Shows local friend requests and processing status.</p>"
+  ],
+  [
+    "<li>接受申请后加入好友列表，或忽略申请。</li>",
+    "<li>After accept request, joins friend list; or ignore request.</li>"
+  ],
+  [
+    "<div class=\"callout\"><h3>Demo scope</h3><p>仅更新本地演示关系。</p></div>",
+    "<div class=\"callout\"><h3>Demo scope</h3><p>Only updates local demo relationships.</p></div>"
+  ],
+  [
+    "<!-- ===== 商城专区：修改以下文字即可 ===== -->",
+    "<!-- ===== Mall zone: Edit text below ===== -->"
+  ],
+  [
+    "<h2>商城专区</h2>",
+    "<h2>Mall zone</h2>"
+  ],
+  [
+    "<p class=\"lead\">查看商品与加入演示购物车。</p>",
+    "<p class=\"lead\">View products and join demo cart.</p>"
+  ],
+  [
+    "<p>以商品卡片展示食品、用品等内容。</p>",
+    "<p>Shows food, supplies etc. via product cards.</p>"
+  ],
+  [
+    "<li>选择商品查看详情；点击加入演示购物车，查看数量反馈。</li>",
+    "<li>Select product to view details; tap to join demo cart, view quantity feedback.</li>"
+  ],
+  [
+    "<div class=\"callout\"><h3>Demo scope</h3><p>没有真实订单、支付或物流。</p><p class=\"from-phone\">【手机框迁出】购物车与商品为示例，不产生真实订单。</p></div>",
+    "<div class=\"callout\"><h3>Demo scope</h3><p>No real order, payment or logistics.</p><p class=\"from-phone\">[Moved out of phone frame] Cart and products are sample, no real order generated.</p></div>"
+  ],
+  [
+    "<!-- ===== 商品详情：修改以下文字即可 ===== -->",
+    "<!-- ===== Product details: Edit text below ===== -->"
+  ],
+  [
+    "<h2>商品详情</h2>",
+    "<h2>Product details</h2>"
+  ],
+  [
+    "<p class=\"lead\">体验从浏览到加入购物车。</p>",
+    "<p class=\"lead\">Experience from browse to cart.</p>"
+  ],
+  [
+    "<p>展示单个商品介绍、价格和数量选择。</p>",
+    "<p>Shows single product intro, price and quantity selection.</p>"
+  ],
+  [
+    "<li>调整数量，加入演示购物车；返回商城查看总件数。</li>",
+    "<li>Adjust quantity, join demo cart; return to mall to view total count.</li>"
+  ],
+  [
+    "<div class=\"callout\"><h3>Demo scope</h3><p>价格为示例，不产生购买行为。</p><p class=\"from-phone\">【手机框迁出】商品与价格为示例，没有真实支付或物流。</p></div>",
+    "<div class=\"callout\"><h3>Demo scope</h3><p>Price is sample, no purchase behavior generated.</p><p class=\"from-phone\">[Moved out of phone frame] Product and price are sample, no real payment or logistics.</p></div>"
+  ],
+  [
+    "<!-- ===== 设置中心：修改以下文字即可 ===== -->",
+    "<!-- ===== Settings center: Edit text below ===== -->"
+  ],
+  [
+    "<h2>设置中心</h2>",
+    "<h2>Settings center</h2>"
+  ],
+  [
+    "<p class=\"lead\">管理资料、设备和演示偏好。</p>",
+    "<p class=\"lead\">Manage info, devices and demo preferences.</p>"
+  ],
+  [
+    "<p>聚合账号、设备、宠物、语言、升级、咨询记录和帮助。</p>",
+    "<p>Aggregates account, devices, pets, language, upgrade, consultation records and help.</p>"
+  ],
+  [
+    "<li>进入个人资料、宠物、设备、修改密码及固件升级。</li>",
+    "<li>Enter personal info, pets, devices, change password and firmware upgrade.</li>"
+  ],
+  [
+    "<li>切换演示通知和语言偏好，查看说明反馈；退出后进入模拟登录。</li>",
+    "<li>Switch demo notifications and language preference, view description feedback; after logout enter simulated login.</li>"
+  ],
+  [
+    "<div class=\"callout\"><h3>Demo scope</h3><p>偏好保存在本地；语言选择记录偏好并提示，不改变原型已有的中英混合界面。</p><p class=\"from-phone\">【手机框迁出】通知与语言偏好仅记录在当前浏览器；固件升级不会向设备发送指令。</p></div>",
+    "<div class=\"callout\"><h3>Demo scope</h3><p>Preferences saved locally; language choice records preference and hints, does not change existing Chinese-English mixed UI of prototype.</p><p class=\"from-phone\">[Moved out of phone frame] Notifications and language preference recorded in current browser only; firmware upgrade sends no commands to device.</p></div>"
+  ],
+  [
+    "<!-- ===== 编辑个人资料：修改以下文字即可 ===== -->",
+    "<!-- ===== Edit personal info: Edit text below ===== -->"
+  ],
+  [
+    "<h2>编辑个人资料</h2>",
+    "<h2>Edit personal info</h2>"
+  ],
+  [
+    "<p class=\"lead\">修改演示主页上的文字。</p>",
+    "<p class=\"lead\">Modify text on demo homepage.</p>"
+  ],
+  [
+    "<p>提供昵称、所在地和个人简介编辑。</p>",
+    "<p>Provides nickname, location and bio editing.</p>"
+  ],
+  [
+    "<li>填写并保存，返回主页后立即显示新内容。</li>",
+    "<li>Fill and save, new content shows immediately after returning to homepage.</li>"
+  ],
+  [
+    "<div class=\"callout\"><h3>Demo scope</h3><p>只修改当前浏览器的演示资料。</p></div>",
+    "<div class=\"callout\"><h3>Demo scope</h3><p>Only modifies demo info of current browser.</p></div>"
+  ],
+  [
+    "<!-- ===== 修改密码：修改以下文字即可 ===== -->",
+    "<!-- ===== Change password: Edit text below ===== -->"
+  ],
+  [
+    "<h2>修改密码</h2>",
+    "<h2>Change password</h2>"
+  ],
+  [
+    "<p class=\"lead\">展示校验和提交反馈。</p>",
+    "<p class=\"lead\">Shows validation and submit feedback.</p>"
+  ],
+  [
+    "<p>演示原密码、新密码与确认密码表单。</p>",
+    "<p>Demo original password, new password and confirm password form.</p>"
+  ],
+  [
+    "<li>填写至少 6 位的新密码，确认两次一致后提交。</li>",
+    "<li>Fill at least 6-char new password, submit after two entries match.</li>"
+  ],
+  [
+    "<div class=\"callout\"><h3>Demo scope</h3><p>不连接账号系统，不读取或保存真实密码。</p><p class=\"from-phone\">【手机框迁出】密码表单为本地演示，不修改真实账号密码。</p></div>",
+    "<div class=\"callout\"><h3>Demo scope</h3><p>No account system connection, no real password read or saved.</p><p class=\"from-phone\">[Moved out of phone frame] Password form is local demo, does not modify real account password.</p></div>"
+  ],
+  [
+    "<!-- ===== 固件升级：修改以下文字即可 ===== -->",
+    "<!-- ===== Firmware upgrade: Edit text below ===== -->"
+  ],
+  [
+    "<h2>固件升级</h2>",
+    "<h2>Firmware upgrade</h2>"
+  ],
+  [
+    "<p class=\"lead\">观看一次模拟升级过程。</p>",
+    "<p class=\"lead\">Watch a simulated upgrade process.</p>"
+  ],
+  [
+    "<p>选择演示设备，展示版本与进度。</p>",
+    "<p>Select demo device, show version and progress.</p>"
+  ],
+  [
+    "<li>点击检查更新，再开始升级；离线设备需先恢复模拟在线。</li>",
+    "<li>Tap check updates, then start upgrade; offline device needs to restore simulated online first.</li>"
+  ],
+  [
+    "<div class=\"callout\"><h3>Demo scope</h3><p>进度由本地计时器驱动，不发送硬件指令。</p><p class=\"from-phone\">【手机框迁出】固件升级为本地模拟，不会向设备发送指令；离开页面会中止未完成的进度。</p></div>",
+    "<div class=\"callout\"><h3>Demo scope</h3><p>Progress driven by local timer, no hardware commands sent.</p><p class=\"from-phone\">[Moved out of phone frame] Firmware upgrade is local simulation, no commands sent to device; leaving page aborts unfinished progress.</p></div>"
+  ],
+  [
+    "<!-- ===== 意见反馈：修改以下文字即可 ===== -->",
+    "<!-- ===== Feedback: Edit text below ===== -->"
+  ],
+  [
+    "<h2>意见反馈</h2>",
+    "<h2>Feedback</h2>"
+  ],
+  [
+    "<p class=\"lead\">展示问题填写与提交结果。</p>",
+    "<p class=\"lead\">Shows issue filling and submit result.</p>"
+  ],
+  [
+    "<p>提供反馈类型、详细内容和可选联系方式。</p>",
+    "<p>Provides feedback type, detailed content and optional contact.</p>"
+  ],
+  [
+    "<li>填写问题描述后提交，查看本地保存反馈。</li>",
+    "<li>Fill issue description and submit, view locally saved feedback.</li>"
+  ],
+  [
+    "<div class=\"callout\"><h3>Demo scope</h3><p>不会发送邮件或工单；联系方式仅保存在当前浏览器。</p></div>",
+    "<div class=\"callout\"><h3>Demo scope</h3><p>No email or ticket sent; contact info saved in current browser only.</p></div>"
+  ],
+  [
+    "<!-- ===== 联系我们：修改以下文字即可 ===== -->",
+    "<!-- ===== Contact us: Edit text below ===== -->"
+  ],
+  [
+    "<h2>联系我们</h2>",
+    "<h2>Contact us</h2>"
+  ],
+  [
+    "<p class=\"lead\">展示支持入口及本地反馈流程。</p>",
+    "<p class=\"lead\">Shows support entry and local feedback flow.</p>"
+  ],
+  [
+    "<p>提供说明文字和反馈入口。</p>",
+    "<p>Provides description text and feedback entry.</p>"
+  ],
+  [
+    "<li>点击意见反馈填写问题；查看帮助与关于页面。</li>",
+    "<li>Tap Feedback to fill issue; view Help and About pages.</li>"
+  ],
+  [
+    "<div class=\"callout\"><h3>Demo scope</h3><p>这是演示支持页面，不会拨号或发送邮件。</p><p class=\"from-phone\">【手机框迁出】支持页面为原型内容，不包含真实客服联系方式，不会拨号或发送邮件。</p></div>",
+    "<div class=\"callout\"><h3>Demo scope</h3><p>This is demo support page, no dial or email sent.</p><p class=\"from-phone\">[Moved out of phone frame] Support page is prototype content, no real customer service contact, no dial or email sent.</p></div>"
+  ],
+  [
+    "<!-- ===== 关于 MoonBack：修改以下文字即可 ===== -->",
+    "<!-- ===== About MoonBack: Edit text below ===== -->"
+  ],
+  [
+    "<h2>关于 MoonBack</h2>",
+    "<h2>About MoonBack</h2>"
+  ],
+  [
+    "<p class=\"lead\">了解原型与使用范围。</p>",
+    "<p class=\"lead\">Learn about prototype and usage scope.</p>"
+  ],
+  [
+    "<p>介绍 MoonBack 宠物健康平台和当前本地交互演示。</p>",
+    "<p>Introduces MoonBack pet health platform and current local interactive demo.</p>"
+  ],
+  [
+    "<li>查看版本、演示说明和协议页面。</li>",
+    "<li>View version, demo description and agreement pages.</li>"
+  ],
+  [
+    "<div class=\"callout\"><h3>Demo scope</h3><p>这里的交互原型用于评审和沟通，不代表产品已经上线。</p><p class=\"from-phone\">【手机框迁出】关于页的技术实现说明（HTML/CSS/JS、右侧说明编辑方式、Android Demo 来源）已迁至本说明区。</p></div>",
+    "<div class=\"callout\"><h3>Demo scope</h3><p>Interactive prototype here for review and communication, does not mean product is launched.</p><p class=\"from-phone\">[Moved out of phone frame] About page technical implementation notes (HTML/CSS/JS, right-side description editing method, Android Demo source) moved to this description area.</p></div>"
+  ],
+  [
+    "<!-- ===== 用户协议与隐私说明：修改以下文字即可 ===== -->",
+    "<!-- ===== User agreement & privacy: Edit text below ===== -->"
+  ],
+  [
+    "<h2>用户协议与隐私说明</h2>",
+    "<h2>User agreement & privacy</h2>"
+  ],
+  [
+    "<p class=\"lead\">说明本地原型如何处理数据。</p>",
+    "<p class=\"lead\">Explains how local demo handles data.</p>"
+  ],
+  [
+    "<p>此处是演示说明，供体验账号流程时查看。</p>",
+    "<p>This is demo description for viewing during account flow experience.</p>"
+  ],
+  [
+    "<li>阅读本地存储、重置和模拟范围说明，然后返回。</li>",
+    "<li>Read local storage, reset and simulation scope description, then return.</li>"
+  ],
+  [
+    "<div class=\"callout\"><h3>Demo scope</h3><p>不是正式法律协议；不采集真实凭据，不连接外部服务。</p><p class=\"from-phone\">【手机框迁出】原「本地演示说明」全文（数据保存在 localStorage、重置演示方式、图片与网络说明、请勿填写真实凭据）已迁至本说明区与手机框下方演示提示。</p></div>",
+    "<div class=\"callout\"><h3>Demo scope</h3><p>Not formal legal agreement; no real credentials collected, no external service connection.</p><p class=\"from-phone\">[Moved out of phone frame] Original \"Local demo description\" full text (data saved in localStorage, reset demo method, image and network description, please do not fill real credentials) moved to this description area and phone frame bottom demo hint.</p></div>"
+  ],
+  [
+    "<!-- ===== 会员中心：修改以下文字即可 ===== -->",
+    "<!-- ===== Membership center: Edit text below ===== -->"
+  ],
+  [
+    "<h2>会员中心</h2>",
+    "<h2>Membership center</h2>"
+  ],
+  [
+    "<p class=\"lead\">演示权益与方案选择。</p>",
+    "<p class=\"lead\">Demo benefits and plan selection.</p>"
+  ],
+  [
+    "<p>展示会员方案、权益和选择状态。</p>",
+    "<p>Shows membership plans, benefits and selection status.</p>"
+  ],
+  [
+    "<li>切换月度／年度方案，点击体验权益更新演示会员标识。</li>",
+    "<li>Switch monthly / annual plan, tap to experience benefits and update demo membership tag.</li>"
+  ],
+  [
+    "<div class=\"callout\"><h3>Demo scope</h3><p>无真实付费订阅，不产生扣款。</p><p class=\"from-phone\">【手机框迁出】会员方案与权益为示例，没有真实订阅或扣款。</p></div>",
+    "<div class=\"callout\"><h3>Demo scope</h3><p>No real paid subscription, no charge incurred.</p><p class=\"from-phone\">[Moved out of phone frame] Membership plans and benefits are sample, no real subscription or charge.</p></div>"
+  ],
+  [
+    "<!-- ===== 喂养计划：修改以下文字即可 ===== -->",
+    "<!-- ===== Feeding plan: Edit text below ===== -->"
+  ],
+  [
+    "<h2>喂养计划</h2>",
+    "<h2>Feeding plan</h2>"
+  ],
+  [
+    "<p class=\"lead\">为宠物安排演示喂养时间。</p>",
+    "<p class=\"lead\">Arrange demo feeding time for pet.</p>"
+  ],
+  [
+    "<p>按当前宠物展示喂养计划、时间、份量和启用状态。</p>",
+    "<p>Shows feeding plan, time, portion and enabled status by current pet.</p>"
+  ],
+  [
+    "<li>添加、编辑或删除计划，切换启用状态。</li>",
+    "<li>Add, edit or delete plan, switch enabled status.</li>"
+  ],
+  [
+    "<li>进入我的食品，管理或选择食品。</li>",
+    "<li>Enter My foods to manage or select food.</li>"
+  ],
+  [
+    "<div class=\"callout\"><h3>Demo scope</h3><p>不会向设备下发指令；计划保存在本地。</p></div>",
+    "<div class=\"callout\"><h3>Demo scope</h3><p>No commands sent to device; plan saved locally.</p></div>"
+  ],
+  [
+    "<!-- ===== 新增／编辑喂养计划：修改以下文字即可 ===== -->",
+    "<!-- ===== Add/edit feeding plan: Edit text below ===== -->"
+  ],
+  [
+    "<h2>新增／编辑喂养计划</h2>",
+    "<h2>Add / Edit feeding plan</h2>"
+  ],
+  [
+    "<p class=\"lead\">安排一次定时喂养。</p>",
+    "<p class=\"lead\">Schedule a timed feeding.</p>"
+  ],
+  [
+    "<p>填写计划名称、时间、份量与食品。</p>",
+    "<p>Fill plan name, time, portion and food.</p>"
+  ],
+  [
+    "<li>填写时间和大于零的份量，选择食品后保存。</li>",
+    "<li>Fill time and portion greater than zero, select food and save.</li>"
+  ],
+  [
+    "<div class=\"callout\"><h3>Demo scope</h3><p>仅创建本地示例计划。</p></div>",
+    "<div class=\"callout\"><h3>Demo scope</h3><p>Only creates local sample plan.</p></div>"
+  ],
+  [
+    "<!-- ===== 我的食品：修改以下文字即可 ===== -->",
+    "<!-- ===== My foods: Edit text below ===== -->"
+  ],
+  [
+    "<h2>我的食品</h2>",
+    "<h2>My foods</h2>"
+  ],
+  [
+    "<p class=\"lead\">管理常用宠物食品。</p>",
+    "<p class=\"lead\">Manage commonly used pet food.</p>"
+  ],
+  [
+    "<p>展示已有食品与添加入口。</p>",
+    "<p>Shows existing foods and add entry.</p>"
+  ],
+  [
+    "<li>查看食品详情，选择预设食品或添加自定义食品，删除前确认。</li>",
+    "<li>View food details, select preset food or add custom food, confirm before delete.</li>"
+  ],
+  [
+    "<div class=\"callout\"><h3>Demo scope</h3><p>仅用于演示喂养计划选择，不关联商城订单。</p></div>",
+    "<div class=\"callout\"><h3>Demo scope</h3><p>Only for demo feeding plan selection, no mall order association.</p></div>"
+  ],
+  [
+    "<!-- ===== 选择食品：修改以下文字即可 ===== -->",
+    "<!-- ===== Select food: Edit text below ===== -->"
+  ],
+  [
+    "<h2>选择食品</h2>",
+    "<h2>Select food</h2>"
+  ],
+  [
+    "<p class=\"lead\">从预设食品中加入收藏。</p>",
+    "<p class=\"lead\">Add to favorites from preset foods.</p>"
+  ],
+  [
+    "<p>提供几种本地预设宠物食品。</p>",
+    "<p>Provides several local preset pet foods.</p>"
+  ],
+  [
+    "<li>点击添加后加入我的食品；已添加的食品显示对应状态。</li>",
+    "<li>Tap add to join My foods; added food shows corresponding status.</li>"
+  ],
+  [
+    "<div class=\"callout\"><h3>Demo scope</h3><p>不购买商品，也不获取外部商品数据。</p></div>",
+    "<div class=\"callout\"><h3>Demo scope</h3><p>No product purchase, no external product data fetched.</p></div>"
+  ],
+  [
+    "<!-- ===== 添加食品：修改以下文字即可 ===== -->",
+    "<!-- ===== Add food: Edit text below ===== -->"
+  ],
+  [
+    "<h2>添加食品</h2>",
+    "<h2>Add food</h2>"
+  ],
+  [
+    "<p class=\"lead\">填写一条自定义食品资料。</p>",
+    "<p class=\"lead\">Fill in a custom food record.</p>"
+  ],
+  [
+    "<p>提供食品名称、品牌及适用宠物类型。</p>",
+    "<p>Provides food name, brand and applicable pet type.</p>"
+  ],
+  [
+    "<li>填写名称与品牌后保存，随后可在喂养计划中选择。</li>",
+    "<li>Fill name and brand and save, then can be selected in feeding plan.</li>"
+  ],
+  [
+    "<div class=\"callout\"><h3>Demo scope</h3><p>数据仅在本地保存。</p></div>",
+    "<div class=\"callout\"><h3>Demo scope</h3><p>Data saved locally only.</p></div>"
+  ],
+  [
+    "<!-- =================== 右侧功能说明编辑区结束 =================== -->",
+    "<!-- =================== Right-side feature description editing area end =================== -->"
+  ],
+  [
+    "MISS: ' + old[:90])\n    else:\n        t = t.replace(old, new)\n        count += n\n        print('{:4d}x  {}'.format(n, old[:60]))\n\nwith open('index.html",
+    "w', encoding='utf-8"
+  ]
+]

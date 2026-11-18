@@ -5,7 +5,7 @@ const $ = s => document.querySelector(s);
 const esc = v => String(v == null ? '' : v).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const paths = {
  star:'M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z',
- home:'M3 10 12 3l9 7v10h-6v-7H9v7H3z',health:'M3 12h4l3-7 4 14 3-7h4',ai:'M5 9 4 3l6 3h4l6-3-1 6a8 8 0 1 1-14 0M8 12h1m6 0h1m-6 4q2 2 4 0',discover:'M20 12a8 8 0 1 1-8-8m0 4a4 4 0 1 0 4 4m-4 0 9-9m-5 0h5v5',profile:'M8 7a4 4 0 1 0 8 0 4 4 0 1 0-8 0M4 21v-3a8 6 0 0 1 16 0v3',back:'m14 5-7 7 7 7',arrow:'m9 5 7 7-7 7',plus:'M12 4v16M4 12h16',bell:'M5 17h14l-2-4V9a5 5 0 0 0-10 0v4l-2 4m5 3h4',camera:'M3 7h12v13H3zM15 11l6-4v13l-6-4M6 4h6',mic:'M9 6a3 3 0 0 1 6 0v6a3 3 0 0 1-6 0V6m-3 5v1a6 6 0 0 0 12 0v-1m-6 7v4m-3 0h6',paw:'M9 12q3-4 6 0l3 5q0 4-6 2-6 2-6-2zM5 7a1.5 2 0 1 0 0 .1M10 4a1.5 2 0 1 0 0 .1M15 4a1.5 2 0 1 0 0 .1M20 7a1.5 2 0 1 0 0 .1',settings:'m9 3-1 3-3 1-2 3 2 2-1 3 2 3 3-1 3 3 3-3 3 1 2-3-1-3 2-2-2-3-3-1-1-3zM9 12a3 3 0 1 0 6 0 3 3 0 1 0-6 0',heart:'M12 21 3 12C-3 3 9 0 12 7c3-7 15-4 9 5z',comment:'M21 11a9 8 0 0 1-13 7l-6 3 2-6a9 8 0 1 1 17-4',bookmark:'M6 3h12v18l-6-4-6 4z',send:'M3 3l18 8-8 3-3 8-7-19m0 0 10 11',moon:'M19 15A8 8 0 0 1 9 5a8 8 0 1 0 10 10',chart:'M4 20V10h4v10m2 0V6h4v14m2 0V2h4v18M2 20h20',device:'M7 3h10v18H7zM10 17h4',fence:'m12 3 8 6-3 11H7L4 9zM12 3v4M4 9l4 2m9 0 3-2',food:'M5 8h14l-2 12H7zM3 8h18M9 4h6',check:'m5 12 4 4L20 5',logout:'M9 4H4v16h5m4-13 5 5-5 5m-5-5h13',crown:'m3 6 5 5 4-7 4 7 5-5-3 14H6z',volume:'M3 9h5l5-5v16l-5-5H3zM16 8q4 4 0 8m3-11q7 7 0 14',play:'m8 4 12 8-12 8z',trash:'M4 6h16M9 6V3h6v3M6 6l1 15h10l1-15M10 10v7m4-7v7',edit:'m4 16 12-12 4 4L8 20l-5 1zM14 6l4 4',pin:'M12 22S4 14 4 9a8 8 0 1 1 16 0c0 5-8 13-8 13M9 9a3 3 0 1 0 6 0 3 3 0 1 0-6 0',lock:'M5 10h14v11H5zM8 10V6a4 4 0 0 1 8 0v4',search:'M10 3a7 7 0 1 0 0 14 7 7 0 1 0 0-14m5 12 6 6',share:'M12 16V2m-5 5 5-5 5 5M5 11H3v10h18V11h-2',refresh:'M20 7a9 9 0 1 0 1 9M20 2v6h-6',info:'M12 3a9 9 0 1 0 0 18 9 9 0 1 0 0-18m0 7v7m0-11v1',mail:'M3 5h18v14H3zM3 5l9 7 9-7',clock:'M12 3a9 9 0 1 0 0 18 9 9 0 1 0 0-18m0 4v6l4 2',close:'m5 5 14 14M19 5 5 19',alert:'M12 2 1 21h22zM12 8v6M12 16v1'
+ home:'M3 10 12 3l9 7v10h-6v-7H9v7H3z',health:'M3 12h4l3-7 4 14 3-7h4',ai:'M5 9 4 3l6 3h4l6-3-1 6a8 8 0 1 1-14 0M8 12h1m6 0h1m-6 4q2 2 4 0',discover:'M20 12a8 8 0 1 1-8-8m0 4a4 4 0 1 0 4 4m-4 0 9-9m-5 0h5v5',profile:'M8 7a4 4 0 1 0 8 0 4 4 0 1 0-8 0M4 21v-3a8 6 0 0 1 16 0v3',back:'m14 5-7 7 7 7',arrow:'m9 5 7 7-7 7',plus:'M12 4v16M4 12h16',bell:'M5 17h14l-2-4V9a5 5 0 0 0-10 0v4l-2 4m5 3h4',camera:'M3 7h12v13H3zM15 11l6-4v13l-6-4M6 4h6',mic:'M9 6a3 3 0 0 1 6 0v6a3 3 0 0 1-6 0V6m-3 5v1a6 6 0 0 0 12 0v-1m-6 7v4m-3 0h6',paw:'M9 12q3-4 6 0l3 5q0 4-6 2-6 2-6-2zM5 7a1.5 2 0 1 0 0 .1M10 4a1.5 2 0 1 0 0 .1M15 4a1.5 2 0 1 0 0 .1M20 7a1.5 2 0 1 0 0 .1',settings:'m9 3-1 3-3 1-2 3 2 2-1 3 2 3 3-1 3 3 3-3 3 1 2-3-1-3 2-2-2-3-3-1-1-3zM9 12a3 3 0 1 0 6 0 3 3 0 1 0-6 0',heart:'M12 21 3 12C-3 3 9 0 12 7c3-7 15-4 9 5z',comment:'M21 11a9 8 0 0 1-13 7l-6 3 2-6a9 8 0 1 1 17-4',bookmark:'M6 3h12v18l-6-4-6 4z',send:'M3 3l18 8-8 3-3 8-7-19m0 0 10 11',moon:'M19 15A8 8 0 0 1 9 5a8 8 0 1 0 10 10',chart:'M4 20V10h4v10m2 0V6h4v14m2 0V2h4v18M2 20h20',device:'M7 3h10v18H7zM10 17h4',fence:'m12 3 8 6-3 11H7L4 9zM12 3v4M4 9l4 2m9 0 3-2',food:'M5 8h14l-2 12H7zM3 8h18M9 4h6',check:'m5 12 4 4L20 5',logout:'M9 4H4v16h5m4-13 5 5-5 5m-5-5h13',crown:'m3 6 5 5 4-7 4 7 5-5-3 14H6z',volume:'M3 9h5l5-5v16l-5-5H3zM16 8q4 4 0 8m3-11q7 7 0 14',play:'m8 4 12 8-12 8z',trash:'M4 6h16M9 6V3h6v3M6 6l1 15h10l1-15M10 10v7m4-7v7',edit:'m4 16 12-12 4 4L8 20l-5 1zM14 6l4 4',pin:'M12 22S4 14 4 9a8 8 0 1 1 16 0c0 5-8 13-8 13M9 9a3 3 0 1 0 6 0 3 3 0 1 0-6 0',lock:'M5 10h14v11H5zM8 10V6a4 4 0 0 1 8 0v4',search:'M10 3a7 7 0 1 0 0 14 7 7 0 1 0 0-14m5 12 6 6',share:'M12 16V2m-5 5 5-5 5 5M5 11H3v10h18V11h-2',refresh:'M20 7a9 9 0 1 0 1 9M20 2v6h-6',info:'M12 3a9 9 0 1 0 0 18 9 9 0 1 0 0-18m0 7v7m0-11v1',mail:'M3 5h18v14H3zM3 5l9 7 9-7',clock:'M12 3a9 9 0 1 0 0 18 9 9 0 1 0 0-18m0 4v6l4 2',close:'m5 5 14 14M19 5 5 19',alert:'M12 2 1 21h22zM12 8v6M12 16v1',dna:'M4 3c0 6 16 6 16 12S4 21 4 21M20 3C20 9 4 9 4 15s16 6 16 6M7 6h10M7 12h10M7 18h10',syringe:'M18 2l4 4M19.5 3.5l-1 1M17 5L5 17l-2 4 4-2 12-12M13 5l4 4M10 8l4 4M7 11l4 4M3 21l2-2',truck:'M3 6h11v10H3zM14 9h4l3 3v4h-7zM7 20a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM18 20a2 2 0 1 0 0-4 2 2 0 0 0 0 4z',vial:'M9 3h6M10 3v7l-5 9a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-5-9V3M8 15h8',calcheck:'M4 6h16v15H4zM4 10h16M8 3v5M16 3v5m-6 9 2 2 4-4'
 };
 const icon = n => `<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="${paths[n] || paths.info}"/></svg>`;
 const FACES={
@@ -30,11 +30,11 @@ const row = (label,route,ico='arrow',sub='') => `<button class="list-row" data-g
 const uid = () => 'id'+Date.now().toString(36)+(++sequence).toString(36);
 let sequence=0;
 const authors = [
- {id:'sophie',name:'sophie.andduke',location:'San Francisco',avatar:'ins_a1.png',bio:'Little paws, big adventures. 🐾',photo:'ins_p1.jpg'},
- {id:'oliver',name:'oliver.the.cat',location:'Los Angeles',avatar:'ins_a2.png',bio:'Slow afternoons & a curious cat.',photo:'ins_p2.jpg'},
- {id:'luna',name:'luna.daily',location:'Seattle',avatar:'ins_a3.png',bio:'Collecting happy moments with Luna.',photo:'ins_p3.jpg'},
- {id:'max',name:'max.and.me',location:'Portland',avatar:'ins_a4.png',bio:'Every day is a good day for a walk.',photo:'ins_p4.jpg'},
- {id:'coco',name:'coco.adventures',location:'San Diego',avatar:'ins_a5.png',bio:'Life is better together.',photo:'ins_p5.jpg'}
+ {id:'sophie',name:'sophie.andduke',location:'San Francisco',followers:328,friends:12,avatar:'ins_a1.png',bio:'Little paws, big adventures. 🐾',photo:'ins_p1.jpg'},
+ {id:'oliver',name:'oliver.the.cat',location:'Los Angeles',followers:512,friends:24,avatar:'ins_a2.png',bio:'Slow afternoons & a curious cat.',photo:'ins_p2.jpg'},
+ {id:'luna',name:'luna.daily',location:'Seattle',followers:186,friends:8,avatar:'ins_a3.png',bio:'Collecting happy moments with Luna.',photo:'ins_p3.jpg'},
+ {id:'max',name:'max.and.me',location:'Portland',followers:94,friends:5,avatar:'ins_a4.png',bio:'Every day is a good day for a walk.',photo:'ins_p4.jpg'},
+ {id:'coco',name:'coco.adventures',location:'San Diego',followers:267,friends:17,avatar:'ins_a5.png',bio:'Life is better together.',photo:'ins_p5.jpg'}
 ];
 const discoverChips=[['for-you','For You'],['following','Following'],['Health','Health'],['Training','Training'],['Nutrition','Nutrition'],['Care','Care']];
 const discoverSub=['He always ends up on my pillow when I am up late...','A new favorite spot by the window, every single afternoon.','Weekend adventures with this little explorer.','Our daily walk went a little longer than usual today.','Happiness comes with four little paws.','A little sunshine with Lucky after breakfast.','Milo and his favorite window again.','Coco is ready for a new adventure.'];
@@ -65,13 +65,19 @@ const seed = () => ({version:1,selected:'lucky',profile:{name:'Kevin',location:'
  {id:'house',name:'Smart Dog House',type:'house',pet:'lucky',online:true,battery:86,serial:'001'},
  {id:'harness2',name:'Smart Dog Harness',type:'harness',pet:'milo',online:true,battery:74,serial:'001'}
  ],
- posts:authors.map((a,i)=>({id:'post'+i,author:a.id,body:['A quiet afternoon with my best friend. Every little moment matters. 🐾','Milo found a new favorite spot by the window. ☀️','Weekend adventures with this little explorer.','Our daily walk, a little longer today. 🌿','Happiness comes with four little paws.'][i],photos:[a.photo,'ins_p'+(i+2)+'.jpg'],tags:['PetLife',i%2?'CatLife':'DailyWalk'],likes:124+i*17,liked:false,saved:false,comments:[{name:'Kevin',text:'So lovely! 🐾'}],time:'Today'})).concat([0,1,2].map((i)=>({id:'my-post'+i,author:'me',body:['A little sunshine with Lucky. 🐾','Milo and his favorite window.','Coco is ready for a new adventure.'][i],photos:[['ins_p6.jpg','ins_p7.jpg','real_coco_sleep.jpg'][i]],tags:['PetLife'],likes:12+i*8,liked:false,saved:false,comments:[],time:'Yesterday'}))),following:['sophie','luna'],friends:['sophie'],requests:[{author:'oliver',status:'pending'}],sentRequests:[],messagesRead:false,
- conversations:{},chats:{},consultations:[],records:[{id:'rec1',pet:'lucky',name:'Rabies vaccine',date:'2026-06-03',next:'2027-06-03',note:'Annual vaccination (sample)'}],
+ posts:authors.map((a,i)=>({id:'post'+i,author:a.id,body:['A quiet afternoon with my best friend. Every little moment matters. 🐾','Milo found a new favorite spot by the window. ☀️','Weekend adventures with this little explorer.','Our daily walk, a little longer today. 🌿','Happiness comes with four little paws.'][i],photos:[a.photo,'ins_p'+(i+2)+'.jpg'],tags:['PetLife',i%2?'CatLife':'DailyWalk'],likes:124+i*17,liked:false,saved:false,comments:[{name:'Kevin',text:'So lovely! 🐾'}],time:'Today'})).concat([0,1,2].map((i)=>({id:'my-post'+i,author:'me',body:['A little sunshine with Lucky. 🐾','Milo and his favorite window.','Coco is ready for a new adventure.'][i],photos:[['ins_p6.jpg','ins_p7.jpg','real_coco_sleep.jpg'][i]],tags:['PetLife'],likes:12+i*8,liked:false,saved:false,comments:[],time:'Yesterday'})).concat([
+ {id:'op1',author:'oliver',body:'Morning sunbeam, right on schedule. ☀️',photos:['ins_p5.jpg'],tags:['PetLife','Cute'],likes:96,liked:false,saved:false,comments:[{name:'sophie.andduke',text:'That light is perfect!'}],time:'2 days ago'},
+ {id:'op2',author:'oliver',body:'He claimed the new cushion before I could even sit down.',photos:['ins_p6.jpg','ins_p7.jpg'],tags:['Funny','PetLife'],likes:213,liked:false,saved:false,comments:[],time:'3 days ago'},
+ {id:'op3',author:'oliver',body:'Leaf season means extra sniffs on every walk. 🍂',photos:['lucky_b1.jpg'],tags:['DailyWalk'],likes:168,liked:false,saved:false,comments:[{name:'max.and.me',text:'Same here, every single leaf.'}],time:'4 days ago'},
+ {id:'op4',author:'oliver',body:'Waiting by the window for the mailman again.',photos:['ins_p4.jpg','real_lucky_rest.jpg'],tags:['Funny'],likes:74,liked:false,saved:false,comments:[],time:'5 days ago'},
+ {id:'op5',author:'oliver',body:'Nap time is serious business.',photos:['coco_b2.jpg','milo_b.jpg'],tags:['PetLife','Cute'],likes:302,liked:false,saved:false,comments:[{name:'luna.daily',text:'Wish I could sleep like that.'}],time:'1 week ago'}
+])),following:['sophie','luna'],friends:['sophie'],requests:[{author:'oliver',status:'pending'}],sentRequests:[],messagesRead:false,
+ conversations:{},chats:{},consultations:[],records:[{id:'rec1',pet:'lucky',name:'Rabies vaccine',date:'2026-06-03',next:'2027-06-03',note:'Annual vaccination (sample)'}],geneticTests:[{id:'gt1',pet:'lucky',kitId:'MB-DNA-240618',petInfo:{name:'Lucky',type:'Dog',breed:'Golden Retriever',sex:'Male',birth:'2023-06-03',weight:28},status:'ready',carrier:'FedEx',tracking:'9400 1102 3344 5566',submittedAt:'2026-10-12',shippingAt:'2026-10-14',testingAt:'2026-10-15',reportAt:'2026-10-29'},{id:'gt2',pet:'lucky',kitId:'MB-DNA-251102',petInfo:{name:'Lucky',type:'Dog',breed:'Golden Retriever',sex:'Male',birth:'2023-06-03',weight:28},status:'submitted',carrier:'',tracking:'',submittedAt:'2026-11-14',shippingAt:'',testingAt:'',reportAt:''},{id:'gt3',pet:'milo',kitId:'MB-DNA-251020',petInfo:{name:'Milo',type:'Dog',breed:'Labrador Retriever',sex:'Male',birth:'2024-03-10',weight:28},status:'testing',carrier:'UPS',tracking:'9400 1102 8899 0011',submittedAt:'2026-11-02',shippingAt:'2026-11-04',testingAt:'2026-11-06',reportAt:''}],vaccinations:[{id:'vac1',pet:'lucky',name:'Rabies',date:'2026-06-03',next:'2027-06-03',dose:'1 mL',vet:'Sunset Animal Clinic',note:'Annual vaccination'},{id:'vac2',pet:'lucky',name:'DHPP (Distemper, Hepatitis, Parvovirus, Parainfluenza)',date:'2026-04-18',next:'2027-04-18',dose:'1 mL',vet:'Sunset Animal Clinic',note:'Annual booster'},{id:'vac3',pet:'lucky',name:'Bordetella (Kennel Cough)',date:'2026-08-21',next:'2026-12-21',dose:'1 mL',vet:'Sunset Animal Clinic',note:'Every 6-12 months'},{id:'vac4',pet:'milo',name:'Rabies',date:'2026-02-11',next:'2027-02-11',dose:'1 mL',vet:'Bay Pet Care',note:'Annual vaccination'}],
  foods:[{id:'food1',name:'Daily Balance',brand:'MoonBack',type:'Dog'},{id:'food2',name:'Indoor Cat',brand:'Nature Care',type:'Cat'}],feeding:[{id:'feed1',pet:'lucky',name:'Breakfast',time:'08:00',grams:90,food:'food1',enabled:true},{id:'feed2',pet:'milo',name:'Dinner',time:'18:30',grams:45,food:'food2',enabled:true}],fences:{},checkins:[],translations:[],feedback:[],member:false,cart:0,notifications:true,language:'Follow demo',firmware:{},healthChecks:{},emptyMode:false
 });
 const STORE='moonback-interactive-offline-v1';
 let storageAvailable=true,state;
-try { const raw=JSON.parse(localStorage.getItem(STORE)||'null'); state=raw&&raw.version===1&&Array.isArray(raw.pets)&&Array.isArray(raw.devices)&&Array.isArray(raw.posts)?Object.assign(seed(),raw):seed(); state.devices=(state.devices||[]).filter(d=>d.type==='harness'||d.type==='house'); if(!state.devices.length||state.devAssign!==2){state.devices=seed().devices;state.devAssign=2;(state.pets||[]).forEach(p=>{const c=seed().pets.find(x=>x.id===p.id);if(c&&(p.breed==='British Shorthair'||p.breed==='Bichon Frise'))Object.assign(p,{type:c.type,breed:c.breed,weight:c.weight,status:c.status,scene:c.scene,anomalies:c.anomalies});});} } catch(e){state=seed();storageAvailable=false;}normalizeState(state);try{localStorage.setItem(STORE,JSON.stringify(state));}catch(e){}
+try { const raw=JSON.parse(localStorage.getItem(STORE)||'null'); state=raw&&raw.version===1&&Array.isArray(raw.pets)&&Array.isArray(raw.devices)&&Array.isArray(raw.posts)?Object.assign(seed(),raw):seed(); state.devices=(state.devices||[]).filter(d=>d.type==='harness'||d.type==='house'); if(!state.devices.length||state.devAssign!==2){state.devices=seed().devices;state.devAssign=2;(state.pets||[]).forEach(p=>{const c=seed().pets.find(x=>x.id===p.id);if(c&&(p.breed==='British Shorthair'||p.breed==='Bichon Frise'))Object.assign(p,{type:c.type,breed:c.breed,weight:c.weight,status:c.status,scene:c.scene,anomalies:c.anomalies});});} } catch(e){state=seed();storageAvailable=false;}{const sp=seed().posts.filter(x=>!state.posts.some(p=>p&&p.id===x.id));if(sp.length)state.posts.push(...sp);}normalizeState(state);try{localStorage.setItem(STORE,JSON.stringify(state));}catch(e){}
 function save(){try{localStorage.setItem(STORE,JSON.stringify(state));}catch(e){storageAvailable=false;$('#preview-state').textContent='● Session mode · refresh may reset';}}
 function normalizeState(s){
  const base=seed(),rawPosts=Array.isArray(s.posts)?s.posts:null;
@@ -84,19 +90,20 @@ function normalizeState(s){
   comments:Array.isArray(p.comments)?p.comments:[],time:p.time||'Today'
  });});
  if(!s.posts.length)s.posts=base.posts;
- ['following','friends','requests','sentRequests','pets','devices','records','feeding','feedback','consultations','translations','checkins'].forEach(k=>{if(!Array.isArray(s[k]))s[k]=base[k]||[];});
+ ['following','friends','requests','sentRequests','pets','devices','records','geneticTests','vaccinations','feeding','feedback','consultations','translations','checkins'].forEach(k=>{if(!Array.isArray(s[k]))s[k]=base[k]||[];});
  if(!s.profile||typeof s.profile!=='object')s.profile=base.profile;
  ['conversations','chats','fences','firmware','healthChecks'].forEach(k=>{if(!s[k]||typeof s[k]!=='object'||Array.isArray(s[k]))s[k]=base[k]||{};});
+ (s.geneticTests||[]).forEach(g=>{if(g.unseen===undefined)g.unseen=true;if(g.carrier===undefined)g.carrier='';if(g.shippingAt===undefined)g.shippingAt=(g.status==='testing'||g.status==='ready')?(g.testingAt||g.submittedAt||''):(g.status==='shipping'?(g.submittedAt||''):'');});
  return s;
 }
 
 const uploadedPhotos={}; let pendingPhotos=[],uploadGeneration=0,uploadReading=false,publishDraft={body:'',tags:''};
 let current={page:'home',params:new URLSearchParams()},previousHash='',toastTimer,operationTimer,modalCallback,modalFocus;
-let view={topicPanelOpen:false,discoverTopic:'',lgStep:'buttons',lgMode:'email',lgAgreed:false,lgCooldownUntil:0,devPick:'harness',feed:'for-you',profileTab:'posts',deviceFilter:'all',range:'today',date:'2026-10-29',loginMode:'phone',translationDirection:'pet-human',translationType:'Dog',recording:false,translationResult:'',listen:false,talk:false,overlay:false,camera:'cam',firmwareStage:'ready',firmwareProgress:0,healthProgress:0,postImage:0,storyIndex:0,friendSearch:'',fenceRadius:150};
+let view={topicPanelOpen:false,discoverTopic:'',lgStep:'buttons',lgMode:'email',lgAgreed:false,lgCooldownUntil:0,devPick:'harness',feed:'for-you',profileTab:'posts',deviceFilter:'all',range:'today',date:'2026-10-29',loginMode:'phone',translationDirection:'pet-human',translationType:'Dog',recording:false,translationResult:'',listen:false,talk:false,overlay:false,camera:'cam',firmwareStage:'ready',firmwareProgress:0,healthProgress:0,postImage:0,storyIndex:0,friendSearch:'',fenceRadius:150,gtStep:'scan',gtKit:'',gtVet:'',gtPet:'',gtExpanded:{}};
 let discoverSlidesTimer=null;
 function startDiscoverSlides(){
  clearInterval(discoverSlidesTimer);discoverSlidesTimer=null;
- if(current.page!=='discover')return;
+ if(!['discover','author'].includes(current.page))return;
  const media=[...document.querySelectorAll('#app-content .ds-media[data-slides]')].filter(m=>{try{return JSON.parse(m.dataset.slides).length>1;}catch(e){return false;}});
  if(!media.length)return;
  discoverSlidesTimer=setInterval(()=>{
@@ -115,7 +122,7 @@ const docs=[...document.querySelectorAll('.doc-page')];
 const docMap=Object.fromEntries(docs.map(e=>[e.dataset.page,e]));
 const modules=[['login','Account','lock'],['home','Home','home'],['monitor','Live care','camera'],['health','Health','health'],['ai','AI Butler','ai'],['discover','Discover','discover'],['profile','Profile','profile']];
 const moduleName=g=>(modules.find(x=>x[0]===g)||['','Home'])[1];
-const titles={home:'',health:'Health Analysis',ai:'AI Butler',discover:'Discover',profile:'User profile',monitor:'Remote care',login:'',register:'Create account',forgot:'Reset password',pets:'My pets','pet-edit':'Add Pet','pet-detail':'Pet profile',devices:'All Devices','device-add':'Add device','device-detail':'Device details',translation:'Pet Language Translator',fence:'Geofence',trajectory:'Location history',checkin:'Check-in',metric:'Health details',report:'Professional report',records:'Health records','record-edit':'Health record',vets:'Online vets','vet-detail':'Vet profile',consult:'Consultation','consult-history':'Consultations',post:'Post',author:'User profile',publish:'Create a post',story:'Stories',topic:'Topic',messages:'Messages',chat:'Chat',friends:'Connections','friend-add':'Add friend','friend-requests':'Friend requests',mall:'Pet shop',product:'Product',settings:'Settings',personal:'Edit profile',password:'Change password',firmware:'Firmware update',feedback:'Feedback',contact:'Contact us',about:'About MoonBack',agreement:'Terms & privacy',membership:'MoonBack Plus',feeding:'Feeding plan','feeding-edit':'Feeding plan',foods:'My foods','food-add':'Add food','food-select':'Select food'};
+const titles={home:'',health:'Health Analysis',ai:'AI Butler',discover:'Discover',profile:'User profile',monitor:'Remote care',login:'',register:'Create account',forgot:'Reset password',pets:'My pets','pet-edit':'Add Pet','pet-detail':'Pet profile',devices:'All Devices','device-add':'Add device','device-detail':'Device details',translation:'Pet Language Translator',fence:'Geofence',trajectory:'Location history',checkin:'Check-in',metric:'Health details',report:'Professional report',records:'Health records','record-edit':'Health record',vets:'Online vets','vet-detail':'Vet profile',consult:'Consultation','consult-history':'Consultations',post:'Post',author:'User profile',publish:'Create a post',story:'Stories',topic:'Topic',messages:'Messages',chat:'Chat',friends:'Connections','friend-add':'Add friend','friend-requests':'Friend requests',mall:'Pet shop',product:'Product',settings:'Settings',personal:'Edit profile',password:'Change password',firmware:'Firmware update',feedback:'Feedback',contact:'Contact us',about:'About MoonBack',agreement:'Terms & privacy',membership:'MoonBack Plus',feeding:'Feeding plan','feeding-edit':'Feeding plan',foods:'My foods','food-add':'Add food','food-select':'Select food',genetic:'Genetic Test','genetic-new':'New Genetic Test','genetic-report':'Genetic Test Report',vaccines:'Vaccination Records','vaccine-add':'Add vaccination record','device-bind':'Bind a device'};
 Object.assign(titles,{privacy:'Privacy Policy',terms:'Terms of Service'});
 const pet=()=>state.pets.find(p=>p.id===state.selected)||state.pets[0]||null;
 const petName=id=>(state.pets.find(p=>p.id===id)||{}).name||'Unlinked';
@@ -124,7 +131,7 @@ const param=(name,def='')=>current.params.get(name)||def;
 const query=(page,params={})=>page+(Object.keys(params).length?'?'+new URLSearchParams(params).toString():'');
 function go(route){closeModal();if(!route)return;if(location.hash.slice(1)===route){readRoute();return;}try{history.pushState({mb:true},'','#'+route);}catch(e){try{location.hash=route;}catch(e2){}}readRoute();}
 function back(){if(history.state&&history.state.mb){history.back();}else go(docMap[current.page].dataset.group);}
-function selectPet(id){if(id==='all'||state.pets.some(p=>p.id===id)){state.selected=id;save();}}
+function selectPet(id){if(view.aiAttach&&view.aiAttach.url)URL.revokeObjectURL(view.aiAttach.url);view.aiAttach=null;view.aiMenu=false;view.aiPetMenu=false;if(id==='all'||state.pets.some(p=>p.id===id)){state.selected=id;save();}}
 function needPet(){return pet()?null:empty('No pets yet','Add a pet first, then try this feature.','pet-edit','Add pet');}
 function relatedDevices(){return state.devices.filter(d=>state.selected==='all'||!d.pet||d.pet===pet()?.id);}
 function metrics(){const n=pet()?.id==='milo'?1:pet()?.id==='coco'?2:0,week=view.range==='week',dateFactor=view.range==='date'?(Number(view.date.replace(/-/g,''))%7):0;return {steps:[5462,3210,4820][n]+(week?980:dateFactor*97),sleep:[8.5,12.2,9.1][n]+(week?.4:dateFactor/10),heart:[98,125,105][n]+(week?-4:dateFactor),temp:[38.5,38.3,38.6][n],breath:[22,25,24][n],hrv:[42,38,45][n],bowel:[2,1,2][n],activity:[2.5,1.8,2.2][n]};}
@@ -175,56 +182,163 @@ function showHarnessSpec(){
   save();toast('Smart Dog Harness added · report interval '+interval+'s');render(true);
  },harnessSpecHtml());tidyDeviceModal();
 }
-const FA_QUICK={"dog": {"vb": "0 0 576 512", "d": "M298.06,224,448,277.55V496a16,16,0,0,1-16,16H368a16,16,0,0,1-16-16V384H192V496a16,16,0,0,1-16,16H112a16,16,0,0,1-16-16V282.09C58.84,268.84,32,233.66,32,192a32,32,0,0,1,64,0,32.06,32.06,0,0,0,32,32ZM544,112v32a64,64,0,0,1-64,64H448v35.58L320,197.87V48c0-14.25,17.22-21.39,27.31-11.31L374.59,64h53.63c10.91,0,23.75,7.92,28.62,17.69L464,96h64A16,16,0,0,1,544,112Zm-112,0a16,16,0,1,0-16,16A16,16,0,0,0,432,112Z"}, "video": {"vb": "0 0 576 512", "d": "M336.2 64H47.8C21.4 64 0 85.4 0 111.8v288.4C0 426.6 21.4 448 47.8 448h288.4c26.4 0 47.8-21.4 47.8-47.8V111.8c0-26.4-21.4-47.8-47.8-47.8zm189.4 37.7L416 177.3v157.4l109.6 75.5c21.2 14.6 50.4-.3 50.4-25.8V127.5c0-25.4-29.1-40.4-50.4-25.8z"}, "microphone": {"vb": "0 0 352 512", "d": "M176 352c53.02 0 96-42.98 96-96V96c0-53.02-42.98-96-96-96S80 42.98 80 96v160c0 53.02 42.98 96 96 96zm160-160h-16c-8.84 0-16 7.16-16 16v48c0 74.8-64.49 134.82-140.79 127.38C96.71 376.89 48 317.11 48 250.3V208c0-8.84-7.16-16-16-16H16c-8.84 0-16 7.16-16 16v40.16c0 89.64 63.97 169.55 152 181.69V464H96c-8.84 0-16 7.16-16 16v16c0 8.84 7.16 16 16 16h160c8.84 0 16-7.16 16-16v-16c0-8.84-7.16-16-16-16h-56v-33.77C285.71 418.47 352 344.9 352 256v-48c0-8.84-7.16-16-16-16z"}, "heartbeat": {"vb": "0 0 512 512", "d": "M320.2 243.8l-49.7 99.4c-6 12.1-23.4 11.7-28.9-.6l-56.9-126.3-30 71.7H60.6l182.5 186.5c7.1 7.3 18.6 7.3 25.7 0L451.4 288H342.3l-22.1-44.2zM473.7 73.9l-2.4-2.5c-51.5-52.6-135.8-52.6-187.4 0L256 100l-27.9-28.5c-51.5-52.7-135.9-52.7-187.4 0l-2.4 2.4C-10.4 123.7-12.5 203 31 256h102.4l35.9-86.2c5.4-12.9 23.6-13.2 29.4-.4l58.2 129.3 49-97.9c5.9-11.8 22.7-11.8 28.6 0l27.6 55.2H481c43.5-53 41.4-132.3-7.3-182.1z"}};
+const FA_QUICK={"dog": {"vb": "0 0 576 512", "d": "M298.06,224,448,277.55V496a16,16,0,0,1-16,16H368a16,16,0,0,1-16-16V384H192V496a16,16,0,0,1-16,16H112a16,16,0,0,1-16-16V282.09C58.84,268.84,32,233.66,32,192a32,32,0,0,1,64,0,32.06,32.06,0,0,0,32,32ZM544,112v32a64,64,0,0,1-64,64H448v35.58L320,197.87V48c0-14.25,17.22-21.39,27.31-11.31L374.59,64h53.63c10.91,0,23.75,7.92,28.62,17.69L464,96h64A16,16,0,0,1,544,112Zm-112,0a16,16,0,1,0-16,16A16,16,0,0,0,432,112Z"}, "video": {"vb": "0 0 576 512", "d": "M336.2 64H47.8C21.4 64 0 85.4 0 111.8v288.4C0 426.6 21.4 448 47.8 448h288.4c26.4 0 47.8-21.4 47.8-47.8V111.8c0-26.4-21.4-47.8-47.8-47.8zm189.4 37.7L416 177.3v157.4l109.6 75.5c21.2 14.6 50.4-.3 50.4-25.8V127.5c0-25.4-29.1-40.4-50.4-25.8z"}, "microphone": {"vb": "0 0 352 512", "d": "M176 352c53.02 0 96-42.98 96-96V96c0-53.02-42.98-96-96-96S80 42.98 80 96v160c0 53.02 42.98 96 96 96zm160-160h-16c-8.84 0-16 7.16-16 16v48c0 74.8-64.49 134.82-140.79 127.38C96.71 376.89 48 317.11 48 250.3V208c0-8.84-7.16-16-16-16H16c-8.84 0-16 7.16-16 16v40.16c0 89.64 63.97 169.55 152 181.69V464H96c-8.84 0-16 7.16-16 16v16c0 8.84 7.16 16 16 16h160c8.84 0 16-7.16 16-16v-16c0-8.84-7.16-16-16-16h-56v-33.77C285.71 418.47 352 344.9 352 256v-48c0-8.84-7.16-16-16-16z"}, "heartbeat": {"vb": "0 0 512 512", "d": "M320.2 243.8l-49.7 99.4c-6 12.1-23.4 11.7-28.9-.6l-56.9-126.3-30 71.7H60.6l182.5 186.5c7.1 7.3 18.6 7.3 25.7 0L451.4 288H342.3l-22.1-44.2zM473.7 73.9l-2.4-2.5c-51.5-52.6-135.8-52.6-187.4 0L256 100l-27.9-28.5c-51.5-52.7-135.9-52.7-187.4 0l-2.4 2.4C-10.4 123.7-12.5 203 31 256h102.4l35.9-86.2c5.4-12.9 23.6-13.2 29.4-.4l58.2 129.3 49-97.9c5.9-11.8 22.7-11.8 28.6 0l27.6 55.2H481c43.5-53 41.4-132.3-7.3-182.1z"},"device": {"vb": "0 0 24 24", "d": "M7 3h10v18H7zM10 17h4"},"dna": {"vb": "0 0 24 24", "d": "M4 3c0 6 16 6 16 12S4 21 4 21M20 3C20 9 4 9 4 15s16 6 16 6M7 6h10M7 12h10M7 18h10"}};
 const faIcon=k=>`<svg class="quick-fa" viewBox="${FA_QUICK[k].vb}" aria-hidden="true"><path d="${FA_QUICK[k].d}"/></svg>`;
 function home(){const p=pet(),m=metrics();const sleepText=Math.floor(m.sleep)+'h'+String(Math.round((m.sleep%1)*60)).padStart(2,'0')+'min';const sceneMap={'real_lucky_rest.jpg':'home_status_lucky.gif','real_lucky_rest.png':'home_status_lucky.gif','real_milo_play.jpg':'home_status_milo.gif','real_coco_sleep.jpg':'home_status_coco.gif'};const scene=p?(sceneMap[p.scene]||p.scene):'home_status_lucky.gif';return `${petStrip()}${!p?empty('Welcome to MoonBack','Add a pet and a device to start using MoonBack.','pet-edit','Add your first pet'):state.selected==='all'?`<div class="card soft"><h3 class="serif">All your little companions</h3><p class="muted">${state.pets.length} pets · ${state.devices.filter(d=>d.online).length} devices online</p></div>${state.pets.map(p=>`<button class="device-card" data-action="pet" data-id="${esc(p.id)}">${img(p.photo,'',p.name)}<span class="info"><b>${esc(p.name)}</b><small>${esc(p.status)} · View today’s status</small></span>${icon('arrow')}</button>`).join('')}`:`${anomalyBanner(p)}<div class="hero hero-v2"><div class="hero-left"><h3>${esc(p.name)} is<br>doing well today!</h3><span class="badge">${icon('moon')}${esc(p.status)}</span><div class="hero-metrics">${navButton('metric?kind=activity',`Activity<b>Normal</b>`,'')}${navButton('metric?kind=sleep',`Sleep<b>${sleepText}</b>`,'')}</div></div><div class="hero-pet-photo">${img(scene,'',p.name)}</div>${navButton('ai?prompt=sleep',`${icon('chart')} Sleep was slightly longer than usual. ${icon('arrow')}`,'insight')}</div>`}
-${heading('Quick Access','quick','See All').replace('class="section-heading"','class="section-heading home-section"').replace('data-go="quick"','data-action="quick"')}<div class="quick-grid">${[['pets','My Pet','dog'],['monitor','Real-time<br>Monitoring','video'],['translation','Voice<br>Translation','microphone'],['health','Health','heartbeat']].map(([r,t,i])=>navButton(r,`<span class="quick-bubble">${faIcon(i)}</span><span>${t}</span>`,'quick')).join('')}</div>
+${heading('Quick Access').replace('class="section-heading"','class="section-heading home-section"')}<div class="quick-grid">${[['pets','My Pet','dog'],['translation','Voice Translation','microphone'],['devices','Device','device'],['genetic','Genetic Test','dna']].map(([r,t,i])=>navButton(r,`<span class="quick-bubble">${faIcon(i)}</span><span>${t}</span>`,'quick')).join('')}</div>
 ${heading('Focus on '+esc(p?p.name:'Lucky')).replace('class="section-heading"','class="section-heading home-section"')}<button class="focus-card" data-go="ai?prompt=sleep"><span class="focus-dot">!</span><span>Sleep was slightly longer than usual.</span>${icon('arrow')}</button>
 ${heading(state.selected==='all'?'All Devices':(p?esc(p.name)+'’s Devices':'My Devices'),'devices','All Devices').replace('class="section-heading"','class="section-heading home-section"')}${relatedDevices().map(deviceCard).join('')||empty('No devices yet','Add a device to start tracking.')}${action('add-device-menu',icon('plus')+' Add Device','secondary')}`;}
 function health(){if(needPet())return needPet();const p=pet(),m=metrics();return `<div class="health-pet">${img(p.photo,'',p.name)}<div class="grow"><select aria-label="Current pet on Health" data-change="select-pet">${petOptions().map(([v,t])=>`<option value="${esc(v)}" ${v===p.id?'selected':''}>${esc(t)}</option>`).join('')}</select><small class="muted">${esc(p.breed)} · ${esc(p.weight)} kg</small></div>${ib('clock','Health records','data-go="records"')}</div>${navButton('report','View Professional Health Report','primary')}${rangeSelect()}<div class="row between"><h3 class="serif">${view.range==='week'?'This week’s overview':'Today’s situation'}</h3><span class="muted">${view.range==='date'?esc(view.date):'Today'}</span></div><div class="metric-grid">${['steps','activity','heart','sleep'].map(k=>{const w=k==='heart'&&p.abnormal;return navButton('metric?kind='+k,`<span class="label">${metricInfo[k][0]}</span><b>${typeof m[k]==='number'&&!Number.isInteger(m[k])?m[k].toFixed(1):m[k].toLocaleString()} <small>${metricInfo[k][1]}</small></b><span class="badge${w?' warn':''}">${w?'High':'Normal'}</span>`,'metric'+(w?' warn':''));}).join('')}</div>${heading('Vital signs')}<div class="card">${['temp','breath','hrv'].map(k=>`<button class="list-row" data-go="metric?kind=${k}"><span class="grow">${metricInfo[k][0]}</span><b>${m[k]} <small>${metricInfo[k][1]}</small></b>${icon('arrow')}</button>`).join('')}</div><div class="card"><div class="row between"><h4>Daily steps</h4>${navButton('metric?kind=steps','View details')}</div>${chart('steps')}</div><div class="card"><div class="row between"><h4>Sleep</h4><span class="badge">Good</span></div>${chart('sleep')}</div>${navButton('metric?kind=bowel','Toileting · Digestion','secondary')}${action('health-check',icon('health')+' Start health check','primary')}${view.healthProgress?`<div class="progress"><span style="width:${view.healthProgress}%"></span></div><p class="muted">${view.healthProgress===100?'Check complete · all metrics updated':'Checking… '+view.healthProgress+'%'}</p>`:''}${state.healthChecks[p.id]?`<p class="muted">Last check: ${esc(state.healthChecks[p.id])}</p>`:''}${navButton('records','Health & vaccine records','secondary')}${navButton('vets','Consult a vet','secondary')}`;}
-function ai(){if(needPet())return needPet();const p=pet(),msgs=state.conversations[p.id]||[];return `<div class="chat-pet">${img(p.photo,'avatar',p.name)}<span>Current pet</span><select aria-label="Current pet for AI" data-change="select-pet">${petOptions().map(([v,t])=>`<option value="${esc(v)}" ${v===p.id?'selected':''}>${esc(t)}</option>`).join('')}</select>${icon('paw')}</div><div class="chat-messages"><div class="bubble">Hi, I’m the AI butler for ${esc(p.name)}. ${param('prompt')==='sleep'?'Sleep was a little longer than recent days — let’s look at the trend together.':'Ask me about today’s activity, sleep or health.'}</div>${msgs.map(m=>`<div class="bubble ${m.role==='user'?'user':''}">${esc(m.text)}</div>`).join('')}</div><div class="suggestions">${['How is today going?','Why the longer sleep?','Any care suggestions?'].map(t=>action('ai-suggest',esc(t),'',`data-text="${esc(t)}"`)).join('')}</div>${form('ai',`<div class="chat-compose"><input name="message" maxlength="500" placeholder="Ask about ${esc(p.name)}…" aria-label="AI message" required><button type="submit" aria-label="Send AI message">${icon('send')}</button></div>`,'').replace('<button class="primary" type="submit"></button>','')}<div class="row between">${navButton('health','View health data')}${navButton('report','Full report')}${navButton('vets','Online vets')}</div>`;}
+function ai(){
+ if(needPet())return needPet();
+ const p=pet(),msgs=state.conversations[p.id]||[],at=view.aiAttach;
+ const bubble=m=>`<div class="bubble ${m.role==='user'?'user':''}">${m.photo?`<img class="bubble-img" src="${esc(m.photo)}" alt="Attached photo">`:''}${m.attach?`<span class="bubble-chip">${icon('dna')}${esc(m.attach)}</span>`:''}${m.text?esc(m.text):''}</div>`;
+ const chip=at?`<div class="ai-chip-row"><span class="ai-chip">${at.kind==='photo'?`<img src="${esc(at.url)}" alt="">`:icon('dna')}<span class="ai-chip-tx">${esc(at.label)}</span><button type="button" class="ai-chip-x" data-action="ai-detach" aria-label="Remove attachment">${icon('close')}</button></span></div>`:'';
+ const reps=(state.geneticTests||[]).filter(g=>g.pet===p.id&&g.status==='ready').sort((a,b)=>String(b.reportAt||'').localeCompare(String(a.reportAt||'')));
+ const rep=reps[0];
+ const menu=view.aiMenu?`<div class="ai-attach-menu" role="menu" aria-label="Add to your question">${action('ai-pick-photo',`${icon('camera')}<span class="ai-attach-tx">Photos<small>Pick an image</small></span>`,'ai-attach-item')}${rep?action('ai-attach-report',`${icon('dna')}<span class="ai-attach-tx">DNA report<small>Kit ${esc(rep.kitId)}</small></span>`,'ai-attach-item',`data-id="${rep.id}"`):`<button type="button" class="ai-attach-item" disabled aria-disabled="true">${icon('dna')}<span class="ai-attach-tx">DNA report<small>No report ready yet</small></span></button>`}</div>`:'';
+ return `<div class="cp-bar"><div class="chat-pet chat-pet-ai">${img(p.photo,'avatar',p.name)}<button type="button" class="cp-name" data-action="ai-pet" aria-haspopup="menu" aria-expanded="${view.aiPetMenu?'true':'false'}">${esc(p.name)}<svg class="cp-caret" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button><button type="button" class="cp-clear" data-action="clear-ai">Clear</button>${view.aiPetMenu?`<div class="cp-menu" role="menu" aria-label="Switch pet">${petOptions().map(([v,t])=>`<button type="button" class="cp-item${v===p.id?' on':''}" data-action="ai-pet-pick" data-id="${esc(v)}"><span>${esc(t)}</span>${v===p.id?icon('check'):''}</button>`).join('')}</div>`:''}</div></div><div class="chat-messages"><div class="bubble">Hi, I’m the AI butler for ${esc(p.name)}. ${param('prompt')==='sleep'?'Sleep was a little longer than recent days — let’s look at the trend together.':'Ask me about today’s activity, sleep or health.'}</div>${msgs.map(bubble).join('')}</div><div class="suggestions">${['How is today going?','Why the longer sleep?','Any care suggestions?'].map(t=>action('ai-suggest',esc(t),'',`data-text="${esc(t)}"`)).join('')}</div><div class="row between">${navButton('health','View health data')}${navButton('report','Full report')}${navButton('vets','Online vets')}</div>${form('ai',`${chip}${menu}<div class="chat-compose"><button type="button" class="chat-plus" data-action="ai-attach" aria-label="Add a photo or DNA report" aria-haspopup="menu" aria-expanded="${view.aiMenu?'true':'false'}">${icon('plus')}</button><input name="message" maxlength="500" placeholder="Ask about ${esc(p.name)}…" aria-label="AI message"><button type="submit" class="chat-send" aria-label="Send AI message">${icon('send')}</button></div><input type="file" accept="image/*" data-change="ai-photo" hidden>`,'').replace('<button class="primary" type="submit"></button>','')}`;
+}
 function postPhotos(p){const v=uploadedPhotos[p.id]||p.photos;return Array.isArray(v)?v:[];}
 function postCard(p,detail=false){const a=author(p.author),photos=postPhotos(p),idx=detail?view.postImage%(photos.length||1):0;return `<article class="feed-post"><div class="post-head">${navButton(query('author',{id:a.id}),img(a.avatar,'avatar',a.name),'')}<button class="grow" data-go="${query('author',{id:a.id})}"><strong>${esc(a.name)}</strong><small>${esc(a.location)} · ${esc(p.time||'')}</small></button>${p.author!=='me'?action('follow',state.following.includes(a.id)?'Following':'Follow','text-btn',`data-id="${a.id}"`):''}</div><button class="post-photo" ${detail?'data-action="post-next"':`data-go="post?id=${esc(p.id)}"`} aria-label="${detail?'Next photo':'Open post'}">${img(photos[idx],'post-photo','Pet post photo')}</button>${detail&&photos.length>1?`<div class="row between muted" style="padding:8px 16px">${action('post-prev','← Previous','text-btn')}<span>${idx+1} / ${photos.length}</span>${action('post-next','Next →','text-btn')}</div>`:''}<div class="post-actions">${action('like',icon('paw'),'icon-btn '+(p.liked?'liked':''),`data-id="${p.id}" aria-label="${p.liked?'Unlike':'Like'}" aria-pressed="${p.liked}"`)}${action('bookmark',icon('star'),'icon-btn '+(p.saved?'saved':''),`data-id="${p.id}" aria-label="${p.saved?'Remove from favorites':'Add to favorites'}" aria-pressed="${p.saved}"`)}${action('share',icon('send'),'icon-btn',`data-id="${p.id}" aria-label="Share post"`)}${detail?'':'<span class="grow"></span>'+navButton('post?id='+p.id,icon('comment'),'icon-btn')}</div><div class="post-copy"><b>${((Number(p.likes)||0)+(p.liked?1:0)).toLocaleString()} likes</b><p><strong>${esc(a.name)}</strong> ${esc(p.body||'')}</p>${(p.tags||[]).map(t=>navButton('topic?tag='+encodeURIComponent(t),'#'+esc(t))).join(' ')}${!detail?`<p>${navButton('post?id='+p.id,'View all '+(p.comments||[]).length+' comments')}</p>`:''}</div></article>`;}
 function discover(){const all=(state.posts||[]).filter(p=>p&&typeof p==='object');const decorated=all.map((p,i)=>({p,i,topic:discoverTopicOf(p,i)}));let list=decorated.filter(x=>view.feed!=='following'||(state.following||[]).includes(x.p.author));if(view.discoverTopic)list=list.filter(x=>x.topic===view.discoverTopic);const left=[],right=[];list.forEach((x,k)=>{(k%2?right:left).push(discoverCard(x.p,x.i,x.topic,k));});const grid=list.length?`<div class="ds-grid"><div class="ds-col">${left.join('')}</div><div class="ds-col">${right.join('')}</div></div>`:empty('No posts yet','Try another topic or share your first post.','publish','Create a post');return `${discoverSearchBar()}${discoverChipRow()}${grid}<div class="ds-no-result" hidden>No matching posts. Try another search.</div>${navButton('mall','Pet shop','secondary')}`;}
-function post(){const p=state.posts.find(p=>p.id===param('id'));if(!p)return empty('Post not found','It may have been deleted.','discover','Back to Discover');return `${postCard(p,true)}<h4>Comments · ${p.comments.length}</h4>${p.comments.map(c=>`<div class="card"><strong class="small-title">${esc(c.name)}</strong><p class="muted">${esc(c.text)}</p></div>`).join('')}<form class="cmt-form" data-form="comment"><div class="cmt-box">${icon('edit')}<input class="cmt-input" name="comment" type="text" maxlength="500" placeholder="Write a comment" aria-label="Write a comment" required><button class="cmt-send" type="submit" hidden>Post</button></div><p class="form-error" role="alert"></p></form>`;}
-function authorPage(){const a=author(param('id'));if(a.id==='me')return profile();return `<div class="row" style="margin:12px 0 18px">${img(a.avatar,'avatar lg',a.name)}<div><h3 class="serif" style="margin:0">${esc(a.name)}</h3><p class="muted">${esc(a.location)}</p></div></div><p class="muted">${esc(a.bio)}</p><div class="stat-row"><div><b>${state.posts.filter(p=>p.author===a.id).length}</b><small>Posts</small></div><div><b>${124+(state.following.includes(a.id)?1:0)}</b><small>Followers</small></div><div><b>56</b><small>Following</small></div></div>${action('follow',state.following.includes(a.id)?'Following · Unfollow':'Follow','primary',`data-id="${a.id}"`)}${navButton('chat?id='+a.id,'Message','secondary')}<div class="card soft"><b>My pets</b><p class="muted">A little companion, a big part of life. 🐾</p></div>${postGrid(state.posts.filter(p=>p.author===a.id))}`;}
+function cmtAvatar(n){const a=authors.find(x=>x.name===n),src=n===state.profile.name?'profile_avatar.jpg':(a?a.avatar:null);return `<span class="cmt-ava">${src?img(src,'',''):esc(String(n||'?').slice(0,1).toUpperCase())}</span>`;}
+function post(){const p=state.posts.find(p=>p.id===param('id'));if(!p)return empty('Post not found','It may have been deleted.','discover','Back to Discover');const rp=view.replyTo&&view.replyTo.post===p.id?view.replyTo:null,cs=p.comments||[];const roots=cs.map((c,i)=>({c,i})).filter(x=>x.c.parent==null);const list=roots.map(({c,i})=>{const kids=cs.map((k,j)=>({k,j})).filter(x=>x.k.parent===i);return `<div class="cmt-item${rp&&rp.index===i?' on':''}" data-action="cmt-reply" data-index="${i}" data-name="${esc(c.name)}" role="button" tabindex="0"><strong class="small-title">${esc(c.name)}</strong><p class="muted">${esc(c.text)}</p>${kids.length?`<div class="cmt-replies">${kids.map(({k,j})=>`<button type="button" class="cmt-reply${rp&&rp.index===j?' on':''}" data-action="cmt-reply" data-index="${j}" data-name="${esc(k.name)}" aria-label="Reply to ${esc(k.name)}">${cmtAvatar(k.name)}<span class="cmt-reply-body"><span class="cmt-reply-head"><b>${esc(k.replyTo||k.name)}</b>:</span> ${esc(k.text)}</span></button>`).join('')}</div>`:''}</div>`;}).join('');return `${postCard(p,true)}<h4>Comments · ${cs.length}</h4>${list}<form class="cmt-form" data-form="comment"><div class="cmt-box${rp?' replying':''}">${icon(rp?'comment':'edit')}<input class="cmt-input" name="comment" type="text" maxlength="500" placeholder="${rp?`Reply to ${esc(rp.name)}`:'Write a comment'}" aria-label="${rp?`Reply to ${esc(rp.name)}`:'Write a comment'}" required>${rp?`<button type="button" class="cmt-clear" data-action="cmt-cancel" aria-label="Cancel reply">${icon('close')}</button>`:''}<button class="cmt-send" type="submit" hidden>Post</button></div><p class="form-error" role="alert"></p></form>`;}
+function authorPage(){const a=author(param('id'));if(a.id==='me')return profile();const posts=state.posts.filter(p=>p.author===a.id);const left=[],right=[];posts.forEach((p,i)=>{(i%2?right:left).push(discoverCard(p,i,discoverTopicOf(p,i),i));});const feed=posts.length?`<div class="up-feed"><div class="ds-grid">${right.length?`<div class="ds-col">${left.join('')}</div><div class="ds-col">${right.join('')}</div>`:`<div class="ds-col">${left.join('')}</div>`}</div></div>`:empty('No posts yet','This user has not shared anything.');return `<div class="up-card"><div class="up-head">${img(a.avatar,'up-avatar',a.name)}<span class="up-id"><b>${esc(a.name)}</b><span class="up-loc">${icon('pin')}${esc(a.location)}</span></span>${icon('arrow')}</div><h4 class="up-about">About me</h4><p class="up-bio">${esc(a.bio)}</p><div class="up-stats"><div><small>Posts</small><b>${posts.length}</b></div><div><small>Followers</small><b>${a.followers||0}</b></div></div></div>${feed}`;}
 function postGrid(posts){return posts.length?`<div class="post-grid">${posts.map(p=>navButton('post?id='+p.id,img(postPhotos(p)[0]||'','','Open post'),'')).join('')}</div>`:empty('Nothing here yet','Share a post or like something you love.','discover','Explore community');}
-function profile(){const p=state.profile||{},posts=(state.posts||[]).filter(x=>x&&(view.profileTab==='liked'?x.liked:x.author==='me'));return `<button class="list-row" data-go="personal">${img('profile_avatar.jpg','avatar lg',p.name)}<span class="grow"><strong style="font:600 25px Fraunces,serif">${esc(p.name)}</strong><span class="muted" style="display:block">${icon('pin')}${esc(p.location)}</span></span>${icon('arrow')}</button><h4>About me</h4><p class="muted">${esc(p.bio)}</p><div class="stat-row">${navButton('friends?kind=posts',`<small>Posts</small><b>${(state.posts||[]).filter(p=>p&&p.author==='me').length}</b>`,'')}${navButton('friends?kind=followers',`<small>Followers</small><b>46</b>`,'')}${navButton('friends?kind=friends',`<small>Friends</small><b>${(state.friends||[]).length}</b>`,'')}</div><button class="device-card" data-go="pets"><span class="grow"><b>My pets</b><small>${(state.pets||[]).length} companions</small></span>${(state.pets||[]).slice(0,3).map(p=>img(p.photo,'avatar',p.name)).join('')}${icon('arrow')}</button>${segments([['posts','Moments'],['liked','Liked']],view.profileTab,'profile-tab')}${postGrid(posts)}${navButton('publish','Share a moment','secondary')}${state.member?'':''}`;}
+function profile(){const p=state.profile||{},gts=state.geneticTests||[],gNew=gts.filter(t=>t&&t.unseen!==false).length,posts=(state.posts||[]).filter(x=>x&&(view.profileTab==='liked'?x.liked:x.author==='me'));return `<button class="list-row" data-go="personal">${img('profile_avatar.jpg','avatar lg',p.name)}<span class="grow"><strong style="font:600 25px Fraunces,serif">${esc(p.name)}</strong><span class="muted" style="display:block">${icon('pin')}${esc(p.location)}</span></span>${icon('arrow')}</button><h4>About me</h4><p class="muted">${esc(p.bio)}</p><div class="stat-row">${navButton('friends?kind=posts',`<small>Posts</small><b>${(state.posts||[]).filter(p=>p&&p.author==='me').length}</b>`,'')}${navButton('friends?kind=followers',`<small>Followers</small><b>46</b>`,'')}</div><button class="device-card pets-card" data-go="pets"><span class="grow"><b>My pets (${(state.pets||[]).length})</b></span>${(state.pets||[]).slice(0,3).map(p=>img(p.photo,'avatar',p.name)).join('')}${icon('arrow')}</button><button class="device-card" data-go="genetic?all=1"><span class="grow"><b>Genetic Test (${gts.length})${gNew?`<span class="gt-new">${gNew} new</span>`:''}</b></span>${icon('dna')}${icon('arrow')}</button>${segments([['posts','Moments'],['liked','Liked']],view.profileTab,'profile-tab')}${postGrid(posts)}${navButton('publish','Share a moment','secondary')}${state.member?'':''}`;}
 function pets(){return `${state.pets.map(p=>`<button class="device-card" data-go="pet-detail?id=${esc(p.id)}">${img(p.photo,'',p.name)}<span class="info"><b>${esc(p.name)}</b>${p.abnormal?'<span class="badge warn">High HR</span>':''}<small>${esc(p.type)} · ${esc(p.breed)}<br>${esc(p.weight)} kg</small></span>${icon('arrow')}</button>`).join('')||empty('No pets yet','Add a pet to start tracking.')}${navButton('pet-edit',icon('plus')+' Add Pet','primary')}`;}
 const PET_ANGLES=[['front','Front'],['left','Left side'],['right','Right side'],['back','Back'],['top','Top'],['bottom','Bottom'],['leftDiag','Left diagonal'],['rightDiag','Right diagonal']];
 const petPhotoSlots={};
-function petEdit(){
- const p=state.pets.find(p=>p.id===param('id'))||{};
- const scan=`<svg class="pe-scan-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V5a1 1 0 0 1 1-1h4M15 4h4a1 1 0 0 1 1 1v4M20 15v4a1 1 0 0 1-1 1h-4M9 20H5a1 1 0 0 1-1-1v-4"/></svg>`;
- const cam=`<svg class="pe-cam-ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="7" width="10" height="10" rx="2"/></svg>`;
- const inp=(n,v,t,ph,extra='')=>`<input name="${n}" type="${t}" value="${esc(v)}" placeholder="${esc(ph)}" ${extra}>`;
- const unit=u=>`<span class="pe-unit">${u}</span>`;
- const cell=(label,body)=>`<div class="pe-cell"><span class="pe-label">${label}</span><div class="pe-input">${body}</div></div>`;
- const grid=`<div class="pe-grid">
-  ${cell('Pet name',inp('name',p.name||'','text','Enter pet name','required maxlength="30"'))}
-  ${cell('Type',`<select name="type"><option value="Dog" selected>Dog</option></select>`)}
-  ${cell('Breed',inp('breed',p.breed||'','text','Enter breed','maxlength="50"'))}
-  ${cell('Age',inp('age',p.age||'','number','Enter age','min="0" max="30" step="1"')+unit('yrs'))}
-  ${cell('Sex',`<select name="sex"><option value="Male" ${p.sex!=='Female'?'selected':''}>Male</option><option value="Female" ${p.sex==='Female'?'selected':''}>Female</option></select>`)}
-  ${cell('Weight',inp('weight',p.weight||'','number','Enter weight','required min="0.1" max="150" step="0.1"')+unit('kg'))}
-  ${cell('Height',inp('height',p.height||'','number','Enter height','min="1" max="200" step="0.1"')+unit('cm'))}
-  ${cell('Emotional history',inp('emotional',p.emotional||'','text','e.g. Neutered','maxlength="60"'))}
-  ${cell('Owner',inp('owner',p.owner||'','text','Enter owner name','maxlength="40"'))}
-  ${cell('Contact',inp('contact',p.contact||'','tel','Mobile number','maxlength="20"'))}
- </div>`;
- const photos=`<div class="pe-photos"><h3>Pet photos</h3><p>Upload at least 8 photos from different angles</p>
-  <div class="pe-photo-grid">${PET_ANGLES.map((a,i)=>`<div class="pe-slot-wrap"><label class="pe-slot"><input type="file" accept="image/*" data-change="pet-photo" data-index="${i}" hidden>${petPhotoSlots[i]?`<img class="pe-slot-img" src="${petPhotoSlots[i]}" alt="${a[1]}">`:cam}</label><span class="pe-slot-label">${a[1]}</span></div>`).join('')}</div>
- </div>`;
- return `<form data-form="pet" class="pe-form">
-  <div class="pe-device"><span class="pe-label">Device ID</span><div class="pe-input pe-input-device"><input id="pe-device-id" name="deviceId" type="text" value="${esc(p.deviceId||'')}" placeholder="Enter device ID" maxlength="30"><button type="button" class="pe-scan" data-action="pet-scan" aria-label="Scan device ID">${scan}</button></div></div>
-  <button type="button" class="pe-add-link" data-action="add-device-menu">No device yet? Add one</button>
-  ${grid}
-  ${photos}
-  <p class="form-error" role="alert"></p>
-  <button class="primary pe-save" type="submit">Save</button>
- </form>`;
+/* ===== Add Pet wizard (2026-11-17) : 3 tabs = device / profile / photos ===== */
+const BREED_PICKS=[
+ ['Golden Retriever','home_pet_lucky.jpg','Large'],['Labrador Retriever','home_pet_milo.jpg','Large'],
+ ['Dachshund','home_pet_coco.jpg','Small'],['Mixed Breed','lucky_b0.jpg','Medium']
+];
+const PET_WIZ_STEPS=[['1','Connect device'],['2','Pet profile'],['3','Photos']];
+function wiz(){if(!view.petWiz)view.petWiz={step:1,editId:'',mode:'scan',deviceId:'',reassign:false,draft:{},newId:'',done:false,error:'',sizeFilter:''};return view.petWiz;}
+function newWiz(id){view.petWiz={step:1,editId:id||'',mode:'scan',deviceId:'',reassign:false,draft:{},newId:'',done:false,error:'',sizeFilter:''};}
+function syncPetDraft(){const w=wiz(),root=$('#app-content');if(!root)return;['name','type','breed','age','sex','weight','height','emotional','owner','contact','nextVax'].forEach(k=>{const el=root.querySelector(`[name="${k}"]`);if(el)w.draft[k]=el.value;});}
+function wizError(msg){const w=wiz();w.error=msg||'';const el=$('#pet-wiz-error');if(el){el.textContent=w.error;el.hidden=!w.error;}}
+function petStepTabs(){const w=wiz();return `<div class="pw-steps">${PET_WIZ_STEPS.map(([n,t],i)=>`<button type="button" class="pw-step${w.step===i+1?' on':''}${w.step>i+1?' done':''}" data-action="pet-step" data-value="${i+1}" aria-current="${w.step===i+1}"><span class="pw-num">${w.step>i+1?'✓':n}</span><span>${t}</span></button>`).join('')}</div>`;}
+function petWizDevice(){
+ const w=wiz();
+ const devOpts=state.devices.map(d=>`<option value="${esc(d.id)}" ${w.deviceId===d.id?'selected':''}>${esc(d.name)} · ${esc(d.serial||'')} · ${esc(d.pet?petName(d.pet):'Unassigned')}</option>`).join('');
+ const selectedDev=state.devices.find(d=>d.id===w.deviceId);
+ const devType=selectedDev?selectedDev.type:(w.scanType||'harness');
+ const devImgHtml=(w.deviceId||w.scanType)?`<div class="bind-device-img">${img(devImg(devType),'',esc((types[devType]||types.harness)[0]))}</div>`:'';
+ const scan=`<button type="button" class="pw-mode${w.mode==='scan'?' on':''}" data-action="pet-wiz-mode" data-value="scan"><span class="pw-mode-ic">${icon('camera')}</span><span class="pw-mode-tx"><b>Scan a device or genetic test box</b><small>Scan the QR code on the device or box</small></span><span class="pw-radio"></span></button>`
+  +(w.mode==='scan'?`<div class="pw-scan-box">${devImgHtml}<div class="pw-scan-id">${w.deviceId?esc(w.deviceId):'No device or box scanned yet'}</div>${action('pet-wiz-scan','Scan QR code','secondary')}</div>`:'');
+ const existing=`<button type="button" class="pw-mode${w.mode==='existing'?' on':''}" data-action="pet-wiz-mode" data-value="existing"><span class="pw-mode-ic">${icon('device')}</span><span class="pw-mode-tx"><b>Use an existing device</b><small>Pick one already added to your account</small></span><span class="pw-radio"></span></button>`
+  +(w.mode==='existing'?`<label class="field pw-select"><select data-change="pet-wiz-device"><option value="">Choose a device…</option>${devOpts}</select></label>${w.deviceId?`<p class="pw-note">${icon('check')} ${w.reassign?'Owner will be changed to this pet on save.':'Device will be linked to this pet on save.'}</p>`:''}`:'');
+ const skip=`<button type="button" class="pw-mode${w.mode==='skip'?' on':''}" data-action="pet-wiz-mode" data-value="skip"><span class="pw-mode-ic">${icon('clock')}</span><span class="pw-mode-tx"><b>I'll link a device later</b><small>You can add a device from the pet profile</small></span><span class="pw-radio"></span></button>`;
+ return `<div class="pw-pane"><p class="pw-intro">Link a Smart Dog Harness now, or skip and do it later.</p>${scan}${existing}${skip}</div>`;
 }
-function petDetail(){const p=state.pets.find(p=>p.id===param('id'))||pet();if(!p)return needPet();return `<div class="center">${img(p.photo,'avatar lg',p.name)}<h2 class="serif">${esc(p.name)}</h2><p class="muted">${esc(p.type)} · ${esc(p.breed)} · ${esc(p.sex)}</p></div>${p.abnormal?anomalyBanner(p):''}<div class="card"><div class="list-row"><span class="grow">Date of birth</span>${esc(p.birth)}</div><div class="list-row"><span class="grow">Weight</span>${p.weight} kg</div></div>${navButton('pet-edit?id='+p.id,'Edit pet profile','secondary')}${row('Health analysis','health','health')}${row('Health & vaccine records','records','clock')}${row('Feeding plan','feeding','food')}${heading('Linked devices','device-add','Add device')}${state.devices.filter(d=>d.pet===p.id||(!d.pet&&d.type==='camera')).map(deviceCard).join('')||'<p class="muted">No devices linked yet.</p>'}${action('delete-pet',icon('trash')+' Delete pet','danger',`data-id="${p.id}"`)}`;}
+function petWizInfo(){
+ const w=wiz(),d=w.draft,p=state.pets.find(x=>x.id===w.editId)||{};
+ const val=k=>esc(d[k]!=null&&d[k]!==''?d[k]:(p[k]!=null?p[k]:''));
+ const inp=(n,ph,type='text',extra='')=>`<input name="${n}" type="${type}" value="${val(n)}" placeholder="${esc(ph)}" ${extra}>`;
+ const cell=(label,body)=>`<div class="pe-cell"><span class="pe-label">${label}</span><div class="pe-input">${body}</div></div>`;
+ const unit=u=>`<span class="pe-unit">${u}</span>`;
+ const sizeBtn=`<div class="pw-size-filter"><span class="pe-label">Filter by size</span>${['Small','Medium','Large'].map(sz=>`<button type="button" class="pw-size-btn${w.sizeFilter===sz?' on':''}" data-action="pet-wiz-size" data-value="${esc(sz)}">${esc(sz)}</button>`).join('')}</div>`;
+ const breed=`<div class="pw-breed"><span class="pe-label">Dog breed · pick a photo</span><div class="pw-breed-row">${BREED_PICKS.filter(([, ,sz])=>!w.sizeFilter||sz===w.sizeFilter).map(([n,src])=>`<button type="button" class="pw-breed-card${d.breed===n?' on':''}" data-action="pet-wiz-breed" data-value="${esc(n)}">${img(src,'',n)}<span>${esc(n)}</span></button>`).join('')}</div></div>`;
+ const grid=`<div class="pe-grid">
+  ${cell('Pet name',inp('name','Enter pet name','text','maxlength="30"'))}
+  ${cell('Type',`<select name="type"><option value="Dog" selected>Dog</option></select>`)}
+  ${cell('Breed',inp('breed','Enter breed','text','maxlength="50"'))}
+  ${cell('Age',inp('age','Enter age','number','min="0" max="30" step="1"')+unit('yrs'))}
+  ${cell('Sex',`<select name="sex"><option value="Male" ${(d.sex||p.sex||'Male')!=='Female'?'selected':''}>Male</option><option value="Female" ${(d.sex||p.sex)==='Female'?'selected':''}>Female</option></select>`)}
+  ${cell('Weight',inp('weight','Enter weight','number','min="0.1" max="150" step="0.1"')+unit('kg'))}
+  ${cell('Height',inp('height','Enter height','number','min="1" max="200" step="0.1"')+unit('cm'))}
+  ${cell('Emotional history',inp('emotional','e.g. Neutered','text','maxlength="60"'))}
+  ${cell('Owner',inp('owner','Enter owner name','text','maxlength="40"'))}
+  ${cell('Contact',inp('contact','Mobile number','tel','maxlength="20"'))}
+  ${cell('Next vaccination',inp('nextVax','','date'))}
+ </div>`;
+ return `<div class="pw-pane">${sizeBtn}${breed}${grid}</div>`;
+}
+function petWizPhotos(){
+ const cam=`<svg class="pe-cam-ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="7" width="10" height="10" rx="2"/></svg>`;
+ return `<div class="pw-pane"><div class="pe-photos"><h3>Pet photos</h3><p>Upload at least 8 photos from different angles</p>
+  <div class="pe-photo-grid">${PET_ANGLES.map((a,i)=>`<div class="pe-slot-wrap"><label class="pe-slot"><input type="file" accept="image/*" data-change="pet-photo" data-index="${i}" hidden>${petPhotoSlots[i]?`<img class="pe-slot-img" src="${petPhotoSlots[i]}" alt="${a[1]}">`:cam}</label><span class="pe-slot-label">${a[1]}</span></div>`).join('')}</div>
+ </div></div>`;
+}
+function petWizDone(){
+ const w=wiz(),p=state.pets.find(x=>x.id===w.newId||x.id===w.editId);
+ return `<div class="pw-done"><div class="pw-done-ic">${icon('check')}</div><h2 class="serif">All set!</h2><p class="muted">${esc(p?p.name:'Your pet')} is ready to explore MoonBack with you.</p>${action('pet-wiz-home','Go to Home','primary')}</div>`;
+}
+function petEdit(){
+ const w=wiz();
+ if(w.done)return petWizDone();
+ const body=w.step===1?petWizDevice():w.step===2?petWizInfo():petWizPhotos();
+ const back=w.step>1?action('pet-wiz-back','Back','secondary'):'';
+ const next=action('pet-wiz-next',w.step===3?'Save & Finish':(w.step===1?'Next: Pet profile':'Next: Photos'),'primary');
+ return `${petStepTabs()}${body}<p class="form-error" id="pet-wiz-error" role="alert" ${w.error?'':'hidden'}>${esc(w.error||'')}</p><div class="pw-actions">${back}${next}</div>`;
+}
+/* ===== Bind device: first-time setup for a new user (scan → pet profile → photos → home) ===== */
+const BIND_STEPS=[['1','Scan product'],['2','Pet profile'],['3','Photos']];
+function bindWiz(){if(!view.bindWiz)view.bindWiz={step:1,scanId:'',bound:false,deviceId:'',petId:'',draft:{},error:'',done:false};return view.bindWiz;}
+function newBind(){view.bindWiz={step:1,scanId:'',bound:false,deviceId:'',petId:'',draft:{},error:'',done:false};}
+function syncBindDraft(){const w=bindWiz(),root=$('#app-content');if(!root)return;['name','breed','sex','weight','age','height','emotional','owner','contact','nextVax'].forEach(k=>{const el=root.querySelector(`[name="${k}"]`);if(el)w.draft[k]=el.value;});}
+function bindError(msg){const w=bindWiz();w.error=msg||'';const el=$('#pet-wiz-error');if(el){el.textContent=w.error;el.hidden=!w.error;}}
+function bindStepTabs(){const w=bindWiz();return `<div class="pw-steps">${BIND_STEPS.map(([n,t],i)=>`<button type="button" class="pw-step${w.step===i+1?' on':''}${w.step>i+1?' done':''}" data-action="bind-step" data-value="${i+1}" aria-current="${w.step===i+1}"><span class="pw-num">${w.step>i+1?'✓':n}</span><span>${t}</span></button>`).join('')}</div>`;}
+function bindPaneScan(){
+ const w=bindWiz();
+ const devImgHtml=w.scanId?`<div class="bind-device-img">${img(devImg(w.bindType||'harness'),'',esc((types[w.bindType||'harness']||types.harness)[0]))}</div>`:'';
+ return `<div class="pw-pane"><p class="pw-intro">Scan the QR code on the product box to bind it to your MoonBack account. Smart Dog Harness, Smart Dog House and Genetic Test kits are all supported.</p>
+  <button type="button" class="pw-mode on" data-action="bind-mode" data-value="scan"><span class="pw-mode-ic">${icon('camera')}</span><span class="pw-mode-tx"><b>Scan a device or genetic test box</b><small>Scan the QR code on the device or box</small></span><span class="pw-radio"></span></button>
+  <div class="pw-scan-box"><div class="pw-scan-id">${w.scanId?'Scanned · '+esc(w.scanId):'No product scanned yet'}</div>${action('bind-scan','Scan QR code','secondary')}${devImgHtml}</div>
+  <p class="muted" style="margin:0 0 14px">Only a fresh scan is accepted here — pick the scanned product to bind it to your account.</p></div>`;
+}
+function bindPaneBind(){
+ const w=bindWiz();
+ const devImgHtml=`<div class="bind-device-img">${img(devImg(w.bindType||'harness'),'',esc((types[w.bindType||'harness']||types.harness)[0]))}</div>`;
+ return `<div class="pw-pane"><p class="pw-intro">Bind the scanned product to your MoonBack account. It will show up in My Devices once confirmed.</p>
+  <div class="pw-scan-box">${devImgHtml}<div class="pw-scan-id">${w.scanId?esc(w.scanId):'—'}</div><p class="muted" style="margin:6px 0 0">Product: ${esc((types[w.bindType||'harness']||types.harness)[0])} · Model 001</p></div>
+  <div class="pw-actions" style="justify-content:flex-start">${action('bind-bind','Bind to account','primary')}</div></div>`;
+}
+function bindPanePet(){
+ const w=bindWiz(),d=w.draft;
+ const val=k=>esc(d[k]!=null&&d[k]!==''?d[k]:'');
+ const inp=(n,ph,type,extra='')=>`<input name="${n}" type="${type}" value="${val(n)}" placeholder="${esc(ph)}" ${extra}>`;
+ const cell=(label,body)=>`<div class="pe-cell"><span class="pe-label">${label}</span><div class="pe-input">${body}</div></div>`;
+ const unit=u=>`<span class="pe-unit">${u}</span>`;
+ const sizeBtn=`<div class="pw-size-filter"><span class="pe-label">Filter by size</span>${['Small','Medium','Large'].map(sz=>`<button type="button" class="pw-size-btn${w.sizeFilter===sz?' on':''}" data-action="bind-size" data-value="${esc(sz)}">${esc(sz)}</button>`).join('')}</div>`;
+ const breed=`<div class="pw-breed"><span class="pe-label">Dog breed · pick a photo</span><div class="pw-breed-row">${BREED_PICKS.filter(([, ,sz])=>!w.sizeFilter||sz===w.sizeFilter).map(([n,src])=>`<button type="button" class="pw-breed-card${d.breed===n?' on':''}" data-action="bind-breed" data-value="${esc(n)}">${img(src,'',n)}<span>${esc(n)}</span></button>`).join('')}</div></div>`;
+ const grid=`<div class="pe-grid">
+  ${cell('Pet name',inp('name','Enter pet name','text','maxlength="30"'))}
+  ${cell('Type',`<select name="type"><option value="Dog" selected>Dog</option></select>`)}
+  ${cell('Breed',inp('breed','Enter breed','text','maxlength="50"'))}
+  ${cell('Age',inp('age','Enter age','number','min="0" max="30" step="1"')+unit('yrs'))}
+  ${cell('Sex',`<select name="sex"><option value="Male" ${(d.sex||'Male')!=='Female'?'selected':''}>Male</option><option value="Female" ${(d.sex||'')==='Female'?'selected':''}>Female</option></select>`)}
+  ${cell('Weight',inp('weight','Enter weight','number','min="0.1" max="150" step="0.1"')+unit('kg'))}
+  ${cell('Height',inp('height','Enter height','number','min="1" max="200" step="0.1"')+unit('cm'))}
+  ${cell('Emotional history',inp('emotional','e.g. Neutered','text','maxlength="60"'))}
+  ${cell('Owner',inp('owner','Enter owner name','text','maxlength="40"'))}
+  ${cell('Contact',inp('contact','Mobile number','tel','maxlength="20"'))}
+  ${cell('Next vaccination',inp('nextVax','','date'))}
+ </div>`;
+ return `<div class="pw-pane">${sizeBtn}${breed}${grid}</div>`;
+}
+function bindPanePhotos(){
+ const cam=`<svg class="pe-cam-ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="7" width="10" height="10" rx="2"/></svg>`;
+ return `<div class="pw-pane"><div class="pe-photos"><h3>Pet photos</h3><p>Upload 8 photos from different angles — they are used to generate your pet's digital twin</p>
+  <div class="pe-photo-grid">${PET_ANGLES.map((a,i)=>`<div class="pe-slot-wrap"><label class="pe-slot"><input type="file" accept="image/*" data-change="bind-photo" data-index="${i}" hidden>${petPhotoSlots[i]?`<img class="pe-slot-img" src="${petPhotoSlots[i]}" alt="${a[1]}">`:cam}</label><span class="pe-slot-label">${a[1]}</span></div>`).join('')}</div>
+  <p class="muted" style="margin:8px 0 0">${Object.keys(petPhotoSlots).length}/8 uploaded</p></div></div>`;
+}
+function bindPaneDone(){
+ const w=bindWiz(),p=state.pets.find(x=>x.id===w.petId);
+ return `<div class="pw-done"><div class="pw-done-ic">${icon('check')}</div><h2 class="serif">All set!</h2><p class="muted">${esc(p?p.name:'Your pet')} is ready to explore MoonBack with you. A digital twin is being generated from the uploaded photos.</p>${action('bind-home','Go to Home','primary')}</div>`;
+}
+function deviceBind(){
+ const w=bindWiz();
+ if(w.done)return bindPaneDone();
+ const body=w.step===1?bindPaneScan():w.step===2?bindPanePet():bindPanePhotos();
+ const back=w.step>1?action('bind-back','Back','secondary'):'';
+ const next=w.step<3?action('bind-next',w.step===1?'Next: Pet profile':'Next: Photos','primary'):action('bind-next','Finish setup','primary');
+ return `${bindStepTabs()}${body}<p class="form-error" id="pet-wiz-error" role="alert" ${w.error?'':'hidden'}>${esc(w.error||'')}</p><div class="pw-actions">${back}${next}</div>`;
+}
+function petDetail(){const p=state.pets.find(p=>p.id===param('id'))||pet();if(!p)return needPet();return `<div class="center">${img(p.photo,'avatar lg',p.name)}<h2 class="serif">${esc(p.name)}</h2><p class="muted">${esc(p.type)} · ${esc(p.breed)} · ${esc(p.sex)}</p></div>${p.abnormal?anomalyBanner(p):''}<div class="card"><div class="list-row"><span class="grow">Date of birth</span>${esc(p.birth)}</div><div class="list-row"><span class="grow">Weight</span>${p.weight} kg</div></div>${navButton('pet-edit?id='+p.id,'Edit pet profile','secondary')}${row('Health analysis','health','health')}${row('Health & vaccine records','records','clock')}${row('Genetic Test','genetic','dna')}${row('Vaccination records','vaccines','syringe')}${row('Feeding plan','feeding','food')}${heading('Linked devices','device-add','Add device')}${state.devices.filter(d=>d.pet===p.id||(!d.pet&&d.type==='camera')).map(deviceCard).join('')||'<p class="muted">No devices linked yet.</p>'}${action('delete-pet',icon('trash')+' Delete pet','danger',`data-id="${p.id}"`)}`;}
 function devices(){const ds=state.devices.filter(d=>view.deviceFilter==='all'||d.type===view.deviceFilter);return `${segments([['all','All Devices'],['harness','Harness'],['house','Dog House']],view.deviceFilter,'device-filter')}${ds.map(deviceCard).join('')||empty('No devices yet','Add a device to try the pairing flow.')}${navButton('device-add',icon('plus')+' Add device','primary')}`;}
 function deviceAdd(){return `${form('device',selectField('Device type','type',Object.entries(types).map(([k,v])=>[k,v[0]]),'harness')+field('Device name','name','','text','required maxlength="40" placeholder="e.g. Smart Dog Harness"')+field('Device serial','serial','MB-'+String(Date.now()).slice(-6),'text','required maxlength="50"')+selectField('Linked pet','pet',petOptions(true),pet()?.id||''),'Finish pairing')}`;}
 function deviceDetail(){const d=state.devices.find(d=>d.id===param('id'));if(!d)return empty('Device not found','It may have been unpaired.','devices','Back to devices');return `<div class="center">${img(devImg(d.type),'avatar lg',d.name)}<h3 class="serif">${esc(d.name)}</h3><span class="badge ${d.online?'':'offline'}">${d.online?'● Online':'● Offline'}</span></div><div class="card"><div class="list-row"><span class="grow">Device serial</span><small>${esc(d.serial)}</small></div><div class="list-row"><span class="grow">Battery</span>${d.battery}%</div><label class="list-row"><span class="grow">Online status</span><input class="toggle" type="checkbox" data-change="device-online" data-id="${d.id}" ${d.online?'checked':''} aria-label="Device online status"></label></div>${selectField('Linked pet','pet',petOptions(true),d.pet,`data-change="device-pet" data-id="${d.id}"`)}${d.type==='harness'?row('Geofence','fence','fence')+row('Location history','trajectory','pin'):''}${row('View health data','health','health')}${row('Firmware update','firmware?id='+d.id,'refresh')}${action('unbind-device','Unpair','danger',`data-id="${d.id}"`)}`;}
@@ -270,6 +384,111 @@ function metric(){if(needPet())return needPet();const k=metricInfo[param('kind')
 function report(){if(needPet())return needPet();const p=pet(),m=metrics();return `${p.abnormal?anomalyBanner(p):''}<div class="card soft"><p class="eyebrow">MOONBACK HEALTH REPORT</p><h2 class="serif">${esc(p.name)}’s wellness</h2><p class="muted">${esc(p.breed)} · ${p.weight} kg · ${esc(view.range==='date'?view.date:'2026-10-29')}</p><span class="badge">Health Report</span></div><div class="card"><h4>Health summary</h4>${p.abnormal?`<p class="muted">${esc(p.name)}’s data shows <b style="color:#b23b3b">Persistent High Heart Rate</b>: sustained above the normal canine range.</p>`:`<p class="muted">${esc(p.name)}’s metrics are steady, with normal activity and sleep trends.</p>`}${Object.entries(metricInfo).slice(0,6).map(([k,v])=>`<div class="list-row"><span class="grow">${v[0]}</span><b>${m[k]} ${v[1]}</b>${k==='heart'&&p.abnormal?'<span class="badge warn">High</span>':''}</div>`).join('')}</div><div class="card"><h4>Daily steps trend</h4>${chart('steps')}</div>${action('download-report','Download this pet’s HTML summary','secondary')}${navButton('vets','Send this report to a vet','primary')}`;}
 function records(){if(needPet())return needPet();return `<p class="muted">${esc(pet().name)}’s health / vaccine records</p>${state.records.filter(r=>r.pet===pet().id).map(r=>`<div class="card"><div class="row between"><b>${esc(r.name)}</b>${navButton('record-edit?id='+r.id,'Edit')}</div><p class="muted">Recorded: ${esc(r.date)}<br>Next date: ${esc(r.next||'Not set')}<br>${esc(r.note)}</p>${action('delete-record','Delete record','text-btn',`data-id="${r.id}"`)}</div>`).join('')||empty('No records yet','Add your first health or vaccine record.')}${navButton('record-edit',icon('plus')+' Add record','primary')}`;}
 function recordEdit(){if(needPet())return needPet();const r=state.records.find(r=>r.id===param('id'))||{};return form('record',`<p class="muted">Current pet: ${esc(pet().name)}</p>`+field('Record name','name',r.name||'','text','required maxlength="60"')+field('Date','date',r.date||today(),'date','required')+field('Next date (optional)','next',r.next||'','date')+`<label class="field">Notes<textarea name="note" maxlength="500">${esc(r.note||'')}</textarea></label>`,'Save record');}
+
+/* ===== Genetic Test & Vaccination (2026-11-17) ===== */
+const gtStatus={submitted:{label:'Sample submitted',cls:'gt-sub'},shipping:{label:'In transit',cls:'gt-ship'},testing:{label:'Testing in progress',cls:'gt-test'},ready:{label:'Report ready',cls:'gt-ready'}};
+function gtReportFor(g){
+ const key=(g.petInfo&&g.petInfo.breed)||'';
+ return {breed:key||'Mixed breed',composition:[['Golden Retriever',86],['Labrador Retriever',9],['Other',5]],
+  risks:[['Hip dysplasia','Low risk','ok'],['Exercise-induced collapse','Carrier','warn'],['Progressive retinal atrophy','Clear','ok']],
+  traits:[['Coat type','Double coat'],['Expected adult weight','25-32 kg'],['Energy level','High']],
+  generated:g.reportAt||today()};
+}
+function genetic(){
+ if(needPet())return needPet();
+ if((state.geneticTests||[]).some(g=>g&&g.unseen!==false)){(state.geneticTests||[]).forEach(g=>{if(g)g.unseen=false;});save();}
+ const p=pet(),showAll=!!param('all'),all=state.geneticTests.slice().sort((a,b)=>String(b.submittedAt).localeCompare(String(a.submittedAt)));
+ const list=showAll?all:all.filter(g=>g.pet===p.id);
+ const card=g=>{const st=gtStatus[g.status]||gtStatus.submitted,info=g.petInfo||p;
+  const trackBtn=action('gt-track',icon('truck')+(g.tracking?' Edit tracking number':' Enter tracking number'),'secondary',`data-id="${g.id}"`);
+  const steps=[['Submitted',g.submittedAt],['Shipping',g.shippingAt],['Testing',g.testingAt],['Report',g.reportAt]].map(([lbl,d])=>`<div class="gt-step${d?' done':''}"><span class="gt-dot"></span><small>${lbl}${d?'<br>'+esc(d):''}</small></div>`).join('');
+  let act='', viewDetails='';
+  const isReady=g.status==='ready';
+  const defaultExpanded = !isReady;
+  const expanded = (view.gtExpanded||{})[g.id] !== undefined ? (view.gtExpanded||{})[g.id] : defaultExpanded;
+  const arrow = expanded?'▲':'▼';
+  viewDetails=`<span class="gt-viewdetails" data-action="gt-toggle-track" data-id="${g.id}"><span class="gt-arr">${arrow}</span><span class="gt-track-label">View details</span></span>`;
+  if(isReady){
+    act=`<div class="gt-ready-row">${navButton('genetic-report?id='+g.id,icon('dna')+' View Report','primary')}${g.reportAt?'<span class="gt-report-date">'+esc(g.reportAt)+'</span>':''}</div>`;
+  } else if(g.status==='submitted'||g.status==='shipping'){
+    act=(g.tracking?'<span class="gt-shipinfo">'+icon('truck')+' '+esc(g.carrier||'Carrier')+' · '+esc(g.tracking)+'</span>':trackBtn);
+  }
+  return `<div class="card gt-card">
+   <div class="row between"><b>${icon('dna')} ${esc(g.kitId)}</b><span class="badge ${st.cls}">${st.label}</span></div>
+   <p class="muted gt-info-line">${esc(info.name)} · ${esc(info.breed)} · ${esc(info.sex)}<br>Submitted ${esc(g.submittedAt||'—')}${viewDetails}</p>
+   <div class="gt-track${expanded?'':' collapsed'}" data-gt-track="${g.id}">${steps}</div>
+   <div class="gt-actions">${act}</div>
+  </div>`;};
+ return `<p class="muted">${showAll?'All DNA test kits and reports':'DNA test kits and reports for '+esc(p.name)}.</p>`
+  +(list.length?list.map(card).join(''):empty('No genetic tests yet','Tap + at the top right to add a kit and track your pet’s DNA test and report.'))
+  +`<p class="muted gt-note">Status flow: Sample submitted → Shipping (enter tracking number) → Testing in progress (read-only) → Report ready. Sample data only.</p>`;
+}
+function geneticNew(){
+ if(needPet())return needPet();
+ const step=view.gtStep||'scan';
+ const stepBar=`<div class="gt-newsteps"><span class="${step==='scan'?'on':''}">1 · Scan kit</span><span class="${step==='info'?'on':''}">2 · Pet info</span></div>`;
+ if(step==='scan')return `${stepBar}<div class="gt-scan">${icon('dna')}<h3 class="serif">Scan the kit QR code</h3><p class="muted">Point the camera at the QR code on the Genetic Test kit box to link it to your pet.</p><div class="gt-scanbox"><span class="gt-corner tl"></span><span class="gt-corner tr"></span><span class="gt-corner bl"></span><span class="gt-corner br"></span><span class="gt-scanline"></span>${icon('dna')}</div>${action('gt-scan',icon('camera')+' Scan QR code','primary')}${navButton('genetic','Cancel','text-btn')}</div>`;
+ const kit=view.gtKit||'MB-DNA-'+String(Date.now()).slice(-6);
+ const pets=state.pets||[];
+ const selId=view.gtPet||pets[0]?.id||'';
+ const sel=pets.find(x=>x.id===selId)||{};
+ return `${stepBar}<div class="card soft"><b>${icon('dna')} Kit ${esc(kit)}</b><p class="muted">Confirm the pet details below. This information will be sent with the sample.</p></div>`
+  +form('gt-info',
+    `<p class="muted">Pet information · editable before submission</p>`
+    +selectField('Pet','pet',pets.map(x=>[x.id,x.name]),selId,`data-change="gt-pet"`)
+    +field('Type','type',sel.type||'Dog','text','required maxlength="40"')
+    +field('Breed','breed',sel.breed||'','text','required maxlength="60"')
+    +field('Sex','sex',sel.sex||'Male','text','required maxlength="20"')
+    +field('Date of birth','birth',sel.birth||'','date')
+    +field('Weight (kg)','weight',sel.weight||'','number','min="1" max="120" step="0.1"')
+    ,'Confirm & create record')
+  +action('gt-back',icon('back')+' Back to scan','text-btn');
+}
+function geneticReport(){
+ if(needPet())return needPet();
+ const g=state.geneticTests.find(x=>x.id===param('id'));
+ if(!g)return empty('Report not found','It may have been removed.','genetic','Back to Genetic Test');
+ const r=gtReportFor(g),info=g.petInfo||pet();
+ return `<div class="card gt-rhead"><p class="eyebrow">MOONBACK · GENETIC TEST REPORT</p><h2 class="serif">${esc(info.name)}’s DNA report</h2><p class="muted">Kit ${esc(g.kitId)} · ${esc(r.breed)}<br>Generated ${esc(r.generated)}</p><span class="badge gt-ready">✓ Report ready</span></div>`
+  +`<div class="card"><h4>Breed composition</h4>${r.composition.map(([n,v])=>`<div class="gt-bar-row"><span>${esc(n)}</span><b>${v}%</b><div class="gt-bar"><span style="width:${v}%"></span></div></div>`).join('')}</div>`
+  +`<div class="card"><h4>Genetic health risks</h4>${r.risks.map(([n,v,c])=>`<div class="list-row"><span class="grow">${esc(n)}</span><span class="badge ${c==='ok'?'':'warn'}">${esc(v)}</span></div>`).join('')}</div>`
+  +`<div class="card"><h4>Traits</h4>${r.traits.map(([k,v])=>`<div class="list-row"><span class="grow">${esc(k)}</span><b>${esc(v)}</b></div>`).join('')}</div>`
+  +`<p class="muted gt-note">This sample report is for demonstration only. It is not a veterinary diagnosis. Consult a qualified veterinarian before making health decisions.</p>`
+  +navButton('genetic','Back to Genetic Test','secondary');
+}
+function nextVaccination(){
+ const list=state.vaccinations.filter(v=>v.pet===pet().id&&v.next);
+ if(!list.length)return null;
+ return list.slice().sort((a,b)=>String(a.next).localeCompare(String(b.next)))[0];
+}
+function daysUntil(date){
+ const d=new Date(date+'T00:00:00'),now=new Date();now.setHours(0,0,0,0);
+ return Math.round((d-now)/86400000);
+}
+function vaccines(){
+ if(needPet())return needPet();
+ const p=pet(),list=state.vaccinations.filter(v=>v.pet===p.id).slice().sort((a,b)=>String(b.date).localeCompare(String(a.date)));
+ const next=nextVaccination();
+ const nextCard=next?`<div class="card soft vac-next">${icon('calcheck')}<div class="grow"><small>Next vaccination</small><b>${esc(next.name)}</b><span class="muted">Due ${esc(next.next)} · ${daysUntil(next.next)>0?'in '+daysUntil(next.next)+' days':daysUntil(next.next)===0?'today':'overdue'}</span></div></div>`:`<div class="card soft vac-next">${icon('calcheck')}<div class="grow"><small>Next vaccination</small><b>Not scheduled</b><span class="muted">Add a record with a next due date.</span></div></div>`;
+ const card=v=>`<div class="card vac-card"><div class="row between"><b>${icon('syringe')} ${esc(v.name)}</b>${action('vac-delete',icon('trash'),'danger gt-del',`data-id="${v.id}" aria-label="Delete vaccination"`)}</div><p class="muted">Administered ${esc(v.date)}<br>${v.next?'Next due '+esc(v.next)+'<br>':''}${v.dose?'Dose '+esc(v.dose)+' · ':''}${esc(v.vet||'')}${v.note?'<br>'+esc(v.note):''}</p></div>`;
+ return nextCard
+  +heading('Vaccination history')
+  +(list.length?list.map(card).join(''):empty('No vaccination records yet','Add your pet’s first vaccination record.'))
+  +navButton('vaccine-add',icon('plus')+' Add vaccination record','primary');
+}
+function vaccineAdd(){
+ if(needPet())return needPet();
+ return `<p class="muted">Current pet: ${esc(pet().name)}</p>`
+  +form('vaccine',
+    field('Vaccine name','name','','text','required maxlength="80" placeholder="e.g. Rabies"')
+   +field('Date administered','date',today(),'date','required')
+   +field('Next due date (optional)','next',(()=>{const d=new Date();return d.getFullYear()+1+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');})(),'date')
+    +field('Dose (optional)','dose','','text','maxlength="30" placeholder="e.g. 1 mL"')
+    +field('Vet / clinic (optional)','vet','','text','maxlength="80"')
+    +`<label class="field">Notes<textarea name="note" maxlength="500"></textarea></label>`
+    ,'Save vaccination record');
+}
+
 const vetsData=[{id:'vet1',name:'Dr. Emma Wilson',specialty:'General care · Internal medicine / daily health',photo:'vet_1.png'},{id:'vet2',name:'Dr. James Chen',specialty:'Nutrition & behavior',photo:'vet_2.png'},{id:'vet3',name:'Dr. Olivia Martin',specialty:'Preventive care',photo:'vet_3.png'}];
 function vets(){return `${vetsData.map(v=>`<div class="card"><div class="row">${img(v.photo,'avatar lg',v.name)}<div class="grow"><b>${v.name}</b><p class="muted">${v.specialty}</p><span class="badge">✓ Verified</span></div></div>${navButton('vet-detail?id='+v.id,'View details & consult','secondary')}</div>`).join('')}${navButton('consult-history','View consultations','secondary')}`;}
 function vetDetail(){if(needPet())return needPet();const v=vetsData.find(x=>x.id===param('id'))||vetsData[0];return `<div class="center">${img(v.photo,'avatar lg',v.name)}<h3>${v.name}</h3><p class="muted">${v.specialty}</p><p class="muted">Focused on everyday wellbeing and long-term health. This is a preset vet profile and consultation flow.</p></div>${form('consult-start',petSelect('Pet for this consultation',pet().id,'consult-pet')+'<label class="checkbox"><input type="checkbox" name="share">Share this pet’s report</label>','Start consultation')}`;}
@@ -279,7 +498,32 @@ function messageForm(name,placeholder){return form(name,`<div class="chat-compos
 function publish(){const topics=[['PetLife','1.2M views'],['DailyWalk','845K views'],['CatLife','3.4M views'],['Health','2.1M views'],['Funny','986K views'],['Cute','4.7M views']];if(!publishDraft.tags&&param('tag'))publishDraft.tags=param('tag');const sel=Array.from(new Set(String(publishDraft.tags||'').split(/[,\s]+/).filter(Boolean)));const chips=sel.map(x=>`<span class="topic-chip">#${esc(x)}<button class="topic-chip-del" data-action="remove-topic" data-value="${esc(x)}" type="button" aria-label="Remove ${esc(x)}">${icon('close')}</button></span>`).join('');const items=topics.filter(([x])=>!sel.includes(x)).map(([x,v])=>`<button class="topic-item" data-action="set-topic" data-value="${esc(x)}" type="button"><span><span class="topic-hash">#</span>${esc(x)}</span><small>${esc(v)}</small></button>`).join('');return `<form data-form="publish" class="publish-form"><p class="form-error" role="alert"></p><div class="publish-body"><div class="photo-section"><button class="photo-plus" data-action="pick-photo" type="button">${icon('plus')}<span>Add photos</span></button><input type="file" accept="image/*" multiple data-change="upload" style="display:none"><div class="photo-grid">${pendingPhotos.map((u,i)=>`<div class="photo-wrap">${img(u,'','Photo to publish')}<button class="photo-del" data-action="remove-photo" data-index="${i}" type="button">${icon('close')}</button></div>`).join('')}</div><small class="photo-cap">Up to 9 photos · JPEG/PNG/WebP</small></div><label class="field">What’s new with your little friend?<textarea name="body" required maxlength="500" placeholder="Share a moment with your pet…">${esc(publishDraft.body)}</textarea><span class="char-count"><span id="pub-count">${publishDraft.body.length}</span>/500</span></label><div class="topic-section"><div class="topic-input-wrap" data-action="topic-focus"><div class="topic-chips">${chips}</div><input class="topic-input" type="text" data-input="topic-input" placeholder="${sel.length?'#tag':'#Tag'}" aria-label="Add a topic"></div><div class="topic-panel"><div class="topic-list"${view.topicPanelOpen?'':' hidden'}>${items||'<p class="topic-none">All topics selected</p>'}</div></div></div></div><div class="publish-footer"><button class="publish-submit" type="submit">Publish</button></div></form>`;}
 function story(){const idx=Number(param('index',String(view.storyIndex)))%authors.length,a=authors[idx];view.storyIndex=idx;return `<div class="story">${img(a.photo,'','Pet story')}<span class="story-name">${esc(a.name)} · Today</span></div><div class="row between" style="margin:16px 0">${navButton('story?index='+((idx+authors.length-1)%authors.length),'← Previous')}${navButton('author?id='+a.id,'View author')}${navButton('story?index='+((idx+1)%authors.length),'Next →')}</div>`;}
 function topic(){const tag=param('tag','PetLife'),posts=state.posts.filter(p=>p.tags.includes(tag));return `<h2 class="serif">#${esc(tag)}</h2><p class="muted">${posts.length} posts</p>${posts.map(p=>postCard(p)).join('')||empty('Nothing here yet','Share a post with this topic.')}${navButton('publish?tag='+encodeURIComponent(tag),'Post to this topic','primary')}`;}
-function messages(){return `<div class="card">${action('read-notification',`<span class="grow"><b>Device alert · ${state.messagesRead?'Read':'Unread'}</b><small class="muted" style="display:block">Living Room Cam status update · 09:41</small></span>${icon('arrow')}`,'list-row')}${row('Friend requests','friend-requests','profile',String(state.requests.filter(r=>r.status==='pending').length))}${row('Add friend','friend-add','plus')}</div><h4>Messages</h4>${authors.slice(0,3).map(a=>`<button class="list-row" data-go="chat?id=${a.id}">${img(a.avatar,'avatar',a.name)}<span class="grow"><b>${esc(a.name)}</b><small style="display:block">${esc((state.chats[a.id]||[]).slice(-1)[0]?.text||'Hi! How is your pet doing?')}</small></span>${icon('arrow')}</button>`).join('')}`;}
+/* ===== Messages (2026-11-18): three activity categories ===== */
+const msgFeeds={
+ likes:[
+  {a:'sophie',act:'liked your post',snip:'A little sunshine with Lucky. 🐾',t:'09:41',go:'post?id=my-post0',thumb:'ins_p6.jpg',unread:true},
+  {a:'oliver',act:'saved your post',snip:'Milo and his favorite window.',t:'09:12',go:'post?id=my-post1',thumb:'ins_p7.jpg',unread:true},
+  {a:'luna',act:'liked your post',snip:'Coco is ready for a new adventure.',t:'08:35',go:'post?id=my-post2',thumb:'real_coco_sleep.jpg',unread:true},
+  {a:'max',act:'saved your post',snip:'A little sunshine with Lucky. 🐾',t:'Yesterday',go:'post?id=my-post0',thumb:'ins_p6.jpg'},
+  {a:'coco',act:'liked your post',snip:'Milo and his favorite window.',t:'2 days ago',go:'post?id=my-post1',thumb:'ins_p7.jpg'}
+ ],
+ follows:[
+  {a:'luna',act:'followed you',snip:'Seattle',t:'08:12',go:'author?id=luna',unread:true},
+  {a:'max',act:'visited your profile',snip:'Portland',t:'Yesterday',go:'author?id=max',unread:true},
+  {a:'coco',act:'followed you',snip:'San Diego',t:'2 days ago',go:'author?id=coco'},
+  {a:'oliver',act:'visited your profile',snip:'Los Angeles',t:'3 days ago',go:'author?id=oliver'}
+ ],
+ comments:[
+  {a:'sophie',act:'left a comment',snip:'So cute! Lucky looks so happy.',t:'09:20',go:'post?id=my-post0',thumb:'ins_p6.jpg',unread:true},
+  {a:'oliver',act:'replied to you',snip:'Thanks! Milo says hi 🐾',t:'08:05',go:'post?id=post1',thumb:'ins_p4.jpg',unread:true},
+  {a:'luna',act:'left a comment',snip:'What a lovely afternoon.',t:'Yesterday',go:'post?id=my-post1',thumb:'ins_p7.jpg'},
+  {a:'max',act:'left a comment',snip:'Where did you get that harness?',t:'2 days ago',go:'post?id=my-post2',thumb:'real_coco_sleep.jpg'}
+ ]
+};
+const msgMeta={likes:{title:'Likes & Saves',ico:'paw',cls:'likes'},follows:{title:'Follows & Visitors',ico:'profile',cls:'follows'},comments:{title:'Comments',ico:'comment',cls:'comments'}};
+function msgUnread(k){return msgFeeds[k].filter(m=>m.unread).length;}
+function messages(){const tab=msgMeta[view.msgTab]?view.msgTab:'likes';return `<div class="msg-tabs">${Object.keys(msgMeta).map(k=>{const m=msgMeta[k],n=msgUnread(k);return `<button class="msg-tab${k===tab?' on':''}" data-action="msg-tab" data-value="${k}" aria-pressed="${k===tab}"><span class="msg-tab-ic ${m.cls}">${icon(m.ico)}${n?`<span class="msg-badge">${n}</span>`:''}</span><span class="msg-tab-tx">${m.title}</span></button>`;}).join('')}</div>`+msgList(tab);}
+function msgList(k){const list=msgFeeds[k]||[];if(!list.length)return empty('Nothing here yet','New activity will appear here.');return `<div class="msg-list">${list.map(x=>{const a=author(x.a);return `<button class="msg-item" data-go="${esc(x.go||'discover')}">${img(a.avatar,'avatar',a.name)}<span class="msg-body"><b>${esc(a.name)}</b> ${esc(x.act)}<span class="msg-snip">${esc(x.snip)}</span></span><span class="msg-side"><span class="msg-time">${esc(x.t)}</span>${x.thumb?img(x.thumb,'msg-thumb','Related post'):''}</span></button>`;}).join('')}</div>`;}
 function chat(){const a=author(param('id',authors[0].id)),msgs=state.chats[a.id]||[{role:'assistant',text:'Hi! How is your pet doing? 🐾'}];return `<div class="chat-pet">${img(a.avatar,'avatar',a.name)}<span>${esc(a.name)}<br><small>Chat</small></span></div><div class="chat-messages">${msgs.map(m=>`<div class="bubble ${m.role==='user'?'user':''}">${esc(m.text)}</div>`).join('')}</div>${messageForm('chat','Send a message…')}`;}
 function friends(){const kind=param('kind','friends');if(kind==='posts')return `<h3>My posts</h3>${postGrid(state.posts.filter(p=>p.author==='me'))}${navButton('publish','New post','primary')}`;const ids=kind==='followers'?authors.slice(0,3).map(a=>a.id):kind==='following'?state.following:state.friends;return `${segments([['friends','Friends'],['followers','Followers'],['following','Following']],kind,'friends-kind')}${ids.map(id=>{const a=author(id);return `<button class="list-row" data-go="author?id=${a.id}">${img(a.avatar,'avatar',a.name)}<span class="grow"><b>${esc(a.name)}</b><small style="display:block">${esc(a.location)}</small></span>${icon('arrow')}</button>`;}).join('')||empty('No users yet','Follow creators or add friends in Discover.')}${navButton('friend-add','Add friend','primary')}`;}
 function friendAdd(){const matches=authors.filter(a=>!view.friendSearch||a.name.toLowerCase().includes(view.friendSearch.toLowerCase()));return `${form('friend-search',field('Search name','keyword',view.friendSearch,'text','maxlength="50" placeholder="e.g. sophie"'),'Search')}${matches.map(a=>`<div class="list-row">${img(a.avatar,'avatar',a.name)}<div class="grow"><b>${esc(a.name)}</b><p class="muted">${esc(a.location)}</p></div>${action('friend-request',state.friends.includes(a.id)?'Friends':state.sentRequests.includes(a.id)?'Requested':'Request','text-btn',`data-id="${a.id}"`)}</div>`).join('')||empty('No matching users','Try sophie, oliver, luna, max or coco.')}`;}
@@ -355,31 +599,33 @@ function foods(){return `${state.foods.map(f=>`<div class="card"><div class="row
 const presetFoods=[['Daily Balance','MoonBack','Dog'],['Indoor Cat','Nature Care','Cat'],['Sensitive Care','Pet Wellness','Dog']];
 function foodSelect(){return presetFoods.map(([n,b,t],i)=>`<div class="card"><h4>${n}</h4><p class="muted">${b} · ${t}</p>${action('add-preset-food',state.foods.some(f=>f.name===n)?'Already in my foods':'Add to my foods','secondary',`data-index="${i}"`)}</div>`).join('')+navButton('foods','View my foods','primary');}
 function foodAdd(){return form('food',field('Food name','name','','text','required maxlength="60"')+field('Brand','brand','','text','required maxlength="40"')+selectField('Type','type',[['Dog','Dog'],['Cat','Cat']],'Dog'),'Save food');}
-const renderers={home,health,ai,discover,profile,monitor,login:loginV2,register:()=>auth('register'),forgot:()=>auth('forgot'),pets,'pet-edit':petEdit,'pet-detail':petDetail,devices,'device-add':deviceAdd,'device-detail':deviceDetail,translation,fence,trajectory,checkin,metric,report,records,'record-edit':recordEdit,vets,'vet-detail':vetDetail,consult,'consult-history':consultHistory,post,author:authorPage,publish,story,topic,messages,chat,friends,'friend-add':friendAdd,'friend-requests':friendRequests,mall,product,settings,personal,password,firmware,feedback,contact,about,agreement,membership,feeding,'feeding-edit':feedingEdit,foods,'food-select':foodSelect,'food-add':foodAdd,privacy,terms};
+const renderers={home,health,ai,discover,profile,monitor,login:loginV2,register:()=>auth('register'),forgot:()=>auth('forgot'),pets,'pet-edit':petEdit,'pet-detail':petDetail,devices,'device-add':deviceAdd,'device-detail':deviceDetail,translation,fence,trajectory,checkin,metric,report,records,'record-edit':recordEdit,vets,'vet-detail':vetDetail,consult,'consult-history':consultHistory,post,author:authorPage,publish,story,topic,messages,chat,friends,'friend-add':friendAdd,'friend-requests':friendRequests,mall,product,settings,personal,password,firmware,feedback,contact,about,agreement,membership,feeding,'feeding-edit':feedingEdit,foods,'food-select':foodSelect,'food-add':foodAdd,privacy,terms,genetic,'genetic-new':geneticNew,'genetic-report':geneticReport,vaccines,'vaccine-add':vaccineAdd,'device-bind':deviceBind};
 function render(keepScroll=false){
  const pos=$('#app-content').scrollTop,doc=docMap[current.page],group=doc.dataset.group;
  $('#top-tabs').innerHTML=modules.map(([r,t,i])=>`<button class="tab ${r===group?'active':''}" role="tab" aria-selected="${r===group}" data-go="${r}">${icon(i)}${t}</button>`).join('');
  $('#bottom-nav').innerHTML=modules.filter(m=>!['login','monitor'].includes(m[0])).map(([r,t,i])=>`<button data-go="${r}" class="${r===group?'active':''}" aria-label="App navigation ${t}" aria-current="${r===group?'page':'false'}">${icon(i)}<span>${({home:'Home',health:'Health',ai:'AI Butler',discover:'Discover',profile:'Profile'})[r]}</span></button>`).join('');
- const noNav=group==='login'||['post','publish'].includes(current.page);
+ const noNav=group==='login'||['post','publish','device-bind','genetic','genetic-new','genetic-report'].includes(current.page);
  $('#bottom-nav').hidden=noNav;
  $('#bottom-nav').style.display=noNav?'none':'flex';
  const main=['home','health','ai','discover','profile','login'].includes(current.page);
  let header=main?'':ib('back','Back','data-action="back"');
- header+=current.page==='home'?`${img('home_logo.png','app-logo','MoonBack')}<span class="spacer"></span>${`<button class="icon-btn${state.messagesRead?'':' has-unread'}" aria-label="Messages" data-go="messages">${icon('bell')}<span class="notif-dot"></span></button>`}${ib('plus','Add device','data-action="add-device-menu"')}`:(current.page==='login'?'':`<h2>${esc(titles[current.page]||doc.querySelector('h2').textContent)}</h2>`);
+ header+=current.page==='home'?`${img('home_logo.png','app-logo','MoonBack')}<span class="spacer"></span>${`<button class="icon-btn${state.messagesRead?'':' has-unread'}" aria-label="Messages" data-go="messages">${icon('bell')}<span class="notif-dot"></span></button>`}${ib('plus','Add device','data-action="add-device-menu"')}`:(current.page==='login'?'':`<h2>${esc(current.page==='pet-edit'&&param('id')?'Edit Pet':(titles[current.page]||doc.querySelector('h2').textContent))}</h2>`);
  if(current.page==='health')header+=ib('clock','Health records','data-go="records"');
- if(current.page==='ai')header+=ib('trash','Clear this pet’s chat','data-action="clear-ai"');
  if(current.page==='discover')header+=ib('plus','New post','data-go="publish"')+ib('comment','Messages','data-go="messages"');
  if(current.page==='profile')header+=ib('crown','Membership','data-go="membership"')+ib('settings','Settings','data-go="settings"');
+ if(current.page==='genetic')header+=ib('plus','Add Genetic Test','data-go="genetic-new"');
  $('#app-header').innerHTML=header;
  $('#app-content').classList.toggle('ds-page',current.page==='discover');
  $('#app-content').classList.toggle('has-composer',current.page==='post');
  $('#app-content').classList.toggle('has-publish',current.page==='publish');
+ $('#app-content').classList.toggle('has-ai-composer',current.page==='ai');
  $('.screen').classList.toggle('ds-screen',current.page==='discover');
  if(current.page==='discover'){const m=$('#app-header [data-go="messages"]');if(m){m.classList.add('has-unread');m.insertAdjacentHTML('beforeend','<span class="notif-dot"></span>');}}
  $('#app-header').classList.toggle('pe-head',current.page==='pet-edit');
  try{$('#app-content').innerHTML=renderers[current.page]();}catch(err){console.error('[MoonBack] Unable to render '+current.page,err);$('#app-content').innerHTML='<div class="empty">'+icon('paw')+'<strong>Something went wrong</strong>This page could not be displayed.'+navButton('home','Back to Home','primary')+'</div>';}
   if(current.page==='login'&&view.lgCooldownUntil>Date.now())lgStartTick();
  $('#app-content').scrollTop=keepScroll?pos:0;
+ if(current.page==='ai'&&!keepScroll){const ac=$('#app-content'),toEnd=()=>{ac.scrollTop=ac.scrollHeight;};toEnd();requestAnimationFrame(toEnd);setTimeout(toEnd,140);}
  docs.forEach(d=>d.hidden=d!==doc);
  $('#doc-module').textContent=moduleName(group);
  $('#page-picker').value=current.page;
@@ -395,28 +641,49 @@ function readRoute(){
  current={page,params:new URLSearchParams(q||'')};
  if(old!==page)view.postImage=0;
  if(page==='login'&&old!==page)view.lgStep='buttons';
+ if(page==='genetic-new'&&old!==page){view.gtStep='scan';view.gtKit='';view.gtPet=param('id')||'';}
+ if(page==='pet-edit'&&old!==page){newWiz(param('id')||'');}
+if(page==='device-bind'&&old!==page){newBind();}
  if(page==='pet-detail'){const p=state.pets.find(p=>p.id===param('id'));if(p)selectPet(p.id);}
  if(page==='device-detail'){const d=state.devices.find(d=>d.id===param('id'));if(d?.pet)selectPet(d.pet);}
  previousHash=raw;
  render();
 }
 function toast(t){clearTimeout(toastTimer);const el=$('#app-toast');el.textContent=t;el.hidden=false;toastTimer=setTimeout(()=>el.hidden=true,3400);}
-function modal(title,text,confirmText,callback,html=''){modalFocus=document.activeElement;modalCallback=callback;$('#modal-layer').innerHTML=`<div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title"><div class="row between"><h3 id="modal-title">${esc(title)}</h3>${ib('close','Close dialog','data-action="close-modal"')}</div><p>${esc(text)}</p>${html}<div class="row">${action('close-modal',confirmText?'Cancel':'Got it','secondary')}${confirmText?action('confirm-modal',esc(confirmText),'primary'):''}</div></div>`;$('#modal-layer').hidden=false;$('#modal-layer button').focus();}
+function modal(title,text,confirmText,callback,html=''){modalFocus=document.activeElement;modalCallback=callback;$('#modal-layer').innerHTML=`<div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title"><div class="row between"><h3 id="modal-title">${esc(title)}</h3>${ib('close','Close dialog','data-action="close-modal"')}</div>${text?`<p>${esc(text)}</p>`:""}${html}<div class="row">${action('close-modal',confirmText?'Cancel':'Got it','secondary')}${confirmText?action('confirm-modal',esc(confirmText),'primary'):''}</div></div>`;$('#modal-layer').hidden=false;$('#modal-layer button').focus();}
 function closeModal(){if($('#modal-layer').hidden)return;$('#modal-layer').hidden=true;modalCallback=null;if(modalFocus?.isConnected)modalFocus.focus();}
 function confirm(title,text,callback){modal(title,text,'Confirm',callback);}
 function today(){const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;}
 function now(){return new Date().toLocaleString('zh-CN',{hour12:false});}
 function refresh(message='',keepScroll=true){save();render(keepScroll);if(message)toast(message);}
-function sendAi(text){if(!pet())return;const p=pet(),m=metrics(),ms=state.conversations[p.id]||(state.conversations[p.id]=[]);let reply;
- if(/sleep/i.test(text))reply=`${p.name} slept ${m.sleep.toFixed(1)} hours. Give it a few days, then read it together with activity and mood. Open Health to see the trend.`;
- else if(/care|advice/i.test(text))reply=`For ${p.name}, keep a steady routine, plenty of water and gentle activity. If discomfort persists, consult a vet.`;
- else if(/heart/i.test(text))reply=`${p.name} ’s heart rate is ${m.heart} bpm, breathing rate ${m.breath} breaths/min. See Health for metric trends.`;
+function sendAi(text){
+ if(!pet())return;
+ const p=pet(),m=metrics(),ms=state.conversations[p.id]||(state.conversations[p.id]=[]);
+ const at=view.aiAttach,t=String(text==null?'':text).trim();
+ if(!t&&!at){toast('Write a question or attach a photo / DNA report');return;}
+ let reply;
+ if(at&&at.kind==='report'){
+  const g=(state.geneticTests||[]).find(x=>x.id===at.id),r=g?gtReportFor(g):null;
+  const comp=r?r.composition.map(([n,v])=>`${n} ${v}%`).join(', '):'not available';
+  const flag=r?(r.risks.filter(x=>x[2]!=='ok').map(([n,v])=>`${n} · ${v}`).join('; ')||'nothing flagged'):'not available';
+  const traits=r?r.traits.map(([k,v])=>`${k}: ${v}`).join('; '):'';
+  reply=`From ${p.name}’s DNA report (kit ${at.kitId}) — breed mix: ${comp}. Genetic health: ${flag}. ${traits?traits+'. ':''}Ask me what any item means, or how to plan feeding and exercise around it.`;
+ }
+ else if(at&&at.kind==='photo'){
+  reply=`Thanks — I’ve saved the photo to this conversation for ${p.name}. This demo cannot read images, so tell me what you see (skin, stool, gait or a wound) and I’ll help you judge it together with today’s activity and sleep.`;
+ }
+ else if(/sleep/i.test(t))reply=`${p.name} slept ${m.sleep.toFixed(1)} hours. Give it a few days, then read it together with activity and mood. Open Health to see the trend.`;
+ else if(/care|advice/i.test(t))reply=`For ${p.name}, keep a steady routine, plenty of water and gentle activity. If discomfort persists, consult a vet.`;
+ else if(/heart/i.test(t))reply=`${p.name} ’s heart rate is ${m.heart} bpm, breathing rate ${m.breath} breaths/min. See Health for metric trends.`;
  else reply=`Today, ${p.name} walked ${m.steps.toLocaleString()} steps, was active for ${m.activity} hours and slept ${m.sleep.toFixed(1)} hours. Everything looks steady — ask me about sleep, heart rate or care tips.`;
- ms.push({role:'user',text},{role:'assistant',text:reply});refresh();$('#app-content').scrollTop=$('#app-content').scrollHeight;
+ ms.push({role:'user',text:t,attach:at&&at.kind==='report'?at.label:'',photo:at&&at.kind==='photo'?at.url:''},{role:'assistant',text:reply});
+ view.aiAttach=null;view.aiMenu=false;refresh();$('#app-content').scrollTop=$('#app-content').scrollHeight;
 }
 function deleteBy(collection,id,msg){confirm('Delete?',msg,()=>{state[collection]=state[collection].filter(x=>x.id!==id);refresh('Deleted');});}
 document.addEventListener('click',e=>{
  if(view.topicPanelOpen&&!e.target.closest('.topic-section')){view.topicPanelOpen=false;const l=document.querySelector('#app-content .topic-list');if(l)l.hidden=true;}
+ if(view.aiMenu&&current.page==='ai'&&!e.target.closest('.ai-attach-menu')&&!e.target.closest('.chat-plus')){view.aiMenu=false;render(true);}
+ if(view.aiPetMenu&&current.page==='ai'&&!e.target.closest('.cp-menu')&&!e.target.closest('.cp-name')){view.aiPetMenu=false;render(true);}
  const link=e.target.closest('[data-go]');if(link){e.preventDefault();go(link.dataset.go);return;}
  const b=e.target.closest('[data-action]');if(!b)return;
  const a=b.dataset.action,id=b.dataset.id,v=b.dataset.value;
@@ -431,6 +698,57 @@ document.addEventListener('click',e=>{
  case 'expired-scenario':go('login');setTimeout(()=>toast('Session expired, please sign in again (demo)'),100);break;
  case 'pet':selectPet(id);refresh();break;
  case 'pet-scan':{const el=$('#pe-device-id');if(el){el.value='868681071353013';toast('Device ID scanned');}break;}
+ case 'pet-step':{syncPetDraft();const w=wiz();if(w.done)break;const n=Number(v);if(n>=1&&n<=3){w.error='';w.step=n;render();}break;}
+ case 'pet-wiz-mode':{const w=wiz();w.mode=v;if(v!=='existing'){w.deviceId='';w.reassign=false;}w.error='';render(true);break;}
+ case 'pet-wiz-scan':{const w=wiz();w.deviceId='868681071353013';w.scanType='harness';w.error='';render(true);toast('Device ID scanned');break;}
+ case 'pet-wiz-breed':{syncPetDraft();const w=wiz();w.draft.breed=v;w.error='';render(true);break;}
+ case 'pet-wiz-size':{const w=wiz();w.sizeFilter=v;w.error='';render(true);break;}
+ case 'pet-wiz-back':{syncPetDraft();const w=wiz();w.error='';w.step=Math.max(1,w.step-1);render();break;}
+case 'pet-wiz-home':{view.petWiz=null;go('home');toast('Pet added - welcome to MoonBack!');break;}
+case 'bind-step':{syncBindDraft();const w=bindWiz();if(w.done)break;const n=Number(v);if(n>=1&&n<=3){w.error='';w.step=n;render();}break;}
+case 'bind-mode':{const w=bindWiz();w.error='';render(true);break;}
+case 'bind-scan':{const w=bindWiz();w.scanId='868681071353013';w.bindType='harness';w.error='';render(true);toast('Product scanned');break;}
+case 'bind-bind':{const w=bindWiz();if(!w.scanId){bindError('Scan a product first.');render(true);break;}state.devices.push({id:uid(),name:'Smart Dog Harness',type:'harness',serial:w.scanId,pet:'',online:true,battery:100});w.bound=true;w.deviceId=state.devices[state.devices.length-1].id;w.error='';w.step=3;save();render();break;}
+case 'bind-breed':{syncBindDraft();const w=bindWiz();w.draft.breed=v;w.error='';render(true);break;}
+case 'bind-size':{syncBindDraft();const w=bindWiz();w.sizeFilter=v;w.error='';render(true);break;}
+case 'bind-back':{syncBindDraft();const w=bindWiz();w.error='';w.step=Math.max(1,w.step-1);render();break;}
+case 'bind-next':{
+ syncBindDraft();const w=bindWiz(),d=w.draft;
+ if(w.step===1){if(!w.scanId){bindError('Scan a product first.');render(true);break;}w.error='';w.step=2;render();break;}
+ if(w.step===2){if(!String(d.name||'').trim()){bindError('Enter a pet name.');render(true);break;}if(!Number.isFinite(Number(d.weight))||Number(d.weight)<=0){bindError('Enter a valid weight.');render(true);break;}w.error='';w.step=3;render();break;}
+ if(w.step===3){if(Object.keys(petPhotoSlots).length<8){bindError('Please upload all 8 pet photos.');render(true);break;}const p={id:uid(),photo:'home_pet_coco.jpg',scene:'real_coco_sleep.jpg',status:'Resting now',type:'Dog',breed:String(d.breed||'Mixed breed'),sex:String(d.sex||'Male'),weight:Number(d.weight)||0,name:String(d.name||'').trim(),age:d.age||'',height:d.height||'',emotional:d.emotional||'',owner:d.owner||'',contact:d.contact||'',nextVax:d.nextVax||''};state.pets.push(p);const dev=state.devices.find(x=>x.id===w.deviceId);if(dev)dev.pet=p.id;state.selected=p.id;save();w.petId=p.id;w.done=true;w.error='';render();break;}
+ break;
+}
+case 'bind-home':{view.bindWiz=null;go('home');toast('Setup complete — welcome to MoonBack!');break;}
+case 'pet-wiz-next':{
+  syncPetDraft();const w=wiz(),d=w.draft;
+  if(w.step===1){
+   if(w.mode==='scan'&&!w.deviceId){wizError('Scan a device first, or choose to link one later.');render(true);break;}
+   if(w.mode==='existing'&&!w.deviceId){wizError('Choose a device, or choose to link one later.');render(true);break;}
+   w.error='';w.step=2;render();break;
+  }
+  if(w.step===2){
+   if(!String(d.name||'').trim()){wizError('Enter a pet name.');render(true);break;}
+   if(!Number.isFinite(Number(d.weight))||Number(d.weight)<=0){wizError('Enter a valid weight.');render(true);break;}
+   w.error='';w.step=3;render();break;
+  }
+  if(w.step===3){
+   if(!w.editId&&Object.keys(petPhotoSlots).length<8){wizError('Please upload all 8 pet photos.');render(true);break;}
+   let p=state.pets.find(x=>x.id===w.editId);
+   if(!p){p={id:uid(),photo:'home_pet_coco.jpg',scene:'real_coco_sleep.jpg',status:'Resting now'};state.pets.push(p);}
+   Object.assign(p,{name:String(d.name||'').trim(),type:'Dog',breed:d.breed||'Mixed breed',sex:d.sex||'Male',weight:Number(d.weight),age:d.age||'',height:d.height||'',emotional:d.emotional||'',owner:d.owner||'',contact:d.contact||'',nextVax:d.nextVax||'',deviceId:w.mode==='scan'?w.deviceId:''});
+   if(w.mode==='existing'&&w.deviceId){
+    const dev=state.devices.find(x=>x.id===w.deviceId);
+    if(dev){dev.pet=p.id;if(w.reassign)toast('Device owner changed to '+p.name);}
+   }else if(w.mode==='scan'&&w.deviceId){
+    const dev=state.devices.find(x=>x.serial===w.deviceId);
+    if(dev){dev.pet=p.id;toast('Device linked to '+p.name);}
+    else{state.devices.push({id:uid(),name:'Smart Dog Harness',type:'harness',serial:w.deviceId,pet:p.id,online:true,battery:100});toast('Device paired and linked to '+p.name);}
+   }
+   Object.keys(petPhotoSlots).forEach(k=>{URL.revokeObjectURL(petPhotoSlots[k]);delete petPhotoSlots[k];});
+   state.selected=p.id;save();w.newId=p.id;w.done=true;w.error='';render();break;
+  }
+ }
  case 'add-device-menu':{view.devPick='harness';modal('Add a device','','Confirm',()=>{if(view.devPick==='house'){toast('This device is still in production');return;}showHarnessSpec();},devPickHtml());tidyDeviceModal();break;}
  case 'pick-device':{if(v==='house'){toast('This device is still in production');break;}view.devPick=v;document.querySelectorAll('.dev-opt').forEach(b=>{const on=b.dataset.value===v;b.classList.toggle('selected',on);const c=b.querySelector('.dev-check');if(c)c.textContent=on?'✓':'';});break;}
  case 'quick':modal('Quick Access','Pick a feature to continue.',null,null,`<div class="setting-group">${row('My pets','pets','paw')}${row('Remote care','monitor','camera')}${row('Voice translation','translation','mic')}${row('Health','health','health')}${row('Geofence','fence','fence')}${row('Feeding plan','feeding','food')}</div>`);break;
@@ -443,14 +761,17 @@ case 'remove-photo':{const i=Number(b.dataset.index);pendingPhotos.splice(i,1);r
 case 'pick-topic':{const f=b.closest('form');const list=f.querySelector('.topic-list');if(list)list.style.display=list.style.display==='block'?'none':'block';break;}
 case 'set-topic':{const cur=String(publishDraft.tags||'').split(/[,\s]+/).filter(Boolean);if(!cur.includes(v))cur.push(v);publishDraft.tags=cur.join(' ');render(true);break;}
  case 'feed':if(v==='for-you'||v==='following'){view.feed=v;view.discoverTopic='';}else{view.feed='for-you';view.discoverTopic=v;}render();break;
+ case 'cmt-reply':view.replyTo={post:param('id'),index:Number(b.dataset.index),name:b.dataset.name};render(true);{const i=$('#app-content .cmt-input');if(i)i.focus();}break;
+ case 'cmt-cancel':view.replyTo=null;render(true);break;
+ case 'msg-tab':view.msgTab=v;render(true);break;
  case 'profile-tab':view.profileTab=v;render(true);break;
  case 'device-filter':view.deviceFilter=v;render();break;
  case 'friends-kind':go('friends?kind='+v);break;
  case 'login-mode':view.loginMode=v;render();break;
- case 'demo-login':go('home');toast('Signed in with the demo account');break;
+ case 'demo-login':go('device-bind');toast('Signed in with the demo account');break;
  case 'lg-step':{if(v==='buttons')view.lgStep='buttons';else{view.lgStep='code';view.lgMode=v;}render();break;}
  case 'lg-agree-toggle':{const cb=$('#lg-agree');if(cb){cb.checked=!cb.checked;view.lgAgreed=cb.checked;const box=$('#lg-agree-box');if(box&&cb.checked)box.classList.remove('lg-warn');}break;}
- case 'lg-oauth':{if(!lgGate())break;go('home');toast('Signed in with '+v+' (demo)');break;}
+ case 'lg-oauth':{if(!lgGate())break;go('device-bind');toast('Signed in with '+v+' (demo)');break;}
  case 'lg-send':{if(!lgGate())break;const f=$('#app-content').querySelector('[data-form="lg-login"]');if(!f)break;const acct=String(f.elements.account.value||'').trim();const ok=view.lgMode==='phone'?/^[\d\s()\-]{10,20}$/.test(acct):/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(acct);f.querySelector('.form-error').textContent=ok?'':(view.lgMode==='phone'?'Enter a valid US mobile number.':'Enter a valid email address.');if(!ok)break;view.lgCooldownUntil=Date.now()+60000;lgStartTick();toast('Demo code sent - 123456');break;}
  case 'verification-code':modal('Verification code','The code is 123456. No SMS or email is sent.');break;
  case 'logout':confirm('Sign out?','You will go to the sign-in page; pets and demo content stay in this browser.',()=>{go('login');toast('Signed out');});break;
@@ -462,8 +783,14 @@ case 'set-topic':{const cur=String(publishDraft.tags||'').split(/[,\s]+/).filter
  case 'post-prev':{const p=state.posts.find(p=>p.id===param('id'));if(p)view.postImage=(view.postImage+postPhotos(p).length-1)%postPhotos(p).length;render(true);break;}
  case 'share':modal('Share this demo post','Send the whole folder when sharing locally; this link only works on a computer that has the same prototype.',null,null,`<input aria-label="Local demo page URL" readonly style="width:100%;padding:10px;font-size:10px" value="${esc(location.href.split('#')[0]+'#post?id='+id)}">`);break;
  case 'ai-suggest':sendAi(b.dataset.text);break;
+ case 'ai-attach':{view.aiMenu=!view.aiMenu;view.aiPetMenu=false;render(true);break;}
+ case 'ai-pet':{view.aiPetMenu=!view.aiPetMenu;view.aiMenu=false;render(true);break;}
+ case 'ai-pet-pick':{view.aiPetMenu=false;selectPet(id);refresh();break;}
+ case 'ai-pick-photo':{view.aiMenu=false;render(true);const inp=$('#app-content').querySelector('[data-change="ai-photo"]');if(inp){inp.value='';inp.click();}break;}
+ case 'ai-attach-report':{const g=state.geneticTests.find(x=>x.id===id);if(!g)break;view.aiAttach={kind:'report',id:g.id,kitId:g.kitId,label:'DNA report · '+g.kitId};view.aiMenu=false;render(true);const ta=$('#app-content .chat-compose input[name="message"]');if(ta)ta.focus();break;}
+ case 'ai-detach':{if(view.aiAttach&&view.aiAttach.url)URL.revokeObjectURL(view.aiAttach.url);view.aiAttach=null;render(true);break;}
  case 'clear-ai':if(pet())confirm('Clear this pet’s chat?','Clears the local demo conversation for this pet only.',()=>{state.conversations[pet().id]=[];refresh('Conversation cleared');});break;
- case 'delete-pet':confirm('Delete this pet?','This removes the demo pet, its health records and feeding plan, and unlinks demo devices. Use Reset demo to restore the samples.',()=>{state.pets=state.pets.filter(p=>p.id!==id);state.devices.forEach(d=>{if(d.pet===id)d.pet='';});state.records=state.records.filter(r=>r.pet!==id);state.feeding=state.feeding.filter(f=>f.pet!==id);delete state.conversations[id];delete state.fences[id];delete state.healthChecks[id];state.selected=state.pets[0]?.id||'';save();go('pets');toast('Pet deleted');});break;
+ case 'delete-pet':confirm('Delete this pet?','This removes the demo pet, its health records and feeding plan, and unlinks demo devices. Use Reset demo to restore the samples.',()=>{state.pets=state.pets.filter(p=>p.id!==id);state.devices.forEach(d=>{if(d.pet===id)d.pet='';});state.records=state.records.filter(r=>r.pet!==id);state.geneticTests=(state.geneticTests||[]).filter(g=>g.pet!==id);state.vaccinations=(state.vaccinations||[]).filter(v=>v.pet!==id);state.feeding=state.feeding.filter(f=>f.pet!==id);delete state.conversations[id];delete state.fences[id];delete state.healthChecks[id];state.selected=state.pets[0]?.id||'';save();go('pets');toast('Pet deleted');});break;
  case 'unbind-device':confirm('Unpair?','Removes the demo device from this browser only; real hardware is not affected.',()=>{state.devices=state.devices.filter(d=>d.id!==id);save();go('devices');toast('Device unpaired');});break;
  case 'listen':case 'talk':case 'sound':{const d=state.devices.find(d=>d.id===view.camera);if(!d?.online){toast('Device is offline — restore the demo online state in device details');break;}if(a!=='sound'){view[a]=!view[a];render(true);}toast(a==='sound'?'Simulated playing a sound to the pet':`${a==='listen'?'Listen':'Talk'}${view[a]?'on':'off'} (button state only, no audio captured)`);break;}
  case 'translation-type':if(view.recording){toast('Stop the current demo recording first');break;}if(v!=='Dog'&&v!=='Cat')break;view.translationType=v;view.translationDirection=(view.transDir||{})[v]||'pet-human';view.translationStage='idle';view.translationResult='';render(true);break;
@@ -509,14 +836,51 @@ case 'set-topic':{const cur=String(publishDraft.tags||'').split(/[,\s]+/).filter
  case 'food-detail':{const f=state.foods.find(f=>f.id===id);if(f)modal(f.name,`Brand: ${f.brand}\nType: ${f.type}\nFoods can be picked in a feeding plan; no real product or order is involved.`);break;}
  case 'delete-food':confirm('Delete this food?','Feeding plans stay; the food selection is cleared.',()=>{state.foods=state.foods.filter(f=>f.id!==id);state.feeding.forEach(f=>{if(f.food===id)f.food='';});refresh('Food deleted');});break;
  case 'add-preset-food':{const [name,brand,type]=presetFoods[Number(b.dataset.index)];if(state.foods.some(f=>f.name===name)){toast('Already in my foods');break;}state.foods.push({id:uid(),name,brand,type});refresh('Added to my foods');break;}
+ /* Genetic Test & Vaccination */
+ case 'gt-scan':view.gtKit='MB-DNA-'+String(Date.now()).slice(-6);view.gtStep='info';render(true);break;
+ case 'gt-back':view.gtStep='scan';render(true);break;
+ case 'gt-track':{const g=state.geneticTests.find(x=>x.id===id);if(!g)break;
+   modal('Tracking number','','Save',()=>{
+    const car=document.querySelector('#gt-carrier'),inp=document.querySelector('#gt-track-input');
+    const carrier=String(car?.value||'').trim(),val=String(inp?.value||'').trim();
+    if(!val){toast('Enter a tracking number');return;}
+    g.carrier=carrier;g.tracking=val;save();render(true);toast('Tracking details saved');
+   },`<label class="field dev-field">Shipping company<input id="gt-carrier" value="${esc(g.carrier||'')}" maxlength="60" placeholder="e.g. FedEx, UPS, USPS"></label><label class="field dev-field">Tracking number<input id="gt-track-input" value="${esc(g.tracking||'')}" maxlength="60" placeholder="e.g. 9400 1102 3344 5566"></label>`);
+   const pel=document.querySelector('#modal-layer .modal');if(pel)pel.classList.add('gt-track-modal');
+   break;}
+ case 'gt-advance':{const g=state.geneticTests.find(x=>x.id===id);if(!g)break;
+   if(g.status==='submitted'){g.status='shipping';g.shippingAt=today();save();render(true);toast('Sample is in transit · add the tracking number');}
+   else if(g.status==='shipping'){g.status='testing';g.testingAt=today();save();render(true);toast('Sample is now being tested · status read-only');}
+   else if(g.status==='testing'){g.status='ready';g.reportAt=today();save();render(true);toast('Genetic test report is ready');}
+   break;}
+ case 'gt-toggle-track':{view.gtExpanded=view.gtExpanded||{};const cur=(view.gtExpanded[id]!==false);view.gtExpanded[id]=!cur;render(true);break;}
+ case 'vac-delete':deleteBy('vaccinations',id,'Delete this local vaccination record.');break;
  }
 });
 document.addEventListener('change',async e=>{
  const el=e.target,a=el.dataset.change;if(!a)return;
  switch(a){
  case 'pet-photo':{const i=Number(el.dataset.index),file=el.files&&el.files[0];if(!file)break;if(!/^image\//.test(file.type)){toast('Please choose an image file');break;}if(petPhotoSlots[i])URL.revokeObjectURL(petPhotoSlots[i]);petPhotoSlots[i]=URL.createObjectURL(file);const label=el.closest('.pe-slot');if(label){const c=label.querySelector('.pe-cam-ic');if(c)c.remove();let im=label.querySelector('.pe-slot-img');if(!im){im=document.createElement('img');im.className='pe-slot-img';label.appendChild(im);}im.src=petPhotoSlots[i];}toast('Photo '+PET_ANGLES[i][1]+' added');break;}
+ case 'bind-photo':{const i=Number(el.dataset.index),file=el.files&&el.files[0];if(!file)break;if(!/^image\//.test(file.type)){toast('Please choose an image file');break;}if(petPhotoSlots[i])URL.revokeObjectURL(petPhotoSlots[i]);petPhotoSlots[i]=URL.createObjectURL(file);const label=el.closest('.pe-slot');if(label){const c=label.querySelector('.pe-cam-ic');if(c)c.remove();let im=label.querySelector('.pe-slot-img');if(!im){im=document.createElement('img');im.className='pe-slot-img';label.appendChild(im);}im.src=petPhotoSlots[i];}toast('Photo '+PET_ANGLES[i][1]+' added');break;}
  case 'select-pet':selectPet(el.value);refresh();break;
+ case 'ai-photo':{
+  const file=el.files&&el.files[0];if(!file)break;
+  if(!/^image\//.test(file.type)){toast('Please choose an image file');break;}
+  if(view.aiAttach&&view.aiAttach.url)URL.revokeObjectURL(view.aiAttach.url);
+  view.aiAttach={kind:'photo',url:URL.createObjectURL(file),label:file.name||'Photo'};
+  render(true);toast('Photo attached — add a question, then send');break;
+ }
+ case 'gt-pet':view.gtPet=el.value||'';render(true);break;
  case 'consult-pet':break;
+case 'pet-wiz-device':{
+ const w=wiz();w.deviceId=el.value||'';w.reassign=false;render(true);
+ const dev=state.devices.find(x=>x.id===w.deviceId);
+ w.scanType=dev?dev.type:'harness';
+ if(dev&&dev.pet&&dev.pet!==w.editId){
+  confirm('Change device owner?',dev.name+' is already linked to '+petName(dev.pet)+'. Change the owner to this pet?',()=>{const ww=wiz();ww.reassign=true;render(true);toast('Owner will be changed on save');});
+ }
+ break;
+}
  case 'health-date':view.date=el.value||today();render(true);break;
  case 'trajectory-date':view.date=el.value||today();render(true);break;
  case 'device-online':{const d=state.devices.find(d=>d.id===el.dataset.id);if(d)d.online=el.checked;refresh(el.checked?'Device set to Online (demo)':'Device set to Offline (demo)');break;}
@@ -553,15 +917,15 @@ document.addEventListener('submit',e=>{
    if(!ok){error(view.lgMode==='phone'?'Enter a valid US mobile number.':'Enter a valid email address.');return;}
    if(!/^\d{6}$/.test(code)){error('Enter the 6-digit verification code.');return;}
    if(code!=='123456'){error('Demo verification code is 123456.');return;}
-   f.reset();go('home');toast('Signed in (demo)');break;
-  }
+  f.reset();go('device-bind');toast('Signed in (demo)');break;
+ }
  case 'login':case 'register':case 'forgot':{
   if(view.loginMode==='phone'&&!/^\+?[\d\s-]{6,20}$/.test(s('account'))){error('Enter a valid phone number, e.g. +1 415 555 0132.');return;}
   if(view.loginMode==='email'&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s('account'))){error('Enter a valid email address.');return;}
   if(s('password').length<6){error('Password must be at least 6 characters.');return;}
   if(kind==='register'&&s('password')!==s('confirm')){error('The passwords do not match.');return;}
   if(kind==='forgot'&&s('code')!=='123456'){error('The verification code is 123456.');return;}
-  f.reset();go(kind==='forgot'?'login':'home');toast(kind==='forgot'?'Demo reset complete; no real password changed':kind==='register'?'Demo sign-up complete':'Signed in with the demo account');break;
+  f.reset();go(kind==='forgot'?'login':'device-bind');toast(kind==='forgot'?'Demo reset complete; no real password changed':kind==='register'?'Demo sign-up complete':'Signed in with the demo account');break;
  }
  case 'pet':{
   if(!s('name')){error('Enter a pet name.');return;}
@@ -579,8 +943,8 @@ document.addEventListener('submit',e=>{
  }
  case 'fence':{const p=pet(),map=$('#fence-map'),old=state.fences[p.id]||{x:50,y:50};if(!s('name')){error('Please name the geofence.');return;}state.fences[p.id]={name:s('name'),radius:Number(s('radius')),enabled:d.has('enabled'),x:Number(map.dataset.x||old.x),y:Number(map.dataset.y||old.y)};refresh('Geofence saved (demo)');break;}
  case 'checkin':if(!s('place')){error('Please enter a check-in place.');return;}state.checkins.unshift({pet:pet().id,place:s('place'),time:now()});refresh('Checked in (demo)');break;
- case 'ai':if(s('message'))sendAi(s('message'));else error('Please enter a message.');break;
- case 'comment':{const p=state.posts.find(p=>p.id===param('id'));if(p&&s('comment')){p.comments.push({name:state.profile.name,text:s('comment')});refresh('Comment added to the local demo');}else error('Please enter a comment.');break;}
+ case 'ai':if(s('message')||view.aiAttach)sendAi(s('message'));else error('Please enter a message, or attach a photo or DNA report.');break;
+ case 'comment':{const p=state.posts.find(p=>p.id===param('id'));if(p&&s('comment')){const rp=view.replyTo,tg=(rp&&rp.post===p.id)?p.comments[rp.index]:null,to=tg?tg.name:null,root=tg?(tg.parent==null?rp.index:tg.parent):null;if(to){p.comments.push({name:state.profile.name,text:s('comment'),replyTo:to,parent:root});}else{p.comments.push({name:state.profile.name,text:s('comment')});}view.replyTo=null;refresh(to?'Reply added to the local demo':'Comment added to the local demo');}else error('Please enter a comment.');break;}
  case 'record':{
   if(!s('name')){error('Please name the record.');return;}if(s('next')&&s('next')<s('date')){error('The next date cannot be earlier than the record date.');return;}
   let r=state.records.find(r=>r.id===param('id'));if(!r){r={id:uid(),pet:pet().id};state.records.push(r);}Object.assign(r,{name:s('name'),date:s('date'),next:s('next'),note:s('note')});save();go('records');toast('Health record saved');break;
@@ -605,6 +969,18 @@ document.addEventListener('submit',e=>{
   if(!s('name')){error('Please name the plan.');return;}let f=state.feeding.find(f=>f.id===param('id'));if(!f){f={id:uid(),pet:pet().id,enabled:true};state.feeding.push(f);}Object.assign(f,{name:s('name'),time:s('time'),grams:Number(s('grams')),food:s('food')});save();go('feeding');toast('Feeding plan saved; no hardware command is sent');break;
  }
  case 'food':if(!s('name')||!s('brand')){error('Please fill in the food name and brand.');return;}state.foods.push({id:uid(),name:s('name'),brand:s('brand'),type:s('type')});save();go('foods');toast('Food saved');break;
+ case 'gt-info':{
+   if(!s('pet')){error('Pick a pet.');return;}
+   const p0=state.pets.find(x=>x.id===s('pet'))||pet();const kit=view.gtKit||'MB-DNA-'+String(Date.now()).slice(-6);
+   const rec={id:uid(),pet:s('pet'),kitId:kit,petInfo:{name:p0.name,type:s('type')||'Dog',breed:s('breed')||'Mixed breed',sex:s('sex'),birth:s('birth'),weight:Number(s('weight'))||p0.weight},status:'submitted',carrier:'',tracking:'',submittedAt:today(),shippingAt:'',testingAt:'',reportAt:''};
+   state.geneticTests.unshift(rec);view.gtStep='scan';view.gtKit='';view.gtPet='';save();go('genetic');toast('Genetic test created · status: Sample submitted');break;
+ }
+ case 'vaccine':{
+   if(!s('name')){error('Enter the vaccine name.');return;}
+   if(s('next')&&s('next')<s('date')){error('The next due date cannot be earlier than the administered date.');return;}
+   state.vaccinations.unshift({id:uid(),pet:pet().id,name:s('name'),date:s('date'),next:s('next'),dose:s('dose'),vet:s('vet'),note:s('note')});
+   save();go('vaccines');toast('Vaccination record saved');break;
+ }
  }
 });
 function downloadReport(){const p=pet(),m=metrics();if(!p)return;const content=`<!doctype html><html lang="en"><meta charset="utf-8"><title>${esc(p.name)} · Health summary</title><style>body{font:16px/1.8 sans-serif;max-width:760px;margin:50px auto;padding:24px;color:#273b52}table{width:100%;border-collapse:collapse}td{padding:12px;border-bottom:1px solid #ddd}small{color:#7a8793}</style><h1>MoonBack · ${esc(p.name)} · health summary</h1><p>${esc(p.breed)} · ${p.weight} kg</p><p>Exported: ${esc(now())}</p><table>${Object.entries(metricInfo).map(([k,v])=>`<tr><td>${v[0]}</td><td>${m[k]} ${v[1]}</td></tr>`).join('')}</table><p><small>This HTML summary is exported from a local prototype. All metrics are samples, not a medical report.</small></p></html>`;const blob=new Blob([content],{type:'text/html;charset=utf-8'}),u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download='MoonBack-'+p.name.replace(/[^\p{L}\p{N}_-]/gu,'_')+'-health-summary.html';a.click();setTimeout(()=>URL.revokeObjectURL(u),10000);toast('Exported this pet’s HTML summary');}

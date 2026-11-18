@@ -1,0 +1,19 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>MoonBack · 使用与编辑指南</title><style>body{font:15px/1.95 -apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif;color:#273b52;background:#f6f7f8;margin:0}main{max-width:850px;margin:45px auto;padding:35px 42px;background:white;border:1px solid #e2e7ec;border-radius:18px}h1{font-size:28px}h2{font-size:19px;margin-top:30px}h3{font-size:15px}a{color:#2165b0}code{background:#edf3f8;padding:3px 6px;border-radius:4px}pre{white-space:pre-wrap;padding:18px;background:#f2f5f8;border-radius:10px;font-size:12px}li{margin:8px 0}.note{background:#eef4fa;padding:15px 20px;border-radius:10px;color:#57708a}@media(max-width:600px){main{margin:12px;padding:22px}}</style><main><a href="index.html">← 打开交互原型</a><h1>MoonBack 使用与编辑指南</h1><p>一份可以直接转发的离线交互原型：左侧操作 App，右侧阅读功能说明。</p><h2>1. 怎样打开与转发？</h2><ol><li>先把整个 ZIP 压缩包解压到一个普通文件夹。不要只在压缩软件中打开单个 HTML。</li><li>双击文件夹中的 <code>index.html</code>，用 Chrome、Edge、Safari 或 Firefox 等现代桌面浏览器打开。</li><li>无需安装开发环境、启动服务或连接互联网。Windows 与 macOS 都可使用。</li><li>转发时发送整个 ZIP，或将完整文件夹重新压缩。<strong>不要只发 index.html</strong>，因为图片、样式和脚本也需要一起保留。</li></ol><h2>2. 怎样体验？</h2><ul><li>顶部 Tab 切换主要模块；手机底部菜单与顶部 Tab 双向同步。</li><li>手机画面内可以单独滚动。点击按钮可进入子页面，右侧说明随页面更新。</li><li>右上方“页面快速定位”可直接查看所有页面，适合评审时快速跳转。</li><li>默认展示 Lucky、Milo、Coco，以及多台示例设备。可新增宠物、绑定演示设备、切换健康趋势、发送 AI 演示消息、发布图文、点赞评论和修改个人资料。</li><li>手机下方提供登录、空数据与登录过期场景；右上角“重置演示”可恢复初始示例。</li><li>本地模拟登录可填手机号 <code>13800138000</code> 或邮箱 <code>demo@example.com</code>；密码填写任意至少 6 位的演示字符并勾选演示协议。也可点击“一键体验演示账号”。找回密码的演示验证码是 <code>123456</code>。</li></ul><h2>3. 怎样修改右侧说明？</h2><ol><li>右键 <code>index.html</code>，选择用文本编辑器打开（例如 VS Code、Windows 记事本；macOS 文本编辑请使用纯文本模式）。</li><li>搜索 <code>右侧功能说明编辑区</code>，或直接搜索页面标题，如 <code>首页 · 宠物状态总览</code>。</li><li>每个页面有一个独立的 <code>section</code>。修改其中 <code>h2</code>、<code>h3</code>、<code>p</code>、<code>li</code> 内的文字；也可以增加段落或列表项。</li><li>以 UTF-8 格式保存。确保文件名仍是 <code>index.html</code>，不是 <code>index.html.txt</code>。</li><li>回到浏览器刷新即可看到修改，不需要改 JavaScript，不需要重新构建。左侧演示操作不会覆盖 HTML 中修改的说明。</li></ol><pre>&lt;!-- ===== 首页 · 宠物状态总览：修改以下文字即可 ===== --&gt;
+&lt;section class="doc-page" id="doc-home"
+         data-page="home" data-group="home" hidden&gt;
+  &lt;h2&gt;首页 · 宠物状态总览&lt;/h2&gt;
+  &lt;p class="lead"&gt;这里可以修改页面副标题。&lt;/p&gt;
+  &lt;h3&gt;页面功能&lt;/h3&gt;
+  &lt;p&gt;这里写你自己的功能介绍。&lt;/p&gt;
+  &lt;h3&gt;可以怎样操作&lt;/h3&gt;
+  &lt;ul&gt;
+    &lt;li&gt;这里写第一项操作说明。&lt;/li&gt;
+    &lt;li&gt;这里写第二项操作说明。&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/section&gt;</pre><p class="note">请保留 section 的 <code>id</code>、<code>data-page</code>、<code>data-group</code> 和 <code>class</code>，不要修改它们的值，也不要删除 <code>hidden</code>。这些属性用于页面联动。<br>文字中如需写“&lt;”或“&amp;”，请分别使用 <code>&amp;lt;</code> 和 <code>&amp;amp;</code>。</p><h2>4. 文件夹结构</h2><pre>MoonBack-Interactive/
+├── index.html       ← 双击打开；右侧说明直接在这里修改
+├── 使用说明.html     ← 本指南
+├── 请先阅读.txt      ← 快速开始
+├── style.css        ← 网页与 App 的样式
+├── app.js           ← 导航、交互、模拟数据
+└── assets/          ← 图片与字体，必须完整保留</pre><h2>5. 数据与模拟范围</h2><ul><li>普通演示资料和互动会尝试保存在当前浏览器的本地存储中。不同浏览器、不同文件路径可能有各自的数据；修改后的演示状态不会自动写回 HTML，也不会随 ZIP 发给别人。</li><li>如果浏览器禁用了本地存储，页面会提示“会话模式”，刷新或关闭后可能恢复初始数据。</li><li>上传的社区图片只在当前打开会话保留；重新打开后，已发布图文使用内置替代图。图片不会上传到网络。</li><li>账号、AI、兽医、录音翻译、监控画面、地图轨迹、购物、会员和固件升级都属于本地模拟，不连接真实服务，不采集麦克风或定位，不产生费用。</li><li>报告下载为当前宠物的 HTML 演示摘要，不是 PDF 或正式医疗报告。</li><li>语言偏好只记录所选值，原型保留当前 Demo 中英混合的界面文案。</li><li>“重置演示”只重置浏览器中的示例数据，不会改变你在 HTML 中编辑过的右侧说明。</li></ul><h2>6. 常见问题</h2><h3>只看到说明，没有手机界面？</h3><p>确认压缩包已完整解压，<code>app.js</code> 与 <code>style.css</code> 在入口旁边，并使用允许 JavaScript 的普通浏览器。聊天软件内置预览器、邮件预览器或压缩包预览器可能不执行脚本。</p><h3>图片没有显示？</h3><p>请确认整个 <code>assets</code> 文件夹已一起解压，且没有改动文件名或相对位置。</p><h3>怎样把说明修改版发给别人？</h3><p>保存 HTML 后，将完整文件夹重新压缩并发送；对方解压后双击 <code>index.html</code> 即可看到你修改后的文字。</p><a href="index.html">开始体验 MoonBack →</a></main></html>
