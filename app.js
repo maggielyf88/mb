@@ -5,8 +5,18 @@ const $ = s => document.querySelector(s);
 const esc = v => String(v == null ? '' : v).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const paths = {
  star:'M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z',
- home:'M3 10 12 3l9 7v10h-6v-7H9v7H3z',health:'M3 12h4l3-7 4 14 3-7h4',ai:'M5 9 4 3l6 3h4l6-3-1 6a8 8 0 1 1-14 0M8 12h1m6 0h1m-6 4q2 2 4 0',discover:'M20 12a8 8 0 1 1-8-8m0 4a4 4 0 1 0 4 4m-4 0 9-9m-5 0h5v5',profile:'M8 7a4 4 0 1 0 8 0 4 4 0 1 0-8 0M4 21v-3a8 6 0 0 1 16 0v3',back:'m14 5-7 7 7 7',arrow:'m9 5 7 7-7 7',plus:'M12 4v16M4 12h16',bell:'M5 17h14l-2-4V9a5 5 0 0 0-10 0v4l-2 4m5 3h4',camera:'M3 7h12v13H3zM15 11l6-4v13l-6-4M6 4h6',mic:'M9 6a3 3 0 0 1 6 0v6a3 3 0 0 1-6 0V6m-3 5v1a6 6 0 0 0 12 0v-1m-6 7v4m-3 0h6',paw:'M9 12q3-4 6 0l3 5q0 4-6 2-6 2-6-2zM5 7a1.5 2 0 1 0 0 .1M10 4a1.5 2 0 1 0 0 .1M15 4a1.5 2 0 1 0 0 .1M20 7a1.5 2 0 1 0 0 .1',settings:'m9 3-1 3-3 1-2 3 2 2-1 3 2 3 3-1 3 3 3-3 3 1 2-3-1-3 2-2-2-3-3-1-1-3zM9 12a3 3 0 1 0 6 0 3 3 0 1 0-6 0',heart:'M12 21 3 12C-3 3 9 0 12 7c3-7 15-4 9 5z',comment:'M21 11a9 8 0 0 1-13 7l-6 3 2-6a9 8 0 1 1 17-4',bookmark:'M6 3h12v18l-6-4-6 4z',send:'M3 3l18 8-8 3-3 8-7-19m0 0 10 11',moon:'M19 15A8 8 0 0 1 9 5a8 8 0 1 0 10 10',chart:'M4 20V10h4v10m2 0V6h4v14m2 0V2h4v18M2 20h20',device:'M7 3h10v18H7zM10 17h4',fence:'m12 3 8 6-3 11H7L4 9zM12 3v4M4 9l4 2m9 0 3-2',food:'M5 8h14l-2 12H7zM3 8h18M9 4h6',check:'m5 12 4 4L20 5',logout:'M9 4H4v16h5m4-13 5 5-5 5m-5-5h13',crown:'m3 6 5 5 4-7 4 7 5-5-3 14H6z',volume:'M3 9h5l5-5v16l-5-5H3zM16 8q4 4 0 8m3-11q7 7 0 14',play:'m8 4 12 8-12 8z',trash:'M4 6h16M9 6V3h6v3M6 6l1 15h10l1-15M10 10v7m4-7v7',edit:'m4 16 12-12 4 4L8 20l-5 1zM14 6l4 4',pin:'M12 22S4 14 4 9a8 8 0 1 1 16 0c0 5-8 13-8 13M9 9a3 3 0 1 0 6 0 3 3 0 1 0-6 0',lock:'M5 10h14v11H5zM8 10V6a4 4 0 0 1 8 0v4',search:'M10 3a7 7 0 1 0 0 14 7 7 0 1 0 0-14m5 12 6 6',share:'M12 16V2m-5 5 5-5 5 5M5 11H3v10h18V11h-2',refresh:'M20 7a9 9 0 1 0 1 9M20 2v6h-6',info:'M12 3a9 9 0 1 0 0 18 9 9 0 1 0 0-18m0 7v7m0-11v1',mail:'M3 5h18v14H3zM3 5l9 7 9-7',clock:'M12 3a9 9 0 1 0 0 18 9 9 0 1 0 0-18m0 4v6l4 2',close:'m5 5 14 14M19 5 5 19',alert:'M12 2 1 21h22zM12 8v6M12 16v1',dna:'M4 3c0 6 16 6 16 12S4 21 4 21M20 3C20 9 4 9 4 15s16 6 16 6M7 6h10M7 12h10M7 18h10',syringe:'M18 2l4 4M19.5 3.5l-1 1M17 5L5 17l-2 4 4-2 12-12M13 5l4 4M10 8l4 4M7 11l4 4M3 21l2-2',truck:'M3 6h11v10H3zM14 9h4l3 3v4h-7zM7 20a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM18 20a2 2 0 1 0 0-4 2 2 0 0 0 0 4z',vial:'M9 3h6M10 3v7l-5 9a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-5-9V3M8 15h8',calcheck:'M4 6h16v15H4zM4 10h16M8 3v5M16 3v5m-6 9 2 2 4-4'
+ home:'M3 10 12 3l9 7v10h-6v-7H9v7H3z',health:'M3 12h4l3-7 4 14 3-7h4',ai:'M5 9 4 3l6 3h4l6-3-1 6a8 8 0 1 1-14 0M8 12h1m6 0h1m-6 4q2 2 4 0',discover:'M20 12a8 8 0 1 1-8-8m0 4a4 4 0 1 0 4 4m-4 0 9-9m-5 0h5v5',profile:'M8 7a4 4 0 1 0 8 0 4 4 0 1 0-8 0M4 21v-3a8 6 0 0 1 16 0v3',back:'m14 5-7 7 7 7',arrow:'m9 5 7 7-7 7',plus:'M12 4v16M4 12h16',bell:'M5 17h14l-2-4V9a5 5 0 0 0-10 0v4l-2 4m5 3h4',camera:'M3 7h12v13H3zM15 11l6-4v13l-6-4M6 4h6',mic:'M9 6a3 3 0 0 1 6 0v6a3 3 0 0 1-6 0V6m-3 5v1a6 6 0 0 0 12 0v-1m-6 7v4m-3 0h6',paw:'M9 12q3-4 6 0l3 5q0 4-6 2-6 2-6-2zM5 7a1.5 2 0 1 0 0 .1M10 4a1.5 2 0 1 0 0 .1M15 4a1.5 2 0 1 0 0 .1M20 7a1.5 2 0 1 0 0 .1',settings:'m9 3-1 3-3 1-2 3 2 2-1 3 2 3 3-1 3 3 3-3 3 1 2-3-1-3 2-2-2-3-3-1-1-3zM9 12a3 3 0 1 0 6 0 3 3 0 1 0-6 0',heart:'M12 21 3 12C-3 3 9 0 12 7c3-7 15-4 9 5z',comment:'M21 11a9 8 0 0 1-13 7l-6 3 2-6a9 8 0 1 1 17-4',bookmark:'M6 3h12v18l-6-4-6 4z',send:'M3 3l18 8-8 3-3 8-7-19m0 0 10 11',moon:'M19 15A8 8 0 0 1 9 5a8 8 0 1 0 10 10',chart:'M4 20V10h4v10m2 0V6h4v14m2 0V2h4v18M2 20h20',device:'M7 3h10v18H7zM10 17h4',fence:'m12 3 8 6-3 11H7L4 9zM12 3v4M4 9l4 2m9 0 3-2',geofence:'M4 8V5.6A1.6 1.6 0 0 1 5.6 4H8M16 4h2.4A1.6 1.6 0 0 1 20 5.6V8M20 16v2.4a1.6 1.6 0 0 1-1.6 1.6H16M8 20H5.6A1.6 1.6 0 0 1 4 18.4V16M12 9.6a2.4 2.4 0 1 0 0 4.8 2.4 2.4 0 1 0 0-4.8',food:'M5 8h14l-2 12H7zM3 8h18M9 4h6',check:'m5 12 4 4L20 5',logout:'M9 4H4v16h5m4-13 5 5-5 5m-5-5h13',crown:'m3 6 5 5 4-7 4 7 5-5-3 14H6z',volume:'M3 9h5l5-5v16l-5-5H3zM16 8q4 4 0 8m3-11q7 7 0 14',play:'m8 4 12 8-12 8z',trash:'M4 6h16M9 6V3h6v3M6 6l1 15h10l1-15M10 10v7m4-7v7',edit:'m4 16 12-12 4 4L8 20l-5 1zM14 6l4 4',pin:'M12 22S4 14 4 9a8 8 0 1 1 16 0c0 5-8 13-8 13M9 9a3 3 0 1 0 6 0 3 3 0 1 0-6 0',lock:'M5 10h14v11H5zM8 10V6a4 4 0 0 1 8 0v4',search:'M10 3a7 7 0 1 0 0 14 7 7 0 1 0 0-14m5 12 6 6',share:'M12 16V2m-5 5 5-5 5 5M5 11H3v10h18V11h-2',refresh:'M20 7a9 9 0 1 0 1 9M20 2v6h-6',info:'M12 3a9 9 0 1 0 0 18 9 9 0 1 0 0-18m0 7v7m0-11v1',mail:'M3 5h18v14H3zM3 5l9 7 9-7',phone:'M6.6 3h3l1.6 4-2 1.4a13 13 0 0 0 6.4 6.4l1.4-2 4 1.6v3a2.6 2.6 0 0 1-2.9 2.6A19.5 19.5 0 0 1 4 5.9 2.6 2.6 0 0 1 6.6 3',clock:'M12 3a9 9 0 1 0 0 18 9 9 0 1 0 0-18m0 4v6l4 2',close:'m5 5 14 14M19 5 5 19',alert:'M12 2 1 21h22zM12 8v6M12 16v1',dna:'M4 3c0 6 16 6 16 12S4 21 4 21M20 3C20 9 4 9 4 15s16 6 16 6M7 6h10M7 12h10M7 18h10',syringe:'M18 2l4 4M19.5 3.5l-1 1M17 5L5 17l-2 4 4-2 12-12M13 5l4 4M10 8l4 4M7 11l4 4M3 21l2-2',truck:'M3 6h11v10H3zM14 9h4l3 3v4h-7zM7 20a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM18 20a2 2 0 1 0 0-4 2 2 0 0 0 0 4z',vial:'M9 3h6M10 3v7l-5 9a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-5-9V3M8 15h8',calcheck:'M4 6h16v15H4zM4 10h16M8 3v5M16 3v5m-6 9 2 2 4-4',file:'M6 3h7l5 5v13H6zM13 3v5h5M9 13h6M9 17h4',image:'M3 5h18v14H3zM3 16l4.5-4.5L12 16l3-3 6 6'
 };
+const BRANDS={
+ facebook:{vb:'0 0 320 512',d:'M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z'},
+ instagram:{vb:'0 0 448 512',d:'M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z'},
+ x:{vb:'0 0 512 512',d:'M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z'},
+ linkedin:{vb:'0 0 448 512',d:'M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z'},
+ reddit:{vb:'0 0 512 512',d:'M440.3 203.5c-15 0-28.2 6.2-37.9 15.9-35.7-24.7-83.8-40.6-137.1-42.3L293 52.3l88.2 19.8c0 21.6 17.6 39.2 39.2 39.2 22 0 39.7-18.1 39.7-39.7s-17.6-39.7-39.7-39.7c-15.4 0-28.7 9.3-35.3 22l-97.4-21.6c-4.9-1.3-9.7 2.2-11 7.1L246.3 177c-52.9 2.2-100.5 18.1-136.3 42.8-9.7-10.1-23.4-16.3-38.4-16.3-55.6 0-73.8 74.6-22.9 100.1-1.8 7.9-2.6 16.3-2.6 24.7 0 83.8 94.4 151.7 210.3 151.7 116.4 0 210.8-67.9 210.8-151.7 0-8.4-.9-17.2-3.1-25.1 49.9-25.6 31.5-99.7-23.8-99.7zM129.4 308.9c0-22 17.6-39.7 39.7-39.7 21.6 0 39.2 17.6 39.2 39.7 0 21.6-17.6 39.2-39.2 39.2-22.1 0-39.7-17.6-39.7-39.2zm214.3 93.5c-36.4 36.4-139.1 36.4-175.5 0-4-3.5-4-9.7 0-13.7 3.5-3.5 9.7-3.5 13.2 0 27.8 28.5 120 29 149 0 3.5-3.5 9.7-3.5 13.2 0 4.1 4 4.1 10.2.1 13.7zm-.8-54.2c-21.6 0-39.2-17.6-39.2-39.2 0-22 17.6-39.7 39.2-39.7 22 0 39.7 17.6 39.7 39.7-.1 21.5-17.7 39.2-39.7 39.2z'},
+ save:{vb:'0 0 24 24',d:'M12 3v12m-5-5 5 5 5-5M4 19h16'}
+};
+const brand=(n,cls='sh-brand-ic')=>`<svg class="${cls}" viewBox="${BRANDS[n].vb}" aria-hidden="true"><path d="${BRANDS[n].d}"/></svg>`;
+
 const icon = n => `<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="${paths[n] || paths.info}"/></svg>`;
 const FACES={
  dog:{vb:'0 0 576 512',d:'M298.06,224,448,277.55V496a16,16,0,0,1-16,16H368a16,16,0,0,1-16-16V384H192V496a16,16,0,0,1-16,16H112a16,16,0,0,1-16-16V282.09C58.84,268.84,32,233.66,32,192a32,32,0,0,1,64,0,32.06,32.06,0,0,0,32,32ZM544,112v32a64,64,0,0,1-64,64H448v35.58L320,197.87V48c0-14.25,17.22-21.39,27.31-11.31L374.59,64h53.63c10.91,0,23.75,7.92,28.62,17.69L464,96h64A16,16,0,0,1,544,112Zm-112,0a16,16,0,1,0-16,16A16,16,0,0,0,432,112Z'},
@@ -18,7 +28,7 @@ const face = (kind,cls='') => {const f=FACES[kind]||FACES.user;return `<svg clas
 const swapIcon = () => `<svg class="swap-ico" viewBox="${FACES.repeat.vb}" aria-hidden="true"><path d="${FACES.repeat.d}"/></svg>`;
 const dirArrow = k => `<svg class="ttc-arr" viewBox="0 0 24 24" aria-hidden="true"><path d="${k==='b'?'M19.5 12H5.5m0 0 4.2-4.2M5.5 12l4.2 4.2':'M4.5 12h14m0 0-4.2-4.2M18.5 12l-4.2 4.2'}"/></svg>`;
 const BLANK_IMG='data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==';
-const img = (src,cls='',alt='') => {const s=src==null?'':String(src),u=s?(s.startsWith('blob:')?s:'assets/'+s):BLANK_IMG;return `<img src="${esc(u)}" class="${esc(cls)}" alt="${esc(alt)}">`;};
+const img = (src,cls='',alt='') => {const s=src==null?'':String(src),u=s?(s.startsWith('blob:')||s.startsWith('data:')?s:'assets/'+s):BLANK_IMG;return `<img src="${esc(u)}" class="${esc(cls)}" alt="${esc(alt)}">`;};
 const navButton = (route,label,cls='text-btn') => `<button class="${cls}" data-go="${esc(route)}">${label}</button>`;
 const action = (name,label,cls='secondary',attrs='') => `<button class="${cls}" data-action="${name}" ${attrs}>${label}</button>`;
 const ib = (name,label,extra='') => `<button class="icon-btn" aria-label="${esc(label)}" ${extra}>${icon(name)}</button>`;
@@ -36,12 +46,12 @@ const authors = [
  {id:'max',name:'max.and.me',location:'Portland',followers:94,friends:5,avatar:'ins_a4.png',bio:'Every day is a good day for a walk.',photo:'ins_p4.jpg'},
  {id:'coco',name:'coco.adventures',location:'San Diego',followers:267,friends:17,avatar:'ins_a5.png',bio:'Life is better together.',photo:'ins_p5.jpg'}
 ];
-const discoverChips=[['for-you','For You'],['following','Following'],['Health','Health'],['Training','Training'],['Nutrition','Nutrition'],['Care','Care']];
+const discoverChips=[['for-you','For You'],['following','Following'],['Health','Health'],['Training','Training'],['Nutrition','Nutrition'],['Care','Care'],['Grooming','Grooming'],['Play','Play'],['Adoption','Adoption']];
 const discoverSub=['He always ends up on my pillow when I am up late...','A new favorite spot by the window, every single afternoon.','Weekend adventures with this little explorer.','Our daily walk went a little longer than usual today.','Happiness comes with four little paws.','A little sunshine with Lucky after breakfast.','Milo and his favorite window again.','Coco is ready for a new adventure.'];
-const discoverTopicList=['Health','Training','Nutrition','Care','Health','Training','Nutrition','Care'];
+const discoverTopicList=['Health','Training','Nutrition','Care','Grooming','Play','Adoption','Health'];
 const discoverTopicOf=(p,i)=>(Array.isArray(p.topics)&&p.topics[0])||discoverTopicList[i%discoverTopicList.length];
 function discoverSearchBar(){return `<label class="ds-search">${icon('search')}<input type="search" data-input="discover-search" placeholder="Search pet care, tips and stories..." aria-label="Search community posts"></label>`;}
-function discoverChipRow(){const on=view.discoverTopic||view.feed;const items=discoverChips.map(([v,l])=>`<button class="ds-chip${on===v?' active':''}" data-action="feed" data-value="${v}" aria-pressed="${on===v}">${l}</button>`);items.splice(4,0,`<button class="ds-chip ds-chip-round" data-action="discover-stories" aria-label="Stories">${icon('paw')}</button>`);return `<div class="ds-chips">${items.join('')}</div>`;}
+function discoverChipRow(){const on=view.discoverTopic||view.feed;const items=discoverChips.map(([v,l])=>`<button class="ds-chip${on===v?' active':''}" data-action="feed" data-value="${v}" aria-pressed="${on===v}">${l}</button>`);items.push(`<button class="ds-chip ds-chip-round" data-action="discover-stories" aria-label="Stories">${icon('paw')}</button>`);return `<div class="ds-chips">${items.join('')}</div>`;}
 function discoverCard(p,orig,topic,slot){
  const a=author(p.author),photos=postPhotos(p),sub=p.subtitle||discoverSub[orig%discoverSub.length];
  const likes=(Number(p.likes)||0).toLocaleString();
@@ -56,7 +66,7 @@ function discoverCard(p,orig,topic,slot){
 }
 const types = {harness:['Smart Dog Harness','home_dev_harness.jpg'],house:['Smart Dog House','home_dev_bed.jpg']};
 const devImg=t=>types[t]?.[1]||'home_dev_harness.jpg';
-const seed = () => ({version:1,selected:'lucky',profile:{name:'Kevin',location:'San Francisco, CA',bio:'A pet lover who enjoys sharing the daily moments with my furry friends.'},pets:[
+const seed = () => ({version:1,selected:'lucky',profile:{name:'Kevin',avatar:'profile_avatar.jpg',location:'San Francisco, CA',bio:'A pet lover who enjoys sharing the daily moments with my furry friends.'},pets:[
  {id:'lucky',name:'Lucky',type:'Dog',breed:'Golden Retriever',sex:'Male',birth:'2023-06-03',weight:28,photo:'home_pet_lucky.jpg',scene:'real_lucky_rest.jpg',status:'Resting now'},
  {id:'milo',name:'Milo',type:'Dog',breed:'Labrador Retriever',sex:'Male',birth:'2024-03-10',weight:28,photo:'home_pet_milo.jpg',scene:'real_milo_play.jpg',status:'Walking now',abnormal:true,anomalies:[{label:'Persistent High Heart Rate',value:'125 bpm',note:'Sustained above normal canine range'}]},
  {id:'coco',name:'Coco',type:'Dog',breed:'Dachshund',sex:'Female',birth:'2022-09-12',weight:9,photo:'home_pet_coco.jpg',scene:'real_coco_sleep.jpg',status:'Playing now'}
@@ -73,12 +83,12 @@ const seed = () => ({version:1,selected:'lucky',profile:{name:'Kevin',location:'
  {id:'op5',author:'oliver',body:'Nap time is serious business.',photos:['coco_b2.jpg','milo_b.jpg'],tags:['PetLife','Cute'],likes:302,liked:false,saved:false,comments:[{name:'luna.daily',text:'Wish I could sleep like that.'}],time:'1 week ago'}
 ])),following:['sophie','luna'],friends:['sophie'],requests:[{author:'oliver',status:'pending'}],sentRequests:[],messagesRead:false,
  conversations:{},chats:{},consultations:[],records:[{id:'rec1',pet:'lucky',name:'Rabies vaccine',date:'2026-06-03',next:'2027-06-03',note:'Annual vaccination (sample)'}],geneticTests:[{id:'gt1',pet:'lucky',kitId:'MB-DNA-240618',petInfo:{name:'Lucky',type:'Dog',breed:'Golden Retriever',sex:'Male',birth:'2023-06-03',weight:28},status:'ready',carrier:'FedEx',tracking:'9400 1102 3344 5566',submittedAt:'2026-10-12',shippingAt:'2026-10-14',testingAt:'2026-10-15',reportAt:'2026-10-29'},{id:'gt2',pet:'lucky',kitId:'MB-DNA-251102',petInfo:{name:'Lucky',type:'Dog',breed:'Golden Retriever',sex:'Male',birth:'2023-06-03',weight:28},status:'submitted',carrier:'',tracking:'',submittedAt:'2026-11-14',shippingAt:'',testingAt:'',reportAt:''},{id:'gt3',pet:'milo',kitId:'MB-DNA-251020',petInfo:{name:'Milo',type:'Dog',breed:'Labrador Retriever',sex:'Male',birth:'2024-03-10',weight:28},status:'testing',carrier:'UPS',tracking:'9400 1102 8899 0011',submittedAt:'2026-11-02',shippingAt:'2026-11-04',testingAt:'2026-11-06',reportAt:''}],vaccinations:[{id:'vac1',pet:'lucky',name:'Rabies',date:'2026-06-03',next:'2027-06-03',dose:'1 mL',vet:'Sunset Animal Clinic',note:'Annual vaccination'},{id:'vac2',pet:'lucky',name:'DHPP (Distemper, Hepatitis, Parvovirus, Parainfluenza)',date:'2026-04-18',next:'2027-04-18',dose:'1 mL',vet:'Sunset Animal Clinic',note:'Annual booster'},{id:'vac3',pet:'lucky',name:'Bordetella (Kennel Cough)',date:'2026-08-21',next:'2026-12-21',dose:'1 mL',vet:'Sunset Animal Clinic',note:'Every 6-12 months'},{id:'vac4',pet:'milo',name:'Rabies',date:'2026-02-11',next:'2027-02-11',dose:'1 mL',vet:'Bay Pet Care',note:'Annual vaccination'}],
- foods:[{id:'food1',name:'Daily Balance',brand:'MoonBack',type:'Dog'},{id:'food2',name:'Indoor Cat',brand:'Nature Care',type:'Cat'}],feeding:[{id:'feed1',pet:'lucky',name:'Breakfast',time:'08:00',grams:90,food:'food1',enabled:true},{id:'feed2',pet:'milo',name:'Dinner',time:'18:30',grams:45,food:'food2',enabled:true}],fences:{},checkins:[],translations:[],feedback:[],member:false,cart:0,notifications:true,language:'Follow demo',firmware:{},healthChecks:{},emptyMode:false
+ foods:[{id:'food1',name:'Daily Balance',brand:'MoonBack',type:'Dog'},{id:'food2',name:'Indoor Cat',brand:'Nature Care',type:'Cat'}],feeding:[{id:'feed1',pet:'lucky',name:'Breakfast',time:'08:00',grams:90,food:'food1',enabled:true},{id:'feed2',pet:'milo',name:'Dinner',time:'18:30',grams:45,food:'food2',enabled:true}],fences:{},checkins:[],translations:[],feedback:[],member:false,cart:0,notifications:true,notif:{device:{offline:true,battery:true,error:true},data:{collect:true,sync:true},service:{account:true,updates:true},community:{likes:true,comments:true,follows:true}},language:'Follow demo',firmware:{},healthChecks:{},emptyMode:false,quickOrder:['pets','translation','devices','fence','genetic'],quickOn:['pets','translation','devices','fence']
 });
 const STORE='moonback-interactive-offline-v1';
 let storageAvailable=true,state;
 try { const raw=JSON.parse(localStorage.getItem(STORE)||'null'); state=raw&&raw.version===1&&Array.isArray(raw.pets)&&Array.isArray(raw.devices)&&Array.isArray(raw.posts)?Object.assign(seed(),raw):seed(); state.devices=(state.devices||[]).filter(d=>d.type==='harness'||d.type==='house'); if(!state.devices.length||state.devAssign!==2){state.devices=seed().devices;state.devAssign=2;(state.pets||[]).forEach(p=>{const c=seed().pets.find(x=>x.id===p.id);if(c&&(p.breed==='British Shorthair'||p.breed==='Bichon Frise'))Object.assign(p,{type:c.type,breed:c.breed,weight:c.weight,status:c.status,scene:c.scene,anomalies:c.anomalies});});} } catch(e){state=seed();storageAvailable=false;}{const sp=seed().posts.filter(x=>!state.posts.some(p=>p&&p.id===x.id));if(sp.length)state.posts.push(...sp);}normalizeState(state);try{localStorage.setItem(STORE,JSON.stringify(state));}catch(e){}
-function save(){try{localStorage.setItem(STORE,JSON.stringify(state));}catch(e){storageAvailable=false;$('#preview-state').textContent='● Session mode · refresh may reset';}}
+function save(){try{localStorage.setItem(STORE,JSON.stringify(state));}catch(e){storageAvailable=false;$('#preview-state').textContent='● 会话模式 · 刷新可能重置';}}
 function normalizeState(s){
  const base=seed(),rawPosts=Array.isArray(s.posts)?s.posts:null;
  const fallbackPhotos=['ins_p1.jpg','ins_p2.jpg','ins_p3.jpg','ins_p4.jpg','ins_p5.jpg','ins_p6.jpg','ins_p7.jpg','real_coco_sleep.jpg'];
@@ -92,14 +102,17 @@ function normalizeState(s){
  if(!s.posts.length)s.posts=base.posts;
  ['following','friends','requests','sentRequests','pets','devices','records','geneticTests','vaccinations','feeding','feedback','consultations','translations','checkins'].forEach(k=>{if(!Array.isArray(s[k]))s[k]=base[k]||[];});
  if(!s.profile||typeof s.profile!=='object')s.profile=base.profile;
+ if(s.profile&&typeof s.profile==='object'&&!s.profile.avatar)s.profile.avatar='profile_avatar.jpg';
  ['conversations','chats','fences','firmware','healthChecks'].forEach(k=>{if(!s[k]||typeof s[k]!=='object'||Array.isArray(s[k]))s[k]=base[k]||{};});
+ {const dn=base.notif;s.notif=(s.notif&&typeof s.notif==='object')?s.notif:{};Object.keys(dn).forEach(k=>{s.notif[k]=Object.assign({},dn[k],(s.notif[k]&&typeof s.notif[k]==='object')?s.notif[k]:{});});if(typeof s.notifications!=='boolean')s.notifications=true;}
+ const qk=['pets','translation','devices','fence','genetic'];s.quickOrder=Array.isArray(s.quickOrder)?s.quickOrder.filter(k=>qk.includes(k)):[];qk.forEach(k=>{if(!s.quickOrder.includes(k))s.quickOrder.push(k);});s.quickOn=Array.isArray(s.quickOn)?s.quickOn.filter(k=>qk.includes(k)):[];if(!s.quickOn.length)s.quickOn=['pets','translation','devices','fence'];
  (s.geneticTests||[]).forEach(g=>{if(g.unseen===undefined)g.unseen=true;if(g.carrier===undefined)g.carrier='';if(g.shippingAt===undefined)g.shippingAt=(g.status==='testing'||g.status==='ready')?(g.testingAt||g.submittedAt||''):(g.status==='shipping'?(g.submittedAt||''):'');});
  return s;
 }
 
 const uploadedPhotos={}; let pendingPhotos=[],uploadGeneration=0,uploadReading=false,publishDraft={body:'',tags:''};
-let current={page:'home',params:new URLSearchParams()},previousHash='',toastTimer,operationTimer,modalCallback,modalFocus;
-let view={topicPanelOpen:false,discoverTopic:'',lgStep:'buttons',lgMode:'email',lgAgreed:false,lgCooldownUntil:0,devPick:'harness',feed:'for-you',profileTab:'posts',deviceFilter:'all',range:'today',date:'2026-10-29',loginMode:'phone',translationDirection:'pet-human',translationType:'Dog',recording:false,translationResult:'',listen:false,talk:false,overlay:false,camera:'cam',firmwareStage:'ready',firmwareProgress:0,healthProgress:0,postImage:0,storyIndex:0,friendSearch:'',fenceRadius:150,gtStep:'scan',gtKit:'',gtVet:'',gtPet:'',gtExpanded:{}};
+let current={page:'home',params:new URLSearchParams()},previousHash='',toastTimer,operationTimer,bindDoneTimer,modalCallback,modalFocus;
+let view={topicPanelOpen:false,discoverTopic:'',appUpdateState:'',lgStep:'buttons',lgMode:'email',lgAgreed:false,lgCooldownUntil:0,devPick:'harness',feed:'for-you',profileTab:'posts',deviceFilter:'all',range:'today',date:'2026-10-29',loginMode:'phone',translationDirection:'pet-human',translationType:'Dog',recording:false,translationResult:'',listen:false,talk:false,overlay:false,camera:'cam',firmwareStage:'ready',firmwareProgress:0,healthProgress:0,postImage:0,storyIndex:0,friendSearch:'',fenceRadius:150,gtStep:'scan',gtKit:'',gtVet:'',gtPet:'',gtExpanded:{}};
 let discoverSlidesTimer=null;
 function startDiscoverSlides(){
  clearInterval(discoverSlidesTimer);discoverSlidesTimer=null;
@@ -120,13 +133,13 @@ function startDiscoverSlides(){
 }
 const docs=[...document.querySelectorAll('.doc-page')];
 const docMap=Object.fromEntries(docs.map(e=>[e.dataset.page,e]));
-const modules=[['login','Account','lock'],['home','Home','home'],['monitor','Live care','camera'],['health','Health','health'],['ai','AI Butler','ai'],['discover','Discover','discover'],['profile','Profile','profile']];
+const modules=[['login','账户','lock'],['home','首页','home'],['monitor','实时看护','camera'],['health','健康','health'],['ai','AI 管家','ai'],['discover','发现','discover'],['profile','我的','profile']];
 const moduleName=g=>(modules.find(x=>x[0]===g)||['','Home'])[1];
-const titles={home:'',health:'Health Analysis',ai:'AI Butler',discover:'Discover',profile:'User profile',monitor:'Remote care',login:'',register:'Create account',forgot:'Reset password',pets:'My pets','pet-edit':'Add Pet','pet-detail':'Pet profile',devices:'All Devices','device-add':'Add device','device-detail':'Device details',translation:'Pet Language Translator',fence:'Geofence',trajectory:'Location history',checkin:'Check-in',metric:'Health details',report:'Professional report',records:'Health records','record-edit':'Health record',vets:'Online vets','vet-detail':'Vet profile',consult:'Consultation','consult-history':'Consultations',post:'Post',author:'User profile',publish:'Create a post',story:'Stories',topic:'Topic',messages:'Messages',chat:'Chat',friends:'Connections','friend-add':'Add friend','friend-requests':'Friend requests',mall:'Pet shop',product:'Product',settings:'Settings',personal:'Edit profile',password:'Change password',firmware:'Firmware update',feedback:'Feedback',contact:'Contact us',about:'About MoonBack',agreement:'Terms & privacy',membership:'MoonBack Plus',feeding:'Feeding plan','feeding-edit':'Feeding plan',foods:'My foods','food-add':'Add food','food-select':'Select food',genetic:'Genetic Test','genetic-new':'New Genetic Test','genetic-report':'Genetic Test Report',vaccines:'Vaccination Records','vaccine-add':'Add vaccination record','device-bind':'Bind a device'};
+const titles={home:'',health:'Health Analysis',ai:'AI Butler',discover:'Discover',profile:'User profile',monitor:'Remote care',login:'',register:'Create account',forgot:'Reset password',pets:'My pets','pet-edit':'Add Pet','pet-detail':'Pet profile',devices:'All Devices','device-add':'Add device','device-detail':'Device details',translation:'Pet Language Translator',fence:'Geofence',trajectory:'Location history',checkin:'Check-in',metric:'Health details',report:'Professional report',records:'Health records','record-edit':'Health record',vets:'Online vets','vet-detail':'Vet profile',consult:'Consultation','consult-history':'Consultations',post:'Post',share:'Share Post',author:'User profile',publish:'Create a post',story:'Stories',topic:'Topic',messages:'Messages',chat:'Chat',friends:'Connections','friend-add':'Add friend','friend-requests':'Friend requests',mall:'Pet shop',product:'Product',settings:'Settings',notifications:'Notifications','app-update':'App update',personal:'Edit profile',password:'Change password',firmware:'Firmware update',feedback:'Feedback',contact:'Contact & Feedback',help:'Help & Feedback','help-article':'Help & Feedback',about:'About MoonBack',agreement:'Terms & privacy',membership:'MoonBack Plus',feeding:'Feeding plan','feeding-edit':'Feeding plan',foods:'My foods','food-add':'Add food','food-select':'Select food',genetic:'Genetic Test','genetic-new':'New Genetic Test','genetic-report':'Genetic Test Report',vaccines:'Vaccination Records','vaccine-add':'Add vaccination record','device-bind':'Bind a device'};
 Object.assign(titles,{privacy:'Privacy Policy',terms:'Terms of Service'});
 const pet=()=>state.pets.find(p=>p.id===state.selected)||state.pets[0]||null;
 const petName=id=>(state.pets.find(p=>p.id===id)||{}).name||'Unlinked';
-const author=id=>id==='me'?{id:'me',name:state.profile.name,location:state.profile.location,avatar:'profile_avatar.jpg',bio:state.profile.bio}:authors.find(a=>a.id===id)||authors[0];
+const author=id=>id==='me'?{id:'me',name:state.profile.name,location:state.profile.location,avatar:state.profile.avatar||'profile_avatar.jpg',bio:state.profile.bio}:authors.find(a=>a.id===id)||authors[0];
 const param=(name,def='')=>current.params.get(name)||def;
 const query=(page,params={})=>page+(Object.keys(params).length?'?'+new URLSearchParams(params).toString():'');
 function go(route){closeModal();if(!route)return;if(location.hash.slice(1)===route){readRoute();return;}try{history.pushState({mb:true},'','#'+route);}catch(e){try{location.hash=route;}catch(e2){}}readRoute();}
@@ -184,29 +197,75 @@ function showHarnessSpec(){
 }
 const FA_QUICK={"dog": {"vb": "0 0 576 512", "d": "M298.06,224,448,277.55V496a16,16,0,0,1-16,16H368a16,16,0,0,1-16-16V384H192V496a16,16,0,0,1-16,16H112a16,16,0,0,1-16-16V282.09C58.84,268.84,32,233.66,32,192a32,32,0,0,1,64,0,32.06,32.06,0,0,0,32,32ZM544,112v32a64,64,0,0,1-64,64H448v35.58L320,197.87V48c0-14.25,17.22-21.39,27.31-11.31L374.59,64h53.63c10.91,0,23.75,7.92,28.62,17.69L464,96h64A16,16,0,0,1,544,112Zm-112,0a16,16,0,1,0-16,16A16,16,0,0,0,432,112Z"}, "video": {"vb": "0 0 576 512", "d": "M336.2 64H47.8C21.4 64 0 85.4 0 111.8v288.4C0 426.6 21.4 448 47.8 448h288.4c26.4 0 47.8-21.4 47.8-47.8V111.8c0-26.4-21.4-47.8-47.8-47.8zm189.4 37.7L416 177.3v157.4l109.6 75.5c21.2 14.6 50.4-.3 50.4-25.8V127.5c0-25.4-29.1-40.4-50.4-25.8z"}, "microphone": {"vb": "0 0 352 512", "d": "M176 352c53.02 0 96-42.98 96-96V96c0-53.02-42.98-96-96-96S80 42.98 80 96v160c0 53.02 42.98 96 96 96zm160-160h-16c-8.84 0-16 7.16-16 16v48c0 74.8-64.49 134.82-140.79 127.38C96.71 376.89 48 317.11 48 250.3V208c0-8.84-7.16-16-16-16H16c-8.84 0-16 7.16-16 16v40.16c0 89.64 63.97 169.55 152 181.69V464H96c-8.84 0-16 7.16-16 16v16c0 8.84 7.16 16 16 16h160c8.84 0 16-7.16 16-16v-16c0-8.84-7.16-16-16-16h-56v-33.77C285.71 418.47 352 344.9 352 256v-48c0-8.84-7.16-16-16-16z"}, "heartbeat": {"vb": "0 0 512 512", "d": "M320.2 243.8l-49.7 99.4c-6 12.1-23.4 11.7-28.9-.6l-56.9-126.3-30 71.7H60.6l182.5 186.5c7.1 7.3 18.6 7.3 25.7 0L451.4 288H342.3l-22.1-44.2zM473.7 73.9l-2.4-2.5c-51.5-52.6-135.8-52.6-187.4 0L256 100l-27.9-28.5c-51.5-52.7-135.9-52.7-187.4 0l-2.4 2.4C-10.4 123.7-12.5 203 31 256h102.4l35.9-86.2c5.4-12.9 23.6-13.2 29.4-.4l58.2 129.3 49-97.9c5.9-11.8 22.7-11.8 28.6 0l27.6 55.2H481c43.5-53 41.4-132.3-7.3-182.1z"},"device": {"vb": "0 0 24 24", "d": "M7 3h10v18H7zM10 17h4"},"dna": {"vb": "0 0 24 24", "d": "M4 3c0 6 16 6 16 12S4 21 4 21M20 3C20 9 4 9 4 15s16 6 16 6M7 6h10M7 12h10M7 18h10"}};
 const faIcon=k=>`<svg class="quick-fa" viewBox="${FA_QUICK[k].vb}" aria-hidden="true"><path d="${FA_QUICK[k].d}"/></svg>`;
+const QUICK_ITEMS=[
+ {k:'pets',t:'My Pet',r:'pets',fi:'dog',si:'paw'},
+ {k:'translation',t:'Voice Translation',r:'translation',fi:'microphone',si:'mic'},
+ {k:'devices',t:'Device',r:'devices',fi:'device',si:'device'},
+ {k:'fence',t:'Electronic Fence',r:'fence',fi:'',si:'geofence'},
+ {k:'genetic',t:'Genetic Test',r:'genetic',fi:'dna',si:'dna'}
+];
+const QUICK_MAX=4;
+const quickItem=k=>QUICK_ITEMS.find(x=>x.k===k);
+const quickIcon=x=>x.fi?faIcon(x.fi):icon(x.si);
+function quickOrder(){const o=(state.quickOrder||[]).filter(quickItem);QUICK_ITEMS.forEach(x=>{if(!o.includes(x.k))o.push(x.k);});return o;}
+function quickOnKeys(){return (state.quickOn||[]).filter(quickItem).slice(0,QUICK_MAX);}
+function quickVisible(){const on=quickOnKeys();return quickOrder().filter(k=>on.includes(k)).map(quickItem);}
+function quickSettingsHtml(){
+ const on=quickOnKeys();
+ return `<p class="qa-sub">Drag to reorder · Up to ${QUICK_MAX} shortcuts on Home</p><ul class="qa-list">${quickOrder().map(k=>{const x=quickItem(k),isOn=on.includes(k);return `<li class="qa-item${isOn?'':' is-off'}" data-key="${k}"><span class="qa-grip" role="button" tabindex="0" aria-label="Drag ${x.t}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6h.01M9 12h.01M9 18h.01M15 6h.01M15 12h.01M15 18h.01"/></svg></span><span class="qa-ico">${icon(x.si)}</span><span class="qa-name">${x.t}</span><button type="button" class="qa-switch${isOn?' on':''}" data-action="qa-toggle" data-value="${k}" aria-pressed="${isOn}" aria-label="Show ${x.t} on Home"><span></span></button></li>`;}).join('')}</ul>`;
+}
+function openQuickSettings(){modal('Quick Access','',null,null,quickSettingsHtml(),'Done');}
+function toggleQuick(k){
+ const on=quickOnKeys();
+ if(on.includes(k)){
+  if(on.length===1){toast('Keep at least one shortcut on Home');return;}
+  state.quickOn=on.filter(x=>x!==k);
+ }else{
+  if(on.length>=QUICK_MAX){toast(`Up to ${QUICK_MAX} shortcuts can be shown`);return;}
+  state.quickOn=on.concat(k);
+ }
+ save();render(true);
+ const btn=document.querySelector(`.qa-switch[data-value="${k}"]`);
+ if(btn){const isOn=quickOnKeys().includes(k);btn.classList.toggle('on',isOn);btn.setAttribute('aria-pressed',String(isOn));const li=btn.closest('.qa-item');if(li)li.classList.toggle('is-off',!isOn);}
+}
 function home(){const p=pet(),m=metrics();const sleepText=Math.floor(m.sleep)+'h'+String(Math.round((m.sleep%1)*60)).padStart(2,'0')+'min';const sceneMap={'real_lucky_rest.jpg':'home_status_lucky.gif','real_lucky_rest.png':'home_status_lucky.gif','real_milo_play.jpg':'home_status_milo.gif','real_coco_sleep.jpg':'home_status_coco.gif'};const scene=p?(sceneMap[p.scene]||p.scene):'home_status_lucky.gif';return `${petStrip()}${!p?empty('Welcome to MoonBack','Add a pet and a device to start using MoonBack.','pet-edit','Add your first pet'):state.selected==='all'?`<div class="card soft"><h3 class="serif">All your little companions</h3><p class="muted">${state.pets.length} pets · ${state.devices.filter(d=>d.online).length} devices online</p></div>${state.pets.map(p=>`<button class="device-card" data-action="pet" data-id="${esc(p.id)}">${img(p.photo,'',p.name)}<span class="info"><b>${esc(p.name)}</b><small>${esc(p.status)} · View today’s status</small></span>${icon('arrow')}</button>`).join('')}`:`${anomalyBanner(p)}<div class="hero hero-v2"><div class="hero-left"><h3>${esc(p.name)} is<br>doing well today!</h3><span class="badge">${icon('moon')}${esc(p.status)}</span><div class="hero-metrics">${navButton('metric?kind=activity',`Activity<b>Normal</b>`,'')}${navButton('metric?kind=sleep',`Sleep<b>${sleepText}</b>`,'')}</div></div><div class="hero-pet-photo">${img(scene,'',p.name)}</div>${navButton('ai?prompt=sleep',`${icon('chart')} Sleep was slightly longer than usual. ${icon('arrow')}`,'insight')}</div>`}
-${heading('Quick Access').replace('class="section-heading"','class="section-heading home-section"')}<div class="quick-grid">${[['pets','My Pet','dog'],['translation','Voice Translation','microphone'],['devices','Device','device'],['genetic','Genetic Test','dna']].map(([r,t,i])=>navButton(r,`<span class="quick-bubble">${faIcon(i)}</span><span>${t}</span>`,'quick')).join('')}</div>
+<div class="section-heading home-section"><h3>Quick Access</h3><button class="text-btn" type="button" data-action="quick-settings">See All</button></div><div class="quick-grid">${quickVisible().map(x=>navButton(x.r,`<span class="quick-bubble">${quickIcon(x)}</span><span>${x.t}</span>`,'quick')).join('')}</div>
 ${heading('Focus on '+esc(p?p.name:'Lucky')).replace('class="section-heading"','class="section-heading home-section"')}<button class="focus-card" data-go="ai?prompt=sleep"><span class="focus-dot">!</span><span>Sleep was slightly longer than usual.</span>${icon('arrow')}</button>
 ${heading(state.selected==='all'?'All Devices':(p?esc(p.name)+'’s Devices':'My Devices'),'devices','All Devices').replace('class="section-heading"','class="section-heading home-section"')}${relatedDevices().map(deviceCard).join('')||empty('No devices yet','Add a device to start tracking.')}${action('add-device-menu',icon('plus')+' Add Device','secondary')}`;}
 function health(){if(needPet())return needPet();const p=pet(),m=metrics();return `<div class="health-pet">${img(p.photo,'',p.name)}<div class="grow"><select aria-label="Current pet on Health" data-change="select-pet">${petOptions().map(([v,t])=>`<option value="${esc(v)}" ${v===p.id?'selected':''}>${esc(t)}</option>`).join('')}</select><small class="muted">${esc(p.breed)} · ${esc(p.weight)} kg</small></div>${ib('clock','Health records','data-go="records"')}</div>${navButton('report','View Professional Health Report','primary')}${rangeSelect()}<div class="row between"><h3 class="serif">${view.range==='week'?'This week’s overview':'Today’s situation'}</h3><span class="muted">${view.range==='date'?esc(view.date):'Today'}</span></div><div class="metric-grid">${['steps','activity','heart','sleep'].map(k=>{const w=k==='heart'&&p.abnormal;return navButton('metric?kind='+k,`<span class="label">${metricInfo[k][0]}</span><b>${typeof m[k]==='number'&&!Number.isInteger(m[k])?m[k].toFixed(1):m[k].toLocaleString()} <small>${metricInfo[k][1]}</small></b><span class="badge${w?' warn':''}">${w?'High':'Normal'}</span>`,'metric'+(w?' warn':''));}).join('')}</div>${heading('Vital signs')}<div class="card">${['temp','breath','hrv'].map(k=>`<button class="list-row" data-go="metric?kind=${k}"><span class="grow">${metricInfo[k][0]}</span><b>${m[k]} <small>${metricInfo[k][1]}</small></b>${icon('arrow')}</button>`).join('')}</div><div class="card"><div class="row between"><h4>Daily steps</h4>${navButton('metric?kind=steps','View details')}</div>${chart('steps')}</div><div class="card"><div class="row between"><h4>Sleep</h4><span class="badge">Good</span></div>${chart('sleep')}</div>${navButton('metric?kind=bowel','Toileting · Digestion','secondary')}${action('health-check',icon('health')+' Start health check','primary')}${view.healthProgress?`<div class="progress"><span style="width:${view.healthProgress}%"></span></div><p class="muted">${view.healthProgress===100?'Check complete · all metrics updated':'Checking… '+view.healthProgress+'%'}</p>`:''}${state.healthChecks[p.id]?`<p class="muted">Last check: ${esc(state.healthChecks[p.id])}</p>`:''}${navButton('records','Health & vaccine records','secondary')}${navButton('vets','Consult a vet','secondary')}`;}
 function ai(){
  if(needPet())return needPet();
  const p=pet(),msgs=state.conversations[p.id]||[],at=view.aiAttach;
- const bubble=m=>`<div class="bubble ${m.role==='user'?'user':''}">${m.photo?`<img class="bubble-img" src="${esc(m.photo)}" alt="Attached photo">`:''}${m.attach?`<span class="bubble-chip">${icon('dna')}${esc(m.attach)}</span>`:''}${m.text?esc(m.text):''}</div>`;
- const chip=at?`<div class="ai-chip-row"><span class="ai-chip">${at.kind==='photo'?`<img src="${esc(at.url)}" alt="">`:icon('dna')}<span class="ai-chip-tx">${esc(at.label)}</span><button type="button" class="ai-chip-x" data-action="ai-detach" aria-label="Remove attachment">${icon('close')}</button></span></div>`:'';
+ const bubble=m=>`<div class="bubble ${m.role==='user'?'user':''}">${m.photo?`<img class="bubble-img" src="${esc(m.photo)}" alt="Attached photo">`:''}${m.attach?`<span class="bubble-chip">${icon(m.attachKind==='file'?'file':'dna')}${esc(m.attach)}</span>`:''}${m.text?esc(m.text):''}</div>`;
+ const chip=at?`<div class="ai-chip-row"><span class="ai-chip">${at.kind==='photo'?`<img src="${esc(at.url)}" alt="">`:icon(at.kind==='file'?'file':'dna')}<span class="ai-chip-tx">${esc(at.label)}</span><button type="button" class="ai-chip-x" data-action="ai-detach" aria-label="Remove attachment">${icon('close')}</button></span></div>`:'';
  const reps=(state.geneticTests||[]).filter(g=>g.pet===p.id&&g.status==='ready').sort((a,b)=>String(b.reportAt||'').localeCompare(String(a.reportAt||'')));
  const rep=reps[0];
- const menu=view.aiMenu?`<div class="ai-attach-menu" role="menu" aria-label="Add to your question">${action('ai-pick-photo',`${icon('camera')}<span class="ai-attach-tx">Photos<small>Pick an image</small></span>`,'ai-attach-item')}${rep?action('ai-attach-report',`${icon('dna')}<span class="ai-attach-tx">DNA report<small>Kit ${esc(rep.kitId)}</small></span>`,'ai-attach-item',`data-id="${rep.id}"`):`<button type="button" class="ai-attach-item" disabled aria-disabled="true">${icon('dna')}<span class="ai-attach-tx">DNA report<small>No report ready yet</small></span></button>`}</div>`:'';
- return `<div class="cp-bar"><div class="chat-pet chat-pet-ai">${img(p.photo,'avatar',p.name)}<button type="button" class="cp-name" data-action="ai-pet" aria-haspopup="menu" aria-expanded="${view.aiPetMenu?'true':'false'}">${esc(p.name)}<svg class="cp-caret" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button><button type="button" class="cp-clear" data-action="clear-ai">Clear</button>${view.aiPetMenu?`<div class="cp-menu" role="menu" aria-label="Switch pet">${petOptions().map(([v,t])=>`<button type="button" class="cp-item${v===p.id?' on':''}" data-action="ai-pet-pick" data-id="${esc(v)}"><span>${esc(t)}</span>${v===p.id?icon('check'):''}</button>`).join('')}</div>`:''}</div></div><div class="chat-messages"><div class="bubble">Hi, I’m the AI butler for ${esc(p.name)}. ${param('prompt')==='sleep'?'Sleep was a little longer than recent days — let’s look at the trend together.':'Ask me about today’s activity, sleep or health.'}</div>${msgs.map(bubble).join('')}</div><div class="suggestions">${['How is today going?','Why the longer sleep?','Any care suggestions?'].map(t=>action('ai-suggest',esc(t),'',`data-text="${esc(t)}"`)).join('')}</div><div class="row between">${navButton('health','View health data')}${navButton('report','Full report')}${navButton('vets','Online vets')}</div>${form('ai',`${chip}${menu}<div class="chat-compose"><button type="button" class="chat-plus" data-action="ai-attach" aria-label="Add a photo or DNA report" aria-haspopup="menu" aria-expanded="${view.aiMenu?'true':'false'}">${icon('plus')}</button><input name="message" maxlength="500" placeholder="Ask about ${esc(p.name)}…" aria-label="AI message"><button type="submit" class="chat-send" aria-label="Send AI message">${icon('send')}</button></div><input type="file" accept="image/*" data-change="ai-photo" hidden>`,'').replace('<button class="primary" type="submit"></button>','')}`;
+ const menu=view.aiMenu?`<div class="ai-attach-menu" role="menu" aria-label="Add to your question">${action('ai-pick-file',`${icon('file')}<span class="ai-attach-tx">Upload file<small>PDF, DOC, DOCX, TXT and more</small></span>`,'ai-attach-item')}${action('ai-pick-photo',`${icon('image')}<span class="ai-attach-tx">Upload photo<small>Choose from your album</small></span>`,'ai-attach-item')}${action('ai-pick-camera',`${icon('camera')}<span class="ai-attach-tx">Take a photo<small>Use the phone camera</small></span>`,'ai-attach-item')}${rep?action('ai-attach-report',`${icon('dna')}<span class="ai-attach-tx">DNA report<small>Kit ${esc(rep.kitId)}</small></span>`,'ai-attach-item',`data-id="${rep.id}"`):`<button type="button" class="ai-attach-item" disabled aria-disabled="true">${icon('dna')}<span class="ai-attach-tx">DNA report<small>No report ready yet</small></span></button>`}</div>`:'';
+ return `<div class="cp-bar"><div class="chat-pet chat-pet-ai">${img(p.photo,'avatar',p.name)}<button type="button" class="cp-name" data-action="ai-pet" aria-haspopup="menu" aria-expanded="${view.aiPetMenu?'true':'false'}">${esc(p.name)}<svg class="cp-caret" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button><button type="button" class="cp-clear" data-action="clear-ai">Clear</button>${view.aiPetMenu?`<div class="cp-menu" role="menu" aria-label="Switch pet">${petOptions().map(([v,t])=>`<button type="button" class="cp-item${v===p.id?' on':''}" data-action="ai-pet-pick" data-id="${esc(v)}"><span>${esc(t)}</span>${v===p.id?icon('check'):''}</button>`).join('')}</div>`:''}</div></div><div class="chat-messages"><div class="bubble">Hi, I’m the AI butler for ${esc(p.name)}. ${param('prompt')==='sleep'?'Sleep was a little longer than recent days — let’s look at the trend together.':'Ask me about today’s activity, sleep or health.'}</div>${msgs.map(bubble).join('')}</div><div class="suggestions">${['How is today going?','Why the longer sleep?','Any care suggestions?'].map(t=>action('ai-suggest',esc(t),'',`data-text="${esc(t)}"`)).join('')}</div><div class="row between">${navButton('health','View health data')}${navButton('report','Full report')}${navButton('vets','Online vets')}</div>${form('ai',`${chip}${menu}<div class="chat-compose"><button type="button" class="chat-plus" data-action="ai-attach" aria-label="Add a file, photo or DNA report" aria-haspopup="menu" aria-expanded="${view.aiMenu?'true':'false'}">${icon('plus')}</button><input name="message" maxlength="500" placeholder="Ask about ${esc(p.name)}…" aria-label="AI message"><button type="submit" class="chat-send" aria-label="Send AI message">${icon('send')}</button></div><input type="file" accept="image/*" data-change="ai-photo" hidden><input type="file" accept=".pdf,.doc,.docx,.txt,.md,.csv,.rtf" data-change="ai-file" hidden><input type="file" accept="image/*" capture="environment" data-change="ai-camera" hidden>`,'').replace('<button class="primary" type="submit"></button>','')}`;
 }
 function postPhotos(p){const v=uploadedPhotos[p.id]||p.photos;return Array.isArray(v)?v:[];}
 function postCard(p,detail=false){const a=author(p.author),photos=postPhotos(p),idx=detail?view.postImage%(photos.length||1):0;return `<article class="feed-post"><div class="post-head">${navButton(query('author',{id:a.id}),img(a.avatar,'avatar',a.name),'')}<button class="grow" data-go="${query('author',{id:a.id})}"><strong>${esc(a.name)}</strong><small>${esc(a.location)} · ${esc(p.time||'')}</small></button>${p.author!=='me'?action('follow',state.following.includes(a.id)?'Following':'Follow','text-btn',`data-id="${a.id}"`):''}</div><button class="post-photo" ${detail?'data-action="post-next"':`data-go="post?id=${esc(p.id)}"`} aria-label="${detail?'Next photo':'Open post'}">${img(photos[idx],'post-photo','Pet post photo')}</button>${detail&&photos.length>1?`<div class="row between muted" style="padding:8px 16px">${action('post-prev','← Previous','text-btn')}<span>${idx+1} / ${photos.length}</span>${action('post-next','Next →','text-btn')}</div>`:''}<div class="post-actions">${action('like',icon('paw'),'icon-btn '+(p.liked?'liked':''),`data-id="${p.id}" aria-label="${p.liked?'Unlike':'Like'}" aria-pressed="${p.liked}"`)}${action('bookmark',icon('star'),'icon-btn '+(p.saved?'saved':''),`data-id="${p.id}" aria-label="${p.saved?'Remove from favorites':'Add to favorites'}" aria-pressed="${p.saved}"`)}${action('share',icon('send'),'icon-btn',`data-id="${p.id}" aria-label="Share post"`)}${detail?'':'<span class="grow"></span>'+navButton('post?id='+p.id,icon('comment'),'icon-btn')}</div><div class="post-copy"><b>${((Number(p.likes)||0)+(p.liked?1:0)).toLocaleString()} likes</b><p><strong>${esc(a.name)}</strong> ${esc(p.body||'')}</p>${(p.tags||[]).map(t=>navButton('topic?tag='+encodeURIComponent(t),'#'+esc(t))).join(' ')}${!detail?`<p>${navButton('post?id='+p.id,'View all '+(p.comments||[]).length+' comments')}</p>`:''}</div></article>`;}
 function discover(){const all=(state.posts||[]).filter(p=>p&&typeof p==='object');const decorated=all.map((p,i)=>({p,i,topic:discoverTopicOf(p,i)}));let list=decorated.filter(x=>view.feed!=='following'||(state.following||[]).includes(x.p.author));if(view.discoverTopic)list=list.filter(x=>x.topic===view.discoverTopic);const left=[],right=[];list.forEach((x,k)=>{(k%2?right:left).push(discoverCard(x.p,x.i,x.topic,k));});const grid=list.length?`<div class="ds-grid"><div class="ds-col">${left.join('')}</div><div class="ds-col">${right.join('')}</div></div>`:empty('No posts yet','Try another topic or share your first post.','publish','Create a post');return `${discoverSearchBar()}${discoverChipRow()}${grid}<div class="ds-no-result" hidden>No matching posts. Try another search.</div>${navButton('mall','Pet shop','secondary')}`;}
-function cmtAvatar(n){const a=authors.find(x=>x.name===n),src=n===state.profile.name?'profile_avatar.jpg':(a?a.avatar:null);return `<span class="cmt-ava">${src?img(src,'',''):esc(String(n||'?').slice(0,1).toUpperCase())}</span>`;}
+function cmtAvatar(n){const a=authors.find(x=>x.name===n),src=n===state.profile.name?(state.profile.avatar||'profile_avatar.jpg'):(a?a.avatar:null);return `<span class="cmt-ava">${src?img(src,'',''):esc(String(n||'?').slice(0,1).toUpperCase())}</span>`;}
 function post(){const p=state.posts.find(p=>p.id===param('id'));if(!p)return empty('Post not found','It may have been deleted.','discover','Back to Discover');const rp=view.replyTo&&view.replyTo.post===p.id?view.replyTo:null,cs=p.comments||[];const roots=cs.map((c,i)=>({c,i})).filter(x=>x.c.parent==null);const list=roots.map(({c,i})=>{const kids=cs.map((k,j)=>({k,j})).filter(x=>x.k.parent===i);return `<div class="cmt-item${rp&&rp.index===i?' on':''}" data-action="cmt-reply" data-index="${i}" data-name="${esc(c.name)}" role="button" tabindex="0"><strong class="small-title">${esc(c.name)}</strong><p class="muted">${esc(c.text)}</p>${kids.length?`<div class="cmt-replies">${kids.map(({k,j})=>`<button type="button" class="cmt-reply${rp&&rp.index===j?' on':''}" data-action="cmt-reply" data-index="${j}" data-name="${esc(k.name)}" aria-label="Reply to ${esc(k.name)}">${cmtAvatar(k.name)}<span class="cmt-reply-body"><span class="cmt-reply-head"><b>${esc(k.replyTo||k.name)}</b>:</span> ${esc(k.text)}</span></button>`).join('')}</div>`:''}</div>`;}).join('');return `${postCard(p,true)}<h4>Comments · ${cs.length}</h4>${list}<form class="cmt-form" data-form="comment"><div class="cmt-box${rp?' replying':''}">${icon(rp?'comment':'edit')}<input class="cmt-input" name="comment" type="text" maxlength="500" placeholder="${rp?`Reply to ${esc(rp.name)}`:'Write a comment'}" aria-label="${rp?`Reply to ${esc(rp.name)}`:'Write a comment'}" required>${rp?`<button type="button" class="cmt-clear" data-action="cmt-cancel" aria-label="Cancel reply">${icon('close')}</button>`:''}<button class="cmt-send" type="submit" hidden>Post</button></div><p class="form-error" role="alert"></p></form>`;}
+/* ===== Share post · generated card (2026-11-19) ===== */
+const SHARE_STYLES=[['photo','Photo'],['paper','Paper'],['night','Night']];
+const SHARE_STICKERS=[['','None'],['paw','Paw'],['heart','Heart'],['star','Star'],['dog','Dog'],['moon','Moon']];
+const shFace=s=>s==='dog'?`<svg class="sh-face" viewBox="${FACES.dog.vb}" aria-hidden="true"><path d="${FACES.dog.d}"/></svg>`:icon(s);
+function shareCard(p){
+  const photos=postPhotos(p),style=view.shareStyle||'photo',st=view.shareSticker||'';
+  const me=state.profile||{name:'Kevin',location:'San Francisco, CA'};
+  return `<div class="sh-card sh-style-${style}">${img(photos[0]||'ins_p1.jpg','sh-photo','Post photo')}<span class="sh-veil"></span><span class="sh-brand">${img('home_logo.png','','MoonBack')}</span>${st?`<span class="sh-sticker">${shFace(st)}</span>`:''}<div class="sh-body"><p class="sh-quote">${esc(p.body||'')}</p><div class="sh-meta">${img(me.avatar||'profile_avatar.jpg','','')}<span><b>${esc(me.name)}</b><small>${esc(me.location||'')}</small></span></div></div></div>`;
+}
+function sharePage(){
+  const p=state.posts.find(x=>x&&x.id===param('id'))||state.posts[0];
+  if(!p)return empty('Nothing to share yet','Create a post first.','publish','Create a post');
+  const style=view.shareStyle||'photo',st=view.shareSticker||'';
+  return `<div class="sh-wrap"><div class="sh-stage">${shareCard(p)}</div><div class="sh-opt"><h4>Card style</h4><div class="sh-chips">${SHARE_STYLES.map(([v,l])=>`<button type="button" class="sh-chip${style===v?' on':''}" data-action="share-style" data-value="${v}" aria-pressed="${style===v}">${l}</button>`).join('')}</div></div><div class="sh-opt"><h4>Sticker</h4><div class="sh-stickers">${SHARE_STICKERS.map(([v,l])=>`<button type="button" class="sh-sticker-btn${st===v?' on':''}" data-action="share-sticker" data-value="${v}" aria-label="${l}" aria-pressed="${st===v}">${v?shFace(v):'<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 1 0 0 18 9 9 0 1 0 0-18M5.6 5.6l12.8 12.8"/></svg>'}</button>`).join('')}</div></div><div class="sh-share"><div class="sh-share-row">${[['facebook','Facebook'],['instagram','Instagram'],['x','X'],['linkedin','LinkedIn'],['reddit','Reddit']].map(([k,l])=>`<button type="button" class="sh-app sh-${k}" data-action="share-social" data-value="${l}" aria-label="Share to ${l}">${brand(k)}<span>${l}</span></button>`).join('')}<button type="button" class="sh-app sh-save" data-action="share-save" aria-label="Save image">${brand('save','sh-dl')}<span>Save</span></button></div></div></div>`;
+}
 function authorPage(){const a=author(param('id'));if(a.id==='me')return profile();const posts=state.posts.filter(p=>p.author===a.id);const left=[],right=[];posts.forEach((p,i)=>{(i%2?right:left).push(discoverCard(p,i,discoverTopicOf(p,i),i));});const feed=posts.length?`<div class="up-feed"><div class="ds-grid">${right.length?`<div class="ds-col">${left.join('')}</div><div class="ds-col">${right.join('')}</div>`:`<div class="ds-col">${left.join('')}</div>`}</div></div>`:empty('No posts yet','This user has not shared anything.');return `<div class="up-card"><div class="up-head">${img(a.avatar,'up-avatar',a.name)}<span class="up-id"><b>${esc(a.name)}</b><span class="up-loc">${icon('pin')}${esc(a.location)}</span></span>${icon('arrow')}</div><h4 class="up-about">About me</h4><p class="up-bio">${esc(a.bio)}</p><div class="up-stats"><div><small>Posts</small><b>${posts.length}</b></div><div><small>Followers</small><b>${a.followers||0}</b></div></div></div>${feed}`;}
 function postGrid(posts){return posts.length?`<div class="post-grid">${posts.map(p=>navButton('post?id='+p.id,img(postPhotos(p)[0]||'','','Open post'),'')).join('')}</div>`:empty('Nothing here yet','Share a post or like something you love.','discover','Explore community');}
-function profile(){const p=state.profile||{},gts=state.geneticTests||[],gNew=gts.filter(t=>t&&t.unseen!==false).length,posts=(state.posts||[]).filter(x=>x&&(view.profileTab==='liked'?x.liked:x.author==='me'));return `<button class="list-row" data-go="personal">${img('profile_avatar.jpg','avatar lg',p.name)}<span class="grow"><strong style="font:600 25px Fraunces,serif">${esc(p.name)}</strong><span class="muted" style="display:block">${icon('pin')}${esc(p.location)}</span></span>${icon('arrow')}</button><h4>About me</h4><p class="muted">${esc(p.bio)}</p><div class="stat-row">${navButton('friends?kind=posts',`<small>Posts</small><b>${(state.posts||[]).filter(p=>p&&p.author==='me').length}</b>`,'')}${navButton('friends?kind=followers',`<small>Followers</small><b>46</b>`,'')}</div><button class="device-card pets-card" data-go="pets"><span class="grow"><b>My pets (${(state.pets||[]).length})</b></span>${(state.pets||[]).slice(0,3).map(p=>img(p.photo,'avatar',p.name)).join('')}${icon('arrow')}</button><button class="device-card" data-go="genetic?all=1"><span class="grow"><b>Genetic Test (${gts.length})${gNew?`<span class="gt-new">${gNew} new</span>`:''}</b></span>${icon('dna')}${icon('arrow')}</button>${segments([['posts','Moments'],['liked','Liked']],view.profileTab,'profile-tab')}${postGrid(posts)}${navButton('publish','Share a moment','secondary')}${state.member?'':''}`;}
+function profile(){const p=state.profile||{},gts=state.geneticTests||[],gNew=gts.filter(t=>t&&t.unseen!==false).length,posts=(state.posts||[]).filter(x=>x&&(view.profileTab==='liked'?x.liked:x.author==='me'));return `<div class="ph-row"><button class="ph-ava" data-action="avatar-view" aria-label="View profile photo">${img(p.avatar||'profile_avatar.jpg','avatar lg',p.name)}</button><div class="grow"><div class="ph-name"><strong>${esc(p.name)}</strong><button class="ph-edit" data-go="personal" aria-label="Edit profile" title="Edit profile">${icon('edit')}</button></div><span class="muted ph-loc">${icon('pin')}${esc(p.location)}</span></div></div><h4>About me</h4><p class="muted">${esc(p.bio)}</p><div class="stat-row">${navButton('friends?kind=posts',`<small>Posts</small><b>${(state.posts||[]).filter(p=>p&&p.author==='me').length}</b>`,'')}${navButton('friends?kind=followers',`<small>Followers</small><b>46</b>`,'')}</div><button class="device-card pets-card" data-go="pets"><span class="grow"><b>My pets (${(state.pets||[]).length})</b></span>${(state.pets||[]).slice(0,3).map(p=>img(p.photo,'avatar',p.name)).join('')}${icon('arrow')}</button><button class="device-card" data-go="genetic?all=1"><span class="grow"><b>Genetic Test (${gts.length})${gNew?`<span class="gt-new">${gNew} new</span>`:''}</b></span>${icon('dna')}${icon('arrow')}</button>${segments([['posts','Moments'],['liked','Liked']],view.profileTab,'profile-tab')}${postGrid(posts)}${navButton('publish','Share a moment','secondary')}${state.member?'':''}`;}
 function pets(){return `${state.pets.map(p=>`<button class="device-card" data-go="pet-detail?id=${esc(p.id)}">${img(p.photo,'',p.name)}<span class="info"><b>${esc(p.name)}</b>${p.abnormal?'<span class="badge warn">High HR</span>':''}<small>${esc(p.type)} · ${esc(p.breed)}<br>${esc(p.weight)} kg</small></span>${icon('arrow')}</button>`).join('')||empty('No pets yet','Add a pet to start tracking.')}${navButton('pet-edit',icon('plus')+' Add Pet','primary')}`;}
 const PET_ANGLES=[['front','Front'],['left','Left side'],['right','Right side'],['back','Back'],['top','Top'],['bottom','Bottom'],['leftDiag','Left diagonal'],['rightDiag','Right diagonal']];
 const petPhotoSlots={};
@@ -277,18 +336,19 @@ function petEdit(){
 }
 /* ===== Bind device: first-time setup for a new user (scan → pet profile → photos → home) ===== */
 const BIND_STEPS=[['1','Scan product'],['2','Pet profile'],['3','Photos']];
-function bindWiz(){if(!view.bindWiz)view.bindWiz={step:1,scanId:'',bound:false,deviceId:'',petId:'',draft:{},error:'',done:false};return view.bindWiz;}
-function newBind(){view.bindWiz={step:1,scanId:'',bound:false,deviceId:'',petId:'',draft:{},error:'',done:false};}
-function syncBindDraft(){const w=bindWiz(),root=$('#app-content');if(!root)return;['name','breed','sex','weight','age','height','emotional','owner','contact','nextVax'].forEach(k=>{const el=root.querySelector(`[name="${k}"]`);if(el)w.draft[k]=el.value;});}
+function bindWiz(){if(!view.bindWiz)view.bindWiz={step:1,scanId:'',sn:'',bound:false,deviceId:'',petId:'',draft:{},error:'',done:false};return view.bindWiz;}
+function newBind(){Object.keys(petPhotoSlots).forEach(k=>{try{URL.revokeObjectURL(petPhotoSlots[k]);}catch(e){}delete petPhotoSlots[k];});view.bindWiz={step:1,scanId:'',sn:'',bound:false,deviceId:'',petId:'',draft:{},error:'',done:false};}
+function syncBindDraft(){const w=bindWiz(),root=$('#app-content');if(!root)return;['name','type','breed','sex','weight','age','height','emotional','owner','contact','nextVax'].forEach(k=>{const el=root.querySelector(`[name="${k}"]`);if(el)w.draft[k]=el.value;});}
 function bindError(msg){const w=bindWiz();w.error=msg||'';const el=$('#pet-wiz-error');if(el){el.textContent=w.error;el.hidden=!w.error;}}
 function bindStepTabs(){const w=bindWiz();return `<div class="pw-steps">${BIND_STEPS.map(([n,t],i)=>`<button type="button" class="pw-step${w.step===i+1?' on':''}${w.step>i+1?' done':''}" data-action="bind-step" data-value="${i+1}" aria-current="${w.step===i+1}"><span class="pw-num">${w.step>i+1?'✓':n}</span><span>${t}</span></button>`).join('')}</div>`;}
 function bindPaneScan(){
  const w=bindWiz();
- const devImgHtml=w.scanId?`<div class="bind-device-img">${img(devImg(w.bindType||'harness'),'',esc((types[w.bindType||'harness']||types.harness)[0]))}</div>`:'';
- return `<div class="pw-pane"><p class="pw-intro">Scan the QR code on the product box to bind it to your MoonBack account. Smart Dog Harness, Smart Dog House and Genetic Test kits are all supported.</p>
-  <button type="button" class="pw-mode on" data-action="bind-mode" data-value="scan"><span class="pw-mode-ic">${icon('camera')}</span><span class="pw-mode-tx"><b>Scan a device or genetic test box</b><small>Scan the QR code on the device or box</small></span><span class="pw-radio"></span></button>
-  <div class="pw-scan-box"><div class="pw-scan-id">${w.scanId?'Scanned · '+esc(w.scanId):'No product scanned yet'}</div>${action('bind-scan','Scan QR code','secondary')}${devImgHtml}</div>
-  <p class="muted" style="margin:0 0 14px">Only a fresh scan is accepted here — pick the scanned product to bind it to your account.</p></div>`;
+ const type=w.bindType||'harness',tName=(types[type]||types.harness)[0];
+ const result=w.scanId?`<div class="bind-result">${img(devImg(type),'','')}<div class="bind-result-meta"><b>${esc(tName)}</b><small>SN · ${esc(w.scanId)}</small></div><button type="button" class="pw-chg" data-action="bind-rescan">Change</button></div>`:'';
+ return `<div class="pw-pane"><p class="pw-intro">Scan the QR code on the product box, or enter the SN code printed on the label, to bind the product to your MoonBack account. Smart Dog Harness, Smart Dog House and Genetic Test kits are all supported.</p>
+  <div class="pw-scan-box"><button type="button" class="pw-scan-btn" data-action="bind-scan">${icon('camera')} Scan QR code</button><div class="pw-sn-row"><input id="bind-sn" type="text" inputmode="numeric" autocomplete="off" placeholder="Enter SN code" value="${esc(w.sn||'')}"><button type="button" class="pw-sn-ok" data-action="bind-sn-confirm">Confirm</button></div></div>
+  ${result}
+  <p class="muted" style="margin:0 0 14px"><button type="button" class="link" data-go="mall" style="color:#c95353;font-size:12px;padding:0;border:0;background:none;text-decoration:none;text-align:left">Don\'t have a MoonBack product? Shop now &gt;</button></p></div>`;
 }
 function bindPaneBind(){
  const w=bindWiz();
@@ -298,37 +358,53 @@ function bindPaneBind(){
   <div class="pw-actions" style="justify-content:flex-start">${action('bind-bind','Bind to account','primary')}</div></div>`;
 }
 function bindPanePet(){
- const w=bindWiz(),d=w.draft;
+ const w=bindWiz(),d=w.draft,isCat=(d.type||'Dog')==='Cat';
  const val=k=>esc(d[k]!=null&&d[k]!==''?d[k]:'');
  const inp=(n,ph,type,extra='')=>`<input name="${n}" type="${type}" value="${val(n)}" placeholder="${esc(ph)}" ${extra}>`;
- const cell=(label,body)=>`<div class="pe-cell"><span class="pe-label">${label}</span><div class="pe-input">${body}</div></div>`;
+ const cell=(label,body,req)=>`<div class="pe-cell"><span class="pe-label">${label}${req?'<i class="req">*</i>':''}</span><div class="pe-input">${body}</div></div>`;
  const unit=u=>`<span class="pe-unit">${u}</span>`;
- const sizeBtn=`<div class="pw-size-filter"><span class="pe-label">Filter by size</span>${['Small','Medium','Large'].map(sz=>`<button type="button" class="pw-size-btn${w.sizeFilter===sz?' on':''}" data-action="bind-size" data-value="${esc(sz)}">${esc(sz)}</button>`).join('')}</div>`;
- const breed=`<div class="pw-breed"><span class="pe-label">Dog breed · pick a photo</span><div class="pw-breed-row">${BREED_PICKS.filter(([, ,sz])=>!w.sizeFilter||sz===w.sizeFilter).map(([n,src])=>`<button type="button" class="pw-breed-card${d.breed===n?' on':''}" data-action="bind-breed" data-value="${esc(n)}">${img(src,'',n)}<span>${esc(n)}</span></button>`).join('')}</div></div>`;
+ const typeRow=`<div class="pw-type-row"><span class="pe-label">Type<i class="req">*</i></span><select name="type" data-change="bind-type" aria-label="Pet type"><option value="Dog" ${!isCat?'selected':''}>Dog</option><option value="Cat" ${isCat?'selected':''}>Cat</option></select></div>`;
+ const sizeBtn=isCat?'':`<div class="pw-size-filter"><span class="pe-label">Filter by size</span>${['Small','Medium','Large'].map(sz=>`<button type="button" class="pw-size-btn${w.sizeFilter===sz?' on':''}" data-action="bind-size" data-value="${esc(sz)}">${esc(sz)}</button>`).join('')}</div>`;
+ const breed=isCat
+  ?`<div class="pw-breed"><span class="pe-label">Cat breed<i class="req">*</i></span><p class="muted" style="font-size:11px;margin:6px 0 0">Cat breed photos are not available yet — type the breed below.</p></div>`
+  :`<div class="pw-breed"><span class="pe-label">Dog breed · pick a photo<i class="req">*</i></span><div class="pw-breed-row">${BREED_PICKS.filter(([, ,sz])=>!w.sizeFilter||sz===w.sizeFilter).map(([n,src])=>`<button type="button" class="pw-breed-card${d.breed===n?' on':''}" data-action="bind-breed" data-value="${esc(n)}">${img(src,'',n)}<span>${esc(n)}</span></button>`).join('')}</div></div>`;
  const grid=`<div class="pe-grid">
-  ${cell('Pet name',inp('name','Enter pet name','text','maxlength="30"'))}
-  ${cell('Type',`<select name="type"><option value="Dog" selected>Dog</option></select>`)}
-  ${cell('Breed',inp('breed','Enter breed','text','maxlength="50"'))}
-  ${cell('Age',inp('age','Enter age','number','min="0" max="30" step="1"')+unit('yrs'))}
-  ${cell('Sex',`<select name="sex"><option value="Male" ${(d.sex||'Male')!=='Female'?'selected':''}>Male</option><option value="Female" ${(d.sex||'')==='Female'?'selected':''}>Female</option></select>`)}
-  ${cell('Weight',inp('weight','Enter weight','number','min="0.1" max="150" step="0.1"')+unit('kg'))}
-  ${cell('Height',inp('height','Enter height','number','min="1" max="200" step="0.1"')+unit('cm'))}
+  ${cell('Pet name',inp('name','Enter pet name','text','maxlength="30"'),1)}
+  ${cell('Breed',inp('breed','Enter breed','text','maxlength="50"'),1)}
+  ${cell('Age',inp('age','Enter age','number','min="0" max="30" step="1"')+unit('yrs'),1)}
+  ${cell('Sex',`<select name="sex"><option value="Male" ${(d.sex||'Male')!=='Female'?'selected':''}>Male</option><option value="Female" ${(d.sex||'')==='Female'?'selected':''}>Female</option></select>`,1)}
+  ${cell('Weight',inp('weight','Enter weight','number','min="0.1" max="150" step="0.1"')+unit('kg'),1)}
+  ${cell('Height',inp('height','Enter height','number','min="1" max="200" step="0.1"')+unit('cm'),1)}
   ${cell('Emotional history',inp('emotional','e.g. Neutered','text','maxlength="60"'))}
   ${cell('Owner',inp('owner','Enter owner name','text','maxlength="40"'))}
   ${cell('Contact',inp('contact','Mobile number','tel','maxlength="20"'))}
   ${cell('Next vaccination',inp('nextVax','','date'))}
  </div>`;
- return `<div class="pw-pane">${sizeBtn}${breed}${grid}</div>`;
+ return `<div class="pw-pane">${typeRow}${sizeBtn}${breed}${grid}</div>`;
 }
 function bindPanePhotos(){
- const cam=`<svg class="pe-cam-ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="7" width="10" height="10" rx="2"/></svg>`;
- return `<div class="pw-pane"><div class="pe-photos"><h3>Pet photos</h3><p>Upload 8 photos from different angles — they are used to generate your pet's digital twin</p>
-  <div class="pe-photo-grid">${PET_ANGLES.map((a,i)=>`<div class="pe-slot-wrap"><label class="pe-slot"><input type="file" accept="image/*" data-change="bind-photo" data-index="${i}" hidden>${petPhotoSlots[i]?`<img class="pe-slot-img" src="${petPhotoSlots[i]}" alt="${a[1]}">`:cam}</label><span class="pe-slot-label">${a[1]}</span></div>`).join('')}</div>
-  <p class="muted" style="margin:8px 0 0">${Object.keys(petPhotoSlots).length}/8 uploaded</p></div></div>`;
+ const plus=`<svg class="pe-plus-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>`;
+ const slots=Object.keys(petPhotoSlots).map(Number).sort((x,y)=>x-y);
+ const n=slots.length;
+ const thumbs=slots.map(i=>`<div class="pe-thumb"><img src="${petPhotoSlots[i]}" alt="Pet photo ${i+1}"><button type="button" class="pe-thumb-x" data-action="bind-photo-remove" data-value="${i}" aria-label="Remove photo">×</button></div>`).join('');
+ const add=n<12?`<label class="pe-upload"><input type="file" accept="image/*" multiple data-change="bind-photos-add" hidden>${plus}<span>Add photo</span></label>`:'';
+ return `<div class="pw-pane"><div class="pe-photos"><h3>Pet photos</h3><p>Optional — up to 12 photos. Any angle is fine; they help build your pet's profile.</p>
+  <div class="pe-photo-grid pe-up-grid">${thumbs}${add}</div>
+  <p class="muted" style="margin:8px 0 0">${n}/12 uploaded</p></div></div>`;
 }
 function bindPaneDone(){
  const w=bindWiz(),p=state.pets.find(x=>x.id===w.petId);
- return `<div class="pw-done"><div class="pw-done-ic">${icon('check')}</div><h2 class="serif">All set!</h2><p class="muted">${esc(p?p.name:'Your pet')} is ready to explore MoonBack with you. A digital twin is being generated from the uploaded photos.</p>${action('bind-home','Go to Home','primary')}</div>`;
+ return `<div class="pw-done"><div class="pw-done-ic">${icon('check')}</div><h2 class="serif">Congratulations!</h2><p class="muted">Your product is bound successfully${p?' — '+esc(p.name)+' has been added to your pets':''}.</p><p class="muted" style="margin:10px 0 0">Redirecting to Home in <b id="bind-done-cd">5</b>s…</p>${action('bind-home','Go to Home','primary')}</div>`;
+}
+function startBindDoneCountdown(){
+ clearInterval(bindDoneTimer);
+ view.bindDone=5;
+ bindDoneTimer=setInterval(()=>{
+  view.bindDone=(view.bindDone||1)-1;
+  const el=document.getElementById('bind-done-cd');
+  if(el)el.textContent=String(Math.max(view.bindDone,1));
+  if(view.bindDone<=0){clearInterval(bindDoneTimer);bindDoneTimer=null;view.bindWiz=null;go('home');toast('Setup complete — welcome to MoonBack!');}
+ },1000);
 }
 function deviceBind(){
  const w=bindWiz();
@@ -495,7 +571,7 @@ function vetDetail(){if(needPet())return needPet();const v=vetsData.find(x=>x.id
 function consult(){const c=state.consultations.find(c=>c.id===param('id'));if(!c)return empty('Pick a vet first','Start a consultation from the online vet list.','vets','Pick a vet');const v=vetsData.find(v=>v.id===c.vet)||vetsData[0];return `<div class="chat-pet">${img(v.photo,'avatar',v.name)}<span>${v.name}<br><small>${esc(c.petName)} · ${c.ended?'Ended':'In progress'}</small></span></div><div class="chat-messages">${c.messages.map(m=>`<div class="bubble ${m.role==='user'?'user':''}">${esc(m.text)}</div>`).join('')}</div>${c.ended?'':messageForm('consult','Write your question…')+action('end-consult','End this consultation','secondary')}${navButton('consult-history','View consultation history','text-btn')}`;}
 function consultHistory(){return state.consultations.length?state.consultations.slice().reverse().map(c=>`<button class="device-card" data-go="consult?id=${c.id}">${img((vetsData.find(v=>v.id===c.vet)||vetsData[0]).photo,'','Vet avatar')}<span class="info"><b>${esc(c.petName)} · ${(vetsData.find(v=>v.id===c.vet)||vetsData[0]).name}</b><small>${esc(c.time)}<br>${c.ended?'Ended':'In progress'}</small></span>${icon('arrow')}</button>`).join('')+navButton('vets','Start a new consultation','primary'):empty('No consultations yet','Pick a vet to try the consultation flow.','vets','Pick a vet');}
 function messageForm(name,placeholder){return form(name,`<div class="chat-compose"><input name="message" maxlength="500" placeholder="${placeholder}" aria-label="Message" required><button type="submit" aria-label="Send message">${icon('send')}</button></div>`,'').replace('<button class="primary" type="submit"></button>','');}
-function publish(){const topics=[['PetLife','1.2M views'],['DailyWalk','845K views'],['CatLife','3.4M views'],['Health','2.1M views'],['Funny','986K views'],['Cute','4.7M views']];if(!publishDraft.tags&&param('tag'))publishDraft.tags=param('tag');const sel=Array.from(new Set(String(publishDraft.tags||'').split(/[,\s]+/).filter(Boolean)));const chips=sel.map(x=>`<span class="topic-chip">#${esc(x)}<button class="topic-chip-del" data-action="remove-topic" data-value="${esc(x)}" type="button" aria-label="Remove ${esc(x)}">${icon('close')}</button></span>`).join('');const items=topics.filter(([x])=>!sel.includes(x)).map(([x,v])=>`<button class="topic-item" data-action="set-topic" data-value="${esc(x)}" type="button"><span><span class="topic-hash">#</span>${esc(x)}</span><small>${esc(v)}</small></button>`).join('');return `<form data-form="publish" class="publish-form"><p class="form-error" role="alert"></p><div class="publish-body"><div class="photo-section"><button class="photo-plus" data-action="pick-photo" type="button">${icon('plus')}<span>Add photos</span></button><input type="file" accept="image/*" multiple data-change="upload" style="display:none"><div class="photo-grid">${pendingPhotos.map((u,i)=>`<div class="photo-wrap">${img(u,'','Photo to publish')}<button class="photo-del" data-action="remove-photo" data-index="${i}" type="button">${icon('close')}</button></div>`).join('')}</div><small class="photo-cap">Up to 9 photos · JPEG/PNG/WebP</small></div><label class="field">What’s new with your little friend?<textarea name="body" required maxlength="500" placeholder="Share a moment with your pet…">${esc(publishDraft.body)}</textarea><span class="char-count"><span id="pub-count">${publishDraft.body.length}</span>/500</span></label><div class="topic-section"><div class="topic-input-wrap" data-action="topic-focus"><div class="topic-chips">${chips}</div><input class="topic-input" type="text" data-input="topic-input" placeholder="${sel.length?'#tag':'#Tag'}" aria-label="Add a topic"></div><div class="topic-panel"><div class="topic-list"${view.topicPanelOpen?'':' hidden'}>${items||'<p class="topic-none">All topics selected</p>'}</div></div></div></div><div class="publish-footer"><button class="publish-submit" type="submit">Publish</button></div></form>`;}
+function publish(){const topics=[['PetLife','1.2M views'],['DailyWalk','845K views'],['CatLife','3.4M views'],['Health','2.1M views'],['Funny','986K views'],['Cute','4.7M views']];if(!publishDraft.tags&&param('tag'))publishDraft.tags=param('tag');const sel=Array.from(new Set(String(publishDraft.tags||'').split(/[,\s]+/).filter(Boolean)));const chips=sel.map(x=>`<span class="topic-chip">#${esc(x)}<button class="topic-chip-del" data-action="remove-topic" data-value="${esc(x)}" type="button" aria-label="Remove ${esc(x)}">${icon('close')}</button></span>`).join('');const items=topics.filter(([x])=>!sel.includes(x)).map(([x,v])=>`<button class="topic-item" data-action="set-topic" data-value="${esc(x)}" type="button"><span><span class="topic-hash">#</span>${esc(x)}</span><small>${esc(v)}</small></button>`).join('');return `<form data-form="publish" class="publish-form"><p class="form-error" role="alert"></p><div class="publish-body"><div class="photo-section"><button class="photo-plus" data-action="pick-photo" type="button">${icon('plus')}<span>Add photos</span></button><input type="file" accept="image/*" multiple data-change="upload" style="display:none"><div class="photo-grid">${pendingPhotos.map((u,i)=>`<div class="photo-wrap">${img(u,'','Photo to publish')}<button class="photo-del" data-action="remove-photo" data-index="${i}" type="button">${icon('close')}</button></div>`).join('')}</div><small class="photo-cap">Up to 9 photos · JPG/JPEG/PNG/GIF</small></div><label class="field">What’s new with your little friend?<textarea name="body" required maxlength="500" placeholder="Share a moment with your pet…">${esc(publishDraft.body)}</textarea><span class="char-count"><span id="pub-count">${publishDraft.body.length}</span>/500</span></label><div class="topic-section"><div class="topic-input-wrap" data-action="topic-focus"><div class="topic-chips">${chips}</div><input class="topic-input" type="text" data-input="topic-input" placeholder="${sel.length?'#tag':'#Tag'}" aria-label="Add a topic"></div><div class="topic-panel"><div class="topic-list"${view.topicPanelOpen?'':' hidden'}>${items||'<p class="topic-none">All topics selected</p>'}</div></div></div></div><div class="publish-footer"><button class="publish-submit" type="submit">Publish</button></div></form>`;}
 function story(){const idx=Number(param('index',String(view.storyIndex)))%authors.length,a=authors[idx];view.storyIndex=idx;return `<div class="story">${img(a.photo,'','Pet story')}<span class="story-name">${esc(a.name)} · Today</span></div><div class="row between" style="margin:16px 0">${navButton('story?index='+((idx+authors.length-1)%authors.length),'← Previous')}${navButton('author?id='+a.id,'View author')}${navButton('story?index='+((idx+1)%authors.length),'Next →')}</div>`;}
 function topic(){const tag=param('tag','PetLife'),posts=state.posts.filter(p=>p.tags.includes(tag));return `<h2 class="serif">#${esc(tag)}</h2><p class="muted">${posts.length} posts</p>${posts.map(p=>postCard(p)).join('')||empty('Nothing here yet','Share a post with this topic.')}${navButton('publish?tag='+encodeURIComponent(tag),'Post to this topic','primary')}`;}
 /* ===== Messages (2026-11-18): three activity categories ===== */
@@ -531,8 +607,65 @@ function friendRequests(){return state.requests.map(r=>{const a=author(r.author)
 const products=[{id:'p1',name:'Daily Balance · Dog food',price:129,image:'home_dev_feeder.jpg',desc:'A balanced formula for everyday feeding.'},{id:'p2',name:'Smart Water Fountain',price:299,image:'home_dev_fountain.jpg',desc:'Smart watering demo — care for every day’s hydration.'},{id:'p3',name:'Comfort Smart Bed',price:599,image:'home_dev_bed.jpg',desc:'A cosy resting spot made for your companion.'}];
 function mall(){return `<div class="card soft"><h2 class="serif">Little things,<br>happier pets.</h2></div>${products.map(p=>`<button class="device-card" data-go="product?id=${p.id}">${img(p.image,'',p.name)}<span class="info"><b>${esc(p.name)}</b><small>$ ${p.price}</small></span>${icon('arrow')}</button>`).join('')}`;}
 function product(){const p=products.find(p=>p.id===param('id'))||products[0];return `<div class="center">${img(p.image,'report',p.name)}<h3>${p.name}</h3><p class="muted">${p.desc}</p><h2>$ ${p.price}</h2></div>${form('cart',field('Quantity','quantity',1,'number','required min="1" max="99" step="1"'),'Add to cart')}`;}
-function settings(){return `<div class="setting-group">${row('Profile','personal','profile')}${row('My pets','pets','paw')}${row('My devices','devices','device')}${row('Change password','password','lock')}</div><div class="setting-group"><label class="list-row">${icon('bell')}<span class="grow">Notifications</span><input type="checkbox" class="toggle" data-change="notifications" ${state.notifications?'checked':''} aria-label="Notifications"></label>${selectField('Language','language',[['Follow system','Follow system'],['Chinese','Chinese'],['English','English']],state.language,'data-change="language"')}${row('Firmware update','firmware','refresh')}${row('Online vet consultations','consult-history','comment')}</div><div class="setting-group">${row('Contact us','contact','mail')}${row('Feedback','feedback','edit')}${row('About MoonBack','about','info')}${row('Terms & Privacy','agreement','lock')}</div>${action('logout','Sign out','danger')}${action('switch-account','Switch account','secondary')}`;}
-function personal(){return `<div class="center" style="padding:15px">${img('profile_avatar.jpg','avatar lg',state.profile.name)}</div>${form('personal',field('Display name','name',state.profile.name,'text','required maxlength="30"')+field('Location','location',state.profile.location,'text','maxlength="80"')+`<label class="field">Bio<textarea name="bio" maxlength="300">${esc(state.profile.bio)}</textarea></label>`,'Save profile')}`;}
+function settings(){return `<div class="setting-group">${row('Profile','personal','profile')}${row('My pets','pets','paw')}${row('My devices','devices','device')}</div><div class="setting-group">${row('Notifications','notifications','bell',state.notifications?'':'Off')}${row('App update','app-update','device')}${row('Firmware update','firmware','refresh')}</div><div class="setting-group">${row('Help &amp; Feedback','help','search')}${row('About MoonBack','about','info')}${row('Terms &amp; Privacy','agreement','lock')}</div>${action('logout','Sign out','danger')}${action('switch-account','Switch account','secondary')}`;}
+function appUpdate(){const st=view.appUpdateState;return `<div class="card center"><span class="badge">${icon('device')}MoonBack</span><h2 class="serif" style="margin:12px 0 6px">MoonBack for iOS</h2><p class="muted">Version 1.0.0 · Build 120</p></div><div class="card"><div class="list-row"><span class="grow">Current version</span><b>1.0.0 (120)</b></div><div class="list-row"><span class="grow">Released</span><span>Nov 12, 2026</span></div></div>${action('check-update','Check for updates','primary')}${st==='latest'?`<p class="upd-note ok">You're on the latest version.</p>`:''}<p class="upd-note">Updates are delivered through the App Store.</p>`;}
+const NOTIF_GROUPS=[
+ ['Device alerts','device',[['offline','Device offline'],['battery','Low battery'],['error','Device errors']]],
+ ['Data alerts','data',[['collect','Data collection issues'],['sync','Sync failures']]],
+ ['Service messages','service',[['account','Membership & billing'],['updates','App & firmware updates']]],
+ ['Community alerts','community',[['likes','Likes & saves'],['comments','Comments & replies'],['follows','New followers & visitors']]]
+];
+function notifPage(){const on=state.notifications;
+ return `<div class="setting-group"><label class="list-row">${icon('bell')}<span class="grow">Allow notifications</span><input type="checkbox" class="toggle" data-change="notifications" ${on?'checked':''} aria-label="Allow notifications"></label></div>`+
+  NOTIF_GROUPS.map(([title,key,items])=>`<h4 class="notif-group">${title}</h4><div class="setting-group${on?'':' is-muted'}">${items.map(([k,label])=>`<label class="list-row"><span class="grow">${label}</span><input type="checkbox" class="toggle" data-change="notif-item" data-group="${key}" data-key="${k}" ${state.notif[key][k]?'checked':''}${on?'':' disabled'} aria-label="${esc(label)}"></label>`).join('')}</div>`).join('')+
+  `<p class="notif-note">Preferences apply to push and in-app alerts.</p>`;
+}
+function personal(){const av=state.profile.avatar||'profile_avatar.jpg';return `<div class="pe-ava-wrap"><button class="pe-ava" data-action="avatar-sheet" aria-label="View or change profile photo">${img(av,'avatar xl',state.profile.name)}<span class="pe-cam">${icon('camera')}</span></button></div>${form('personal',field('Display name','name',state.profile.name,'text','required maxlength="30"')+field('Location','location',state.profile.location,'text','maxlength="80"')+`<label class="field">Bio<textarea name="bio" maxlength="300">${esc(state.profile.bio)}</textarea></label>`,'Save profile')}`;}
+/* ===== Profile avatar: view / album / crop (2026-11-19) ===== */
+var avatarCrop=null;
+const AVATAR_ALBUM=['ins_p1.jpg','ins_p2.jpg','ins_p3.jpg','ins_p4.jpg','ins_p5.jpg','ins_p6.jpg','ins_p7.jpg','real_lucky_rest.jpg','real_milo_play.jpg','real_coco_sleep.jpg','lucky_b1.jpg','milo_b.jpg','coco_b2.jpg','home_pet_lucky.jpg','home_pet_milo.jpg','home_pet_coco.jpg'];
+const avSrc=v=>{const s=String(v==null?'':v);return !s?BLANK_IMG:(s.startsWith('blob:')||s.startsWith('data:')||s.startsWith('assets/'))?s:'assets/'+s;};
+function avOpen(html,cls){const l=$('#overlay-layer');l.className='ovl-layer '+cls;l.innerHTML=html;l.hidden=false;}
+function avClose(){const l=$('#overlay-layer');if(!l||l.hidden)return;l.hidden=true;l.className='ovl-layer';l.innerHTML='';avatarCrop=null;}
+function avatarSheet(){avOpen(`<div class="ovl-sheet"><div class="ovl-group"><button class="ovl-item" data-action="avatar-view">View Photo</button><button class="ovl-item" data-action="avatar-camera">Take Photo</button><button class="ovl-item" data-action="avatar-album">Choose from Album</button></div><div class="ovl-group"><button class="ovl-item" data-action="ovl-close">Cancel</button></div></div><input id="av-cam" type="file" accept="image/*" capture="user" data-change="avatar-file" style="display:none">`,'ovl-dim');}
+function avatarView(src){const s=src||avSrc(state.profile.avatar||'profile_avatar.jpg');avOpen(`<div class="ovl-viewer" data-action="ovl-close"><button class="ovl-x" data-action="ovl-close" aria-label="Close">${icon('close')}</button><img src="${esc(s)}" alt="${esc(state.profile.name)}"></div>`,'ovl-dark');}
+function avatarAlbum(){avOpen(`<div class="ovl-album"><div class="ovl-album-head"><button class="ovl-txt" data-action="ovl-close">Cancel</button><b>Choose photo</b><label class="ovl-file">Device<input type="file" accept="image/*" data-change="avatar-file" style="display:none"></label></div><div class="ovl-grid">${AVATAR_ALBUM.map((f,i)=>`<button class="ovl-thumb" data-action="avatar-pick" data-value="${esc(f)}" aria-label="Photo ${i+1}"><img src="assets/${esc(f)}" alt="Photo ${i+1}"></button>`).join('')}</div></div>`,'ovl-dark');}
+function avatarCropStart(src){
+ avOpen(`<div class="ovl-crop"><div class="ovl-crop-head"><button class="ovl-txt" data-action="ovl-close">Cancel</button><b>Move and scale</b><button class="ovl-txt ok" data-action="crop-done">Done</button></div><div class="crop-stage" id="crop-stage"><img class="crop-img" id="crop-img" alt=""><div class="crop-mask" id="crop-mask"></div><div class="crop-ring" id="crop-ring"></div></div><div class="crop-zoom"><span class="cz">-</span><input id="crop-range" type="range" min="0" max="100" value="0" step="1" aria-label="Zoom photo"><span class="cz">+</span></div></div>`,'ovl-dark');
+ const im=$('#crop-img'),stage=$('#crop-stage'),ring=$('#crop-ring'),mask=$('#crop-mask'),rng=$('#crop-range');if(!im||!stage||!ring||!rng)return;
+ const start=(iw,ih)=>{const W=stage.clientWidth,H=stage.clientHeight,D=Math.round(Math.min(W,H)*0.84)||200;
+  ring.style.width=D+'px';ring.style.height=D+'px';ring.style.left=((W-D)/2)+'px';ring.style.top=((H-D)/2)+'px';
+  if(mask)mask.style.background='radial-gradient(circle '+(D/2)+'px at 50% 50%, rgba(0,0,0,0) 0 99%, rgba(0,0,0,.58) 100%)';
+  const s0=Math.max(D/iw,D/ih)*1.07;im.style.width=(iw*s0)+'px';im.style.height=(ih*s0)+'px';
+  avatarCrop={img:im,iw,ih,D,s0,s:s0,x:0,y:0};
+  avApply();toast('Drag to move, slide to zoom');
+  const clamp=()=>{const c=avatarCrop;if(!c)return;const mx=Math.max(0,(c.iw*c.s-c.D)/2),my=Math.max(0,(c.ih*c.s-c.D)/2);c.x=Math.max(-mx,Math.min(mx,c.x));c.y=Math.max(-my,Math.min(my,c.y));};
+  const zoom=v=>{const c=avatarCrop;if(!c)return;const ns=c.s0+(c.s0*3)*(v/100),r=ns/c.s;c.x*=r;c.y*=r;c.s=ns;clamp();avApply();};
+  let drag=false,px=0,py=0,sx=0,sy=0;
+  stage.addEventListener('pointerdown',e=>{const c=avatarCrop;if(!c)return;drag=true;px=e.clientX;py=e.clientY;sx=c.x;sy=c.y;try{stage.setPointerCapture(e.pointerId);}catch(err){}});
+  stage.addEventListener('pointermove',e=>{const c=avatarCrop;if(!c||!drag)return;c.x=sx+(e.clientX-px);c.y=sy+(e.clientY-py);clamp();avApply();});
+  const end=()=>{drag=false;};stage.addEventListener('pointerup',end);stage.addEventListener('pointercancel',end);stage.addEventListener('pointerleave',end);
+  rng.addEventListener('input',()=>zoom(Number(rng.value)));
+  stage.addEventListener('wheel',e=>{e.preventDefault();const nv=Math.max(0,Math.min(100,Number(rng.value)-e.deltaY*0.12));rng.value=nv;zoom(nv);},{passive:false});
+ };
+ im.onload=()=>start(im.naturalWidth||800,im.naturalHeight||800);
+ im.onerror=()=>{avClose();toast('This photo could not be loaded');};
+ im.src=src;
+}
+function avApply(){const c=avatarCrop;if(!c)return;c.img.style.transform=`translate(calc(-50% + ${c.x}px), calc(-50% + ${c.y}px)) scale(${c.s/c.s0})`;}
+function avatarCropDone(){
+ const c=avatarCrop;if(!c)return;
+ try{
+  const sx=c.iw/2-(c.x+c.D/2)/c.s,sy=c.ih/2-(c.y+c.D/2)/c.s,sw=c.D/c.s,out=512;
+  const cv=document.createElement('canvas');cv.width=cv.height=out;
+  const ctx=cv.getContext('2d');ctx.drawImage(c.img,sx,sy,sw,sw,0,0,out,out);
+  state.profile.avatar=cv.toDataURL('image/jpeg',0.9);
+ }catch(err){
+  state.profile.avatar=avSrc(c.img.getAttribute('src'));
+  toast('Photo set · full cropping needs the online preview');
+ }
+ save();avatarCrop=null;avClose();render(true);toast('Profile photo updated');
+}
 
 /* ===== Sign-in v2 (2026-11-15): English, US market, agreement gate ===== */
 const LG_GOOGLE = `<svg class="lg-ico" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M21.6 12.2c0-.7-.1-1.4-.2-2H12v3.9h5.4a4.6 4.6 0 0 1-2 3v2.5h3.2c1.9-1.7 3-4.3 3-7.4z"/><path fill="#34A853" d="M12 22c2.7 0 5-.9 6.6-2.4l-3.2-2.5c-.9.6-2 1-3.4 1-2.6 0-4.8-1.7-5.6-4.1H3.1v2.6A10 10 0 0 0 12 22z"/><path fill="#FBBC05" d="M6.4 14c-.2-.6-.3-1.3-.3-2s.1-1.4.3-2V7.4H3.1a10 10 0 0 0 0 9.2L6.4 14z"/><path fill="#EA4335" d="M12 6c1.5 0 2.8.5 3.8 1.5l2.8-2.8A10 10 0 0 0 3.1 7.4L6.4 10c.8-2.4 3-4 5.6-4z"/></svg>`;
@@ -588,9 +721,37 @@ function terms(){return `<div class="lg-doc"><h2>Terms of Service</h2><p class="
 function auth(mode='login'){const email=view.loginMode==='email',isLogin=mode==='login',isRegister=mode==='register';return `<div class="center"><div class="auth-logo">IB09</div><h2 class="auth-title">IB09 Pet</h2><p class="muted">Care beyond the everyday.</p></div><div class="auth-form">${segments([['phone','Phone'],['email','Email']],view.loginMode,'login-mode')}${form(mode,field(email?'Email address':'Phone number','account','',email?'email':'tel',`required maxlength="80" autocomplete="off" placeholder="${email?'demo@example.com':'+1 415 555 0132'}"`)+(mode==='forgot'?`<div class="row">${field('Verification code','code','','text','required maxlength="6"')}<button type="button" class="text-btn" data-action="verification-code">Get code</button></div>`:'')+field(isLogin?'Password':'New password (min 6 characters)','password','','password','required minlength="6" maxlength="64" autocomplete="off"')+(isRegister?field('Confirm password','confirm','','password','required minlength="6" maxlength="64" autocomplete="off"'):'')+(mode!=='forgot'?`<label class="checkbox"><input type="checkbox" name="agree" required><span>I have read and agree to the ${navButton('agreement','Terms & Privacy')}</span></label>`:''),isLogin?'Sign in':isRegister?'Create account':'Reset password')}${isLogin?`<div class="row between" style="margin:16px 0">${navButton('forgot','Forgot password?')}${navButton('register','Sign up')}</div>`:navButton('login','Back to sign in','secondary')}</div>`;}
 function password(){return `${form('password',field('Current password (min 6 characters)','old','','password','required minlength="6" autocomplete="off"')+field('New password','password','','password','required minlength="6" maxlength="64" autocomplete="off"')+field('Confirm new password','confirm','','password','required minlength="6" maxlength="64" autocomplete="off"'),'Save changes')}`;}
 function firmware(){const d=state.devices.find(d=>d.id===param('id'))||state.devices[0];if(!d)return empty('No devices yet','Add a device to see the update flow.','device-add','Add device');return `${selectField('Select device','device',state.devices.map(d=>[d.id,d.name]),d.id,'data-change="firmware-device"')}<div class="center" style="padding:30px 0">${img(devImg(d.type),'avatar lg',d.name)}<h3>${esc(d.name)}</h3><p class="muted">Current version ${state.firmware[d.id]||'1.2.0'} · ${d.online?'Online':'Offline'}</p></div><div class="card"><h4>${view.firmwareStage==='done'?'Update complete':view.firmwareStage==='ready'?'Check for updates':'New version found:  1.3.0'}</h4><p class="muted">Improves connectivity and device stability</p>${view.firmwareStage==='updating'?`<div class="progress"><span style="width:${view.firmwareProgress}%"></span></div><p class="muted">Updating… ${view.firmwareProgress}%</p>`:action(view.firmwareStage==='ready'?'firmware-check':'firmware-start',view.firmwareStage==='done'?'Update again':view.firmwareStage==='ready'?'Check for updates':'Start update','primary',`data-id="${d.id}"`)}</div>`;}
-function feedback(){return `${form('feedback',selectField('Feedback type','type',[['Feature idea','Feature idea'],['UI issue','UI issue'],['Other','Other']],'Feature idea')+`<label class="field">Details<textarea name="body" required minlength="5" maxlength="1000" placeholder="At least 5 characters"></textarea></label>`+field('Contact (optional)','contact','','text','maxlength="80"'),'Submit locally')}${state.feedback.length?heading('Saved feedback')+state.feedback.slice().reverse().map(f=>`<div class="card"><b>${esc(f.type)}</b><p class="muted">${esc(f.body)}</p><small class="muted">${esc(f.time)}</small></div>`).join(''):''}`;}
-function contact(){return `<div class="card soft"><h2 class="serif">We’re here<br>for little companions.</h2><p class="muted">Questions or ideas? Tell us.</p></div>${row('Write feedback','feedback','edit')}${row('About MoonBack','about','info')}`;}
-function about(){return `<div class="center" style="padding:30px 0">${img('home_logo.png','','MoonBack')}<h2 class="serif">Care beyond<br>the everyday.</h2><p class="muted">MoonBack · Version 1.0</p></div><div class="card"><p class="muted">Health, device care, AI companionship and community — get to know your companion a little better every day.</p></div>${row('Legal','agreement','lock')}${action('help','Usage & editing guide','secondary')}`;}
+function feedback(){const mail=(state.profile&&state.profile.email)||'6572859@qq.com';return `<h2 class="fb-title">Send Feedback</h2><h4 class="fb-sub">Your Feedback</h4><form data-form="feedback" class="fb-form"><label class="fb-label">Subject<input name="subject" required maxlength="80" placeholder="Enter feedback subject"></label><label class="fb-label">Description<textarea name="body" required minlength="5" maxlength="1000" placeholder="Describe your issue or suggestion..."></textarea></label><label class="fb-check"><input type="checkbox" name="reply" data-change="fb-reply" checked><span>Please send replies to my email</span></label><input class="fb-mail" name="email" type="email" value="${esc(mail)}" maxlength="80" aria-label="Reply email"><button class="fb-submit" type="submit">Submit Feedback</button></form>${state.feedback.length?heading('Saved feedback')+state.feedback.slice().reverse().map(f=>`<div class="card"><b>${esc(f.subject||f.type||'Feedback')}</b><p class="muted">${esc(f.body)}</p><small class="muted">${esc(f.time)}</small></div>`).join(''):''}`;}
+function contact(){const rows=[['mail','Email','support@moonback.com'],['phone','Phone','+1 (415) 555-0134'],['clock','Support hours','Mon–Fri · 9:00–18:00 PT']];return `<div class="card soft"><h2 class="serif">We’re here<br>for little companions.</h2><p class="muted">Questions or ideas? Tell us.</p></div><div class="card">${rows.map(([ic,label,val])=>`<button class="list-row" data-action="copy-contact" data-value="${esc(val)}">${icon(ic)}<span class="grow">${label}</span><span class="ct-val">${esc(val)}</span></button>`).join('')}</div><p class="ct-note">We usually reply within one business day. Tap a row to copy.</p>`;}
+const HELP_TOPICS=[
+ {cat:'Getting started',items:[
+  {id:'h1',title:'Set up your MoonBack account',body:['Sign in with Apple, Google or your email.','Enter the 6-digit code we send to verify your phone number or email.','Add your pet and pair a device to start tracking.']},
+  {id:'h2',title:'Pair your Smart Dog Harness',body:['Turn the harness on and keep it close to your phone.','Scan the QR code on the device, or enter its SN code.','Choose the pet the harness belongs to and set the report interval.']},
+  {id:'h3',title:'Add a pet profile',body:['Open My pets and tap +.','Scan the device or genetic test box, then fill in name, breed, age, sex, weight and height.','Upload photos and finish — health tracking starts right away.']}
+ ]},
+ {cat:'Devices',items:[
+  {id:'h4',title:'Battery and charging',body:['A full charge lasts up to 3 days depending on the report interval.','You will get a low battery alert at 20%.','Charge with the included cable until the indicator turns green.']},
+  {id:'h5',title:'Device shows offline',body:['Check that the harness is charged and within Bluetooth range.','Make sure your phone has network access.','If it stays offline for more than 10 minutes, restart the harness.']},
+  {id:'h6',title:'Set up a geofence',body:['Open Geofence from Quick Access.','Choose a centre point and drag to adjust the radius.','Enable alerts to be notified when your dog leaves the zone.']}
+ ]},
+ {cat:'Health & AI',items:[
+  {id:'h7',title:'Understand health metrics',body:['MoonBack tracks activity, sleep, heart rate, respiration and body temperature.','Each metric is compared with your dog’s own 7-day baseline.','One unusual reading is not a diagnosis — look at the trend.']},
+  {id:'h8',title:'How AI insights work',body:['Companion reviews recent data and flags meaningful changes.','Insights appear in the chat and can be followed up with a question.','When data is insufficient, Companion says so instead of guessing.']},
+  {id:'h9',title:'Genetic test status',body:['Each test moves through submitted, shipping, testing and ready.','Status is updated by the lab and cannot be changed manually.','The report is available as a PDF once it is ready.']}
+ ]},
+ {cat:'Community',items:[
+  {id:'h10',title:'Posting and privacy',body:['Posts are visible to the MoonBack community by default.','You can delete a post at any time from your profile.','Avoid sharing personal details such as your address.']},
+  {id:'h11',title:'Report a post',body:['Tap the ··· menu on a post and choose Report.','Pick a reason and add details if needed.','Our team reviews reports within 24 hours.']}
+ ]},
+ {cat:'Account & billing',items:[
+  {id:'h12',title:'Manage your account',body:['Open Settings → Profile to edit your name, city and bio.','Sign-in uses a phone or email code — there is no password.','You can sign out or switch accounts at the bottom of Settings.']},
+  {id:'h13',title:'MoonBack Plus',body:['Plus unlocks advanced reports and dedicated service entries.','Plans are billed monthly or yearly through the App Store.','Manage or cancel your subscription in your Apple ID settings.']}
+ ]}
+];
+function helpFind(id){for(const g of HELP_TOPICS){const a=g.items.find(x=>x.id===id);if(a)return Object.assign({cat:g.cat},a);}return null;}
+function help(){return HELP_TOPICS.map(g=>`<h4 class="help-cat">${esc(g.cat)}</h4><div class="setting-group">${g.items.map(a=>`<button class="list-row" data-go="help-article?id=${esc(a.id)}">${icon('file')}<span class="grow">${esc(a.title)}</span>${icon('arrow')}</button>`).join('')}</div>`).join('')+`<p class="ct-note">Can’t find what you need? Tap the button below and tell us.</p>`;}
+function helpArticle(){const a=helpFind(param('id'));if(!a)return empty('Article not found','Pick a topic from Help & Feedback.','help');return `<h2 class="serif" style="margin:6px 0 4px">${esc(a.title)}</h2><p class="muted" style="margin:0 0 12px">${esc(a.cat)}</p><div class="card">${a.body.map(t=>`<p class="help-p">${esc(t)}</p>`).join('')}</div>`;}
+function about(){return `<div class="center" style="padding:30px 0">${img('home_logo.png','','MoonBack')}<h2 class="serif">Care beyond<br>the everyday.</h2><p class="muted">MoonBack · Version 1.0</p></div><div class="card"><p style="font-size:13px;line-height:1.75;color:#55606c;margin:0">MoonBack is a pet care technology company. We design smart devices and AI tools that help dog owners understand their companions better — from daily activity and sleep to long-term health.</p></div>`;}
 function agreement(){return `<div class="lg-doc"><h2>Legal</h2><p class="muted">MoonBack · Version 1.0</p><div class="setting-group">${row('Privacy Policy','privacy','lock')}${row('Terms of Service','terms','lock')}</div></div>`;}
 function membership(){return `<div class="card soft center">${icon('crown')}<h2 class="serif">A little more care.</h2><p class="muted">MoonBack Plus</p></div><div class="card"><h4>Membership benefits</h4><p class="muted">Health trends, in-depth reports and dedicated service entries. Pick the plan that fits you.</p></div>${form('membership',selectField('Choose plan','plan',[['monthly','Monthly · $29 / mo'],['yearly','Yearly · $199 / yr']],'monthly'),'Try membership')}${state.member?'':''}`;}
 function feeding(){if(needPet())return needPet();return `<p class="muted">${esc(pet().name)}’s feeding plan</p>${state.feeding.filter(f=>f.pet===pet().id).map(f=>`<div class="card"><div class="row"><div class="grow"><b>${esc(f.name)}</b><p class="muted">${esc(f.time)} · ${f.grams} g · ${esc(state.foods.find(x=>x.id===f.food)?.name||'No food selected')}</p></div><input class="toggle" type="checkbox" data-change="feeding-enabled" data-id="${f.id}" ${f.enabled?'checked':''} aria-label="${esc(f.name)} Enabled"></div><div class="row between">${navButton('feeding-edit?id='+f.id,'Edit')}${action('delete-feeding','Delete','text-btn',`data-id="${f.id}"`)}</div></div>`).join('')||empty('No feeding plans yet','Plan the first meal for this pet.')}${navButton('feeding-edit','Add feeding plan','primary')}${navButton('foods','Manage my foods','secondary')}`;}
@@ -599,17 +760,19 @@ function foods(){return `${state.foods.map(f=>`<div class="card"><div class="row
 const presetFoods=[['Daily Balance','MoonBack','Dog'],['Indoor Cat','Nature Care','Cat'],['Sensitive Care','Pet Wellness','Dog']];
 function foodSelect(){return presetFoods.map(([n,b,t],i)=>`<div class="card"><h4>${n}</h4><p class="muted">${b} · ${t}</p>${action('add-preset-food',state.foods.some(f=>f.name===n)?'Already in my foods':'Add to my foods','secondary',`data-index="${i}"`)}</div>`).join('')+navButton('foods','View my foods','primary');}
 function foodAdd(){return form('food',field('Food name','name','','text','required maxlength="60"')+field('Brand','brand','','text','required maxlength="40"')+selectField('Type','type',[['Dog','Dog'],['Cat','Cat']],'Dog'),'Save food');}
-const renderers={home,health,ai,discover,profile,monitor,login:loginV2,register:()=>auth('register'),forgot:()=>auth('forgot'),pets,'pet-edit':petEdit,'pet-detail':petDetail,devices,'device-add':deviceAdd,'device-detail':deviceDetail,translation,fence,trajectory,checkin,metric,report,records,'record-edit':recordEdit,vets,'vet-detail':vetDetail,consult,'consult-history':consultHistory,post,author:authorPage,publish,story,topic,messages,chat,friends,'friend-add':friendAdd,'friend-requests':friendRequests,mall,product,settings,personal,password,firmware,feedback,contact,about,agreement,membership,feeding,'feeding-edit':feedingEdit,foods,'food-select':foodSelect,'food-add':foodAdd,privacy,terms,genetic,'genetic-new':geneticNew,'genetic-report':geneticReport,vaccines,'vaccine-add':vaccineAdd,'device-bind':deviceBind};
+const renderers={home,health,ai,discover,profile,monitor,login:loginV2,register:()=>auth('register'),forgot:()=>auth('forgot'),pets,'pet-edit':petEdit,'pet-detail':petDetail,devices,'device-add':deviceAdd,'device-detail':deviceDetail,translation,fence,trajectory,checkin,metric,report,records,'record-edit':recordEdit,vets,'vet-detail':vetDetail,consult,'consult-history':consultHistory,post,share:sharePage,author:authorPage,publish,story,topic,messages,chat,friends,'friend-add':friendAdd,'friend-requests':friendRequests,mall,product,settings,notifications:notifPage,'app-update':appUpdate,personal,password,firmware,feedback,contact,help,'help-article':helpArticle,about,agreement,membership,feeding,'feeding-edit':feedingEdit,foods,'food-select':foodSelect,'food-add':foodAdd,privacy,terms,genetic,'genetic-new':geneticNew,'genetic-report':geneticReport,vaccines,'vaccine-add':vaccineAdd,'device-bind':deviceBind};
 function render(keepScroll=false){
  const pos=$('#app-content').scrollTop,doc=docMap[current.page],group=doc.dataset.group;
  $('#top-tabs').innerHTML=modules.map(([r,t,i])=>`<button class="tab ${r===group?'active':''}" role="tab" aria-selected="${r===group}" data-go="${r}">${icon(i)}${t}</button>`).join('');
  $('#bottom-nav').innerHTML=modules.filter(m=>!['login','monitor'].includes(m[0])).map(([r,t,i])=>`<button data-go="${r}" class="${r===group?'active':''}" aria-label="App navigation ${t}" aria-current="${r===group?'page':'false'}">${icon(i)}<span>${({home:'Home',health:'Health',ai:'AI Butler',discover:'Discover',profile:'Profile'})[r]}</span></button>`).join('');
- const noNav=group==='login'||['post','publish','device-bind','genetic','genetic-new','genetic-report'].includes(current.page);
+ const noNav=group==='login'||['post','publish','share','device-bind','genetic','genetic-new','genetic-report'].includes(current.page);
  $('#bottom-nav').hidden=noNav;
  $('#bottom-nav').style.display=noNav?'none':'flex';
  const main=['home','health','ai','discover','profile','login'].includes(current.page);
- let header=main?'':ib('back','Back','data-action="back"');
- header+=current.page==='home'?`${img('home_logo.png','app-logo','MoonBack')}<span class="spacer"></span>${`<button class="icon-btn${state.messagesRead?'':' has-unread'}" aria-label="Messages" data-go="messages">${icon('bell')}<span class="notif-dot"></span></button>`}${ib('plus','Add device','data-action="add-device-menu"')}`:(current.page==='login'?'':`<h2>${esc(current.page==='pet-edit'&&param('id')?'Edit Pet':(titles[current.page]||doc.querySelector('h2').textContent))}</h2>`);
+ let header=(main||current.page==='share')?'':ib('back','Back','data-action="back"');
+ header+=current.page==='home'?`${img('home_logo.png','app-logo','MoonBack')}<span class="spacer"></span>${`<button class="icon-btn${state.messagesRead?'':' has-unread'}" aria-label="Messages" data-go="messages">${icon('bell')}<span class="notif-dot"></span></button>`}${ib('plus','Add device','data-action="add-device-menu"')}`:(current.page==='login'?'':`<h2>${esc(current.page==='pet-edit'&&param('id')?'Edit Pet':(titles[current.page]||doc.dataset.en||doc.querySelector('h2').textContent))}</h2>`);
+ if(current.page==='feedback')header=`<span class="spacer"></span>${ib('close','Close','data-action="back"')}`;
+ if(current.page==='share')header+=ib('close','Close','data-action="share-close"');
  if(current.page==='health')header+=ib('clock','Health records','data-go="records"');
  if(current.page==='discover')header+=ib('plus','New post','data-go="publish"')+ib('comment','Messages','data-go="messages"');
  if(current.page==='profile')header+=ib('crown','Membership','data-go="membership"')+ib('settings','Settings','data-go="settings"');
@@ -624,17 +787,21 @@ function render(keepScroll=false){
  $('#app-header').classList.toggle('pe-head',current.page==='pet-edit');
  try{$('#app-content').innerHTML=renderers[current.page]();}catch(err){console.error('[MoonBack] Unable to render '+current.page,err);$('#app-content').innerHTML='<div class="empty">'+icon('paw')+'<strong>Something went wrong</strong>This page could not be displayed.'+navButton('home','Back to Home','primary')+'</div>';}
   if(current.page==='login'&&view.lgCooldownUntil>Date.now())lgStartTick();
+ {const cr=$('#app-content .ds-chips');if(cr&&view.chipScroll)cr.scrollLeft=view.chipScroll;}
  $('#app-content').scrollTop=keepScroll?pos:0;
  if(current.page==='ai'&&!keepScroll){const ac=$('#app-content'),toEnd=()=>{ac.scrollTop=ac.scrollHeight;};toEnd();requestAnimationFrame(toEnd);setTimeout(toEnd,140);}
+ const fabMap={profile:`<button class="fab-vet" data-go="consult-history" aria-label="Online vet consultations" title="Online vet consultations">${icon('comment')}</button>`,contact:`<button class="fab-edit" data-go="feedback" aria-label="Write feedback" title="Write feedback">${icon('edit')}</button>`,help:`<button class="fab-edit" data-go="feedback" aria-label="Write feedback" title="Write feedback">${icon('edit')}</button>`};
+ if($('#fab-layer'))$('#fab-layer').innerHTML=fabMap[current.page]||'';
+ $('#app-content').classList.toggle('has-fab',!!fabMap[current.page]);
  docs.forEach(d=>d.hidden=d!==doc);
  $('#doc-module').textContent=moduleName(group);
  $('#page-picker').value=current.page;
- $('#preview-state').textContent=!storageAvailable?'● Session mode · refresh may reset':state.emptyMode?'● Empty demo':'● Sample data';
+ $('#preview-state').textContent=!storageAvailable?'● 会话模式 · 刷新可能重置':state.emptyMode?'● 空数据演示':'● 示例数据';
  document.title='MoonBack · '+doc.querySelector('h2').textContent;
  startDiscoverSlides();
 }
 function readRoute(){
- clearInterval(operationTimer);clearInterval(discoverSlidesTimer);view.recording=false;if(view.firmwareStage==='updating'){view.firmwareStage='available';view.firmwareProgress=0;}if(view.healthProgress<100)view.healthProgress=0;
+ avClose();clearInterval(operationTimer);clearInterval(discoverSlidesTimer);clearInterval(bindDoneTimer);bindDoneTimer=null;view.recording=false;if(view.firmwareStage==='updating'){view.firmwareStage='available';view.firmwareProgress=0;}if(view.healthProgress<100)view.healthProgress=0;
  closeModal();const raw=location.hash.slice(1)||'home',[page,q]=raw.split('?');
  if(!docMap[page]||!renderers[page]){go('home');return;}
  const old=current.page;
@@ -650,7 +817,7 @@ if(page==='device-bind'&&old!==page){newBind();}
  render();
 }
 function toast(t){clearTimeout(toastTimer);const el=$('#app-toast');el.textContent=t;el.hidden=false;toastTimer=setTimeout(()=>el.hidden=true,3400);}
-function modal(title,text,confirmText,callback,html=''){modalFocus=document.activeElement;modalCallback=callback;$('#modal-layer').innerHTML=`<div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title"><div class="row between"><h3 id="modal-title">${esc(title)}</h3>${ib('close','Close dialog','data-action="close-modal"')}</div>${text?`<p>${esc(text)}</p>`:""}${html}<div class="row">${action('close-modal',confirmText?'Cancel':'Got it','secondary')}${confirmText?action('confirm-modal',esc(confirmText),'primary'):''}</div></div>`;$('#modal-layer').hidden=false;$('#modal-layer button').focus();}
+function modal(title,text,confirmText,callback,html='',closeLabel='Got it'){modalFocus=document.activeElement;modalCallback=callback;$('#modal-layer').innerHTML=`<div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title"><div class="row between"><h3 id="modal-title">${esc(title)}</h3>${ib('close','Close dialog','data-action="close-modal"')}</div>${text?`<p>${esc(text)}</p>`:""}${html}<div class="row">${action('close-modal',confirmText?'Cancel':closeLabel,confirmText||closeLabel==='Got it'?'secondary':'primary')}${confirmText?action('confirm-modal',esc(confirmText),'primary'):''}</div></div>`;$('#modal-layer').hidden=false;{const dlg=$('#modal-layer .modal');if(dlg){dlg.tabIndex=-1;dlg.focus();}else $('#modal-layer button').focus();}}
 function closeModal(){if($('#modal-layer').hidden)return;$('#modal-layer').hidden=true;modalCallback=null;if(modalFocus?.isConnected)modalFocus.focus();}
 function confirm(title,text,callback){modal(title,text,'Confirm',callback);}
 function today(){const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;}
@@ -660,7 +827,7 @@ function sendAi(text){
  if(!pet())return;
  const p=pet(),m=metrics(),ms=state.conversations[p.id]||(state.conversations[p.id]=[]);
  const at=view.aiAttach,t=String(text==null?'':text).trim();
- if(!t&&!at){toast('Write a question or attach a photo / DNA report');return;}
+ if(!t&&!at){toast('Write a question, or attach a file, photo or DNA report');return;}
  let reply;
  if(at&&at.kind==='report'){
   const g=(state.geneticTests||[]).find(x=>x.id===at.id),r=g?gtReportFor(g):null;
@@ -670,16 +837,66 @@ function sendAi(text){
   reply=`From ${p.name}’s DNA report (kit ${at.kitId}) — breed mix: ${comp}. Genetic health: ${flag}. ${traits?traits+'. ':''}Ask me what any item means, or how to plan feeding and exercise around it.`;
  }
  else if(at&&at.kind==='photo'){
-  reply=`Thanks — I’ve saved the photo to this conversation for ${p.name}. This demo cannot read images, so tell me what you see (skin, stool, gait or a wound) and I’ll help you judge it together with today’s activity and sleep.`;
+  reply=`Thanks — I’ve saved the ${at.from==='camera'?'photo you just took':'photo'} to this conversation for ${p.name}. This demo cannot read images, so tell me what you see (skin, stool, gait or a wound) and I’ll help you judge it together with today’s activity and sleep.`;
+ }
+ else if(at&&at.kind==='file'){
+  reply=`Received “${at.name}”. This demo keeps the file in this conversation only and cannot read its contents — tell me what it says (a lab result, a vet note or a feeding plan) and I’ll help you read it alongside ${p.name}’s activity and sleep.`;
  }
  else if(/sleep/i.test(t))reply=`${p.name} slept ${m.sleep.toFixed(1)} hours. Give it a few days, then read it together with activity and mood. Open Health to see the trend.`;
  else if(/care|advice/i.test(t))reply=`For ${p.name}, keep a steady routine, plenty of water and gentle activity. If discomfort persists, consult a vet.`;
  else if(/heart/i.test(t))reply=`${p.name} ’s heart rate is ${m.heart} bpm, breathing rate ${m.breath} breaths/min. See Health for metric trends.`;
  else reply=`Today, ${p.name} walked ${m.steps.toLocaleString()} steps, was active for ${m.activity} hours and slept ${m.sleep.toFixed(1)} hours. Everything looks steady — ask me about sleep, heart rate or care tips.`;
- ms.push({role:'user',text:t,attach:at&&at.kind==='report'?at.label:'',photo:at&&at.kind==='photo'?at.url:''},{role:'assistant',text:reply});
+ ms.push({role:'user',text:t,attach:at&&(at.kind==='report'||at.kind==='file')?at.label:'',attachKind:at?at.kind:'',photo:at&&at.kind==='photo'?at.url:''},{role:'assistant',text:reply});
  view.aiAttach=null;view.aiMenu=false;refresh();$('#app-content').scrollTop=$('#app-content').scrollHeight;
 }
 function deleteBy(collection,id,msg){confirm('Delete?',msg,()=>{state[collection]=state[collection].filter(x=>x.id!==id);refresh('Deleted');});}
+/* Discover 分类胶囊：鼠标可左右拖动 */
+let chipDrag=null,chipDragged=false;
+const chipClass=el=>el&&el.classList&&el.classList.contains('ds-chips')?el:null;
+document.addEventListener('pointerdown',e=>{const row=chipClass(e.target.closest&&e.target.closest('.ds-chips'));if(!row||e.pointerType==='touch')return;chipDrag={row,x:e.clientX,left:row.scrollLeft};chipDragged=false;row.classList.add('dragging');});
+document.addEventListener('pointermove',e=>{if(!chipDrag)return;const dx=e.clientX-chipDrag.x;if(Math.abs(dx)>4)chipDragged=true;if(chipDragged){chipDrag.row.scrollLeft=chipDrag.left-dx;view.chipScroll=chipDrag.row.scrollLeft;if(e.cancelable)e.preventDefault();}});
+const chipEnd=()=>{if(!chipDrag)return;chipDrag.row.classList.remove('dragging');chipDrag=null;};
+document.addEventListener('pointerup',chipEnd);
+document.addEventListener('pointercancel',chipEnd);
+/* Quick Access 设置菜单：拖拽排序（逐格交换） */
+let qaDrag=null;
+document.addEventListener('pointerdown',e=>{
+ const grip=e.target.closest&&e.target.closest('.qa-grip');if(!grip)return;
+ const li=grip.closest('.qa-item'),list=li&&li.parentElement;if(!list)return;
+ if(e.cancelable)e.preventDefault();
+ const items=[...list.querySelectorAll('.qa-item')];
+ const rect=li.getBoundingClientRect();
+ const slot=items.length>1?Math.abs(items[1].getBoundingClientRect().top-items[0].getBoundingClientRect().top):rect.height+8;
+ qaDrag={li,list,startY:e.clientY,slot:slot||rect.height+8,startKeys:items.map(x=>x.dataset.key)};
+ li.classList.add('dragging');
+});
+document.addEventListener('pointermove',e=>{
+ if(!qaDrag)return;
+ const {li,list,slot}=qaDrag,dy=e.clientY-qaDrag.startY;
+ li.style.transform=`translateY(${Math.max(-slot*0.6,Math.min(slot*0.6,dy))}px)`;
+ if(dy<-slot*0.5){
+  const prev=li.previousElementSibling;
+  if(prev&&prev.classList.contains('qa-item')){list.insertBefore(li,prev);qaDrag.startY=e.clientY;li.style.transform='';}
+ }else if(dy>slot*0.5){
+  const next=li.nextElementSibling;
+  if(next&&next.classList.contains('qa-item')){list.insertBefore(next,li);qaDrag.startY=e.clientY;li.style.transform='';}
+ }
+ if(e.cancelable)e.preventDefault();
+});
+const qaEnd=()=>{
+ if(!qaDrag)return;
+ const {li,list,startKeys}=qaDrag;
+ li.classList.remove('dragging');li.style.transform='';
+ const keys=[...list.querySelectorAll('.qa-item')].map(x=>x.dataset.key);
+ qaDrag=null;
+ if(keys.length!==QUICK_ITEMS.length)return;
+ if(keys.join(',')===startKeys.join(','))return;
+ state.quickOrder=keys;save();render(true);openQuickSettings();
+};
+document.addEventListener('pointerup',qaEnd);
+document.addEventListener('pointercancel',qaEnd);
+document.addEventListener('scroll',e=>{if(chipClass(e.target))view.chipScroll=e.target.scrollLeft;},true);
+document.addEventListener('click',e=>{if(chipDragged){if(e.target.closest&&e.target.closest('.ds-chips')){e.preventDefault();e.stopPropagation();}chipDragged=false;}},true);
 document.addEventListener('click',e=>{
  if(view.topicPanelOpen&&!e.target.closest('.topic-section')){view.topicPanelOpen=false;const l=document.querySelector('#app-content .topic-list');if(l)l.hidden=true;}
  if(view.aiMenu&&current.page==='ai'&&!e.target.closest('.ai-attach-menu')&&!e.target.closest('.chat-plus')){view.aiMenu=false;render(true);}
@@ -707,19 +924,22 @@ document.addEventListener('click',e=>{
 case 'pet-wiz-home':{view.petWiz=null;go('home');toast('Pet added - welcome to MoonBack!');break;}
 case 'bind-step':{syncBindDraft();const w=bindWiz();if(w.done)break;const n=Number(v);if(n>=1&&n<=3){w.error='';w.step=n;render();}break;}
 case 'bind-mode':{const w=bindWiz();w.error='';render(true);break;}
-case 'bind-scan':{const w=bindWiz();w.scanId='868681071353013';w.bindType='harness';w.error='';render(true);toast('Product scanned');break;}
-case 'bind-bind':{const w=bindWiz();if(!w.scanId){bindError('Scan a product first.');render(true);break;}state.devices.push({id:uid(),name:'Smart Dog Harness',type:'harness',serial:w.scanId,pet:'',online:true,battery:100});w.bound=true;w.deviceId=state.devices[state.devices.length-1].id;w.error='';w.step=3;save();render();break;}
+case 'bind-scan':{const w=bindWiz();w.scanId='868681071353013';w.sn='';w.bindType='harness';w.error='';render(true);toast('Product scanned');break;}
+case 'bind-sn-confirm':{const el=$('#bind-sn'),v=el?String(el.value||'').trim():'';const w=bindWiz();w.sn=v;if(!v){bindError('Enter the SN code.');render(true);break;}w.scanId=v;w.bindType='harness';w.error='';render(true);toast('SN confirmed');break;}
+case 'bind-rescan':{const w=bindWiz();w.scanId='';w.sn='';w.error='';render(true);break;}
+case 'bind-photo-remove':{const i=Number(v);if(petPhotoSlots[i]){try{URL.revokeObjectURL(petPhotoSlots[i]);}catch(e){}delete petPhotoSlots[i];render(true);}break;}
+case 'bind-bind':{const w=bindWiz();if(!w.scanId){bindError('Scan the QR code or enter an SN code first.');render(true);break;}state.devices.push({id:uid(),name:'Smart Dog Harness',type:'harness',serial:w.scanId,pet:'',online:true,battery:100});w.bound=true;w.deviceId=state.devices[state.devices.length-1].id;w.error='';w.step=3;save();render();break;}
 case 'bind-breed':{syncBindDraft();const w=bindWiz();w.draft.breed=v;w.error='';render(true);break;}
 case 'bind-size':{syncBindDraft();const w=bindWiz();w.sizeFilter=v;w.error='';render(true);break;}
 case 'bind-back':{syncBindDraft();const w=bindWiz();w.error='';w.step=Math.max(1,w.step-1);render();break;}
 case 'bind-next':{
  syncBindDraft();const w=bindWiz(),d=w.draft;
- if(w.step===1){if(!w.scanId){bindError('Scan a product first.');render(true);break;}w.error='';w.step=2;render();break;}
- if(w.step===2){if(!String(d.name||'').trim()){bindError('Enter a pet name.');render(true);break;}if(!Number.isFinite(Number(d.weight))||Number(d.weight)<=0){bindError('Enter a valid weight.');render(true);break;}w.error='';w.step=3;render();break;}
- if(w.step===3){if(Object.keys(petPhotoSlots).length<8){bindError('Please upload all 8 pet photos.');render(true);break;}const p={id:uid(),photo:'home_pet_coco.jpg',scene:'real_coco_sleep.jpg',status:'Resting now',type:'Dog',breed:String(d.breed||'Mixed breed'),sex:String(d.sex||'Male'),weight:Number(d.weight)||0,name:String(d.name||'').trim(),age:d.age||'',height:d.height||'',emotional:d.emotional||'',owner:d.owner||'',contact:d.contact||'',nextVax:d.nextVax||''};state.pets.push(p);const dev=state.devices.find(x=>x.id===w.deviceId);if(dev)dev.pet=p.id;state.selected=p.id;save();w.petId=p.id;w.done=true;w.error='';render();break;}
+ if(w.step===1){if(!w.scanId){bindError('Scan the QR code or enter an SN code first.');render(true);break;}w.error='';w.step=2;render();break;}
+ if(w.step===2){if(!String(d.name||'').trim()){bindError('Enter a pet name.');render(true);break;}if(!String(d.breed||'').trim()){bindError('Enter the breed.');render(true);break;}if(!String(d.age==null?'':d.age).trim()){bindError('Enter the age.');render(true);break;}if(!Number.isFinite(Number(d.weight))||Number(d.weight)<=0){bindError('Enter a valid weight.');render(true);break;}if(!String(d.height==null?'':d.height).trim()){bindError('Enter the height.');render(true);break;}w.error='';w.step=3;render();break;}
+ if(w.step===3){const p={id:uid(),photo:'home_pet_coco.jpg',scene:'real_coco_sleep.jpg',status:'Resting now',type:(d.type==='Cat'?'Cat':'Dog'),breed:String(d.breed||'Mixed breed'),sex:String(d.sex||'Male'),weight:Number(d.weight)||0,name:String(d.name||'').trim(),age:d.age||'',height:d.height||'',emotional:d.emotional||'',owner:d.owner||'',contact:d.contact||'',nextVax:d.nextVax||''};state.pets.push(p);const dev=state.devices.find(x=>x.id===w.deviceId);if(dev)dev.pet=p.id;state.selected=p.id;save();w.petId=p.id;w.done=true;w.error='';render();startBindDoneCountdown();break;}
  break;
 }
-case 'bind-home':{view.bindWiz=null;go('home');toast('Setup complete — welcome to MoonBack!');break;}
+case 'bind-home':{clearInterval(bindDoneTimer);bindDoneTimer=null;view.bindWiz=null;go('home');toast('Setup complete — welcome to MoonBack!');break;}
 case 'pet-wiz-next':{
   syncPetDraft();const w=wiz(),d=w.draft;
   if(w.step===1){
@@ -752,6 +972,8 @@ case 'pet-wiz-next':{
  case 'add-device-menu':{view.devPick='harness';modal('Add a device','','Confirm',()=>{if(view.devPick==='house'){toast('This device is still in production');return;}showHarnessSpec();},devPickHtml());tidyDeviceModal();break;}
  case 'pick-device':{if(v==='house'){toast('This device is still in production');break;}view.devPick=v;document.querySelectorAll('.dev-opt').forEach(b=>{const on=b.dataset.value===v;b.classList.toggle('selected',on);const c=b.querySelector('.dev-check');if(c)c.textContent=on?'✓':'';});break;}
  case 'quick':modal('Quick Access','Pick a feature to continue.',null,null,`<div class="setting-group">${row('My pets','pets','paw')}${row('Remote care','monitor','camera')}${row('Voice translation','translation','mic')}${row('Health','health','health')}${row('Geofence','fence','fence')}${row('Feeding plan','feeding','food')}</div>`);break;
+ case 'quick-settings':openQuickSettings();break;
+ case 'qa-toggle':toggleQuick(v);break;
  case 'range':view.range=v;render(true);break;
 case 'topic-focus':{if(view.topicPanelOpen)break;view.topicPanelOpen=true;render(true);const i=document.querySelector('.topic-input');if(i)i.focus();break;}
 case 'clear-topics':view.topicPanelOpen=false;render(true);break;
@@ -765,6 +987,13 @@ case 'set-topic':{const cur=String(publishDraft.tags||'').split(/[,\s]+/).filter
  case 'cmt-cancel':view.replyTo=null;render(true);break;
  case 'msg-tab':view.msgTab=v;render(true);break;
  case 'profile-tab':view.profileTab=v;render(true);break;
+ case 'avatar-sheet':avatarSheet();break;
+ case 'avatar-view':avatarView();break;
+ case 'avatar-album':avatarAlbum();break;
+ case 'avatar-camera':{const i=$('#av-cam');if(i){i.value='';i.click();}break;}
+ case 'avatar-pick':avatarCropStart(avSrc(v));break;
+ case 'crop-done':avatarCropDone();break;
+ case 'ovl-close':avClose();break;
  case 'device-filter':view.deviceFilter=v;render();break;
  case 'friends-kind':go('friends?kind='+v);break;
  case 'login-mode':view.loginMode=v;render();break;
@@ -781,12 +1010,21 @@ case 'set-topic':{const cur=String(publishDraft.tags||'').split(/[,\s]+/).filter
  case 'follow':state.following=state.following.includes(id)?state.following.filter(x=>x!==id):state.following.concat(id);refresh(state.following.includes(id)?'Followed · feed synced':'Unfollowed');break;
  case 'post-next':view.postImage++;render(true);break;
  case 'post-prev':{const p=state.posts.find(p=>p.id===param('id'));if(p)view.postImage=(view.postImage+postPhotos(p).length-1)%postPhotos(p).length;render(true);break;}
- case 'share':modal('Share this demo post','Send the whole folder when sharing locally; this link only works on a computer that has the same prototype.',null,null,`<input aria-label="Local demo page URL" readonly style="width:100%;padding:10px;font-size:10px" value="${esc(location.href.split('#')[0]+'#post?id='+id)}">`);break;
+ case 'share':go('share?id='+id);break;
+ case 'check-update':view.appUpdateState='latest';render(true);toast("You're on the latest version");break;
+ case 'copy-contact':{const v=el.dataset.value||'';if(v&&navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(v).catch(()=>{});toast('Copied to clipboard');break;}
+ case 'share-close':if(history.state&&history.state.mb){history.back();}else{go('post?id='+param('id'));}break;
+ case 'share-style':view.shareStyle=v;render(true);break;
+ case 'share-sticker':view.shareSticker=v;render(true);break;
+ case 'share-social':toast('Opening '+v+' with your card…');break;
+ case 'share-save':toast('Card saved to Photos');break;
  case 'ai-suggest':sendAi(b.dataset.text);break;
  case 'ai-attach':{view.aiMenu=!view.aiMenu;view.aiPetMenu=false;render(true);break;}
  case 'ai-pet':{view.aiPetMenu=!view.aiPetMenu;view.aiMenu=false;render(true);break;}
  case 'ai-pet-pick':{view.aiPetMenu=false;selectPet(id);refresh();break;}
  case 'ai-pick-photo':{view.aiMenu=false;render(true);const inp=$('#app-content').querySelector('[data-change="ai-photo"]');if(inp){inp.value='';inp.click();}break;}
+ case 'ai-pick-camera':{view.aiMenu=false;render(true);const inp=$('#app-content').querySelector('[data-change="ai-camera"]');if(inp){inp.value='';inp.click();}break;}
+ case 'ai-pick-file':{view.aiMenu=false;render(true);const inp=$('#app-content').querySelector('[data-change="ai-file"]');if(inp){inp.value='';inp.click();}break;}
  case 'ai-attach-report':{const g=state.geneticTests.find(x=>x.id===id);if(!g)break;view.aiAttach={kind:'report',id:g.id,kitId:g.kitId,label:'DNA report · '+g.kitId};view.aiMenu=false;render(true);const ta=$('#app-content .chat-compose input[name="message"]');if(ta)ta.focus();break;}
  case 'ai-detach':{if(view.aiAttach&&view.aiAttach.url)URL.revokeObjectURL(view.aiAttach.url);view.aiAttach=null;render(true);break;}
  case 'clear-ai':if(pet())confirm('Clear this pet’s chat?','Clears the local demo conversation for this pet only.',()=>{state.conversations[pet().id]=[];refresh('Conversation cleared');});break;
@@ -862,13 +1100,30 @@ document.addEventListener('change',async e=>{
  switch(a){
  case 'pet-photo':{const i=Number(el.dataset.index),file=el.files&&el.files[0];if(!file)break;if(!/^image\//.test(file.type)){toast('Please choose an image file');break;}if(petPhotoSlots[i])URL.revokeObjectURL(petPhotoSlots[i]);petPhotoSlots[i]=URL.createObjectURL(file);const label=el.closest('.pe-slot');if(label){const c=label.querySelector('.pe-cam-ic');if(c)c.remove();let im=label.querySelector('.pe-slot-img');if(!im){im=document.createElement('img');im.className='pe-slot-img';label.appendChild(im);}im.src=petPhotoSlots[i];}toast('Photo '+PET_ANGLES[i][1]+' added');break;}
  case 'bind-photo':{const i=Number(el.dataset.index),file=el.files&&el.files[0];if(!file)break;if(!/^image\//.test(file.type)){toast('Please choose an image file');break;}if(petPhotoSlots[i])URL.revokeObjectURL(petPhotoSlots[i]);petPhotoSlots[i]=URL.createObjectURL(file);const label=el.closest('.pe-slot');if(label){const c=label.querySelector('.pe-cam-ic');if(c)c.remove();let im=label.querySelector('.pe-slot-img');if(!im){im=document.createElement('img');im.className='pe-slot-img';label.appendChild(im);}im.src=petPhotoSlots[i];}toast('Photo '+PET_ANGLES[i][1]+' added');break;}
+ case 'bind-type':{syncBindDraft();const w=bindWiz();w.draft.type=el.value==='Cat'?'Cat':'Dog';w.error='';render(true);break;}
+ case 'bind-photos-add':{const files=[].slice.call(el.files||[]);if(!files.length)break;let added=0,full=false;for(let k=0;k<files.length;k++){const f=files[k];if(Object.keys(petPhotoSlots).length>=12){full=true;break;}if(!/^image\//.test(f.type))continue;let idx=0;while(petPhotoSlots[idx])idx++;petPhotoSlots[idx]=URL.createObjectURL(f);added++;}if(added){render(true);toast(added+(added>1?' photos':' photo')+' added');}else if(full){toast('Up to 12 photos');}break;}
  case 'select-pet':selectPet(el.value);refresh();break;
+ case 'avatar-file':{const file=el.files&&el.files[0];if(!file)break;if(!/^image\//.test(file.type)){toast('Please choose an image file');break;}const fr=new FileReader();fr.onload=()=>avatarCropStart(String(fr.result||''));fr.onerror=()=>toast('This photo could not be read');fr.readAsDataURL(file);break;}
  case 'ai-photo':{
   const file=el.files&&el.files[0];if(!file)break;
   if(!/^image\//.test(file.type)){toast('Please choose an image file');break;}
   if(view.aiAttach&&view.aiAttach.url)URL.revokeObjectURL(view.aiAttach.url);
   view.aiAttach={kind:'photo',url:URL.createObjectURL(file),label:file.name||'Photo'};
   render(true);toast('Photo attached — add a question, then send');break;
+ }
+ case 'ai-camera':{
+  const file=el.files&&el.files[0];if(!file)break;
+  if(!/^image\//.test(file.type)){toast('Please take a photo first');break;}
+  if(view.aiAttach&&view.aiAttach.url)URL.revokeObjectURL(view.aiAttach.url);
+  view.aiAttach={kind:'photo',from:'camera',url:URL.createObjectURL(file),label:file.name||'Camera photo'};
+  render(true);toast('Photo attached — add a question, then send');break;
+ }
+ case 'ai-file':{
+  const file=el.files&&el.files[0];if(!file)break;
+  if(!/\.(pdf|docx?|txt|md|csv|rtf)$/i.test(file.name)){toast('Please choose a PDF, DOC, DOCX or TXT file');break;}
+  if(view.aiAttach&&view.aiAttach.url)URL.revokeObjectURL(view.aiAttach.url);
+  view.aiAttach={kind:'file',name:file.name,size:file.size,label:file.name};
+  render(true);toast('File attached — add a question, then send');break;
  }
  case 'gt-pet':view.gtPet=el.value||'';render(true);break;
  case 'consult-pet':break;
@@ -888,8 +1143,10 @@ case 'pet-wiz-device':{
  case 'camera':view.camera=el.value;view.listen=false;view.talk=false;go('monitor?camera='+el.value);break;
  case 'overlay':view.overlay=el.checked;render(true);break;
   case 'lg-agree':view.lgAgreed=el.checked;if(el.checked){const box=$('#lg-agree-box');if(box)box.classList.remove('lg-warn');}break;
- case 'notifications':state.notifications=el.checked;save();toast('Notification preference saved');break;
+ case 'notifications':state.notifications=el.checked;save();toast(el.checked?'Notifications on':'Notifications off');if(current.page==='notifications')render(true);break;
+ case 'notif-item':{const g=el.dataset.group,k=el.dataset.key;if(state.notif[g]){state.notif[g][k]=el.checked;save();toast('Notification preference saved');}break;}
  case 'language':state.language=el.value;save();toast('Language preference saved');break;
+ case 'fb-reply':{const m=$('.fb-mail');if(m){m.disabled=!el.checked;m.style.opacity=el.checked?'1':'.45';}break;}
  case 'firmware-device':view.firmwareStage='ready';view.firmwareProgress=0;go('firmware?id='+el.value);break;
  case 'feeding-enabled':{const f=state.feeding.find(f=>f.id===el.dataset.id);if(f)f.enabled=el.checked;save();toast(el.checked?'Plan enabled (demo)':'Plan disabled (demo)');break;}
  case 'upload':{
@@ -961,9 +1218,9 @@ document.addEventListener('submit',e=>{
  }
  case 'friend-search':view.friendSearch=s('keyword');render();break;
  case 'cart':state.cart+=Number(s('quantity'));refresh('Added to cart · '+state.cart+' items');break;
- case 'personal':if(!s('name')){error('Display name cannot be empty.');return;}state.profile={name:s('name'),location:s('location'),bio:s('bio')};save();go('profile');toast('Profile updated');break;
+ case 'personal':if(!s('name')){error('Display name cannot be empty.');return;}state.profile=Object.assign({},state.profile,{name:s('name'),location:s('location'),bio:s('bio')});save();go('profile');toast('Profile updated');break;
  case 'password':if(s('password')!==s('confirm')){error('The new passwords do not match.');return;}if(s('password')===s('old')){error('The new password must differ from the current one.');return;}f.reset();modal('Demo change complete','The form is cleared; no real account or password was changed.');break;
- case 'feedback':if(s('body').length<5){error('Please write at least 5 characters.');return;}state.feedback.push({type:s('type'),body:s('body'),contact:s('contact'),time:now()});refresh('Feedback saved locally; no ticket is sent');break;
+ case 'feedback':{const subj=s('subject'),body=s('body'),mail=s('email'),cb=$('[name="reply"]'),reply=!!(cb&&cb.checked);if(!subj){error('Please enter a subject.');return;}if(body.length<5){error('Please write at least 5 characters.');return;}if(reply&&!mail){error('Please enter your email.');return;}state.feedback.push({subject:subj,body:body,email:reply?mail:'',time:now()});refresh('Feedback sent');break;}
  case 'membership':state.member=true;refresh('Demo membership enabled; nothing is charged');break;
  case 'feeding':{
   if(!s('name')){error('Please name the plan.');return;}let f=state.feeding.find(f=>f.id===param('id'));if(!f){f={id:uid(),pet:pet().id,enabled:true};state.feeding.push(f);}Object.assign(f,{name:s('name'),time:s('time'),grams:Number(s('grams')),food:s('food')});save();go('feeding');toast('Feeding plan saved; no hardware command is sent');break;
@@ -985,7 +1242,7 @@ document.addEventListener('submit',e=>{
 });
 function downloadReport(){const p=pet(),m=metrics();if(!p)return;const content=`<!doctype html><html lang="en"><meta charset="utf-8"><title>${esc(p.name)} · Health summary</title><style>body{font:16px/1.8 sans-serif;max-width:760px;margin:50px auto;padding:24px;color:#273b52}table{width:100%;border-collapse:collapse}td{padding:12px;border-bottom:1px solid #ddd}small{color:#7a8793}</style><h1>MoonBack · ${esc(p.name)} · health summary</h1><p>${esc(p.breed)} · ${p.weight} kg</p><p>Exported: ${esc(now())}</p><table>${Object.entries(metricInfo).map(([k,v])=>`<tr><td>${v[0]}</td><td>${m[k]} ${v[1]}</td></tr>`).join('')}</table><p><small>This HTML summary is exported from a local prototype. All metrics are samples, not a medical report.</small></p></html>`;const blob=new Blob([content],{type:'text/html;charset=utf-8'}),u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download='MoonBack-'+p.name.replace(/[^\p{L}\p{N}_-]/gu,'_')+'-health-summary.html';a.click();setTimeout(()=>URL.revokeObjectURL(u),10000);toast('Exported this pet’s HTML summary');}
 $('#page-picker').innerHTML=modules.map(([g,t])=>`<optgroup label="${t}">${docs.filter(d=>d.dataset.group===g).map(d=>`<option value="${d.dataset.page}">${esc(d.querySelector('h2').textContent)}</option>`).join('')}</optgroup>`).join('');
-$('#page-picker').addEventListener('change',e=>{const page=e.target.value,defaults={'pet-detail':pet()?.id,'device-detail':state.devices[0]?.id,post:state.posts[0]?.id,author:authors[0].id,consult:state.consultations.slice(-1)[0]?.id};go(defaults[page]?query(page,{id:defaults[page]}):page);});
+$('#page-picker').addEventListener('change',e=>{const page=e.target.value,defaults={'pet-detail':pet()?.id,'device-detail':state.devices[0]?.id,post:state.posts[0]?.id,share:state.posts[0]?.id,author:authors[0].id,consult:state.consultations.slice(-1)[0]?.id};go(defaults[page]?query(page,{id:defaults[page]}):page);});
 document.addEventListener('input',e=>{const el=e.target;if(el.name!=='comment')return;const f=el.closest('form'),b=f&&f.querySelector('.cmt-send');if(b)b.hidden=!String(el.value||'').trim();});
 document.addEventListener('input',e=>{const el=e.target;if(el.dataset.input!=='topic-input')return;const q=String(el.value||'').trim().replace(/^#/,'').toLowerCase();document.querySelectorAll('#app-content .topic-item').forEach(it=>{it.hidden=!!q&&!String(it.dataset.value).toLowerCase().includes(q);});});
 document.addEventListener('keydown',e=>{if(e.key!=='Enter')return;const el=e.target;if(el.dataset.input!=='topic-input')return;e.preventDefault();const v=String(el.value||'').trim().replace(/^#/,'');if(!v)return;const cur=String(publishDraft.tags||'').split(/[,\s]+/).filter(Boolean);if(!cur.includes(v))cur.push(v);publishDraft.tags=cur.join(' ');render(true);});
